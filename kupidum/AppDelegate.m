@@ -43,7 +43,7 @@
 //    UIViewController *viewController2 = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
 
     FinderViewController *finderViewController = [[FinderViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
-    UIViewController *finderViewController0 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
+    UIViewController *finderViewController0 = [[UIViewController alloc] init];
     UIViewController *finderViewController2 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
     UIViewController *finderViewController3 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
     UIViewController *finderViewController4 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
@@ -51,13 +51,13 @@
     UINavigationController *finderNavigationController = [[UINavigationController alloc] initWithRootViewController:finderViewController];
     [finderNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Cercar", @"") image:[UIImage imageNamed:@"tab_icon_search"] tag:1]];
 
-    [finderViewController0 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Inici", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:2]];
-    [finderViewController2 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Missatges", @"") image:[UIImage imageNamed:@"tab_icon_msg"] tag:2]];
-    [finderViewController3 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Xat", @"") image:[UIImage imageNamed:@"tab_icon_chat"] tag:3]];
-    [finderViewController4 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:4]];
+    [finderViewController0 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Inici", @"") image:[UIImage imageNamed:@"tab_icon_home"] tag:2]];
+    [finderViewController2 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Missatges", @"") image:[UIImage imageNamed:@"tab_icon_msg"] tag:3]];
+    [finderViewController3 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Xat", @"") image:[UIImage imageNamed:@"tab_icon_chat"] tag:4]];
+    [finderViewController4 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
 
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[finderNavigationController, finderViewController0, finderViewController2, finderViewController3, finderViewController4];
+    self.tabBarController.viewControllers = @[finderViewController0, finderNavigationController, finderViewController2, finderViewController3, finderViewController4];
     [self.tabBarController setSelectedViewController:finderNavigationController];
     self.window.rootViewController = self.tabBarController;
 }
