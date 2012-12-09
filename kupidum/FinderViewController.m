@@ -6,7 +6,46 @@
 //  Copyright 2012 Albert Nadal Garriga. All rights reserved.
 //
 
-@implementation VinsViewController
+#import <UIKit/UIKit.h>
+#import "FinderViewController.h"
+#import "AppDelegate.h"
+
+@implementation FinderViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [self.navigationItem setTitle:NSLocalizedString(@"Troba gent interessant", @"")];
+    [boto_buscar setTitle:NSLocalizedString(@"Cercar gent", @"") forState:UIControlStateNormal];
+    [boto_nearby setTitle:NSLocalizedString(@"Gent a prop", @"") forState:UIControlStateNormal];
+    [botoIniciarCerca setTitle:NSLocalizedString(@"Buscar", @"") forState:UIControlStateNormal];
+    [search_bar setPlaceholder:NSLocalizedString(@"Cercar un sobrenom", @"")];
+
+    UIImageView *imatgeNuvols = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_search_bar.png"]];
+    [imatgeNuvols setFrame:CGRectMake(0,0, 320, 44)];
+    [search_bar addSubview:imatgeNuvols];
+
+    for(UIView *subviewSearchBar in [search_bar subviews])
+    {
+        if([subviewSearchBar isKindOfClass:[UIButton class]])
+        {
+            [[(UIButton *)subviewSearchBar titleLabel] setTextColor:[UIColor whiteColor]];
+            [[(UIButton *)subviewSearchBar titleLabel] setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0f]];
+            [(UIButton *)subviewSearchBar setBackgroundImage:[UIImage imageNamed:@"boto_buscar.png"] forState:UIControlStateNormal];
+            [search_bar bringSubviewToFront:subviewSearchBar];
+        }
+        else if([subviewSearchBar isKindOfClass:[UITextField class]])
+        {
+            [search_bar bringSubviewToFront:subviewSearchBar];
+        }
+    }
+
+    float scrollHeight = [[UIScreen mainScreen] bounds].size.height - self.navigationController.navigationBar.frame.size.height - subheaderImage.frame.size.height - [[UIApplication sharedApplication] statusBarFrame].size.height - [[[(AppDelegate *)[[UIApplication sharedApplication] delegate] tabBarController] tabBar] frame].size.height;
+    [finderScrollContent setFrame:CGRectMake(0, 0, 320, scrollHeight)];
+    [scroll setContentSize:CGSizeMake(320*2, scrollHeight)];
+    [scroll addSubview:finderScrollContent];
+}
 
 /*
 - (void)initStartOperations
@@ -445,24 +484,20 @@
 	[boto_do setUserInteractionEnabled:FALSE];
 	[boto_varietat setUserInteractionEnabled:FALSE];	
 }
-
+*/
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-	//[search_bar setText:@""];
 	[scroll setScrollEnabled:NO];
-	[self deshabilitarBotonsFiltre];
-
-	//[search_bar becomeFirstResponder];
+//	[self deshabilitarBotonsFiltre];
 
 	return true;
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-	//[search_bar setText:@""];
 	[search_bar resignFirstResponder];
 	[scroll setScrollEnabled:YES];
-	[self habilitarBotonsFiltre];
+//	[self habilitarBotonsFiltre];
 
 	[search_bar resignFirstResponder];
 }
@@ -471,13 +506,11 @@
 {
 	[search_bar resignFirstResponder];
 	[scroll setScrollEnabled:YES];
-	[self habilitarBotonsFiltre];
+//	[self habilitarBotonsFiltre];
 
 	[search_bar resignFirstResponder];
-
-	//[[NSTimer scheduledTimerWithTimeInterval:0.001 target:self selector:@selector(iniciarCercaUbicacioManual) userInfo:nil repeats:NO] retain];
 }
-
+/*
 - (void)definirFiltreGrape:(int)i:(NSString *)nom
 {
 	id_grape = i;
@@ -1099,19 +1132,16 @@
 {
 	//[mapView removeAnnotations:[mapView annotations]];
 }
-
+*/
 - (IBAction)subheaderPremut
 {
 	if(temporitzador != nil)
-	{
-		//Si el temportizador ja està en marxa s'atura per tornar-lo a arrencar
 		[temporitzador invalidate];
-	}
 
 	[contenidor_swipe_to_other_views setAlpha:1.0];
 	[contenidor_swipe_to_other_views setHidden:NO];
 
-	temporitzador = [[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(iniciarAmagarContenidorSwipe) userInfo:nil repeats:NO] retain];
+	temporitzador = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(iniciarAmagarContenidorSwipe) userInfo:nil repeats:NO];
 }
 
 - (void)iniciarAmagarContenidorSwipe
@@ -1129,12 +1159,9 @@
 	[contenidor_swipe_to_other_views setHidden:YES];
 
 	if(temporitzador != nil)
-	{
-		[temporitzador release];
 		temporitzador = nil;
-	}
 }
-
+/*
 - (void)desbloquejarFerTransicio
 {
 	fent_transicio = false;
@@ -1144,45 +1171,12 @@
 {
 	fent_transicio = true;
 }
-
+*/
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat pageWidth = scrollView.frame.size.width;
     float fractionalPage = scrollView.contentOffset.x / pageWidth;
     page = lround(fractionalPage);
-
-	if((scrollView.contentOffset.x <= 0) || (scrollView.contentOffset.x == 320 * 1) || (scrollView.contentOffset.x >= 320 * 2))
-	{
-		if(fent_transicio)
-		{
-			[UIView beginAnimations:@"transicioEntreVistesVinthink" context:NULL];
-			[UIView setAnimationDelegate:self];
-			[UIView setAnimationDidStopSelector:@selector(desbloquejarFerTransicio)];
-			[UIView setAnimationDuration:0.15];
-			
-			CGAffineTransform zooming = CGAffineTransformMakeScale(1.0, 1.0);
-			vins_scroll_content.transform = zooming;
-			
-			[UIView commitAnimations];
-			//fent_transicio = false;
-		}
-	}
-	else
-	{
-		if(!fent_transicio)
-		{
-			[UIView beginAnimations:@"transicioEntreVistesVinthink" context:NULL];
-			[UIView setAnimationDelegate:self];
-			[UIView setAnimationDidStopSelector:@selector(bloquejarFerTransicio)];
-			[UIView setAnimationDuration:0.15];
-			
-			CGAffineTransform zooming = CGAffineTransformMakeScale(0.9, 0.9);
-			vins_scroll_content.transform = zooming;
-			
-			[UIView commitAnimations];
-			//fent_transicio = true;
-		}
-	}
 
     if (previousPage != page)
 	{
@@ -1195,7 +1189,6 @@
 		//Es posa el tamany dels textos de la barra subheader a tamany unselected per defecte
 		[boto_buscar.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
 		[boto_nearby.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
-		[boto_featured.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
 
 		UIButton *boto_selected;
 
@@ -1212,10 +1205,6 @@
 						//[self mostrarBotoNavBarSearch];
 						break;
 
-			case 2:		//Vista Notificacions
-						boto_selected = boto_featured;
-						break;
-
 			default:	boto_selected = boto_buscar;
 						break;
 		}
@@ -1225,7 +1214,7 @@
 		[boto_selected.titleLabel setFont:[UIFont boldSystemFontOfSize:15.0]];
     }
 }
-
+/*
 - (bool)isReloading
 {
 	return reloading;

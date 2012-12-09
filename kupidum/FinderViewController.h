@@ -8,49 +8,36 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "vinthinkAppDelegate.h"
-#import "VinthinkWS.h"
-#import "UserStatusTimeLine.h"
-#import "UserProfileViewController.h"
-#import "PlaceProfileViewController.h"
-#import "StatusCommentsViewController.h"
-#import "NearbyTableViewController.h"
-#import "ChooseCountryViewController.h"
-#import "ChoosePriceViewController.h"
-#import "ChooseWineTypeViewController.h"
-#import "ChooseDOViewController.h"
-#import "ChooseGrapeViewController.h"
-#import "SearchWinesViewController.h"
-#import "WineSearchTableViewController.h"
-#import "PlacesWithWinesSearchTableViewController.h"
 
-
-@interface VinsViewController : UIViewController <CLLocationManagerDelegate, UIScrollViewDelegate, UIAlertViewDelegate, UISearchBarDelegate, UIActionSheetDelegate>
+@interface FinderViewController : UIViewController <CLLocationManagerDelegate, UIScrollViewDelegate, UIAlertViewDelegate, UISearchBarDelegate, UIActionSheetDelegate>
 {
-	IBOutlet vinthinkAppDelegate *aplicacio;
+	//Scroll horitzontal amb les seccions Timeline, Nearby i Notifications
+    IBOutlet UIImageView *subheaderImage;
+	IBOutlet UIScrollView *scroll;
+    IBOutlet UIView *finderScrollContent;
 
 	IBOutlet UISearchBar *search_bar;
 
 	IBOutlet UIPageControl *paginador;
 
-	//Scroll horitzontal amb les seccions Timeline, Nearby i Notifications
-	IBOutlet UIScrollView *scroll;
+/*
 	IBOutlet UIView *vins_scroll_content;
+*/
 	int previousPage;
 	int page;
-
+/*
 	//Botons del Subheader
+*/
 	IBOutlet UIButton *boto_buscar;
 	IBOutlet UIButton *boto_nearby;
+
+    IBOutlet UIButton *botoIniciarCerca;
+/*
 	IBOutlet UIButton *boto_featured;
 
 
 	//Boto per afegir un nou vi
 	UIButton *boto_add_wine;
-
-	//Taula on es mostren els contactes trobats
-//	IBOutlet UITableView *tableView;
-//	IBOutlet UITableViewController *tableViewController;
 
 	//Dades de la sessió d'usuari
 	NSString *user_id; //Id de l'usuari al sistema
@@ -60,11 +47,11 @@
 	bool hi_ha_alertes_visibles;
 	bool hi_ha_alerta_no_connectivitat;
 	bool fent_transicio;
-
+*/
 	//Contenidor "Swipe to other views"
 	NSTimer *temporitzador;
 	IBOutlet UIView *contenidor_swipe_to_other_views;
-
+/*
 	//Boto Item inferior
 	IBOutlet UITabBarItem *boto_item;
 
@@ -128,18 +115,21 @@
 	UIView *contenidor_indicador;
 	UIActivityIndicatorView *indicador;
 	UIImageView *bg_indicador;
+*/
 }
 
-- (void)initStartOperations;
+/*- (void)initStartOperations;
 - (NSString *)dateInFormat:(NSString*)stringFormat;
 - (IBAction)showSelectorPaisos;
 - (IBAction)showSelectorPreus;
 - (IBAction)showSelectorTipusVi;
 - (IBAction)showSelectorDO;
 - (IBAction)showSelectorVarietat;
+*/
 - (IBAction)subheaderPremut;
 - (void)iniciarAmagarContenidorSwipe;
 - (void)contenidorSwipeAmagat;
+/*
 - (void)obtenirVinsDestacats;
 - (void)obtenirPaisosAmbVins;
 - (void)obtenirDenominacionsOrigen;
@@ -163,6 +153,6 @@
 - (NSMutableArray *)paisosDO;
 - (NSMutableArray *)llistaGrapes;
 - (void)desbloquejarFerTransicio;
-- (void)bloquejarFerTransicio;
+- (void)bloquejarFerTransicio;*/
 
 @end
