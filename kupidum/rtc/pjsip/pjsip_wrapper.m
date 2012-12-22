@@ -14,8 +14,10 @@
 //#import "Base64Utilities.h"
 //#import "XMLParser.h"
 //#import "CNCMessageParser.h"
-
 #import <AudioToolbox/AudioToolbox.h>
+
+#define PJSIP_LOG_LEVEL 4
+#define PJSIP_LOG_ENABLED true
 
 static pjsua_acc_id acc_id;
 static pjsua_acc_config acc_cfg;
@@ -43,7 +45,6 @@ static void on_incoming_call(pjsua_acc_id acc_id, pjsua_call_id call_id,pjsip_rx
 static void on_reg_state(pjsua_acc_id acc_id);
 static void on_call_state (pjsua_call_id call_id, pjsip_event *e);
 static void on_call_media_state(pjsua_call_id call_id);
-
 static void on_call_rx_offer(pjsua_call_id call_id, const pjmedia_sdp_session *offer, void *reserved, pjsip_status_code *code, pjsua_call_setting *opt);
 static void on_pager2(pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to, 
                       const pj_str_t *contact, const pj_str_t *mime_type, const pj_str_t *body, 
@@ -75,17 +76,14 @@ static pj_str_t strdup_in_pool(pj_pool_t* pool, const char* srcstr);
 static const char * get_charstr_from_value(id value);
 // ----------------------------------------
 
-//PjSipClient *instance;
-
-YarnVideoDeviceView *ingoingVideoDeviceView;
-YarnVideoDeviceView *outgoingVideoDeviceView;
+KPDClientSIP *client;
+KPDVideoDeviceView *videoDeviceView;
+KPDVideoDeviceView *outgoingVideoDeviceView;
 
 static NSString* to_NSString(const pj_str_t* s, NSStringEncoding e)
 {
     return [[NSString alloc] initWithBytes:s->ptr length:s->slen encoding:e];
 }
-
-
 
 static bool is_video_possible(pjsua_call_id call_id)
 {
@@ -151,20 +149,6 @@ static pjmedia_dir get_video_direction(pjsua_call_id call_id)
     return dir;
 }
 
-static void log_call_medias(pjsua_call_info* pinfo)
-{
-    DLog(@"info.state:%d", pinfo->state);
-    DLog(@"info.setting.aud_cnt:%d", pinfo->setting.aud_cnt);
-    DLog(@"info.setting.vid_cnt:%d", pinfo->setting.vid_cnt);
-    DLog(@"info.media_cnt:%d", pinfo->media_cnt);
-    DLog(@"info.rem_aud_cnt:%d", pinfo->rem_aud_cnt);
-    DLog(@"info.rem_vid_cnt:%d", pinfo->rem_vid_cnt);
-    
-    for(int i=0; i<pinfo->media_cnt; i++) {
-        DLog(@"info.media[%d].status:%d", i, pinfo->media[i].status);
-    }
-}
-
 static void log_audio_devices() {
     NSLog(@"Audio devices:");
     for(int i=0; i<pjmedia_aud_dev_count(); i++) {
@@ -192,7 +176,7 @@ static void log_video_devices() {
 
 static void log_codec_params(int index, const char* name, pjmedia_vid_codec_param* params)
 {
-    NSLog(@"Codec name is %@", name);
+    NSLog(@"Codec name is %s", name);
     NSLog(@"MTU VALUE for codec #%d is %d", index, params->enc_mtu);
     NSLog(@"FrameSize for codec #%d is w:%d h:%d", index, params->enc_fmt.det.vid.size.w, params->enc_fmt.det.vid.size.h);
     NSLog(@"FPS for codec #%d is %d/%d", index, params->enc_fmt.det.vid.fps.num, params->enc_fmt.det.vid.fps.denum);
@@ -253,14 +237,13 @@ static pj_status_t set_video_stream(pjsua_call_id call_id, pjsua_call_vid_strm_o
 }
 
 // HOOKED.
-/*
+
 static void on_incoming_call(pjsua_acc_id acc_id, pjsua_call_id call_id, pjsip_rx_data *rdata)
 {
-
-
     pjsua_call_answer2(call_id, &call_setting, 180, NULL, NULL);
     pjsua_call_info callInfo;
     pjsua_call_get_info(call_id, &callInfo);
+/*
     RTCEventOptions *options = nil;
     if (rdata->msg_info.msg != NULL)
         options = RTCEventOptions_from_header(&rdata->msg_info.msg->hdr);
@@ -268,18 +251,20 @@ static void on_incoming_call(pjsua_acc_id acc_id, pjsua_call_id call_id, pjsip_r
     [instance onIncomingSession:call_id 
                        fromUser:from
                     withOptions:options
-                    isVideoCall:(current_call_has_video)? 1:0];
+                    isVideoCall:(current_call_has_video)? 1:0];*/
 }
+
 
 static void on_reg_state(pjsua_acc_id acc_id)
 {
 	pjsua_acc_info info;
     pjsua_acc_get_info(acc_id, &info);
-    [instance onRegStatus:info.status expires:info.expires];
+//    [instance onRegStatus:info.status expires:info.expires];
 }
 
 static void on_reg_state2(pjsua_acc_id reg_acc_id, pjsua_reg_info *info)
 {
+    
 }
 
 static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
@@ -287,7 +272,7 @@ static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
     pjsua_call_info callInfo;
     pjsua_call_get_info(call_id, &callInfo);
     
-    RTCEventOptions *options = nil;
+/*    RTCEventOptions *options = nil;
     if (e &&
         e->body.tsx_state.type == PJSIP_EVENT_RX_MSG &&
         e->body.tsx_state.src.rdata &&
@@ -295,9 +280,7 @@ static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
         e->body.tsx_state.src.rdata->msg_info.msg)
     {
         options = RTCEventOptions_from_header(&e->body.tsx_state.src.rdata->msg_info.msg->hdr);
-    }
-    
-
+    }*/
 
     if(callInfo.state == PJSIP_INV_STATE_CALLING)
     {
@@ -330,7 +313,7 @@ static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
 
     if(callInfo.state == PJSIP_INV_STATE_DISCONNECTED)
     {
-        [instance onChangeSession:call_id
+/*        [instance onChangeSession:call_id
                         withState:[NSString stringWithCString:callInfo.state_text.ptr encoding:NSASCIIStringEncoding]
                           stateId:callInfo.state
                       isVideoCall:true
@@ -353,23 +336,23 @@ static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
         const char *indent_char = " ";
 
         pjsua_call_dump(call_id, PJ_TRUE, stats_string, 5000, indent_char);
-        NSLog(@"STATS: (%s)", stats_string);
+        NSLog(@"STATS: (%s)", stats_string);*/
     }
     else
     {
-        [instance onChangeSession:call_id
+/*        [instance onChangeSession:call_id
                         withState:[NSString stringWithCString:callInfo.state_text.ptr encoding:NSASCIIStringEncoding]
                           stateId:callInfo.state
                       isVideoCall:(current_call_has_video && this_client_started_direct_video_call)
             startVideoImmediately:false
                        lastStatus:callInfo.last_status
-                       andOptions:options];
+                       andOptions:options];*/
     }
 }
 
 static void on_call_media_state(pjsua_call_id call_id)
 {
-
+/*
     pjsua_call_id current_call_id;
     pj_status_t status = search_first_active_call(&current_call_id);
     if(call_id != current_call_id) {
@@ -568,8 +551,8 @@ static void on_call_media_state(pjsua_call_id call_id)
         startVideoImmediately:call_request_started_with_video
                    lastStatus:callInfo.last_status
                    andOptions:nil];
-
-}*/
+*/
+}
 
 void on_call_rx_offer(pjsua_call_id call_id, const pjmedia_sdp_session *offer, void *reserved, pjsip_status_code *code, pjsua_call_setting *opt)
 {
@@ -760,11 +743,12 @@ void setup_video_codec_params(void)
         }
     }
 }
-/*
+
 static void on_pager_status2 (pjsua_call_id call_id, const pj_str_t *to, const pj_str_t *body, 
                               void *user_data, pjsip_status_code status, const pj_str_t *reason, 
                               pjsip_tx_data *tdata, pjsip_rx_data *rdata, pjsua_acc_id acc_id)
 {
+/*
     @autoreleasepool {
         RTCUser *toUser = [RTCUser userFromString:to_NSString(to, NSASCIIStringEncoding)];
         RTCEventOptions *options = nil;
@@ -775,9 +759,10 @@ static void on_pager_status2 (pjsua_call_id call_id, const pj_str_t *to, const p
         free(user_data);
 
         [instance onMessageStatus:status ofMessageId:messageId to:toUser withOptions:options];
-    }    
+    }
+*/
 }
-
+/*
 static RTCEventOptions *RTCEventOptions_from_header(const pjsip_hdr *header)
 {
     if (header == NULL) return nil;
@@ -802,9 +787,10 @@ static RTCEventOptions *RTCEventOptions_from_header(const pjsip_hdr *header)
     
     return retValue;
 }
-
+*/
 static void on_pager2(pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to, const pj_str_t *contact, const pj_str_t *mime_type, const pj_str_t *body, pjsip_rx_data *rdata, pjsua_acc_id acc_id)
 {
+/*
     @autoreleasepool {   
         NSString *fromString = to_NSString(from, NSUTF8StringEncoding);
         NSString *toString = to_NSString(to, NSUTF8StringEncoding);
@@ -892,10 +878,12 @@ static void on_pager2(pjsua_call_id call_id, const pj_str_t *from, const pj_str_
         }
         
     }
+*/
 }
 
 void on_typing (pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to, const pj_str_t *contact, pj_bool_t is_typing)
 {
+/*
     RTCUser *fromUser = [RTCUser userFromString:to_NSString(from, NSASCIIStringEncoding)];
     if (is_typing)
     {
@@ -905,13 +893,15 @@ void on_typing (pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to,
     {
         [instance onTypingStop:fromUser];
     }
+*/
 }
 
-int call(const char* callId, RTCEventOptions * options, bool isVideoCall)
+//int call(const char* callId, RTCEventOptions * options, bool isVideoCall)
+int call(const char* callId, bool isVideoCall)
 {
     pjsua_msg_data messageData;
     pjsua_msg_data_init(&messageData);
-    add_optional_headers(&messageData, options);
+//    add_optional_headers(&messageData, options);
     pj_str_t callee = pj_str((char*)callId);
     pjsua_call_id call_id;
     pj_status_t status;
@@ -941,6 +931,9 @@ int call(const char* callId, RTCEventOptions * options, bool isVideoCall)
 
 static pj_status_t create_transport()
 {
+    return pjsua_transport_create(PJSIP_TRANSPORT_TCP, &tp_cfg, &tp_id);
+
+/*
     pj_status_t status = PJ_ERROR;
     
     pjsua_transport_config_default(&tp_cfg);
@@ -958,164 +951,159 @@ static pj_status_t create_transport()
     }
 
     return status;
-}*/
+*/
+}
 
 static void log_cb(int level, const char *data, int len)
 {
-    DLog(@"pj_log %@", [[NSString alloc] initWithBytes:data length:len encoding:NSUTF8StringEncoding]);   
+    NSLog(@"pj_log %@", [[NSString alloc] initWithBytes:data length:len encoding:NSUTF8StringEncoding]);
 }
-/*
-void main_pjsip(PjSipClient *theInstance, const char *userAgent)
+
+void main_pjsip(KPDClientSIP *clientSip, const char* user, const char* password, const char* userAgent)
 {
     pj_status_t status;    
     status = pjsua_create();
-    
-    instance = theInstance;
 
-    ingoingVideoDeviceView = [[YarnVideoDeviceView alloc] init];    //View for the ingoing video device
+    client = clientSip;
+
+    videoDeviceView = [[KPDVideoDeviceView alloc] init];
 
     if( status != PJ_SUCCESS) {
-        printf("Error initializing pjsua"); return;
+        printf("Error initializing pjsua");
+        return;
     }
 
-    {
-        pjsua_config cfg;
-        pjsua_logging_config log_cfg;
-        
-        pjsua_config_default(&cfg);
-        cfg.cb.on_incoming_call = &on_incoming_call;
-        cfg.cb.on_reg_state = &on_reg_state;
-        cfg.cb.on_call_state = &on_call_state;
-        cfg.cb.on_call_media_state = &on_call_media_state;
+    pjsua_config cfg;
+    pjsua_logging_config log_cfg;
 
-        cfg.cb.on_call_rx_offer = &on_call_rx_offer;
-        cfg.cb.on_pager2 = &on_pager2;
-        cfg.cb.on_pager_status2 = &on_pager_status2;
-        cfg.cb.on_typing = &on_typing;
-        cfg.cb.on_reg_state2 = &on_reg_state2;
-        
-        if (userAgent != NULL) {
-            cfg.user_agent = pj_str((char*) userAgent);
-        }
-        
-        pjsua_logging_config_default(&log_cfg);
-        log_cfg.level = 4; //6  (Set to 6 for maximum logging, set to 1 otherwise)
-        log_cfg.console_level = 4; //6  (Set to 6 for maximum logging, set to 1 otherwise)
-        log_cfg.cb = &log_cb;
-        log_cfg.msg_logging = true;
-        
+    pjsua_config_default(&cfg);
+    cfg.cb.on_incoming_call = &on_incoming_call;
+    cfg.cb.on_reg_state = &on_reg_state;
+    cfg.cb.on_call_state = &on_call_state;
+    cfg.cb.on_call_media_state = &on_call_media_state;
+    cfg.cb.on_call_rx_offer = &on_call_rx_offer;
+    cfg.cb.on_pager2 = &on_pager2;
+    cfg.cb.on_pager_status2 = &on_pager_status2;
+    cfg.cb.on_typing = &on_typing;
+    cfg.cb.on_reg_state2 = &on_reg_state2;
 
-        pjsua_media_config media_config;
-        pjsua_media_config_default(&media_config);
-        media_config.vid_preview_enable_native = PJ_TRUE;
+    if (userAgent != NULL) {
+        cfg.user_agent = pj_str((char*) userAgent);
+    }
 
-        //media_config.jb_max = -1; //this should be able to set the máximum jitter buffer size (max jb) Could help reduce chopiness on video -> Current default (with -1 value) is 500 ms, we should test 750 in troubled network conditions in order to see if there is improvement.
-        //media_config.jb_max_pre = -1;   //this should be able to set the máximum prefetch for jitter buffer (max num of frames) Could help reduce chopiness on video. Automatic default if not set is jb_max * 4 / 5
+    pjsua_logging_config_default(&log_cfg);
+    log_cfg.level = PJSIP_LOG_LEVEL;
+    log_cfg.console_level = PJSIP_LOG_LEVEL;
+    log_cfg.cb = &log_cb;
+    log_cfg.msg_logging = PJSIP_LOG_ENABLED;
 
-        //Set the STUN server
-        cfg.stun_host = pj_str("stunserver.org");
-        cfg.stun_srv[0] = pj_str("stun.l.google.com:19302");
-        cfg.stun_srv[1] = pj_str("stun.ipns.com");
-        cfg.stun_srv[2] = pj_str("stun.endigovoip.com");
-        cfg.stun_srv[3] = pj_str("stun.rnktel.com");
-        cfg.stun_srv[4] = pj_str("stun.voip.aebc.com");
-        cfg.stun_srv[5] = pj_str("stun.callwithus.com");
-        cfg.stun_srv_cnt = 6;
+    pjsua_media_config media_config;
+    pjsua_media_config_default(&media_config);
+    media_config.vid_preview_enable_native = PJ_TRUE;
 
-        status = pjsua_init(&cfg, &log_cfg, &media_config);
+    //media_config.jb_max = -1; //this should be able to set the máximum jitter buffer size (max jb) Could help reduce chopiness on video -> Current default (with -1 value) is 500 ms, we should test 750 in troubled network conditions in order to see if there is improvement.
+    //media_config.jb_max_pre = -1;   //this should be able to set the máximum prefetch for jitter buffer (max num of frames) Could help reduce chopiness on video. Automatic default if not set is jb_max * 4 / 5
 
-        if(status != PJ_SUCCESS) {
-            printf("Error pjsua_init()"); return;
-        }
+    //Set the STUN server
+    cfg.stun_host = pj_str("stunserver.org");
+    cfg.stun_srv[0] = pj_str("stun.l.google.com:19302");
+    cfg.stun_srv[1] = pj_str("stun.ipns.com");
+    cfg.stun_srv[2] = pj_str("stun.endigovoip.com");
+    cfg.stun_srv[3] = pj_str("stun.rnktel.com");
+    cfg.stun_srv[4] = pj_str("stun.voip.aebc.com");
+    cfg.stun_srv[5] = pj_str("stun.callwithus.com");
+    cfg.stun_srv_cnt = 6;
+
+    status = pjsua_init(&cfg, &log_cfg, &media_config);
+
+    if(status != PJ_SUCCESS) {
+        printf("Error pjsua_init()"); return;
     }
 
     pjsua_transport_config_default(&tp_cfg);
     tp_cfg.port = 0;
-    
-    status = pjsua_transport_create(PJSIP_TRANSPORT_TCP,
-                                    &tp_cfg, NULL);
+
+    status = pjsua_transport_create(PJSIP_TRANSPORT_TCP, &tp_cfg, NULL);
     if (status != PJ_SUCCESS) {
         NSLog(@"Error creant transport TCP");
     }
 
-    
-
     pjsua_acc_config_default(&acc_cfg);
-    
     pjsua_call_setting_default(&call_setting);
-    
+
     pjsua_acc_config acc_cfg;
     pjsua_acc_config_default(&acc_cfg);
-    acc_cfg.id = pj_str( (char*)"<sip:silvia@smsturmix.com>");
+
+    char* sip_uri;
+    sprintf(sip_uri, "<sip:%s@smsturmix.com>", user);
+
+    acc_cfg.id = pj_str((char*)sip_uri);
     acc_cfg.reg_uri = pj_str((char*) ("sip:smsturmix.com"));
     acc_cfg.cred_count = 1;
     acc_cfg.cred_info[0].realm = pj_str((char*)"*");
     acc_cfg.cred_info[0].scheme = pj_str((char*)"digest");
-    acc_cfg.cred_info[0].username = pj_str((char*)"silvia");
-    acc_cfg.cred_info[0].data = pj_str((char*)"silvia");
-    
-    acc_cfg.proxy[acc_cfg.proxy_cnt++] = pj_str((char*) "<sip:smsturmix.com;transport=tcp>");
-    
-    pj_str_t h263_codec_id = {"H263-1998/96", 12};      //pj_str("H263-1998/96");
+    acc_cfg.cred_info[0].username = pj_str((char*)user);
+    acc_cfg.cred_info[0].data = pj_str((char*)password);
+
+    acc_cfg.proxy[acc_cfg.proxy_cnt++] = pj_str((char*)"<sip:smsturmix.com;transport=tcp>");
+
+    pj_str_t h263_codec_id = {"H263-1998/96", 12};
     pjsua_vid_codec_set_priority(&h263_codec_id, 2);
-    
+
     setup_video_codec_params();
-    
+
     acc_cfg.vid_in_auto_show = PJ_FALSE;
     acc_cfg.vid_out_auto_transmit = PJ_FALSE;
     acc_cfg.vid_rend_dev = PJMEDIA_VID_DEFAULT_RENDER_DEV;
-    
+
     call_setting.vid_cnt = video_call_enabled ? 1 : 0; //video_call_enabled; //1 => hasVideo | 0 => hasNoVideo
     call_setting.aud_cnt = audio_call_enabled; //1 => hasAudio | 0 => hasNoAudio
-    
+
     status = pjsua_acc_add(&acc_cfg, PJ_TRUE, &acc_id);
     if ( status != PJ_SUCCESS ) {
         pj_perror(3, "pjsip", status, "Error Registering");
     }
-
 
     status = pjsua_start();
     if(status != PJ_SUCCESS) {
         printf("Error pjsua_start()"); return;
     }
 }
-*/
-
 
 // stream views setup
 bool setOutgoingVideoStreamViewFrame(CGRect rect)
 {
-    [ingoingVideoDeviceView setPreviewFrame:rect];
+    [videoDeviceView setPreviewFrame:rect];
 
     return true;
 }
 
 bool setIngoingVideoStreamViewFrame(CGRect rect)
 {
-    [ingoingVideoDeviceView setFrame:rect];
+    [videoDeviceView setFrame:rect];
 
     return true;
 }
 
 void setVideoStreamViewFrame(CGRect rect)
 {
-    [ingoingVideoDeviceView.view setFrame:rect];
+    [videoDeviceView.view setFrame:rect];
 }
 
 // getting stream views
 UIView* getOutgoingVideoStreamView(void)
 {
-    return [ingoingVideoDeviceView getPreviewView];
+    return [videoDeviceView getPreviewView];
 }
 
 UIView* getIngoingVideoStreamView(void)
 {
-    return [ingoingVideoDeviceView videoView];
+    return [videoDeviceView videoView];
 }
 
 UIView* getVideoStreamView(void)
 {
-    return [ingoingVideoDeviceView view];
+    return [videoDeviceView view];
 }
 
 bool acceptVideoCallRequest(void)
@@ -1158,11 +1146,11 @@ bool setEnableVideoDriver(bool v)
     // Hide/init video views
     if(v)
     {
-         [ingoingVideoDeviceView initializeView];
+         [videoDeviceView initializeView];
     }
     else
     {
-         [ingoingVideoDeviceView releaseDeviceView];
+         [videoDeviceView releaseDeviceView];
     }
 
     return true;
@@ -1172,11 +1160,11 @@ bool setEnableReceiveNotificationsFromVideoDriver(bool v)
 {
     if(v)
     {
-        [ingoingVideoDeviceView startNotificationListeners];
+        [videoDeviceView startNotificationListeners];
     }
     else
     {
-        [ingoingVideoDeviceView stopNotificationListeners];
+        [videoDeviceView stopNotificationListeners];
     }
 
     return true;
@@ -1342,7 +1330,7 @@ NSArray * getVideoDevices(void)
     {
         if ([device hasMediaType:AVMediaTypeVideo])
         {
-            YarnVideoDevice *yarn_video_device = [[YarnVideoDevice alloc] init];
+            KPDVideoDevice *yarn_video_device = [[KPDVideoDevice alloc] init];
 
             [yarn_video_device setDeviceId:[device uniqueID]];
             [yarn_video_device setDeviceName:[device localizedName]];
@@ -1378,7 +1366,7 @@ int getVideoDevicesCount(void)
     return video_devices_count;
 }
 
-YarnVideoDevice* getDefaultFrontVideoDevice(void)
+KPDVideoDevice* getDefaultFrontVideoDevice(void)
 {
     NSArray *video_devices = getVideoDevices();
     for(int i=0; i<[video_devices count]; i++)
@@ -1387,7 +1375,7 @@ YarnVideoDevice* getDefaultFrontVideoDevice(void)
     return nil;
 }
 
-YarnVideoDevice* getDefaultBackVideoDevice(void)
+KPDVideoDevice* getDefaultBackVideoDevice(void)
 {
     NSArray *video_devices = getVideoDevices();
     for(int i=0; i<[video_devices count]; i++)
@@ -1396,14 +1384,14 @@ YarnVideoDevice* getDefaultBackVideoDevice(void)
     return nil;
 }
 
-bool setOutgoingVideoStreamDevice(YarnVideoDevice *yvd)
+bool setOutgoingVideoStreamDevice(KPDVideoDevice *yvd)
 {
     NSMutableDictionary *userInfoOutgoingVideoStreamDevice = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[yvd deviceId], @"deviceUniqueID", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setOutgoingVideoStreamDevice" object:nil userInfo:userInfoOutgoingVideoStreamDevice];
 
     return true;
 }
-/*
+
 // enable/disable video/audio before start call
 bool setEnableVideoCall(bool v)
 {
@@ -1413,11 +1401,11 @@ bool setEnableVideoCall(bool v)
     pjsua_call_setting_default(&call_setting);
     call_setting.vid_cnt = video_call_enabled ? 1 : 0; //video_call_enabled; //1 => hasVideo | 0 => hasNoVideo
 
-    instance.video_call_enable = video_call_enabled ? 1 : 0; //video_call_enabled;
+//    instance.video_call_enable = video_call_enabled ? 1 : 0; //video_call_enabled;
     
     return true;
 }
-*/
+
 bool setEnableAudioCall(bool v)
 {
     //it will take effect only in register_user and accept_call functions, so you must call this just before
@@ -1618,13 +1606,13 @@ static void on_call_generic_media_state(pjsua_call_info *ci, unsigned mi,
     pj_assert(ci->media[mi].status <= PJ_ARRAY_SIZE(status_name));
     pj_assert(PJSUA_CALL_MEDIA_ERROR == 4);
 }
-/*
-void accept_call(int call_id, RTCEventOptions * options)
+
+//void accept_call(int call_id, RTCEventOptions * options)
+void accept_call(int call_id)
 {
     pjsua_msg_data messageData;
     pjsua_msg_data_init(&messageData);
-    add_optional_headers(&messageData, options);
-
+    //add_optional_headers(&messageData, options);
 
     int mi = 0;
     pjsua_call_info call_info;
@@ -1652,13 +1640,13 @@ void accept_call(int call_id, RTCEventOptions * options)
                     current_call_has_video = false;
 
                     //Show the video window with the preview full screen sized
-                    [instance onChangeMediaStreams:call_id
+/*                    [instance onChangeMediaStreams:call_id
                                          withState:[NSString stringWithCString:call_info.state_text.ptr encoding:NSASCIIStringEncoding]
                                            stateId:call_info.state
                                        isVideoCall:true
                              startVideoImmediately:false
                                         lastStatus:call_info.last_status
-                                        andOptions:nil];
+                                        andOptions:nil];*/
                 }
     
                 setEnableVideoCall(true);
@@ -1672,32 +1660,35 @@ void accept_call(int call_id, RTCEventOptions * options)
     pjsua_call_answer2(call_id, &call_setting, 200, NULL, &messageData);
 }
 
-void reject_call(int call_id, RTCEventOptions * options)
+//void reject_call(int call_id, RTCEventOptions * options)
+void reject_call(int call_id)
 {
     pjsua_msg_data messageData;
     pjsua_msg_data_init(&messageData);
-    add_optional_headers(&messageData, options);
+//    add_optional_headers(&messageData, options);
    
     pjsua_call_answer2(call_id, &call_setting, 603, NULL, &messageData);
 }
 
-void hangup_call(int call_id, RTCEventOptions * options)
+//void hangup_call(int call_id, RTCEventOptions * options)
+void hangup_call(int call_id)
 {
     pjsua_msg_data messageData;
     pjsua_msg_data_init(&messageData);
-    add_optional_headers(&messageData, options);
+//    add_optional_headers(&messageData, options);
     pjsua_call_hangup(call_id, 0, NULL, &messageData);
 }
 
-void busy_call(int call_id, RTCEventOptions * options)
+//void busy_call(int call_id, RTCEventOptions * options)
+void busy_call(int call_id)
 {
     pjsua_msg_data messageData;
     pjsua_msg_data_init(&messageData);
-    add_optional_headers(&messageData, options);
+//    add_optional_headers(&messageData, options);
  
     pjsua_call_answer2(call_id, &call_setting, 486, NULL, &messageData);
 }
-*/
+
 void destroy_client()
 {
     pjsua_destroy();

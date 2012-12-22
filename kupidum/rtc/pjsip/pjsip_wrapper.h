@@ -11,9 +11,9 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "YarnVideoDevice.h"
-#import "YarnVideoDeviceView.h"
-//#import "PjSipClient.h"
+#import "KPDVideoDevice.h"
+#import "KPDVideoDeviceView.h"
+#import "KPDClientSIP.h"
 //#import "SIPUri.h"
 #include "pjsua.h"
 #include "pjsip.h"
@@ -26,9 +26,9 @@ enum {
     PJ_ERROR = -1
 };
 
-/*
-void main_pjsip(PjSipClient *theInstance, const char* userAgent);
 
+void main_pjsip(KPDClientSIP *clientSip, const char* user, const char* password, const char* userAgent);
+/*
 int call(const char* callId, RTCEventOptions * options, bool isVideoCall);
 int acc_add(const char* regUriString, const char* proxyString, const char * userUriString,
                   const char* userString, const char* passwordString, int *accountId);
@@ -63,9 +63,9 @@ bool getOnHoldVideoStatefromCall(int call_id);
 NSArray * getVideoDevices(void);
 int getVideoDevicesCount(void);
 
-YarnVideoDevice* getDefaultFrontVideoDevice(void);
-YarnVideoDevice* getDefaultBackVideoDevice(void);
-bool setOutgoingVideoStreamDevice(YarnVideoDevice *yvd);
+KPDVideoDevice* getDefaultFrontVideoDevice(void);
+KPDVideoDevice* getDefaultBackVideoDevice(void);
+bool setOutgoingVideoStreamDevice(KPDVideoDevice *yvd);
 
 // enable/disable video/audio before start call
 bool setEnableVideoCall(bool v);
@@ -115,12 +115,12 @@ pj_status_t send_message(const char *toString, const char *messageId,
                          const char *messageBody, RTCEventOptions * options);
 void notify_start_typing(const char *toString, RTCEventOptions * options);
 void notify_stop_typing(const char *toString, RTCEventOptions * options);
-
+*/
 // Session functions
-void accept_call(int call_id, RTCEventOptions * options);
-void reject_call(int call_id, RTCEventOptions * options);
-void busy_call(int call_id, RTCEventOptions * options);
-void hangup_call(int call_id, RTCEventOptions * options);*/
+void accept_call(int call_id);
+void reject_call(int call_id);
+void busy_call(int call_id);
+void hangup_call(int call_id);
 void destroy_client();
 bool is_call_active(int call_id);
 

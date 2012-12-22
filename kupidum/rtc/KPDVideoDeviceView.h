@@ -1,9 +1,9 @@
 //
-//  YarnVideoDeviceView.h
-//  pjsobj
+//  KPDVideoDeviceView.h
+//  kupidum
 //
-//  Created by Albert Nadal on 25/4/12.
-//  Copyright (c) 2012 Telefonica I+D. All rights reserved.
+//  Created by Albert Nadal Garriga on 22/12/12.
+//  Copyright 2012 Albert Nadal Garriga. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,7 +16,7 @@ typedef enum video_device_view_type
     YARN_VIDEO_VIEW_PREVIEW
 }video_device_view_type;
 
-@interface YarnVideoDeviceView : NSObject
+@interface KPDVideoDeviceView : NSObject
 {
     UIView *view;               // This UIView acts as the main container
     UIImageView *videoView;     // This UIView contains de video view

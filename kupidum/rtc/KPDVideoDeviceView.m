@@ -1,15 +1,15 @@
 //
-//  app_pjsip_video.h
-//  pjsobj
+//  KPDVideoDeviceView.h
+//  kupidum
 //
-//  Created by Albert Nadal on 25/4/12.
-//  Copyright (c) 2012 Telefonica I+D. All rights reserved.
+//  Created by Albert Nadal Garriga on 22/12/12.
+//  Copyright 2012 Albert Nadal Garriga. All rights reserved.
 //
 
-#import "YarnVideoDeviceView.h"
+#import "KPDVideoDeviceView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation YarnVideoDeviceView
+@implementation KPDVideoDeviceView
 
 @synthesize previewView, view, videoView, viewType;
 

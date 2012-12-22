@@ -1,9 +1,9 @@
 //
-//  app_pjsip_video.h
-//  pjsobj
+//  KPDVideoDevice.h
+//  kupidum
 //
-//  Created by Albert Nadal on 25/4/12.
-//  Copyright (c) 2012 Telefonica I+D. All rights reserved.
+//  Created by Albert Nadal Garriga on 22/12/12.
+//  Copyright 2012 Albert Nadal Garriga. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,7 +16,7 @@ typedef enum video_device_type
 }video_device_type;
 
 //Device "object" for video capture
-@interface YarnVideoDevice : NSObject
+@interface KPDVideoDevice : NSObject
 {
     NSString *deviceId; //AVCaptureDevice uniqueID property
     NSString *deviceName;
