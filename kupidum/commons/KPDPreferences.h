@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface KMPreferences : NSObject
+@interface KPDPreferences : NSObject
 
-+ (KMPreferences *)sharedInstance;
++ (KPDPreferences *)sharedInstance;
 
 - (NSString *)proxy;
 - (NSString *)user;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Albert Nadal Garriga. All rights reserved.
 //
 
-#import "KMUIUtilities.h"
+#import "KPDUIUtilities.h"
 
-@implementation KMUIUtilities
+@implementation KPDUIUtilities
 
 + (UIButton*)customBackBarButtonWithImage:(NSString*)imageName 
                                  andTitle:(NSString*)title 

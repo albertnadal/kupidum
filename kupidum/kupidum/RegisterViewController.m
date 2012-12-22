@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RegisterViewController.h"
-#import "KMUIUtilities.h"
+#import "KPDUIUtilities.h"
 
 #define SELECTOR_SOC_TAG 1
 #define SELECTOR_EDAT_TAG 2
@@ -396,7 +396,7 @@
     {
         case 0:
         {
-                        [[KMRegisterData sharedInstance] setProfileType:[[NSNumber alloc] initWithInt:indexSelectorSoc]
+                        [[KPDRegisterData sharedInstance] setProfileType:[[NSNumber alloc] initWithInt:indexSelectorSoc]
                                                                  minAge:[[NSNumber alloc] initWithInt:edatMinima]
                                                                  maxAge:[[NSNumber alloc] initWithInt:edatMaxima]
                                                                birthday:[[NSNumber alloc] initWithInt:diaNaixement]
@@ -602,7 +602,7 @@
 
 - (void)showNavigationBarButtons
 {
-    UIButton *backButton = [KMUIUtilities customCircleBarButtonWithImage:@"nav_black_circle_button.png"
+    UIButton *backButton = [KPDUIUtilities customCircleBarButtonWithImage:@"nav_black_circle_button.png"
                                                            andInsideImage:@"nav_arrow_back_button.png"
                                                               andSelector:@selector(backPressed)
                                                                 andTarget:self];

@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 TID. All rights reserved.
 //
 
-#import "KMPreferences.h"
+#import "KPDPreferences.h"
 
-@interface KMPreferences ()
+@interface KPDPreferences ()
 
 @property (nonatomic, strong) NSMutableDictionary *preferences;
 
@@ -22,17 +22,17 @@
 
 @end
 
-@implementation KMPreferences
+@implementation KPDPreferences
 
 @synthesize preferences = preferences_;
 
-+ (KMPreferences *)sharedInstance
++ (KPDPreferences *)sharedInstance
 {    
     static dispatch_once_t onceToken;
-    static KMPreferences *_instance;
+    static KPDPreferences *_instance;
     
     dispatch_once(&onceToken, ^{
-        _instance = [[KMPreferences alloc] init];
+        _instance = [[KPDPreferences alloc] init];
     });
     
     return _instance;

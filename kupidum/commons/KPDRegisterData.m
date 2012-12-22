@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 TID. All rights reserved.
 //
 
-#import "KMRegisterData.h"
+#import "KPDRegisterData.h"
 
-@interface KMRegisterData ()
+@interface KPDRegisterData ()
 
 @property (nonatomic, strong) NSMutableDictionary *registerData;
 
@@ -16,17 +16,17 @@
 
 @end
 
-@implementation KMRegisterData
+@implementation KPDRegisterData
 
 @synthesize registerData = registerData_;
 
-+ (KMRegisterData *)sharedInstance
++ (KPDRegisterData *)sharedInstance
 {    
     static dispatch_once_t onceToken;
-    static KMRegisterData *_instance;
+    static KPDRegisterData *_instance;
     
     dispatch_once(&onceToken, ^{
-        _instance = [[KMRegisterData alloc] init];
+        _instance = [[KPDRegisterData alloc] init];
     });
     
     return _instance;

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-#import "KMUIUtilities.h"
+#import "KPDUIUtilities.h"
 
 @interface LoginViewController ()
 
@@ -60,7 +60,7 @@
 
 - (void)showNavigationBarButtons
 {
-    UIButton *backButton = [KMUIUtilities customCircleBarButtonWithImage:@"nav_black_circle_button.png"
+    UIButton *backButton = [KPDUIUtilities customCircleBarButtonWithImage:@"nav_black_circle_button.png"
                                                           andInsideImage:@"nav_arrow_back_button.png"
                                                              andSelector:@selector(backPressed)
                                                                andTarget:self];

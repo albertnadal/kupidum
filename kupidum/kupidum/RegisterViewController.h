@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KMRegisterData.h"
+#import "KPDRegisterData.h"
 
 @interface RegisterViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate>
 {

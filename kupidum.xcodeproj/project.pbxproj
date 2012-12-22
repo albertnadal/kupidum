@@ -51,9 +51,9 @@
 		FF3745381686181F0098BBF1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3745371686181F0098BBF1 /* CoreVideo.framework */; };
 		FF37453A168618740098BBF1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF374539168618740098BBF1 /* CoreMedia.framework */; };
 		FF749737167F2B1400AF971F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FF749736167F2B1400AF971F /* Base64.m */; };
-		FF74973E167F2C4E00AF971F /* KMPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = FF749739167F2C4E00AF971F /* KMPreferences.m */; };
-		FF74973F167F2C4E00AF971F /* KMRegisterData.m in Sources */ = {isa = PBXBuildFile; fileRef = FF74973B167F2C4E00AF971F /* KMRegisterData.m */; };
-		FF749740167F2C4E00AF971F /* KMUIUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = FF74973D167F2C4E00AF971F /* KMUIUtilities.m */; };
+		FF74973E167F2C4E00AF971F /* KPDPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = FF749739167F2C4E00AF971F /* KPDPreferences.m */; };
+		FF74973F167F2C4E00AF971F /* KPDRegisterData.m in Sources */ = {isa = PBXBuildFile; fileRef = FF74973B167F2C4E00AF971F /* KPDRegisterData.m */; };
+		FF749740167F2C4E00AF971F /* KPDUIUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = FF74973D167F2C4E00AF971F /* KPDUIUtilities.m */; };
 		FF7497A7167F2D4800AF971F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7497A4167F2D4800AF971F /* AppDelegate.m */; };
 		FF7497AF167F2D8400AF971F /* InitialScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7497AC167F2D8400AF971F /* InitialScreenViewController.xib */; };
 		FF7497B0167F2D8400AF971F /* InitialScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7497AD167F2D8400AF971F /* InitialScreenViewController.m */; };
@@ -168,12 +168,12 @@
 		FF374539168618740098BBF1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		FF749735167F2B1400AF971F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		FF749736167F2B1400AF971F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
-		FF749738167F2C4E00AF971F /* KMPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMPreferences.h; path = kupidum/commons/KMPreferences.h; sourceTree = "<group>"; };
-		FF749739167F2C4E00AF971F /* KMPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMPreferences.m; path = kupidum/commons/KMPreferences.m; sourceTree = "<group>"; };
-		FF74973A167F2C4E00AF971F /* KMRegisterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMRegisterData.h; path = kupidum/commons/KMRegisterData.h; sourceTree = "<group>"; };
-		FF74973B167F2C4E00AF971F /* KMRegisterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMRegisterData.m; path = kupidum/commons/KMRegisterData.m; sourceTree = "<group>"; };
-		FF74973C167F2C4E00AF971F /* KMUIUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMUIUtilities.h; path = kupidum/commons/KMUIUtilities.h; sourceTree = "<group>"; };
-		FF74973D167F2C4E00AF971F /* KMUIUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMUIUtilities.m; path = kupidum/commons/KMUIUtilities.m; sourceTree = "<group>"; };
+		FF749738167F2C4E00AF971F /* KPDPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDPreferences.h; path = kupidum/commons/KPDPreferences.h; sourceTree = "<group>"; };
+		FF749739167F2C4E00AF971F /* KPDPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDPreferences.m; path = kupidum/commons/KPDPreferences.m; sourceTree = "<group>"; };
+		FF74973A167F2C4E00AF971F /* KPDRegisterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDRegisterData.h; path = kupidum/commons/KPDRegisterData.h; sourceTree = "<group>"; };
+		FF74973B167F2C4E00AF971F /* KPDRegisterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDRegisterData.m; path = kupidum/commons/KPDRegisterData.m; sourceTree = "<group>"; };
+		FF74973C167F2C4E00AF971F /* KPDUIUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDUIUtilities.h; path = kupidum/commons/KPDUIUtilities.h; sourceTree = "<group>"; };
+		FF74973D167F2C4E00AF971F /* KPDUIUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDUIUtilities.m; path = kupidum/commons/KPDUIUtilities.m; sourceTree = "<group>"; };
 		FF7497A3167F2D4800AF971F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = kupidum/AppDelegate.h; sourceTree = "<group>"; };
 		FF7497A4167F2D4800AF971F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = kupidum/AppDelegate.m; sourceTree = "<group>"; };
 		FF7497AC167F2D8400AF971F /* InitialScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InitialScreenViewController.xib; path = kupidum/InitialScreenViewController.xib; sourceTree = "<group>"; };
@@ -294,12 +294,12 @@
 		B7074442166BDB10007E8B23 /* commons */ = {
 			isa = PBXGroup;
 			children = (
-				FF749738167F2C4E00AF971F /* KMPreferences.h */,
-				FF749739167F2C4E00AF971F /* KMPreferences.m */,
-				FF74973A167F2C4E00AF971F /* KMRegisterData.h */,
-				FF74973B167F2C4E00AF971F /* KMRegisterData.m */,
-				FF74973C167F2C4E00AF971F /* KMUIUtilities.h */,
-				FF74973D167F2C4E00AF971F /* KMUIUtilities.m */,
+				FF749738167F2C4E00AF971F /* KPDPreferences.h */,
+				FF749739167F2C4E00AF971F /* KPDPreferences.m */,
+				FF74973A167F2C4E00AF971F /* KPDRegisterData.h */,
+				FF74973B167F2C4E00AF971F /* KPDRegisterData.m */,
+				FF74973C167F2C4E00AF971F /* KPDUIUtilities.h */,
+				FF74973D167F2C4E00AF971F /* KPDUIUtilities.m */,
 			);
 			name = commons;
 			sourceTree = "<group>";
@@ -697,9 +697,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF749737167F2B1400AF971F /* Base64.m in Sources */,
-				FF74973E167F2C4E00AF971F /* KMPreferences.m in Sources */,
-				FF74973F167F2C4E00AF971F /* KMRegisterData.m in Sources */,
-				FF749740167F2C4E00AF971F /* KMUIUtilities.m in Sources */,
+				FF74973E167F2C4E00AF971F /* KPDPreferences.m in Sources */,
+				FF74973F167F2C4E00AF971F /* KPDRegisterData.m in Sources */,
+				FF749740167F2C4E00AF971F /* KPDUIUtilities.m in Sources */,
 				FF7497A7167F2D4800AF971F /* AppDelegate.m in Sources */,
 				FF7497B0167F2D8400AF971F /* InitialScreenViewController.m in Sources */,
 				FF7497B5167F2D9700AF971F /* LoginViewController.m in Sources */,

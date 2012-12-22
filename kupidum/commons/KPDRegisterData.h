@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 
-@interface KMRegisterData : NSObject
+@interface KPDRegisterData : NSObject
 
-+ (KMRegisterData *)sharedInstance;
++ (KPDRegisterData *)sharedInstance;
 
 - (NSNumber *)profileType;
 - (NSNumber *)minAge;
