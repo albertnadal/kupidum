@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 laFruitera.com. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "VideoconferenceViewController.h"
 
-@interface HomeViewController ()
+@interface VideoconferenceViewController ()
 
 @end
 
-@implementation HomeViewController
+@implementation VideoconferenceViewController
 
 @synthesize usernameField;
 @synthesize passwordField;
@@ -30,6 +30,12 @@
 {
     KPDClientSIP *clientSip = [KPDClientSIP sharedInstance];
     [clientSip registerToServerWithUser:[usernameField text] password:[passwordField text]];
+}
+
+- (IBAction)callUser:(id)sender
+{
+    KPDClientSIP *clientSip = [KPDClientSIP sharedInstance];
+    [clientSip callUser:@"silvia" withVideo:TRUE];
 }
 
 - (void)viewDidLoad

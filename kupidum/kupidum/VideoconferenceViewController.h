@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "KPDClientSIP.h"
 
-@interface HomeViewController : UIViewController
+@interface VideoconferenceViewController : UIViewController
 {
     IBOutlet UITextField *usernameField;
     IBOutlet UITextField *passwordField;

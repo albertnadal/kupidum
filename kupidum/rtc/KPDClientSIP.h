@@ -20,5 +20,6 @@
 + (KPDClientSIP *)sharedInstance;
 + (NSString *)userAgent;
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword;
+- (void)callUser:(NSString *)theUser withVideo:(BOOL)videoFlag;
 
 @end

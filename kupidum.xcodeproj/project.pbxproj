@@ -25,8 +25,8 @@
 		FF25A5BE16867CCD00F5DB58 /* libresample-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF25A5B716867CCC00F5DB58 /* libresample-arm-apple-darwin9.a */; };
 		FF25A5BF16867CCD00F5DB58 /* libspeex-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF25A5B816867CCC00F5DB58 /* libspeex-arm-apple-darwin9.a */; };
 		FF25A5C016867CCD00F5DB58 /* libsrtp-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF25A5B916867CCC00F5DB58 /* libsrtp-arm-apple-darwin9.a */; };
-		FF25A5CB168683B600F5DB58 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF25A5C9168683B600F5DB58 /* HomeViewController.m */; };
-		FF25A5CC168683B600F5DB58 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF25A5CA168683B600F5DB58 /* HomeViewController.xib */; };
+		FF25A5CB168683B600F5DB58 /* VideoconferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF25A5C9168683B600F5DB58 /* VideoconferenceViewController.m */; };
+		FF25A5CC168683B600F5DB58 /* VideoconferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF25A5CA168683B600F5DB58 /* VideoconferenceViewController.xib */; };
 		FF37450B1685F3190098BBF1 /* libpj-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3744FF1685F3190098BBF1 /* libpj-arm-apple-darwin9.a */; };
 		FF37450C1685F3190098BBF1 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3745001685F3190098BBF1 /* libpjlib-util-arm-apple-darwin9.a */; };
 		FF37450D1685F3190098BBF1 /* libpjmedia-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3745011685F3190098BBF1 /* libpjmedia-arm-apple-darwin9.a */; };
@@ -143,9 +143,9 @@
 		FF25A5B716867CCC00F5DB58 /* libresample-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libresample-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/lib/libresample-arm-apple-darwin9.a"; sourceTree = "<group>"; };
 		FF25A5B816867CCC00F5DB58 /* libspeex-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libspeex-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/lib/libspeex-arm-apple-darwin9.a"; sourceTree = "<group>"; };
 		FF25A5B916867CCC00F5DB58 /* libsrtp-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsrtp-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/lib/libsrtp-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF25A5C8168683B600F5DB58 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = kupidum/HomeViewController.h; sourceTree = "<group>"; };
-		FF25A5C9168683B600F5DB58 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = kupidum/HomeViewController.m; sourceTree = "<group>"; };
-		FF25A5CA168683B600F5DB58 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeViewController.xib; path = kupidum/HomeViewController.xib; sourceTree = "<group>"; };
+		FF25A5C8168683B600F5DB58 /* VideoconferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoconferenceViewController.h; path = kupidum/VideoconferenceViewController.h; sourceTree = "<group>"; };
+		FF25A5C9168683B600F5DB58 /* VideoconferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoconferenceViewController.m; path = kupidum/VideoconferenceViewController.m; sourceTree = "<group>"; };
+		FF25A5CA168683B600F5DB58 /* VideoconferenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoconferenceViewController.xib; path = kupidum/VideoconferenceViewController.xib; sourceTree = "<group>"; };
 		FF3744FF1685F3190098BBF1 /* libpj-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpj-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjlib/lib/libpj-arm-apple-darwin9.a"; sourceTree = "<group>"; };
 		FF3745001685F3190098BBF1 /* libpjlib-util-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjlib-util-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjlib-util/lib/libpjlib-util-arm-apple-darwin9.a"; sourceTree = "<group>"; };
 		FF3745011685F3190098BBF1 /* libpjmedia-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-arm-apple-darwin9.a"; sourceTree = "<group>"; };
@@ -403,6 +403,7 @@
 				B79E6AB216596723004C472F /* Register */,
 				FF25A5C51686832900F5DB58 /* Home */,
 				B70F46B21673F242004C8741 /* Finder */,
+				FF25A5D416871E6B00F5DB58 /* Videoconference */,
 				FF7497A3167F2D4800AF971F /* AppDelegate.h */,
 				FF7497A4167F2D4800AF971F /* AppDelegate.m */,
 				B7EF68011659001800F20DF3 /* Supporting Files */,
@@ -505,11 +506,18 @@
 		FF25A5C51686832900F5DB58 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				FF25A5C8168683B600F5DB58 /* HomeViewController.h */,
-				FF25A5C9168683B600F5DB58 /* HomeViewController.m */,
-				FF25A5CA168683B600F5DB58 /* HomeViewController.xib */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		FF25A5D416871E6B00F5DB58 /* Videoconference */ = {
+			isa = PBXGroup;
+			children = (
+				FF25A5C8168683B600F5DB58 /* VideoconferenceViewController.h */,
+				FF25A5C9168683B600F5DB58 /* VideoconferenceViewController.m */,
+				FF25A5CA168683B600F5DB58 /* VideoconferenceViewController.xib */,
+			);
+			name = Videoconference;
 			sourceTree = "<group>";
 		};
 		FF3744F91685ED6F0098BBF1 /* RTC */ = {
@@ -702,7 +710,7 @@
 				FF749823167F2F7200AF971F /* bg_bottom_cela_filtre.png in Resources */,
 				FF749824167F2F7200AF971F /* bg_boto_login.png in Resources */,
 				FF749825167F2F7200AF971F /* bg_boto_facebook.png in Resources */,
-				FF25A5CC168683B600F5DB58 /* HomeViewController.xib in Resources */,
+				FF25A5CC168683B600F5DB58 /* VideoconferenceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,7 +737,7 @@
 				FF25A5A7168674C900F5DB58 /* KPDVideoDevice.m in Sources */,
 				FF25A5A8168674C900F5DB58 /* KPDVideoDeviceView.m in Sources */,
 				FF25A5AB168674E200F5DB58 /* pjsip_wrapper.m in Sources */,
-				FF25A5CB168683B600F5DB58 /* HomeViewController.m in Sources */,
+				FF25A5CB168683B600F5DB58 /* VideoconferenceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

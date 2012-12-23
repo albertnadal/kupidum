@@ -896,6 +896,31 @@ void on_typing (pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to,
 */
 }
 
+int videocall(char* user)
+{
+    char sip_uri[255];
+    sprintf(sip_uri, "<sip:%s@smsturmix.com>", user);
+
+    pjsua_msg_data messageData;
+    pjsua_msg_data_init(&messageData);
+    pj_str_t callee = pj_str((char*)sip_uri);
+    pjsua_call_id call_id;
+    pj_status_t status;
+
+    current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
+    current_call_remote_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
+
+    setEnableVideoCall(true);
+
+    call_setting.vid_cnt = 1;
+    call_setting.aud_cnt = 1;
+
+    status = pjsua_call_make_call(acc_id, &callee, &call_setting, NULL, &messageData, &call_id);
+
+    return (status == PJ_SUCCESS)? call_id: PJ_ERROR;
+}
+
+/*
 //int call(const char* callId, RTCEventOptions * options, bool isVideoCall)
 int call(const char* callId, bool isVideoCall)
 {
@@ -928,7 +953,7 @@ int call(const char* callId, bool isVideoCall)
 
     return (status == PJ_SUCCESS)? call_id: PJ_ERROR;
 }
-
+*/
 static pj_status_t create_transport()
 {
     return pjsua_transport_create(PJSIP_TRANSPORT_TCP, &tp_cfg, &tp_id);

@@ -48,7 +48,16 @@
     const char *user = [theUser cStringUsingEncoding:NSUTF8StringEncoding];
     const char *password = [thePassword cStringUsingEncoding:NSUTF8StringEncoding];
 
-    main_pjsip(self, user, password, userAgent); //Creates pjsip instance and register user to SIP server
+    main_pjsip(self, (char*)user, (char*)password, (char*)userAgent); //Creates pjsip instance and register user to SIP server
+}
+
+- (void)callUser:(NSString *)theUser withVideo:(BOOL)videoFlag
+{
+    const char *user = [theUser cStringUsingEncoding:NSUTF8StringEncoding];
+    int status;
+
+    if(videoFlag)   status = videocall((char*)user);
+    else            { /*Nothing to do now*/ }
 }
 
 @end
