@@ -27,7 +27,7 @@ enum {
 };
 
 
-void main_pjsip(KPDClientSIP *clientSip, const char* user, const char* password, const char* userAgent);
+void main_pjsip(KPDClientSIP *clientSip, char* user, char* password, char* userAgent);
 /*
 int call(const char* callId, RTCEventOptions * options, bool isVideoCall);
 int acc_add(const char* regUriString, const char* proxyString, const char * userUriString,

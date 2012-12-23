@@ -959,7 +959,7 @@ static void log_cb(int level, const char *data, int len)
     NSLog(@"pj_log %@", [[NSString alloc] initWithBytes:data length:len encoding:NSUTF8StringEncoding]);
 }
 
-void main_pjsip(KPDClientSIP *clientSip, const char* user, const char* password, const char* userAgent)
+void main_pjsip(KPDClientSIP *clientSip, char* user, char* password, char* userAgent)
 {
     pj_status_t status;    
     status = pjsua_create();
@@ -1031,10 +1031,7 @@ void main_pjsip(KPDClientSIP *clientSip, const char* user, const char* password,
     pjsua_acc_config_default(&acc_cfg);
     pjsua_call_setting_default(&call_setting);
 
-    pjsua_acc_config acc_cfg;
-    pjsua_acc_config_default(&acc_cfg);
-
-    char* sip_uri;
+    char sip_uri[255];
     sprintf(sip_uri, "<sip:%s@smsturmix.com>", user);
 
     acc_cfg.id = pj_str((char*)sip_uri);

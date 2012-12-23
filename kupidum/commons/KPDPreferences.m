@@ -288,10 +288,12 @@
 
 #pragma mark - Private methods
 
-/*- (NSString *)settingsPath
+- (NSString *)settingsPath
 {
-    return [CNCFilesystemManager localPathForFile:@"settings.plist"];
-}*/
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *dir = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return [NSString stringWithFormat:@"%@/%@", dir, @"settings.plist"];
+}
 
 - (BOOL)existsFileInDocuments
 {

@@ -17,6 +17,7 @@
 @property (retain, nonatomic) NSString* deviceName;
 @property (nonatomic) video_device_type deviceType;*/
 
++ (KPDClientSIP *)sharedInstance;
 + (NSString *)userAgent;
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword;
 

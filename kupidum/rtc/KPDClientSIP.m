@@ -18,6 +18,18 @@
     return self;
 }
 
++ (KPDClientSIP *)sharedInstance
+{
+    static dispatch_once_t onceToken;
+    static KPDClientSIP *_instance;
+    
+    dispatch_once(&onceToken, ^{
+        _instance = [[KPDClientSIP alloc] init];
+    });
+    
+    return _instance;
+}
+
 + (NSString *)userAgent
 {
     NSDictionary * bundleDictionary = [[NSBundle mainBundle] infoDictionary];
