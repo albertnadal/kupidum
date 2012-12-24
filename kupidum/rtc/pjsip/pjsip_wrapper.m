@@ -29,12 +29,8 @@ static pjsip_transport *the_transport = 0;
 
 
 // Enable/disable UA audio and video calls (should be always True if possible)
-bool audio_call_enabled = true;
-bool video_call_enabled = true;
 bool current_call_has_video = false;
 bool call_is_active = false;
-bool call_request_started_with_video = false;
-bool this_client_started_direct_video_call = false;
 pjmedia_dir current_call_video_dir = PJMEDIA_DIR_NONE;          //SDP a=inactive
 pjmedia_dir current_call_remote_video_dir = PJMEDIA_DIR_NONE;   //SDP a=inactive
 
@@ -284,31 +280,26 @@ static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
 
     if(callInfo.state == PJSIP_INV_STATE_CALLING)
     {
-        // Case when this is the user agent that sends the INVITE to another user agent
-        current_call_has_video = video_call_enabled;
+        NSLog(@"Calling...");
+        // Nothing to do
     }
     else if(callInfo.state == PJSIP_INV_STATE_INCOMING)
     {
         // Case when this is the user agent that receives an INVITE from another user agent
+        NSLog(@"Receiving an INVITE...");
+
         current_call_has_video = is_video_possible(call_id);
-        video_call_enabled = current_call_has_video;
+        [client receivedIncomingCall:call_id];
     }
     else if(callInfo.state == PJSIP_INV_STATE_CONFIRMED)
     {
+        NSLog(@"Call confirmed...");
+
         call_is_active = true;
-
-        // Case when this is the user agent that sends the INVITE to another user agent
-        if(call_request_started_with_video) current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
-        else                                current_call_video_dir = PJMEDIA_DIR_NONE;
-
-        current_call_has_video = is_video_active(call_id);
-        video_call_enabled = current_call_has_video;
+        current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
 
         //Every call has only audio media available until is stablished. At this point, both endpoints must enable the video media for possible video media request during call.
         setEnableVideoCall(true);
-
-        // When call has been stablished then this_client_started_direct_video_call flag has no utility and must be disabled
-        this_client_started_direct_video_call = false;
     }
 
     if(callInfo.state == PJSIP_INV_STATE_DISCONNECTED)
@@ -320,12 +311,10 @@ static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
             startVideoImmediately:false
                        lastStatus:callInfo.last_status
                        andOptions:options];
-
+*/
         // If call has been disconnected from remote part then the video flag (and others) must be set to false
         current_call_has_video = false;
         call_is_active = false;
-        call_request_started_with_video = false;
-        this_client_started_direct_video_call = false;
         current_call_remote_video_dir = PJMEDIA_DIR_NONE;
         current_call_video_dir = PJMEDIA_DIR_NONE;
 
@@ -336,7 +325,7 @@ static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
         const char *indent_char = " ";
 
         pjsua_call_dump(call_id, PJ_TRUE, stats_string, 5000, indent_char);
-        NSLog(@"STATS: (%s)", stats_string);*/
+        NSLog(@"STATS: (%s)", stats_string);
     }
     else
     {
@@ -352,13 +341,18 @@ static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
 
 static void on_call_media_state(pjsua_call_id call_id)
 {
-/*
     pjsua_call_id current_call_id;
     pj_status_t status = search_first_active_call(&current_call_id);
-    if(call_id != current_call_id) {
-        NSLog(@"Different call identifier detected!");
+
+    if(status != PJ_SUCCESS) {
+        NSLog(@"Error searching first active call!");
         return;
     }
+
+/*    if(call_id != current_call_id) {
+        NSLog(@"Different call identifier detected!");
+        return;
+    }*/
     
     // When media is active, connect call to sound device.
     pjsua_call_info callInfo;
@@ -369,189 +363,24 @@ static void on_call_media_state(pjsua_call_id call_id)
         pjsua_conf_connect(0, callInfo.conf_slot);
     }
 
-    // If this client launched the call with video then the video stream must be started as soon as possible
-    if(this_client_started_direct_video_call)
+    // if the call request is launched with video and the call state is confirmed then media state procedure can be checked
+/*    if((callInfo.state != PJSIP_INV_STATE_CONFIRMED))
+        return;*/
+
+    if(is_video_active(call_id) || is_remote_video_active(call_id))
+    {
+        // Setup the current h.263+ configuration
+        setup_video_codec_params();
+
+        // Start video stream
         set_video_stream(call_id, PJSUA_CALL_VID_STRM_START_TRANSMIT, PJMEDIA_DIR_NONE);
 
-    // if the call request is launched with video and the call state is confirmed then media state procedure can be checked
-    if((!call_request_started_with_video) && (callInfo.state != PJSIP_INV_STATE_CONFIRMED))
-        return;
-
-
-    // The first step after a change on any media state is to check the SDP response from remote client
-    // At this point is necessary to check if remote client rejected any video transference as described in on the SDP response (m=video 0 RTP/AVP 96)
-    // If out client sent a video request and remote client rejects it then the video modal window will not appear and a message box must alert user about this.
-    if((current_call_has_video)
-       && (current_call_video_dir == PJMEDIA_DIR_ENCODING_DECODING)
-       && (current_call_remote_video_dir == PJMEDIA_DIR_ENCODING_DECODING)
-       && (get_video_direction(call_id) == PJMEDIA_DIR_NONE))
-    {
-        current_call_video_dir = PJMEDIA_DIR_NONE;
-        current_call_remote_video_dir = PJMEDIA_DIR_NONE;
-        current_call_has_video = false;
-        
-        [instance onChangeMediaStreams:call_id
-                             withState:[NSString stringWithCString:callInfo.state_text.ptr encoding:NSASCIIStringEncoding]
-                               stateId:callInfo.state
-                           isVideoCall:true
-                 startVideoImmediately:false
-                            lastStatus:RECEIVING_VIDEO_SDP_OFFER_REJECTED
-                            andOptions:nil];
-
-        return;
+//        [client videoStreamStartTransmiting:call_id];
     }
-
-    // Setup the current h.263+ configuration
-    setup_video_codec_params();
-
-
-    if(status == PJ_SUCCESS && (is_video_active(call_id) || is_remote_video_active(call_id)|| video_call_enabled))
+    else
     {
-        if((current_call_video_dir == PJMEDIA_DIR_NONE) && (current_call_remote_video_dir == PJMEDIA_DIR_NONE))
-        {
-            // BOTH CLIENTS SWITCHED FROM VIDEO TO AUDIO
-
-            current_call_has_video = false;
-            [instance onChangeMediaStreams:call_id 
-                                 withState:[NSString stringWithCString:callInfo.state_text.ptr encoding:NSASCIIStringEncoding] 
-                                   stateId:callInfo.state
-                               isVideoCall:false
-                     startVideoImmediately:false
-                                lastStatus:RECEIVING_VIDEO_SWITCH_REQUEST
-                                andOptions:nil];
-            return;
-        }
-        else if(((current_call_video_dir == PJMEDIA_DIR_ENCODING_DECODING) || (current_call_video_dir == PJMEDIA_DIR_DECODING)) && (current_call_remote_video_dir == PJMEDIA_DIR_DECODING) && (current_call_has_video))
-        {
-            // REMOTE CLIENT SWITCHED FROM VIDEO TO AUDIO (remote video decoding only)
-            // We have to show the preview video view in full screen mode as initial
-            current_call_has_video = true;
-            current_call_video_dir = PJMEDIA_DIR_ENCODING;
-
-            //setEnableVideoDriver(true);
-
-            // At this point, pjmedia closed the video engine and inmediatelly started a new instance to make possible the onlysend video mode.
-            // So the instance must "reactivate" the video views in waiting for remote acceptance video
-            //[NSTimer scheduledTimerWithTimeInterval:5.00 target:instance selector:@selector(activateVideoAndWaitForRemoteAcceptance) userInfo:nil repeats:NO];
-            [instance performSelectorOnMainThread:@selector(activateVideoAndWaitForRemoteAcceptance) withObject:nil waitUntilDone:YES];
-
-            // After pjmedia restarts the video engine then the application is no sending video to the remote client because of the stream is stoped by default. The stream must be transmiting video.
-            set_video_stream(call_id, PJSUA_CALL_VID_STRM_START_TRANSMIT, PJMEDIA_DIR_NONE);
-
-            return;
-        }
-        else if(((current_call_video_dir == PJMEDIA_DIR_ENCODING)) && (current_call_remote_video_dir == PJMEDIA_DIR_ENCODING_DECODING) && (current_call_has_video))
-        {
-            // REMOTE CLIENT SWITCHED FROM AUDIO TO VIDEO AND WE ARE IN VIDEO ENCODING MODE
-            // We have to switch to ENCODING_DECODING mode
-            current_call_has_video = true;
-            current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
-
-            // At this point, pjmedia closed the video engine and inmediatelly started a new instance to make possible the onlysend video mode.
-            // So the instance must "reactivate" the video views in waiting for remote video frames
-//            [instance activateVideoAndWaitForRemoteAcceptance];
-            [instance performSelectorOnMainThread:@selector(activateVideoAndWaitForRemoteAcceptance) withObject:nil waitUntilDone:YES];
-
-            // After pjmedia restarts the video engine then the application is no sending video to the remote client because of the stream is stoped by default. The stream must be transmiting video.
-            set_video_stream(call_id, PJSUA_CALL_VID_STRM_START_TRANSMIT, PJMEDIA_DIR_NONE);
-
-            return;
-        }
-        else if(((current_call_video_dir == PJMEDIA_DIR_ENCODING_DECODING ) || (current_call_video_dir == PJMEDIA_DIR_NONE)) && (current_call_remote_video_dir == PJMEDIA_DIR_ENCODING_DECODING) && (!current_call_has_video) && (call_request_started_with_video))
-        {
-            // CLIENT RECEIVED A DIRECT VIDEO MEDIA REQUEST
-            // Client received an incoming video media request
-            // Videoconference must be launched by start sending frames to the other client
-            
-            if(set_video_stream(call_id, PJSUA_CALL_VID_STRM_START_TRANSMIT, PJMEDIA_DIR_NONE) == PJ_SUCCESS)
-            {
-                current_call_has_video = true;
-                current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
-                current_call_remote_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
-            }
-            else
-            {
-                NSLog(@"Start video transmision failed.");
-            }
-
-            return;
-        }
-        else if(((current_call_video_dir == PJMEDIA_DIR_ENCODING_DECODING ) || (current_call_video_dir == PJMEDIA_DIR_NONE)) && (current_call_remote_video_dir == PJMEDIA_DIR_ENCODING_DECODING) && (!current_call_has_video))
-        {
-            // CLIENT RECEIVED AN INCOMING VIDEO MEDIA REQUEST
-            // Client received an incoming video media request
-            // After start sending frames to the requester user agent then the app must first show the pop up asking for start sending video
-            
-            [instance onChangeMediaStreams:call_id 
-                                 withState:[NSString stringWithCString:callInfo.state_text.ptr encoding:NSASCIIStringEncoding] 
-                                   stateId:callInfo.state
-                               isVideoCall:true
-                     startVideoImmediately:true
-                                lastStatus:RECEIVING_VIDEO_SWITCH_REQUEST
-                                andOptions:nil];
-                        
-            current_call_has_video = true;
-            current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
-            current_call_remote_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
-
-            return;
-        }
-        else if(current_call_video_dir == PJMEDIA_DIR_DECODING)
-        {
-            // CLIENT SWITCHED FROM VIDEO TO AUDIO
-            // User want to switch from video to audio
-            // Video window must disapear and audio popup must be shown again
-
-            current_call_has_video = true;
-            current_call_remote_video_dir = PJMEDIA_DIR_ENCODING;
-
-            [instance onChangeMediaStreams:call_id
-                                 withState:[NSString stringWithCString:callInfo.state_text.ptr encoding:NSASCIIStringEncoding] 
-                                   stateId:callInfo.state
-                               isVideoCall:false
-                     startVideoImmediately:false
-                                lastStatus:RECEIVING_VIDEO_TO_AUDIO_SWITCH_REQUEST
-                                andOptions:nil];
-            return;
-        }
-        else if(current_call_video_dir == PJMEDIA_DIR_ENCODING_DECODING) // The user agent who sent the video request is allways working in encoder/decoder mode
-        {
-            // There are 2 possible cases at this point:
-
-            // Case 1) THIS CLIENT SENT A VIDEO MEDIA REQUEST
-            // The remote video media stream is enabled ONLY FOR DECODING (no frames sent).
-            // Pending for remote user authorization via Pop up to start encode and frame transmission.
-
-            // Case 2) THIS CLIENT IS IN AUDIO MODE AND IS RECEIVING VIDEO FROM REMOTE CLIENT
-            // This client switched from DECODING mode to ENCODING_DECODING mode (from asymetric to symetric video stream)
-
-            if(set_video_stream(call_id, PJSUA_CALL_VID_STRM_START_TRANSMIT, PJMEDIA_DIR_NONE) == PJ_SUCCESS)
-            {
-                current_call_has_video = true;
-                current_call_remote_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
-                call_request_started_with_video = false;
-            }
-            else
-            {
-                NSLog(@"Start video transmision failed.");
-            }
-        }
-
-    }
-    // Video was deactivated.
-    else {
-        //set_video_stream(call_id, PJSUA_CALL_VID_STRM_STOP_TRANSMIT, PJMEDIA_DIR_NONE);
         stop_all_vid_previews();
     }
-
-    [instance onChangeMediaStreams:call_id
-                    withState:[NSString stringWithCString:callInfo.state_text.ptr encoding:NSASCIIStringEncoding] 
-                      stateId:callInfo.state
-                  isVideoCall:current_call_has_video
-        startVideoImmediately:call_request_started_with_video
-                   lastStatus:callInfo.last_status
-                   andOptions:nil];
-*/
 }
 
 void on_call_rx_offer(pjsua_call_id call_id, const pjmedia_sdp_session *offer, void *reserved, pjsip_status_code *code, pjsua_call_setting *opt)
@@ -619,38 +448,29 @@ void on_call_rx_offer(pjsua_call_id call_id, const pjmedia_sdp_session *offer, v
 
                     NSString *attr_name_nsstring = [NSString stringWithCString:attr_name_string encoding:NSASCIIStringEncoding];
 
+                    video_direction_in_sdp = true;
+
                     if([attr_name_nsstring isEqualToString:@"sendonly"])
                     {
+                        current_call_remote_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
+                        current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
+                    }
+                    else if([attr_name_nsstring isEqualToString:@"sendonly"])
+                    {
                         // The requester only wants to send video
-                        video_direction_in_sdp = true;
                         current_call_remote_video_dir = PJMEDIA_DIR_ENCODING;
                         current_call_video_dir = PJMEDIA_DIR_DECODING;
                     }
                     else if([attr_name_nsstring isEqualToString:@"recvonly"])
                     {
                         // The requester only wants to receive video
-                        video_direction_in_sdp = true;
                         current_call_remote_video_dir = PJMEDIA_DIR_DECODING;
                         current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
                     }
+                    else    video_direction_in_sdp = false;
 
                     //NSLog(@"Attribute name (%s) | Value (%s)", attr_name_string, attr_value_string);
                 }
-
-                if(!video_direction_in_sdp) //"sendrecv" by default
-                {
-                    // The requester wants to receive and send video
-                    current_call_remote_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
-
-                    if (current_call_video_dir == PJMEDIA_DIR_ENCODING_DECODING || current_call_video_dir == PJMEDIA_DIR_DECODING) {
-                        current_call_video_dir = PJMEDIA_DIR_NONE;
-                    }
-                    else if (current_call_video_dir == PJMEDIA_DIR_NONE) {
-                        current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
-                    }
-
-                }
-
             }
             else
             {
@@ -673,10 +493,8 @@ void on_call_rx_offer(pjsua_call_id call_id, const pjmedia_sdp_session *offer, v
         setEnableVideoCall(false);
         current_call_video_dir = PJMEDIA_DIR_NONE; /* PJMEDIA_DIR_ENCODING; */
         current_call_remote_video_dir = PJMEDIA_DIR_NONE; /* PJMEDIA_DIR_DECODING; */
-        call_request_started_with_video = false;
         current_call_has_video = false;
     }
-
 }
 
 void setup_video_codec_params(void)
@@ -1030,14 +848,14 @@ void main_pjsip(KPDClientSIP *clientSip, char* user, char* password, char* userA
     //media_config.jb_max_pre = -1;   //this should be able to set the máximum prefetch for jitter buffer (max num of frames) Could help reduce chopiness on video. Automatic default if not set is jb_max * 4 / 5
 
     //Set the STUN server
-    cfg.stun_host = pj_str("stunserver.org");
+/*    cfg.stun_host = pj_str("stunserver.org");
     cfg.stun_srv[0] = pj_str("stun.l.google.com:19302");
     cfg.stun_srv[1] = pj_str("stun.ipns.com");
     cfg.stun_srv[2] = pj_str("stun.endigovoip.com");
     cfg.stun_srv[3] = pj_str("stun.rnktel.com");
     cfg.stun_srv[4] = pj_str("stun.voip.aebc.com");
     cfg.stun_srv[5] = pj_str("stun.callwithus.com");
-    cfg.stun_srv_cnt = 6;
+    cfg.stun_srv_cnt = 6;*/
 
     status = pjsua_init(&cfg, &log_cfg, &media_config);
 
@@ -1078,8 +896,8 @@ void main_pjsip(KPDClientSIP *clientSip, char* user, char* password, char* userA
     acc_cfg.vid_out_auto_transmit = PJ_FALSE;
     acc_cfg.vid_rend_dev = PJMEDIA_VID_DEFAULT_RENDER_DEV;
 
-    call_setting.vid_cnt = video_call_enabled ? 1 : 0; //video_call_enabled; //1 => hasVideo | 0 => hasNoVideo
-    call_setting.aud_cnt = audio_call_enabled; //1 => hasAudio | 0 => hasNoAudio
+    call_setting.vid_cnt = 1; //1 => hasVideo | 0 => hasNoVideo
+    call_setting.aud_cnt = 1; //1 => hasAudio | 0 => hasNoAudio
 
     status = pjsua_acc_add(&acc_cfg, PJ_TRUE, &acc_id);
     if ( status != PJ_SUCCESS ) {
@@ -1234,7 +1052,6 @@ bool setEnableOutgoingVideoStream(pjsua_call_id call_id, bool v)
     
             if(current_call_video_dir == PJMEDIA_DIR_DECODING)
             {
-                    call_request_started_with_video = true; // We don't want to see the full screen preview view. We want to show directly the common videoconference view.
                     current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
                     result = set_video_stream(call_id, PJSUA_CALL_VID_STRM_CHANGE_DIR, current_call_video_dir) == PJ_SUCCESS;
             }else   result = true;
@@ -1249,9 +1066,6 @@ bool setEnableOutgoingVideoStream(pjsua_call_id call_id, bool v)
             // First of all video media must be enabled
             setEnableVideoCall(true);
 
-            // The second step is to disable the call_request_started_with_video because of we are already on an active call and this flag has only efect for starting a call directly with video
-            call_request_started_with_video = false;
-
             // Set direction as needed.
             pjmedia_dir dir = v? PJMEDIA_DIR_ENCODING_DECODING: PJMEDIA_DIR_NONE;
 
@@ -1262,7 +1076,6 @@ bool setEnableOutgoingVideoStream(pjsua_call_id call_id, bool v)
                 set_video_stream(call_id, PJSUA_CALL_VID_STRM_REMOVE, PJMEDIA_DIR_NONE);
                 current_call_video_dir = PJMEDIA_DIR_NONE;
                 current_call_remote_video_dir = PJMEDIA_DIR_NONE;
-                call_request_started_with_video = false;
                 current_call_has_video = false; // Call session will have only audio media, then the current_call_has_video flag must be disabled
 
                 result = true;
@@ -1417,24 +1230,18 @@ bool setOutgoingVideoStreamDevice(KPDVideoDevice *yvd)
 // enable/disable video/audio before start call
 bool setEnableVideoCall(bool v)
 {
-    //it will take effect only in register_user and accept_call functions, so you must call this just before
-    video_call_enabled = v; // ? 1 : 0;
-
     pjsua_call_setting_default(&call_setting);
-    call_setting.vid_cnt = video_call_enabled ? 1 : 0; //video_call_enabled; //1 => hasVideo | 0 => hasNoVideo
+    call_setting.vid_cnt = v ? 1 : 0; // 1 => hasVideo | 0 => hasNoVideo
 
 //    instance.video_call_enable = video_call_enabled ? 1 : 0; //video_call_enabled;
-    
+
     return true;
 }
 
 bool setEnableAudioCall(bool v)
 {
-    //it will take effect only in register_user and accept_call functions, so you must call this just before
-    audio_call_enabled = v ? 1 : 0;
-
     pjsua_call_setting_default(&call_setting);
-    call_setting.aud_cnt = audio_call_enabled; //1 => hasAudio | 0 => hasNoAudio
+    call_setting.aud_cnt = v ? 1 : 0; //1 => hasAudio | 0 => hasNoAudio
 
     return true;
 }
@@ -1499,8 +1306,8 @@ int acc_add(const char* regUriString, const char* proxyString, const char * user
     acc_cfg.vid_out_auto_transmit = PJ_FALSE;
     acc_cfg.vid_rend_dev = PJMEDIA_VID_DEFAULT_RENDER_DEV;
 
-    call_setting.vid_cnt = video_call_enabled ? 1 : 0; //video_call_enabled; //1 => hasVideo | 0 => hasNoVideo
-    call_setting.aud_cnt = audio_call_enabled; //1 => hasAudio | 0 => hasNoAudio
+    call_setting.vid_cnt = 1; // 1 => hasVideo | 0 => hasNoVideo
+    call_setting.aud_cnt = 1; // 1 => hasAudio | 0 => hasNoAudio
 
     status = pjsua_acc_add(&acc_cfg, PJ_TRUE, &acc_id);
     if ( status != PJ_SUCCESS ) { 
@@ -1643,7 +1450,6 @@ void accept_call(int call_id)
 
     call_setting.vid_cnt = 0;
     call_setting.aud_cnt = 1;
-    call_request_started_with_video = false;
 
     for (mi=0; mi<call_info.media_cnt; ++mi)
     {
@@ -1658,19 +1464,9 @@ void accept_call(int call_id)
                 {
                     current_call_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
                     current_call_remote_video_dir = PJMEDIA_DIR_ENCODING_DECODING;
-                    call_request_started_with_video = true;
                     current_call_has_video = false;
-
-                    //Show the video window with the preview full screen sized
-/*                    [instance onChangeMediaStreams:call_id
-                                         withState:[NSString stringWithCString:call_info.state_text.ptr encoding:NSASCIIStringEncoding]
-                                           stateId:call_info.state
-                                       isVideoCall:true
-                             startVideoImmediately:false
-                                        lastStatus:call_info.last_status
-                                        andOptions:nil];*/
                 }
-    
+
                 setEnableVideoCall(true);
                 break;
             default:

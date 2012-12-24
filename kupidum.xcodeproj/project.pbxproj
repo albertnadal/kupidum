@@ -146,6 +146,7 @@
 		FF25A5C8168683B600F5DB58 /* VideoconferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoconferenceViewController.h; path = kupidum/VideoconferenceViewController.h; sourceTree = "<group>"; };
 		FF25A5C9168683B600F5DB58 /* VideoconferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoconferenceViewController.m; path = kupidum/VideoconferenceViewController.m; sourceTree = "<group>"; };
 		FF25A5CA168683B600F5DB58 /* VideoconferenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoconferenceViewController.xib; path = kupidum/VideoconferenceViewController.xib; sourceTree = "<group>"; };
+		FF25A5D51688988400F5DB58 /* KPDClientSIPDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDClientSIPDelegate.h; path = kupidum/rtc/KPDClientSIPDelegate.h; sourceTree = "<group>"; };
 		FF3744FF1685F3190098BBF1 /* libpj-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpj-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjlib/lib/libpj-arm-apple-darwin9.a"; sourceTree = "<group>"; };
 		FF3745001685F3190098BBF1 /* libpjlib-util-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjlib-util-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjlib-util/lib/libpjlib-util-arm-apple-darwin9.a"; sourceTree = "<group>"; };
 		FF3745011685F3190098BBF1 /* libpjmedia-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-arm-apple-darwin9.a"; sourceTree = "<group>"; };
@@ -523,6 +524,7 @@
 		FF3744F91685ED6F0098BBF1 /* RTC */ = {
 			isa = PBXGroup;
 			children = (
+				FF25A5D51688988400F5DB58 /* KPDClientSIPDelegate.h */,
 				FF25A5A0168674C900F5DB58 /* KPDClientSIP.h */,
 				FF25A5A1168674C900F5DB58 /* KPDClientSIP.m */,
 				FF25A5A2168674C900F5DB58 /* KPDVideoDevice.h */,

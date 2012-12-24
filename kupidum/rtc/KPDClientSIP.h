@@ -7,19 +7,38 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KPDClientSIPDelegate.h"
 
 @interface KPDClientSIP : NSObject
 {
-    
+    int currentCallId;
+    id<KPDClientSIPDelegate> delegate;
 }
+
+@property (retain, nonatomic) id<KPDClientSIPDelegate> delegate;
 
 /*@property (retain, nonatomic) NSString* deviceId;
 @property (retain, nonatomic) NSString* deviceName;
 @property (nonatomic) video_device_type deviceType;*/
 
+// Class methods
 + (KPDClientSIP *)sharedInstance;
 + (NSString *)userAgent;
+
+// Methods called from pjsip_wrapper
+- (void)receivedIncomingCall:(int)callId;
+
+// Public methods called from VideoconferenceViewController
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword;
 - (void)callUser:(NSString *)theUser withVideo:(BOOL)videoFlag;
+- (void)acceptCall;
+- (void)rejectCall;
+- (void)setIngoingVideoStreamViewHidden:(BOOL) isHidden;
+- (void)setOutgoingVideoStreamViewHidden:(BOOL) isHidden;
+- (void)setIngoingVideoStreamViewFrame:(CGRect) remoteCgrect;
+- (void)setOutgoingVideoStreamViewFrame:(CGRect) localCgrect;
+- (UIView *)getIngoingVideoStreamView;
+- (UIView *)getOutgoingVideoStreamView;
+- (UIView *)getVideoStreamView;
 
 @end

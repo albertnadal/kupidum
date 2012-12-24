@@ -11,6 +11,8 @@
 
 @implementation KPDClientSIP
 
+@synthesize delegate;
+
 - (id)init
 {
     self = [super init];
@@ -49,6 +51,52 @@
     const char *password = [thePassword cStringUsingEncoding:NSUTF8StringEncoding];
 
     main_pjsip(self, (char*)user, (char*)password, (char*)userAgent); //Creates pjsip instance and register user to SIP server
+
+    setEnableVideoDriver(true);
+}
+
+- (void)receivedIncomingCall:(int)callId
+{
+    currentCallId = callId;
+    [delegate clientDidReceivedVideocall:self fromUser:@"Sílvia"];
+}
+
+- (void)acceptCall
+{
+    accept_call(currentCallId);
+}
+
+- (void)rejectCall
+{
+    reject_call(currentCallId);
+}
+
+- (void) setIngoingVideoStreamViewHidden:(BOOL) isHidden{
+    setIngoingVideoStreamViewHidden(isHidden);
+}
+
+- (void) setOutgoingVideoStreamViewHidden:(BOOL) isHidden{
+    setOutgoingVideoStreamViewHidden(isHidden);
+}
+
+- (void) setIngoingVideoStreamViewFrame:(CGRect) remoteCgrect{
+    setIngoingVideoStreamViewFrame(remoteCgrect);
+}
+
+- (void) setOutgoingVideoStreamViewFrame:(CGRect) localCgrect{
+    setOutgoingVideoStreamViewFrame(localCgrect);
+}
+
+- (UIView *) getIngoingVideoStreamView{
+    return getIngoingVideoStreamView();
+}
+
+- (UIView *) getOutgoingVideoStreamView{
+    return getOutgoingVideoStreamView();
+}
+
+- (UIView *) getVideoStreamView{
+    return getVideoStreamView();
 }
 
 - (void)callUser:(NSString *)theUser withVideo:(BOOL)videoFlag

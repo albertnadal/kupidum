@@ -9,15 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "KPDClientSIP.h"
 
-@interface VideoconferenceViewController : UIViewController
+@interface VideoconferenceViewController : UIViewController<UIAlertViewDelegate, KPDClientSIPDelegate>
 {
     IBOutlet UITextField *usernameField;
     IBOutlet UITextField *passwordField;
+    IBOutlet UIView *videoView;
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *usernameField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
+@property (strong, nonatomic) IBOutlet UIView *videoView;
 
 - (IBAction)connect:(id)sender;
+- (void)showEmbededVideoView;
 
 @end
