@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 laFruitera.com. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "VideoconferenceViewController.h"
 
 @interface VideoconferenceViewController ()
@@ -30,11 +31,11 @@
 
 - (void)showEmbededVideoView
 {
-    int ingoingVideoWidth = 118;
-    int ingoingVideoHeight = 145;
-    
+    int ingoingVideoWidth = 320;
+    int ingoingVideoHeight = 261;
+
     CGRect remoteCgrect = CGRectMake(0, 0, ingoingVideoWidth, ingoingVideoHeight);
-    
+
     [[KPDClientSIP sharedInstance] setIngoingVideoStreamViewFrame:remoteCgrect];
     [[KPDClientSIP sharedInstance] setIngoingVideoStreamViewHidden:false];
 
@@ -51,7 +52,7 @@
     [remoteView reloadInputViews];
 
     [remoteView setFrame:remoteCgrect];
-//    [remoteView.layer setFrame:remoteCgrect];
+    [remoteView.layer setFrame:remoteCgrect];
 
     // We add the ingoing video view from app_pjsip into the videoView
     [videoView addSubview:remoteView];

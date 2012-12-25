@@ -44,17 +44,17 @@
     VideoconferenceViewController *videoconferenceViewController = [[VideoconferenceViewController alloc] initWithNibName:@"VideoconferenceViewController" bundle:nil];
     UIViewController *finderViewController2 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
     UIViewController *finderViewController3 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
-    UIViewController *finderViewController4 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
+    UIViewController *finderViewController4 = [[UIViewController alloc] init];
 
     UINavigationController *finderNavigationController = [[UINavigationController alloc] initWithRootViewController:finderViewController];
-    [videoconferenceViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Inici", @"") image:[UIImage imageNamed:@"tab_icon_home"] tag:1]];
+    [finderViewController4 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Inici", @"") image:[UIImage imageNamed:@"tab_icon_home"] tag:1]];
     [finderNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Cercar", @"") image:[UIImage imageNamed:@"tab_icon_search"] tag:2]];
     [finderViewController2 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Missatges", @"") image:[UIImage imageNamed:@"tab_icon_msg"] tag:3]];
     [finderViewController3 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Xat", @"") image:[UIImage imageNamed:@"tab_icon_chat"] tag:4]];
-    [finderViewController4 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
+    [videoconferenceViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
 
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[videoconferenceViewController, finderNavigationController, finderViewController2, finderViewController3, finderViewController4];
+    self.tabBarController.viewControllers = @[finderViewController4, finderNavigationController, finderViewController2, finderViewController3, videoconferenceViewController];
     [self.tabBarController setSelectedViewController:videoconferenceViewController];
     self.window.rootViewController = self.tabBarController;
 }

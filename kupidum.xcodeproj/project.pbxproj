@@ -27,6 +27,7 @@
 		FF25A5C016867CCD00F5DB58 /* libsrtp-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF25A5B916867CCC00F5DB58 /* libsrtp-arm-apple-darwin9.a */; };
 		FF25A5CB168683B600F5DB58 /* VideoconferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF25A5C9168683B600F5DB58 /* VideoconferenceViewController.m */; };
 		FF25A5CC168683B600F5DB58 /* VideoconferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF25A5CA168683B600F5DB58 /* VideoconferenceViewController.xib */; };
+		FF25A5D71688B97400F5DB58 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF25A5D61688B97300F5DB58 /* QuartzCore.framework */; };
 		FF37450B1685F3190098BBF1 /* libpj-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3744FF1685F3190098BBF1 /* libpj-arm-apple-darwin9.a */; };
 		FF37450C1685F3190098BBF1 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3745001685F3190098BBF1 /* libpjlib-util-arm-apple-darwin9.a */; };
 		FF37450D1685F3190098BBF1 /* libpjmedia-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3745011685F3190098BBF1 /* libpjmedia-arm-apple-darwin9.a */; };
@@ -147,6 +148,7 @@
 		FF25A5C9168683B600F5DB58 /* VideoconferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoconferenceViewController.m; path = kupidum/VideoconferenceViewController.m; sourceTree = "<group>"; };
 		FF25A5CA168683B600F5DB58 /* VideoconferenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoconferenceViewController.xib; path = kupidum/VideoconferenceViewController.xib; sourceTree = "<group>"; };
 		FF25A5D51688988400F5DB58 /* KPDClientSIPDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDClientSIPDelegate.h; path = kupidum/rtc/KPDClientSIPDelegate.h; sourceTree = "<group>"; };
+		FF25A5D61688B97300F5DB58 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FF3744FF1685F3190098BBF1 /* libpj-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpj-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjlib/lib/libpj-arm-apple-darwin9.a"; sourceTree = "<group>"; };
 		FF3745001685F3190098BBF1 /* libpjlib-util-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjlib-util-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjlib-util/lib/libpjlib-util-arm-apple-darwin9.a"; sourceTree = "<group>"; };
 		FF3745011685F3190098BBF1 /* libpjmedia-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-arm-apple-darwin9.a"; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF25A5D71688B97400F5DB58 /* QuartzCore.framework in Frameworks */,
 				FF25A5B116867B0B00F5DB58 /* CoreAudio.framework in Frameworks */,
 				FF25A5AF16867A0200F5DB58 /* CFNetwork.framework in Frameworks */,
 				FF25A5AD1686794400F5DB58 /* AudioToolbox.framework in Frameworks */,
@@ -382,6 +385,7 @@
 		B7EF67F91659001800F20DF3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FF25A5D61688B97300F5DB58 /* QuartzCore.framework */,
 				FF25A5B016867B0B00F5DB58 /* CoreAudio.framework */,
 				FF25A5AE16867A0200F5DB58 /* CFNetwork.framework */,
 				FF25A5AC1686794400F5DB58 /* AudioToolbox.framework */,
