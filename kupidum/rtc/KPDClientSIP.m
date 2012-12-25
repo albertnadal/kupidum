@@ -61,6 +61,12 @@
     [delegate clientDidReceivedVideocall:self fromUser:@"Sílvia"];
 }
 
+- (void)videoStreamStartTransmiting:(int)callId
+{
+    currentCallId = callId;
+    [delegate videoconferenceDidBegan:self];
+}
+
 - (void)acceptCall
 {
     accept_call(currentCallId);

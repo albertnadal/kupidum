@@ -78,6 +78,13 @@
 - (IBAction)callUser:(id)sender
 {
     [[KPDClientSIP sharedInstance] callUser:@"silvia" withVideo:TRUE];
+
+    [self showEmbededVideoView];
+}
+
+- (void)videoconferenceDidBegan:(KPDClientSIP *)client
+{
+    [self showEmbededVideoView];
 }
 
 - (void)clientDidReceivedVideocall:(KPDClientSIP *)client fromUser:(NSString *)theUser
@@ -101,7 +108,6 @@
 	else if (buttonIndex == 1)
 	{
 		// Accept the videocall
-        [self showEmbededVideoView];
         [[KPDClientSIP sharedInstance] acceptCall];
 	}
 }

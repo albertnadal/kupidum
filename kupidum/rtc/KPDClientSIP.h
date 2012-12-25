@@ -27,6 +27,7 @@
 
 // Methods called from pjsip_wrapper
 - (void)receivedIncomingCall:(int)callId;
+- (void)videoStreamStartTransmiting:(int)callId;
 
 // Public methods called from VideoconferenceViewController
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword;

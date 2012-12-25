@@ -13,5 +13,6 @@
 @protocol KPDClientSIPDelegate <NSObject>
 
 - (void)clientDidReceivedVideocall:(KPDClientSIP *)client fromUser:(NSString *)theUser;
+- (void)videoconferenceDidBegan:(KPDClientSIP *)client;
 
 @end

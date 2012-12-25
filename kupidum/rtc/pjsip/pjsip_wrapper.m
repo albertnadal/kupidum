@@ -375,7 +375,7 @@ static void on_call_media_state(pjsua_call_id call_id)
         // Start video stream
         set_video_stream(call_id, PJSUA_CALL_VID_STRM_START_TRANSMIT, PJMEDIA_DIR_NONE);
 
-//        [client videoStreamStartTransmiting:call_id];
+        [client videoStreamStartTransmiting:call_id];
     }
     else
     {
