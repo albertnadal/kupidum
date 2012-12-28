@@ -32,6 +32,7 @@
 // Public methods called from VideoconferenceViewController
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword;
 - (void)callUser:(NSString *)theUser withVideo:(BOOL)videoFlag;
+- (void)hangUp;
 - (void)acceptCall;
 - (void)rejectCall;
 - (void)setIngoingVideoStreamViewHidden:(BOOL) isHidden;

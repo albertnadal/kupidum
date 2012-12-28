@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UIView *videoView;
 
 - (IBAction)connect:(id)sender;
+- (IBAction)callUser:(id)sender;
+- (IBAction)hangUp:(id)sender;
 - (void)showEmbededVideoView;
 
 @end

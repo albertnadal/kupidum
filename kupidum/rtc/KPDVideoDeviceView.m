@@ -167,7 +167,7 @@
         // Based on the Benjaming UI storyboard. When the remote user agent start sending frames then the preview view must be shown in the right-bottom corner and the ingoing view must be fullsized
         [self performSelectorOnMainThread:@selector(switchIngoingAndPreviewViews) withObject:nil waitUntilDone:YES];
     }
-    
+
     if([videoView respondsToSelector:@selector(setImage:)])
     {
         [videoView setImage:(UIImage *)[[theNotification userInfo] valueForKey:@"videoframe"]];

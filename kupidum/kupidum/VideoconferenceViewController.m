@@ -32,7 +32,7 @@
 - (void)showEmbededVideoView
 {
     int ingoingVideoWidth = 320;
-    int ingoingVideoHeight = 261;
+    int ingoingVideoHeight = 392;
 
     CGRect remoteCgrect = CGRectMake(0, 0, ingoingVideoWidth, ingoingVideoHeight);
 
@@ -80,6 +80,11 @@
     [[KPDClientSIP sharedInstance] callUser:@"silvia" withVideo:TRUE];
 
     [self showEmbededVideoView];
+}
+
+- (IBAction)hangUp:(id)sender
+{
+    [[KPDClientSIP sharedInstance] hangUp];
 }
 
 - (void)videoconferenceDidBegan:(KPDClientSIP *)client

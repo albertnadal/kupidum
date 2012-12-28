@@ -67,6 +67,11 @@
     [delegate videoconferenceDidBegan:self];
 }
 
+- (void)hangUp
+{
+    hangup_call(currentCallId);
+}
+
 - (void)acceptCall
 {
     accept_call(currentCallId);

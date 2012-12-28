@@ -54,6 +54,10 @@ static void on_typing (pjsua_call_id call_id, const pj_str_t *from, const pj_str
                        const pj_str_t *contact, pj_bool_t is_typing);
 
 static void on_reg_state2(pjsua_acc_id reg_acc_id, pjsua_reg_info *info);
+
+// Stun callback --------------------------
+static void on_stun_servers_resolved(const pj_stun_resolve_result *result);
+
 // ----------------------------------------
 
 // Transport functions --------------------
@@ -717,7 +721,7 @@ void on_typing (pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to,
 int videocall(char* user)
 {
     char sip_uri[255];
-    sprintf(sip_uri, "<sip:%s@smsturmix.com>", user);
+    sprintf(sip_uri, "<sip:%s@72.249.126.110>", user);
 
     pjsua_msg_data messageData;
     pjsua_msg_data_init(&messageData);
@@ -802,6 +806,11 @@ static void log_cb(int level, const char *data, int len)
     NSLog(@"pj_log %@", [[NSString alloc] initWithBytes:data length:len encoding:NSUTF8StringEncoding]);
 }
 
+static void on_stun_servers_resolved(const pj_stun_resolve_result *result)
+{
+    NSLog(@"Stun server resolved.");
+}
+
 void main_pjsip(KPDClientSIP *clientSip, char* user, char* password, char* userAgent)
 {
     pj_status_t status;    
@@ -848,14 +857,39 @@ void main_pjsip(KPDClientSIP *clientSip, char* user, char* password, char* userA
     //media_config.jb_max_pre = -1;   //this should be able to set the máximum prefetch for jitter buffer (max num of frames) Could help reduce chopiness on video. Automatic default if not set is jb_max * 4 / 5
 
     //Set the STUN server
-/*    cfg.stun_host = pj_str("stunserver.org");
-    cfg.stun_srv[0] = pj_str("stun.l.google.com:19302");
-    cfg.stun_srv[1] = pj_str("stun.ipns.com");
-    cfg.stun_srv[2] = pj_str("stun.endigovoip.com");
-    cfg.stun_srv[3] = pj_str("stun.rnktel.com");
-    cfg.stun_srv[4] = pj_str("stun.voip.aebc.com");
-    cfg.stun_srv[5] = pj_str("stun.callwithus.com");
-    cfg.stun_srv_cnt = 6;*/
+/*    cfg.stun_host = pj_str("72.249.126.110");
+    cfg.stun_domain = pj_str("72.249.126.110");
+    cfg.stun_srv[0] = pj_str("72.249.126.110");
+    cfg.stun_srv_cnt = 1;*/
+
+    // *** TURN server data
+    // *** Used a free online Turn server on http://numb.viagenie.ca/
+
+    media_config.enable_ice = PJ_TRUE;
+    media_config.enable_turn = PJ_TRUE;
+    media_config.turn_server = pj_str("numb.viagenie.ca");
+    media_config.turn_conn_type = PJ_TURN_TP_UDP;
+
+	media_config.turn_auth_cred.type = PJ_STUN_AUTH_CRED_STATIC;
+	media_config.turn_auth_cred.data.static_cred.realm = pj_str("kupidum");
+	media_config.turn_auth_cred.data.static_cred.username = pj_str("turn@kupidum.com");
+	media_config.turn_auth_cred.data.static_cred.data_type = PJ_STUN_PASSWD_PLAIN;
+	media_config.turn_auth_cred.data.static_cred.data = pj_str("kupidum");
+
+/*    media_config.enable_turn = 1;*/
+
+//    media_config.turn_server = pj_str("ip:port");
+//    media_config.turn_auth_cred.data.static_cred.username = pj_str("uname");
+//    media_config.turn_auth_cred.data.static_cred.data = pj_str("password");
+
+/*    pj_str_t stun_servers[1];
+    stun_servers[0] = pj_str("stunserver.org");
+
+    pj_status_t result = pjsua_resolve_stun_servers(1, stun_servers, true, nil, &on_stun_servers_resolved);
+    if(result == PJ_SUCCESS)
+    {
+        NSLog(@"One working STUN server found!");
+    }*/
 
     status = pjsua_init(&cfg, &log_cfg, &media_config);
 
@@ -875,17 +909,17 @@ void main_pjsip(KPDClientSIP *clientSip, char* user, char* password, char* userA
     pjsua_call_setting_default(&call_setting);
 
     char sip_uri[255];
-    sprintf(sip_uri, "<sip:%s@smsturmix.com>", user);
+    sprintf(sip_uri, "<sip:%s@72.249.126.110>", user);
 
     acc_cfg.id = pj_str((char*)sip_uri);
-    acc_cfg.reg_uri = pj_str((char*) ("sip:smsturmix.com"));
+    acc_cfg.reg_uri = pj_str((char*) ("sip:72.249.126.110"));
     acc_cfg.cred_count = 1;
     acc_cfg.cred_info[0].realm = pj_str((char*)"*");
     acc_cfg.cred_info[0].scheme = pj_str((char*)"digest");
     acc_cfg.cred_info[0].username = pj_str((char*)user);
     acc_cfg.cred_info[0].data = pj_str((char*)password);
 
-    acc_cfg.proxy[acc_cfg.proxy_cnt++] = pj_str((char*)"<sip:smsturmix.com;transport=tcp>");
+    acc_cfg.proxy[acc_cfg.proxy_cnt++] = pj_str((char*)"<sip:72.249.126.110;transport=tcp>");
 
     pj_str_t h263_codec_id = {"H263-1998/96", 12};
     pjsua_vid_codec_set_priority(&h263_codec_id, 2);
@@ -1287,15 +1321,15 @@ int acc_add(const char* regUriString, const char* proxyString, const char * user
 
     pjsua_acc_config acc_cfg;
     pjsua_acc_config_default(&acc_cfg);
-    acc_cfg.id = pj_str( (char*)"<sip:silvia@smsturmix.com>");
-    acc_cfg.reg_uri = pj_str((char*) ("sip:smsturmix.com"));
+    acc_cfg.id = pj_str( (char*)"<sip:silvia@72.249.126.110>");
+    acc_cfg.reg_uri = pj_str((char*) ("sip:72.249.126.110"));
     acc_cfg.cred_count = 1;
     acc_cfg.cred_info[0].realm = pj_str((char*)"*");
     acc_cfg.cred_info[0].scheme = pj_str((char*)"digest");
     acc_cfg.cred_info[0].username = pj_str((char*)"silvia");
     acc_cfg.cred_info[0].data = pj_str((char*)"silvia");
     
-    acc_cfg.proxy[acc_cfg.proxy_cnt++] = pj_str((char*) "<sip:smsturmix.com;transport=tcp>");
+    acc_cfg.proxy[acc_cfg.proxy_cnt++] = pj_str((char*) "<sip:72.249.126.110;transport=tcp>");
 
     pj_str_t h263_codec_id = {"H263-1998/96", 12};      //pj_str("H263-1998/96");
     pjsua_vid_codec_set_priority(&h263_codec_id, 2);
