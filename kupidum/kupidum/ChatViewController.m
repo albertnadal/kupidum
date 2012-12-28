@@ -1,36 +1,37 @@
 //
-//  ViewController.m
+//  ChatViewController.m
+//  kupidum
 //
-//  Created by Alex Barinov
-//  Project home page: http://alexbarinov.github.com/UIBubbleTableView/
-//
-//  This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.
-//  To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/
+//  Created by Albert Nadal Garriga on 28/12/12.
+//  Copyright (c) 2012 laFruitera.com. All rights reserved.
 //
 
-// 
-// Images used in this example by Petr Kratochvil released into public domain
-// http://www.publicdomainpictures.net/view-image.php?image=9806
-// http://www.publicdomainpictures.net/view-image.php?image=1358
-//
-
-#import "ViewController.h"
+#import "ChatViewController.h"
 #import "UIBubbleTableView.h"
 #import "UIBubbleTableViewDataSource.h"
 #import "NSBubbleData.h"
 
-@interface ViewController ()
+@interface ChatViewController ()
 {
     IBOutlet UIBubbleTableView *bubbleTable;
     IBOutlet UIView *textInputView;
     IBOutlet UITextField *textField;
-
+    
     NSMutableArray *bubbleData;
 }
 
 @end
 
-@implementation ViewController
+@implementation ChatViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -38,7 +39,7 @@
     
     NSBubbleData *heyBubble = [NSBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];
     heyBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
-
+    
     NSBubbleData *photoBubble = [NSBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"] date:[NSDate dateWithTimeIntervalSinceNow:-290] type:BubbleTypeSomeoneElse];
     photoBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
     
@@ -98,7 +99,7 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-
+    
     [UIView animateWithDuration:0.2f animations:^{
         
         CGRect frame = textInputView.frame;
@@ -133,7 +134,7 @@
 - (IBAction)sayPressed:(id)sender
 {
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
-
+    
     NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
     [bubbleData addObject:sayBubble];
     [bubbleTable reloadData];
@@ -143,3 +144,4 @@
 }
 
 @end
+

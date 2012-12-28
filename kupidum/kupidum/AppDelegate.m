@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "InitialScreenViewController.h"
+#import "ChatViewController.h"
 #import "VideoconferenceViewController.h"
 #import "FinderViewController.h"
 
@@ -42,19 +43,22 @@
 {
     FinderViewController *finderViewController = [[FinderViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
     VideoconferenceViewController *videoconferenceViewController = [[VideoconferenceViewController alloc] initWithNibName:@"VideoconferenceViewController" bundle:nil];
+    ChatViewController *chatViewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
     UIViewController *finderViewController2 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
-    UIViewController *finderViewController3 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
     UIViewController *finderViewController4 = [[UIViewController alloc] init];
 
-    UINavigationController *finderNavigationController = [[UINavigationController alloc] initWithRootViewController:finderViewController];
     [finderViewController4 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Inici", @"") image:[UIImage imageNamed:@"tab_icon_home"] tag:1]];
+
+    UINavigationController *finderNavigationController = [[UINavigationController alloc] initWithRootViewController:finderViewController];
     [finderNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Cercar", @"") image:[UIImage imageNamed:@"tab_icon_search"] tag:2]];
     [finderViewController2 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Missatges", @"") image:[UIImage imageNamed:@"tab_icon_msg"] tag:3]];
-    [finderViewController3 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Xat", @"") image:[UIImage imageNamed:@"tab_icon_chat"] tag:4]];
+
+    UINavigationController *chatNavigationController = [[UINavigationController alloc] initWithRootViewController:chatViewController];
+    [chatNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Xat", @"") image:[UIImage imageNamed:@"tab_icon_chat"] tag:4]];
     [videoconferenceViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
 
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[finderViewController4, finderNavigationController, finderViewController2, finderViewController3, videoconferenceViewController];
+    self.tabBarController.viewControllers = @[finderViewController4, finderNavigationController, finderViewController2, chatNavigationController, videoconferenceViewController];
     [self.tabBarController setSelectedViewController:videoconferenceViewController];
     self.window.rootViewController = self.tabBarController;
 }
