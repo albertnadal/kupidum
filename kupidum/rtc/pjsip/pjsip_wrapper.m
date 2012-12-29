@@ -46,7 +46,7 @@ static void on_pager2(pjsua_call_id call_id, const pj_str_t *from, const pj_str_
                       const pj_str_t *contact, const pj_str_t *mime_type, const pj_str_t *body, 
                       pjsip_rx_data *rdata, pjsua_acc_id acc_id);
 
-static void on_pager_status2 (pjsua_call_id call_id, const pj_str_t *to, const pj_str_t *body, 
+static void on_pager_status2 (pjsua_call_id call_id, const pj_str_t *to, const pj_str_t *body,
                               void *user_data, pjsip_status_code status, const pj_str_t *reason, 
                               pjsip_tx_data *tdata, pjsip_rx_data *rdata, pjsua_acc_id acc_id);
 
@@ -54,9 +54,6 @@ static void on_typing (pjsua_call_id call_id, const pj_str_t *from, const pj_str
                        const pj_str_t *contact, pj_bool_t is_typing);
 
 static void on_reg_state2(pjsua_acc_id reg_acc_id, pjsua_reg_info *info);
-
-// Stun callback --------------------------
-static void on_stun_servers_resolved(const pj_stun_resolve_result *result);
 
 // ----------------------------------------
 
@@ -570,6 +567,7 @@ static void on_pager_status2 (pjsua_call_id call_id, const pj_str_t *to, const p
                               void *user_data, pjsip_status_code status, const pj_str_t *reason, 
                               pjsip_tx_data *tdata, pjsip_rx_data *rdata, pjsua_acc_id acc_id)
 {
+    NSLog(@"Canvi d'estat en el contingut...");
 /*
     @autoreleasepool {
         RTCUser *toUser = [RTCUser userFromString:to_NSString(to, NSASCIIStringEncoding)];
@@ -612,6 +610,7 @@ static RTCEventOptions *RTCEventOptions_from_header(const pjsip_hdr *header)
 */
 static void on_pager2(pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to, const pj_str_t *contact, const pj_str_t *mime_type, const pj_str_t *body, pjsip_rx_data *rdata, pjsua_acc_id acc_id)
 {
+    NSLog(@"Rebent contingut...");
 /*
     @autoreleasepool {   
         NSString *fromString = to_NSString(from, NSUTF8StringEncoding);
@@ -705,8 +704,8 @@ static void on_pager2(pjsua_call_id call_id, const pj_str_t *from, const pj_str_
 
 void on_typing (pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to, const pj_str_t *contact, pj_bool_t is_typing)
 {
-/*
-    RTCUser *fromUser = [RTCUser userFromString:to_NSString(from, NSASCIIStringEncoding)];
+    NSLog(@"Typing...");
+    /*RTCUser *fromUser = [RTCUser userFromString:to_NSString(from, NSASCIIStringEncoding)];
     if (is_typing)
     {
         [instance onTypingStart:fromUser];
@@ -714,8 +713,7 @@ void on_typing (pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to,
     else
     {
         [instance onTypingStop:fromUser];
-    }
-*/
+    }*/
 }
 
 int videocall(char* user)
@@ -804,11 +802,6 @@ static pj_status_t create_transport()
 static void log_cb(int level, const char *data, int len)
 {
     NSLog(@"pj_log %@", [[NSString alloc] initWithBytes:data length:len encoding:NSUTF8StringEncoding]);
-}
-
-static void on_stun_servers_resolved(const pj_stun_resolve_result *result)
-{
-    NSLog(@"Stun server resolved.");
 }
 
 void main_pjsip(KPDClientSIP *clientSip, char* user, char* password, char* userAgent)
@@ -1374,7 +1367,7 @@ void add_header(pjsua_msg_data * messageData, const char * headerKey, const char
             pj_str_t hname = strdup_in_pool(pool, headerKey);
             pj_str_t hvalue = strdup_in_pool(pool, headerValue);
             pjsip_generic_string_hdr * locationHeader = pjsip_generic_string_hdr_create(pool, &hname, &hvalue);
-            if (locationHeader != NULL && messageData != NULL) 
+            if (locationHeader != NULL && messageData != NULL)
                 pj_list_push_back(&messageData->hdr_list, locationHeader);
         }
     }
@@ -1406,9 +1399,8 @@ void add_optional_headers(pjsua_msg_data * messageData, RTCEventOptions * option
         }
     }
 }
-
-pj_status_t send_message_mime_type(const char *toString, const char *messageId, 
-                                   const char *messageBody, const char *mimeType, RTCEventOptions * options)
+*/
+pj_status_t send_message_mime_type(const char *toUserUri, const char *messageBody, const char *mimeType)
 {
     pjsua_msg_data messageData;
     pjsua_msg_data_init(&messageData);
@@ -1416,41 +1408,49 @@ pj_status_t send_message_mime_type(const char *toString, const char *messageId,
     pj_pool_t * pool = pjsip_endpt_create_pool(endpt, "Location Header", 100, 100);
     messageData.msg_body = strdup_in_pool(pool, messageBody);
     pj_str_t content = strdup_in_pool(pool, messageBody);
-    pj_str_t to = strdup_in_pool(pool, toString);
+    pj_str_t to = strdup_in_pool(pool, toUserUri);
     pj_str_t pjmimeType = strdup_in_pool(pool, mimeType);
-    add_optional_headers(&messageData, options);
-    
+
     if (messageBody == NULL)
         return PJ_ERROR;
-    
-    char *dupMessageId = strdup(messageId);
-    return pjsua_im_send(acc_id, &to, &pjmimeType, &content, &messageData, (void*)dupMessageId);
+
+    return pjsua_im_send(acc_id, &to, &pjmimeType, &content, &messageData, NULL);
 }
 
-pj_status_t send_message(const char *toString, const char *messageId,
-                         const char *messageBody, RTCEventOptions * options)
+pj_status_t send_message(const char *toUser, const char *messageBody)
 {
-    return send_message_mime_type(toString, messageId, messageBody, "text/plain; charset=UTF-8", options);
+    char toUserUri[255];
+    strcpy(toUserUri, "<sip:");
+    strcat(toUserUri, toUser);
+    strcat(toUserUri, "@72.249.126.110>");
+
+    return send_message_mime_type(toUserUri, messageBody, "text/plain; charset=UTF-8");
 }
 
-void notify_start_typing(const char *toString, RTCEventOptions * options)
+void notify_start_typing(const char *toUser)
 {
+    char toUserUri[255];
+    strcpy(toUserUri, "<sip:");
+    strcat(toUserUri, toUser);
+    strcat(toUserUri, "@72.249.126.110>");
+
     pjsua_msg_data messageData;
     pjsua_msg_data_init(&messageData);
-    add_optional_headers(&messageData, options);
-    pj_str_t to = pj_str((char*)toString);
+    pj_str_t to = pj_str((char*)toUserUri);
     pjsua_im_typing(acc_id, &to, true, &messageData);
 }
 
-void notify_stop_typing(const char *toString, RTCEventOptions * options)
+void notify_stop_typing(const char *toUser)
 {
+    char toUserUri[255];
+    strcpy(toUserUri, toUser);
+    strcat(toUserUri, "@72.249.126.110");
+
     pjsua_msg_data messageData;
     pjsua_msg_data_init(&messageData);
-    add_optional_headers(&messageData, options);
-    pj_str_t to = pj_str((char*)toString);
+    pj_str_t to = pj_str((char*)toUserUri);
     pjsua_im_typing(acc_id, &to, false, &messageData);
 }
-*/
 
 /* General processing for media state. "mi" is the media index */
 static void on_call_generic_media_state(pjsua_call_info *ci, unsigned mi,

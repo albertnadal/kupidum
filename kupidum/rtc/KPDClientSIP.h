@@ -29,8 +29,10 @@
 - (void)receivedIncomingCall:(int)callId;
 - (void)videoStreamStartTransmiting:(int)callId;
 
-// Public methods called from VideoconferenceViewController
+// Public methods for SIP register signaling
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword;
+
+// Public methods called from VideoconferenceViewController
 - (void)callUser:(NSString *)theUser withVideo:(BOOL)videoFlag;
 - (void)hangUp;
 - (void)acceptCall;
@@ -42,5 +44,8 @@
 - (UIView *)getIngoingVideoStreamView;
 - (UIView *)getOutgoingVideoStreamView;
 - (UIView *)getVideoStreamView;
+
+// Public methods called from ChatViewController
+- (void)sendInstantMessageToUser:(NSString *)toUser withContent:(NSString *)textMessage;
 
 @end

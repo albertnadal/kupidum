@@ -111,13 +111,11 @@ void send_registration_message();
 pj_status_t update_screen_name(const char *newUserUriString);
 
 // Messaging
-/*pj_status_t send_message_mime_type(const char *toString, const char *messageId,
-                                   const char *messageBody, const char *mimeType, RTCEventOptions * options);
-pj_status_t send_message(const char *toString, const char *messageId,
-                         const char *messageBody, RTCEventOptions * options);
-void notify_start_typing(const char *toString, RTCEventOptions * options);
-void notify_stop_typing(const char *toString, RTCEventOptions * options);
-*/
+pj_status_t send_message_mime_type(const char *toUserUri, const char *messageBody, const char *mimeType);
+pj_status_t send_message(const char *toUser, const char *messageBody);
+void notify_start_typing(const char *toUser);
+void notify_stop_typing(const char *toUser);
+
 // Session functions
 void accept_call(int call_id);
 void reject_call(int call_id);

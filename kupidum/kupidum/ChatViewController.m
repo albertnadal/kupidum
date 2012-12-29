@@ -133,12 +133,14 @@
 
 - (IBAction)sayPressed:(id)sender
 {
+    [[KPDClientSIP sharedInstance] sendInstantMessageToUser:@"silvia" withContent:textField.text];
+
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
-    
+
     NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
     [bubbleData addObject:sayBubble];
     [bubbleTable reloadData];
-    
+
     textField.text = @"";
     [textField resignFirstResponder];
 }

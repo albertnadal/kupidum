@@ -44,6 +44,8 @@
             [[UIDevice currentDevice] systemVersion]];
 }
 
+// Public methods for SIP register signaling
+
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword
 {
     const char *userAgent = [[KPDClientSIP userAgent] cStringUsingEncoding:NSUTF8StringEncoding];
@@ -54,6 +56,8 @@
 
     setEnableVideoDriver(true);
 }
+
+// Public methods called from VideoconferenceViewController
 
 - (void)receivedIncomingCall:(int)callId
 {
@@ -117,6 +121,16 @@
 
     if(videoFlag)   status = videocall((char*)user);
     else            { /*Nothing to do now*/ }
+}
+
+// Public methods called from ChatViewController
+
+- (void)sendInstantMessageToUser:(NSString *)toUser withContent:(NSString *)textMessage
+{
+    const char *user = [toUser cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *messageBody = [textMessage cStringUsingEncoding:NSUTF8StringEncoding];
+
+    send_message((char *)user, (char *)messageBody);
 }
 
 @end
