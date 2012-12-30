@@ -608,16 +608,39 @@ static RTCEventOptions *RTCEventOptions_from_header(const pjsip_hdr *header)
     return retValue;
 }
 */
+
+NSString* getUserFromSIPUri(NSString *sipUri)
+{
+    NSRange start = [sipUri rangeOfString:@"<sip:"];
+    NSRange end = [sipUri rangeOfString:@">"];
+    int length = end.location - start.location - start.length;
+    int location = start.location + start.length;
+    NSRange user_domain_range;
+    user_domain_range.location = location;
+    user_domain_range.length = length;
+    NSString *userAndDomain = [sipUri substringWithRange:user_domain_range];
+
+    NSRange arroba_range = [userAndDomain rangeOfString:@"@"];
+    return [[userAndDomain substringWithRange:NSMakeRange(0, arroba_range.location)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
 static void on_pager2(pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to, const pj_str_t *contact, const pj_str_t *mime_type, const pj_str_t *body, pjsip_rx_data *rdata, pjsua_acc_id acc_id)
 {
-    NSLog(@"Rebent contingut...");
-/*
-    @autoreleasepool {   
+//    @autoreleasepool {
         NSString *fromString = to_NSString(from, NSUTF8StringEncoding);
-        NSString *toString = to_NSString(to, NSUTF8StringEncoding);
+//        NSString *toString = to_NSString(to, NSUTF8StringEncoding);
         NSString *mimeTypeString = to_NSString(mime_type, NSUTF8StringEncoding);
         NSString *bodyString = to_NSString(body, NSUTF8StringEncoding);
-        
+
+        if([mimeTypeString isEqualToString:@"text/plain"])
+        {
+            NSString *fromUser = getUserFromSIPUri(fromString);
+            [client instantMessageReceivedFromUser:fromUser withContent:bodyString];
+        }
+
+ /*
+
+ 
         RTCUser *fromUser = [RTCUser userFromString:fromString];
         RTCUser *toUser = [RTCUser userFromString:toString];
         RTCEventOptions *options = nil;
@@ -697,9 +720,9 @@ static void on_pager2(pjsua_call_id call_id, const pj_str_t *from, const pj_str_
             NSString *mimeType = to_NSString(mime_type, NSUTF8StringEncoding);
             DLog(@"Unknown message type received: %@",  mimeType);
         }
-        
-    }
-*/
+*/        
+//    }
+
 }
 
 void on_typing (pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to, const pj_str_t *contact, pj_bool_t is_typing)

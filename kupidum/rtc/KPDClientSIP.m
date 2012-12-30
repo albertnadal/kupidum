@@ -11,11 +11,11 @@
 
 @implementation KPDClientSIP
 
-@synthesize delegate;
 
 - (id)init
 {
     self = [super init];
+    delegates = [[NSMutableArray alloc] init];
 
     return self;
 }
@@ -44,6 +44,17 @@
             [[UIDevice currentDevice] systemVersion]];
 }
 
+- (void)addDelegate:(id<KPDClientSIPDelegate>)theDelegate
+{
+    if([delegates indexOfObject:theDelegate] == NSNotFound)
+        [delegates addObject:theDelegate];
+}
+
+- (void)removeDelegate:(id<KPDClientSIPDelegate>)theDelegate
+{
+    [delegates removeObject:theDelegate];
+}
+
 // Public methods for SIP register signaling
 
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword
@@ -57,19 +68,37 @@
     setEnableVideoDriver(true);
 }
 
-// Public methods called from VideoconferenceViewController
+// Public methods called from pjsip_wrapper
 
 - (void)receivedIncomingCall:(int)callId
 {
     currentCallId = callId;
-    [delegate clientDidReceivedVideocall:self fromUser:@"Sílvia"];
+
+    for(id<KPDClientSIPDelegate> delegate in delegates)
+        if([delegate respondsToSelector:@selector(clientDidReceivedVideocall:fromUser:)])
+            [delegate clientDidReceivedVideocall:self fromUser:@"Sílvia"];
 }
 
 - (void)videoStreamStartTransmiting:(int)callId
 {
     currentCallId = callId;
-    [delegate videoconferenceDidBegan:self];
+
+    for(id<KPDClientSIPDelegate> delegate in delegates)
+        if([delegate respondsToSelector:@selector(videoconferenceDidBegan:)])
+            [delegate videoconferenceDidBegan:self];
 }
+
+- (void)instantMessageReceivedFromUser:(NSString *)fromUser withContent:(NSString *)textMessage
+{
+    NSLog(@"Text message: %@", textMessage);
+
+    for(id<KPDClientSIPDelegate> delegate in delegates)
+        if([delegate respondsToSelector:@selector(clientDidReceivedInstantMessage:fromUser:withContent:)])
+            [delegate clientDidReceivedInstantMessage:self fromUser:fromUser withContent:textMessage];
+}
+
+
+// Public methods called from VideoconferenceViewController
 
 - (void)hangUp
 {

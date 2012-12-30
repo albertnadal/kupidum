@@ -59,7 +59,7 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
 #else
     CGSize size = [(text ? text : @"") sizeWithFont:font constrainedToSize:CGSizeMake(220, 9999) lineBreakMode:UILineBreakModeWordWrap];
 #endif
-    
+
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     label.numberOfLines = 0;
 #ifdef __IPHONE_6_0
@@ -70,11 +70,11 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
     label.text = (text ? text : @"");
     label.font = font;
     label.backgroundColor = [UIColor clearColor];
-    
+
 #if !__has_feature(objc_arc)
     [label autorelease];
 #endif
-    
+
     UIEdgeInsets insets = (type == BubbleTypeMine ? textInsetsMine : textInsetsSomeone);
     return [self initWithView:label date:date type:type insets:insets];
 }

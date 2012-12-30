@@ -24,7 +24,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [[KPDClientSIP sharedInstance] setDelegate:self];
+        [[KPDClientSIP sharedInstance] addDelegate:self];
     }
     return self;
 }
@@ -127,6 +127,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[KPDClientSIP sharedInstance] removeDelegate:self];
 }
 
 @end

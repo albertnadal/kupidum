@@ -12,22 +12,21 @@
 @interface KPDClientSIP : NSObject
 {
     int currentCallId;
-    id<KPDClientSIPDelegate> delegate;
+    NSMutableArray *delegates;
 }
-
-@property (retain, nonatomic) id<KPDClientSIPDelegate> delegate;
-
-/*@property (retain, nonatomic) NSString* deviceId;
-@property (retain, nonatomic) NSString* deviceName;
-@property (nonatomic) video_device_type deviceType;*/
 
 // Class methods
 + (KPDClientSIP *)sharedInstance;
 + (NSString *)userAgent;
 
+// General instance methods
+- (void)addDelegate:(id<KPDClientSIPDelegate>)theDelegate;
+- (void)removeDelegate:(id<KPDClientSIPDelegate>)theDelegate;
+
 // Methods called from pjsip_wrapper
 - (void)receivedIncomingCall:(int)callId;
 - (void)videoStreamStartTransmiting:(int)callId;
+- (void)instantMessageReceivedFromUser:(NSString *)fromUser withContent:(NSString *)textMessage;
 
 // Public methods for SIP register signaling
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword;

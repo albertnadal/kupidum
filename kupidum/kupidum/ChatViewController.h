@@ -10,6 +10,6 @@
 #import "UIBubbleTableViewDataSource.h"
 #import "KPDClientSIP.h"
 
-@interface ChatViewController : UIViewController<UIBubbleTableViewDataSource>
+@interface ChatViewController : UIViewController<UIBubbleTableViewDataSource, KPDClientSIPDelegate>
 
 @end

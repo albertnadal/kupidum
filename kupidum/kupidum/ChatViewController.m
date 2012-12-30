@@ -29,15 +29,29 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[KPDClientSIP sharedInstance] addDelegate:self];
     }
     return self;
+}
+
+- (void)clientDidReceivedInstantMessage:(KPDClientSIP *)client fromUser:(NSString *)fromUser withContent:(NSString *)textMessage
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
+
+        NSBubbleData *receivedBubble = [NSBubbleData dataWithText:textMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
+        receivedBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
+
+        [bubbleData addObject:receivedBubble];
+        [bubbleTable reloadData];
+    });
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSBubbleData *heyBubble = [NSBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];
+/*    NSBubbleData *heyBubble = [NSBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];
     heyBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
     
     NSBubbleData *photoBubble = [NSBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"] date:[NSDate dateWithTimeIntervalSinceNow:-290] type:BubbleTypeSomeoneElse];
@@ -45,8 +59,9 @@
     
     NSBubbleData *replyBubble = [NSBubbleData dataWithText:@"Wow.. Really cool picture out there. iPhone 5 has really nice camera, yeah?" date:[NSDate dateWithTimeIntervalSinceNow:-5] type:BubbleTypeMine];
     replyBubble.avatar = nil;
-    
-    bubbleData = [[NSMutableArray alloc] initWithObjects:heyBubble, photoBubble, replyBubble, nil];
+*/    
+    bubbleData = [[NSMutableArray alloc] init]; //initWithObjects:heyBubble, photoBubble, replyBubble, nil];
+
     bubbleTable.bubbleDataSource = self;
     
     // The line below sets the snap interval in seconds. This defines how the bubbles will be grouped in time.
@@ -66,7 +81,7 @@
     //    - NSBubbleTypingTypeMe - shows "now typing" bubble on the right
     //    - NSBubbleTypingTypeNone - no "now typing" bubble
     
-    bubbleTable.typingBubble = NSBubbleTypingTypeSomebody;
+    bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
     
     [bubbleTable reloadData];
     
