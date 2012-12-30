@@ -44,6 +44,9 @@
 
         [bubbleData addObject:receivedBubble];
         [bubbleTable reloadData];
+
+        NSURL *incomingMessageAudioUrl = [[NSBundle mainBundle] URLForResource:@"incoming_message" withExtension:@"aif"];
+        [[KPDAudioUtilities sharedInstance] playRingtone:incomingMessageAudioUrl];
     });
 }
 
@@ -155,6 +158,9 @@
     NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
     [bubbleData addObject:sayBubble];
     [bubbleTable reloadData];
+
+    NSURL *outgoingMessageAudioUrl = [[NSBundle mainBundle] URLForResource:@"send_message" withExtension:@"aif"];
+    [[KPDAudioUtilities sharedInstance] playRingtone:outgoingMessageAudioUrl];
 
     textField.text = @"";
     [textField resignFirstResponder];

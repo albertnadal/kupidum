@@ -1,9 +1,9 @@
 //
-//  CNCPreferences.m
-//  GConnect
+//  KPDPreferences.h
+//  kupidum
 //
-//  Created by Francisco José  Rodríguez Pérez on 02/03/12.
-//  Copyright (c) 2012 TID. All rights reserved.
+//  Created by Albert Nadal Garriga on 12/02/12.
+//  Copyright (c) 2012 Albert Nadal Garriga. All rights reserved.
 //
 
 #import "KPDPreferences.h"

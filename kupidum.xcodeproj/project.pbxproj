@@ -53,6 +53,9 @@
 		FF374536168617FC0098BBF1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF374535168617FC0098BBF1 /* AVFoundation.framework */; };
 		FF3745381686181F0098BBF1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3745371686181F0098BBF1 /* CoreVideo.framework */; };
 		FF37453A168618740098BBF1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF374539168618740098BBF1 /* CoreMedia.framework */; };
+		FF4902961690F4AE00500ABB /* incoming_message.aif in Resources */ = {isa = PBXBuildFile; fileRef = FF4902941690F4AE00500ABB /* incoming_message.aif */; };
+		FF4902971690F4AE00500ABB /* send_message.aif in Resources */ = {isa = PBXBuildFile; fileRef = FF4902951690F4AE00500ABB /* send_message.aif */; };
+		FF4902A11690F63E00500ABB /* KPDAudioUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4902A01690F63E00500ABB /* KPDAudioUtilities.m */; };
 		FF749737167F2B1400AF971F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FF749736167F2B1400AF971F /* Base64.m */; };
 		FF74973E167F2C4E00AF971F /* KPDPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = FF749739167F2C4E00AF971F /* KPDPreferences.m */; };
 		FF74973F167F2C4E00AF971F /* KPDRegisterData.m in Sources */ = {isa = PBXBuildFile; fileRef = FF74973B167F2C4E00AF971F /* KPDRegisterData.m */; };
@@ -193,6 +196,10 @@
 		FF374535168617FC0098BBF1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FF3745371686181F0098BBF1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		FF374539168618740098BBF1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		FF4902941690F4AE00500ABB /* incoming_message.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = incoming_message.aif; path = kupidum/audio/incoming_message.aif; sourceTree = "<group>"; };
+		FF4902951690F4AE00500ABB /* send_message.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = send_message.aif; path = kupidum/audio/send_message.aif; sourceTree = "<group>"; };
+		FF49029F1690F63E00500ABB /* KPDAudioUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDAudioUtilities.h; path = kupidum/commons/KPDAudioUtilities.h; sourceTree = "<group>"; };
+		FF4902A01690F63E00500ABB /* KPDAudioUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDAudioUtilities.m; path = kupidum/commons/KPDAudioUtilities.m; sourceTree = "<group>"; };
 		FF749735167F2B1400AF971F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		FF749736167F2B1400AF971F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		FF749738167F2C4E00AF971F /* KPDPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDPreferences.h; path = kupidum/commons/KPDPreferences.h; sourceTree = "<group>"; };
@@ -354,6 +361,8 @@
 				FF74973B167F2C4E00AF971F /* KPDRegisterData.m */,
 				FF74973C167F2C4E00AF971F /* KPDUIUtilities.h */,
 				FF74973D167F2C4E00AF971F /* KPDUIUtilities.m */,
+				FF49029F1690F63E00500ABB /* KPDAudioUtilities.h */,
+				FF4902A01690F63E00500ABB /* KPDAudioUtilities.m */,
 			);
 			name = commons;
 			sourceTree = "<group>";
@@ -487,6 +496,7 @@
 		B7EF685A1659149100F20DF3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FF4902921690F45800500ABB /* audio */,
 				B707444B166BDE7A007E8B23 /* NavigationButtons */,
 				FF7497D4167F2F7200AF971F /* tab_icon_video@2x.png */,
 				FF7497D5167F2F7200AF971F /* tab_icon_video.png */,
@@ -648,6 +658,15 @@
 				FF3745271685F5A60098BBF1 /* libssl.a */,
 			);
 			name = openssl;
+			sourceTree = "<group>";
+		};
+		FF4902921690F45800500ABB /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				FF4902941690F4AE00500ABB /* incoming_message.aif */,
+				FF4902951690F4AE00500ABB /* send_message.aif */,
+			);
+			name = audio;
 			sourceTree = "<group>";
 		};
 		FF749734167F2B1400AF971F /* base64 */ = {
@@ -833,6 +852,8 @@
 				FFEDFEFE168E461400C493AB /* avatar1.png in Resources */,
 				FFEDFEFF168E461400C493AB /* halloween.jpg in Resources */,
 				FFEDFF05168E57B000C493AB /* ChatViewController.xib in Resources */,
+				FF4902961690F4AE00500ABB /* incoming_message.aif in Resources */,
+				FF4902971690F4AE00500ABB /* send_message.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -866,6 +887,7 @@
 				FFEDFEDF168E457B00C493AB /* UIBubbleTableViewCell.m in Sources */,
 				FFEDFEE0168E457B00C493AB /* UIBubbleTypingTableViewCell.m in Sources */,
 				FFEDFF04168E57B000C493AB /* ChatViewController.m in Sources */,
+				FF4902A11690F63E00500ABB /* KPDAudioUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

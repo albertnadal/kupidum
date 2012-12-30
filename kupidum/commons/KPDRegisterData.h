@@ -1,9 +1,9 @@
 //
-//  KMRegisterData.h
+//  KPDRegisterData.h
 //  kupidum
 //
-//  Created by Albert Nadal Garriga on 02/03/12.
-//  Copyright (c) 2012 TID. All rights reserved.
+//  Created by Albert Nadal Garriga on 12/02/12.
+//  Copyright (c) 2012 Albert Nadal Garriga. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
