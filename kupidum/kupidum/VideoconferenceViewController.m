@@ -94,6 +94,9 @@
 
 - (void)clientDidReceivedVideocall:(KPDClientSIP *)client fromUser:(NSString *)theUser
 {
+    NSURL *incomingVideocallAudioUrl = [[NSBundle mainBundle] URLForResource:@"incoming_call" withExtension:@"wav"];
+    [[KPDAudioUtilities sharedInstance] playRingtoneInLoop:incomingVideocallAudioUrl];
+
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@ is now calling you!", theUser] message:@"Do you want to Accept or Reject the videocall?" delegate:self cancelButtonTitle:@"Reject" otherButtonTitles:@"Accept", nil];
     [alert setNeedsDisplay];
     [alert setNeedsLayout];
@@ -105,6 +108,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    [[KPDAudioUtilities sharedInstance] stopRingtone];
+
 	if (buttonIndex == 0)
 	{
 		// Reject the videocall

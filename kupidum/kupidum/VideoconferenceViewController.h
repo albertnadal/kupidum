@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "KPDClientSIP.h"
+#import "KPDAudioUtilities.h"
 
 @interface VideoconferenceViewController : UIViewController<UIAlertViewDelegate, KPDClientSIPDelegate>
 {
