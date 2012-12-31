@@ -101,7 +101,9 @@
 #else
     self.bubbleSection = [[NSMutableArray alloc] init];
 #endif
-    
+
+    NSMutableArray *currentSection = nil;
+
     if (self.bubbleDataSource && (count = [self.bubbleDataSource rowsForBubbleTable:self]) > 0)
     {
 #if !__has_feature(objc_arc)
@@ -126,8 +128,7 @@
          }];
         
         NSDate *last = [NSDate dateWithTimeIntervalSince1970:0];
-        NSMutableArray *currentSection = nil;
-        
+
         for (int i = 0; i < count; i++)
         {
             NSBubbleData *data = (NSBubbleData *)[bubbleData objectAtIndex:i];
@@ -148,6 +149,17 @@
     }
     
     [super reloadData];
+
+    int indexLastSection = 0;
+    int indexLastBubbleLastSection = 0;
+    if(currentSection != nil)
+    {
+        indexLastSection = [self.bubbleSection count]-1;
+        indexLastBubbleLastSection = [currentSection count];
+
+        NSIndexPath* ipath = [NSIndexPath indexPathForRow:indexLastBubbleLastSection inSection:indexLastSection];
+        [self scrollToRowAtIndexPath:ipath atScrollPosition: UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 #pragma mark - UITableViewDelegate implementation

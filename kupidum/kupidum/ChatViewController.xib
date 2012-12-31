@@ -41,7 +41,7 @@
 					<object class="IBUIImageView" id="979017353">
 						<reference key="NSNextResponder" ref="763618099"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{320, 480}</string>
+						<string key="NSFrameSize">{320, 548}</string>
 						<reference key="NSSuperview" ref="763618099"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="915146061"/>
@@ -56,7 +56,7 @@
 					<object class="IBUITableView" id="915146061">
 						<reference key="NSNextResponder" ref="763618099"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 425}</string>
+						<string key="NSFrameSize">{320, 496}</string>
 						<reference key="NSSuperview" ref="763618099"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="734598508"/>
@@ -77,12 +77,12 @@
 					</object>
 					<object class="IBUIView" id="734598508">
 						<reference key="NSNextResponder" ref="763618099"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">266</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIImageView" id="929883949">
 								<reference key="NSNextResponder" ref="734598508"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{320, 35}</string>
+								<string key="NSFrame">{{0, 8}, {320, 44}}</string>
 								<reference key="NSSuperview" ref="734598508"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="965922464"/>
@@ -97,7 +97,7 @@
 							<object class="IBUITextField" id="965922464">
 								<reference key="NSNextResponder" ref="734598508"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{7, 3}, {231, 30}}</string>
+								<string key="NSFrame">{{5, 16}, {231, 30}}</string>
 								<reference key="NSSuperview" ref="734598508"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="538851033"/>
@@ -133,7 +133,7 @@
 							<object class="IBUIButton" id="538851033">
 								<reference key="NSNextResponder" ref="734598508"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{245, 2}, {73, 32}}</string>
+								<string key="NSFrame">{{242, 15}, {73, 32}}</string>
 								<reference key="NSSuperview" ref="734598508"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -157,29 +157,31 @@
 									<string key="NSResourceName">boto_buscar.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<int key="type">2</int>
+									<string key="name">HelveticaNeue</string>
+									<string key="family">Helvetica Neue</string>
+									<int key="traits">0</int>
 									<double key="pointSize">15</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica-Bold</string>
+									<string key="NSName">HelveticaNeue-Medium</string>
 									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 425}, {320, 35}}</string>
+						<string key="NSFrame">{{0, 496}, {320, 52}}</string>
 						<reference key="NSSuperview" ref="763618099"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="929883949"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
+							<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
+				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="979017353"/>
@@ -190,6 +192,23 @@
 				</object>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
+					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
+					<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<array key="dict.sortedKeys">
+							<integer value="1"/>
+							<integer value="3"/>
+						</array>
+						<array key="dict.values">
+							<string>{320, 568}</string>
+							<string>{568, 320}</string>
+						</array>
+					</object>
+					<string key="IBUITargetRuntime">IBCocoaTouchFramework</string>
+					<string key="IBUIDisplayName">Retina 4 Full Screen</string>
+					<int key="IBUIType">2</int>
+				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 		</array>

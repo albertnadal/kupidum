@@ -20,6 +20,8 @@
     NSMutableArray *bubbleData;
 }
 
+- (void)reloadDataAfterSendMessage;
+
 @end
 
 @implementation ChatViewController
@@ -117,34 +119,44 @@
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
+
     [UIView animateWithDuration:0.2f animations:^{
         
         CGRect frame = textInputView.frame;
-        frame.origin.y -= kbSize.height;
+        frame.origin.y -= (kbSize.height - self.navigationController.navigationBar.frame.size.height - 5.0);
         textInputView.frame = frame;
         
         frame = bubbleTable.frame;
-        frame.size.height -= kbSize.height;
+        frame.size.height -= (kbSize.height - self.navigationController.navigationBar.frame.size.height - 5.0);
         bubbleTable.frame = frame;
     }];
+
+    [bubbleTable reloadData];
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
+
     [UIView animateWithDuration:0.2f animations:^{
         
         CGRect frame = textInputView.frame;
-        frame.origin.y += kbSize.height;
+        frame.origin.y += (kbSize.height - self.navigationController.navigationBar.frame.size.height - 5.0);
         textInputView.frame = frame;
         
         frame = bubbleTable.frame;
-        frame.size.height += kbSize.height;
+        frame.size.height += (kbSize.height - self.navigationController.navigationBar.frame.size.height - 5.0);
         bubbleTable.frame = frame;
     }];
+}
+
+- (void)reloadDataAfterSendMessage
+{
+    NSURL *outgoingMessageAudioUrl = [[NSBundle mainBundle] URLForResource:@"send_message" withExtension:@"aif"];
+    [[KPDAudioUtilities sharedInstance] playRingtone:outgoingMessageAudioUrl];
+
+    [bubbleTable reloadData];
 }
 
 #pragma mark - Actions
@@ -157,13 +169,15 @@
 
     NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
     [bubbleData addObject:sayBubble];
-    [bubbleTable reloadData];
-
-    NSURL *outgoingMessageAudioUrl = [[NSBundle mainBundle] URLForResource:@"send_message" withExtension:@"aif"];
-    [[KPDAudioUtilities sharedInstance] playRingtone:outgoingMessageAudioUrl];
 
     textField.text = @"";
     [textField resignFirstResponder];
+
+    [NSTimer scheduledTimerWithTimeInterval:0.25f
+                                     target:self
+                                   selector:@selector(reloadDataAfterSendMessage)
+                                   userInfo:nil
+                                    repeats:NO];
 }
 
 @end
