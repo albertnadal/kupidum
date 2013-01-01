@@ -61,7 +61,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="734598508"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
+						<object class="NSColor" key="IBUIBackgroundColor" id="986844900">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
@@ -79,6 +79,21 @@
 						<reference key="NSNextResponder" ref="763618099"/>
 						<int key="NSvFlags">266</int>
 						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUIImageView" id="970879987">
+								<reference key="NSNextResponder" ref="734598508"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{0, 2}, {320, 6}}</string>
+								<reference key="NSSuperview" ref="734598508"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="929883949"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">thin_upper_shadow.png</string>
+								</object>
+							</object>
 							<object class="IBUIImageView" id="929883949">
 								<reference key="NSNextResponder" ref="734598508"/>
 								<int key="NSvFlags">292</int>
@@ -172,12 +187,9 @@
 						<string key="NSFrame">{{0, 496}, {320, 52}}</string>
 						<reference key="NSSuperview" ref="763618099"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="929883949"/>
+						<reference key="NSNextKeyView" ref="970879987"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
-						</object>
+						<reference key="IBUIBackgroundColor" ref="986844900"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
@@ -303,6 +315,7 @@
 							<reference ref="538851033"/>
 							<reference ref="965922464"/>
 							<reference ref="929883949"/>
+							<reference ref="970879987"/>
 						</array>
 						<reference key="parent" ref="763618099"/>
 					</object>
@@ -323,6 +336,11 @@
 						<reference key="object" ref="929883949"/>
 						<reference key="parent" ref="734598508"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">34</int>
+						<reference key="object" ref="970879987"/>
+						<reference key="parent" ref="734598508"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -331,6 +349,7 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="33.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="34.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.CustomClassName">UIBubbleTableView</string>
@@ -343,7 +362,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">33</int>
+			<int key="maxID">34</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -414,6 +433,7 @@
 			<string key="bg_light_blue.png">{320, 480}</string>
 			<string key="bg_search_bar.png">{640, 88}</string>
 			<string key="boto_buscar.png">{196, 68}</string>
+			<string key="thin_upper_shadow.png">{320, 6}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>

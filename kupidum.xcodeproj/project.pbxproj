@@ -57,6 +57,8 @@
 		FF4902971690F4AE00500ABB /* send_message.aif in Resources */ = {isa = PBXBuildFile; fileRef = FF4902951690F4AE00500ABB /* send_message.aif */; };
 		FF4902A11690F63E00500ABB /* KPDAudioUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4902A01690F63E00500ABB /* KPDAudioUtilities.m */; };
 		FF4902A31691049600500ABB /* incoming_call.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF4902A21691049600500ABB /* incoming_call.wav */; };
+		FF63708F169342A0009127E9 /* thin_upper_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF63708D169342A0009127E9 /* thin_upper_shadow@2x.png */; };
+		FF637090169342A0009127E9 /* thin_upper_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = FF63708E169342A0009127E9 /* thin_upper_shadow.png */; };
 		FF749737167F2B1400AF971F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FF749736167F2B1400AF971F /* Base64.m */; };
 		FF74973E167F2C4E00AF971F /* KPDPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = FF749739167F2C4E00AF971F /* KPDPreferences.m */; };
 		FF74973F167F2C4E00AF971F /* KPDRegisterData.m in Sources */ = {isa = PBXBuildFile; fileRef = FF74973B167F2C4E00AF971F /* KPDRegisterData.m */; };
@@ -202,6 +204,8 @@
 		FF49029F1690F63E00500ABB /* KPDAudioUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDAudioUtilities.h; path = kupidum/commons/KPDAudioUtilities.h; sourceTree = "<group>"; };
 		FF4902A01690F63E00500ABB /* KPDAudioUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDAudioUtilities.m; path = kupidum/commons/KPDAudioUtilities.m; sourceTree = "<group>"; };
 		FF4902A21691049600500ABB /* incoming_call.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = incoming_call.wav; path = kupidum/audio/incoming_call.wav; sourceTree = "<group>"; };
+		FF63708D169342A0009127E9 /* thin_upper_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "thin_upper_shadow@2x.png"; path = "kupidum/images/thin_upper_shadow@2x.png"; sourceTree = "<group>"; };
+		FF63708E169342A0009127E9 /* thin_upper_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thin_upper_shadow.png; path = kupidum/images/thin_upper_shadow.png; sourceTree = "<group>"; };
 		FF749735167F2B1400AF971F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		FF749736167F2B1400AF971F /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		FF749738167F2C4E00AF971F /* KPDPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDPreferences.h; path = kupidum/commons/KPDPreferences.h; sourceTree = "<group>"; };
@@ -510,6 +514,8 @@
 				FF7497DB167F2F7200AF971F /* tab_icon_home.png */,
 				FF7497DC167F2F7200AF971F /* tab_icon_chat@2x.png */,
 				FF7497DD167F2F7200AF971F /* tab_icon_chat.png */,
+				FF63708D169342A0009127E9 /* thin_upper_shadow@2x.png */,
+				FF63708E169342A0009127E9 /* thin_upper_shadow.png */,
 				FF7497DE167F2F7200AF971F /* logo@2x.png */,
 				FF7497DF167F2F7200AF971F /* logo.png */,
 				FF7497E0167F2F7200AF971F /* icon114x114.png */,
@@ -858,6 +864,8 @@
 				FF4902961690F4AE00500ABB /* incoming_message.aif in Resources */,
 				FF4902971690F4AE00500ABB /* send_message.aif in Resources */,
 				FF4902A31691049600500ABB /* incoming_call.wav in Resources */,
+				FF63708F169342A0009127E9 /* thin_upper_shadow@2x.png in Resources */,
+				FF637090169342A0009127E9 /* thin_upper_shadow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
