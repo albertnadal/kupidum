@@ -25,5 +25,6 @@
 - (IBAction)callUser:(id)sender;
 - (IBAction)hangUp:(id)sender;
 - (void)showEmbededVideoView;
+- (void)showIncomingVideocallAlertFromUser:(id)theUser;
 
 @end

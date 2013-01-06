@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 laFruitera.com. All rights reserved.
 //
 
+#import "WCAlertView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "VideoconferenceViewController.h"
 
@@ -92,34 +93,38 @@
     [self showEmbededVideoView];
 }
 
+- (void)showIncomingVideocallAlertFromUser:(id)theUser
+{    
+    [WCAlertView showAlertWithTitle:[NSString stringWithFormat:@"%@ is now calling you!", (NSString *)theUser] message:@"Do you want to Accept or Reject the videocall?" customizationBlock:^(WCAlertView *alertView) {
+        
+        // You can also set different appearance for this alert using customization block
+        alertView.style = WCAlertViewStyleWhiteHatched;
+        alertView.alertViewStyle = UIAlertViewStyleDefault;
+        
+    } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
+        
+        [[KPDAudioUtilities sharedInstance] stopRingtone];
+        
+        if (buttonIndex == 0)
+        {
+            // Reject the videocall
+            [[KPDClientSIP sharedInstance] rejectCall];
+        }
+        else if (buttonIndex == 1)
+        {
+            // Accept the videocall
+            [[KPDClientSIP sharedInstance] acceptCall];
+        }
+        
+    } cancelButtonTitle:@"Reject" otherButtonTitles:@"Accept", nil];
+}
+
 - (void)clientDidReceivedVideocall:(KPDClientSIP *)client fromUser:(NSString *)theUser
 {
     NSURL *incomingVideocallAudioUrl = [[NSBundle mainBundle] URLForResource:@"incoming_call" withExtension:@"wav"];
     [[KPDAudioUtilities sharedInstance] playRingtoneInLoop:incomingVideocallAudioUrl];
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@ is now calling you!", theUser] message:@"Do you want to Accept or Reject the videocall?" delegate:self cancelButtonTitle:@"Reject" otherButtonTitles:@"Accept", nil];
-    [alert setNeedsDisplay];
-    [alert setNeedsLayout];
-    [alert setHidden:NO];
-    [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
-
-    [alert show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    [[KPDAudioUtilities sharedInstance] stopRingtone];
-
-	if (buttonIndex == 0)
-	{
-		// Reject the videocall
-        [[KPDClientSIP sharedInstance] rejectCall];
-	}
-	else if (buttonIndex == 1)
-	{
-		// Accept the videocall
-        [[KPDClientSIP sharedInstance] acceptCall];
-	}
+    [self performSelectorOnMainThread:@selector(showIncomingVideocallAlertFromUser:) withObject:theUser waitUntilDone:YES];
 }
 
 - (void)viewDidLoad

@@ -45,9 +45,15 @@
     VideoconferenceViewController *videoconferenceViewController = [[VideoconferenceViewController alloc] initWithNibName:@"VideoconferenceViewController" bundle:nil];
     ChatViewController *chatViewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
     UIViewController *finderViewController2 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
-    UIViewController *finderViewController4 = [[UIViewController alloc] init];
 
-    [finderViewController4 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Inici", @"") image:[UIImage imageNamed:@"tab_icon_home"] tag:1]];
+    UIViewController *homeViewController = [[UIViewController alloc] init];
+    UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+    [homeViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Inici", @"") image:[UIImage imageNamed:@"tab_icon_home"] tag:1]];
+    [homeViewController.navigationItem setTitle:@"Superwoman"];
+
+    UIImageView *home_background = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 455)];
+    [home_background setImage:[UIImage imageNamed:@"home_prototype.png"]];
+    [homeViewController.view addSubview:home_background];
 
     UINavigationController *finderNavigationController = [[UINavigationController alloc] initWithRootViewController:finderViewController];
     [finderNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Cercar", @"") image:[UIImage imageNamed:@"tab_icon_search"] tag:2]];
@@ -58,7 +64,7 @@
     [videoconferenceViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
 
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[finderViewController4, finderNavigationController, finderViewController2, chatNavigationController, videoconferenceViewController];
+    self.tabBarController.viewControllers = @[homeNavigationController, finderNavigationController, finderViewController2, chatNavigationController, videoconferenceViewController];
     [self.tabBarController setSelectedViewController:videoconferenceViewController];
     self.window.rootViewController = self.tabBarController;
 }
