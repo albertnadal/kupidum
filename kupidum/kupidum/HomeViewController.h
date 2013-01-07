@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController <UIScrollViewDelegate>
+{
+    IBOutlet UIScrollView *scroll;
+}
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scroll;
 
 @end

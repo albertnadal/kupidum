@@ -148,6 +148,8 @@
 		FF7B53BA169A47240042FA62 /* fake_photo1.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B53B7169A47230042FA62 /* fake_photo1.png */; };
 		FF7B53BB169A47240042FA62 /* fake_photo2.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B53B8169A47230042FA62 /* fake_photo2.png */; };
 		FF7B53BC169A47240042FA62 /* fake_photo3.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B53B9169A47240042FA62 /* fake_photo3.png */; };
+		FF7B53BF169AE1090042FA62 /* bg_horizontal_scroll_panel_candidates.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B53BD169AE1080042FA62 /* bg_horizontal_scroll_panel_candidates.png */; };
+		FF7B53C0169AE1090042FA62 /* bg_horizontal_scroll_panel_candidates@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B53BE169AE1080042FA62 /* bg_horizontal_scroll_panel_candidates@2x.png */; };
 		FFAE275E1699C6FA00B82CF6 /* WCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE275D1699C6FA00B82CF6 /* WCAlertView.m */; };
 		FFEDFEDC168E457B00C493AB /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED2168E457B00C493AB /* NSBubbleData.m */; };
 		FFEDFEDD168E457B00C493AB /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED4168E457B00C493AB /* UIBubbleHeaderTableViewCell.m */; };
@@ -334,6 +336,8 @@
 		FF7B53B7169A47230042FA62 /* fake_photo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fake_photo1.png; path = kupidum/images/fake_photo1.png; sourceTree = "<group>"; };
 		FF7B53B8169A47230042FA62 /* fake_photo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fake_photo2.png; path = kupidum/images/fake_photo2.png; sourceTree = "<group>"; };
 		FF7B53B9169A47240042FA62 /* fake_photo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fake_photo3.png; path = kupidum/images/fake_photo3.png; sourceTree = "<group>"; };
+		FF7B53BD169AE1080042FA62 /* bg_horizontal_scroll_panel_candidates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_horizontal_scroll_panel_candidates.png; path = kupidum/images/bg_horizontal_scroll_panel_candidates.png; sourceTree = "<group>"; };
+		FF7B53BE169AE1080042FA62 /* bg_horizontal_scroll_panel_candidates@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_horizontal_scroll_panel_candidates@2x.png"; path = "kupidum/images/bg_horizontal_scroll_panel_candidates@2x.png"; sourceTree = "<group>"; };
 		FFAE275C1699C6FA00B82CF6 /* WCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WCAlertView.h; path = kupidum/WCAlertView/WCAlertView/WCAlertView.h; sourceTree = "<group>"; };
 		FFAE275D1699C6FA00B82CF6 /* WCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WCAlertView.m; path = kupidum/WCAlertView/WCAlertView/WCAlertView.m; sourceTree = "<group>"; };
 		FFEDFED1168E457B00C493AB /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBubbleData.h; path = kupidum/UIBubbleTableView/src/NSBubbleData.h; sourceTree = "<group>"; };
@@ -563,6 +567,8 @@
 				B707444B166BDE7A007E8B23 /* NavigationButtons */,
 				FF7B53A3169A34200042FA62 /* online_green_led_normal.png */,
 				FF7B53A4169A34200042FA62 /* online_green_led_normal@2x.png */,
+				FF7B53BD169AE1080042FA62 /* bg_horizontal_scroll_panel_candidates.png */,
+				FF7B53BE169AE1080042FA62 /* bg_horizontal_scroll_panel_candidates@2x.png */,
 				FF7B53B7169A47230042FA62 /* fake_photo1.png */,
 				FF7B53B8169A47230042FA62 /* fake_photo2.png */,
 				FF7B53B9169A47240042FA62 /* fake_photo3.png */,
@@ -984,6 +990,8 @@
 				FF7B53BA169A47240042FA62 /* fake_photo1.png in Resources */,
 				FF7B53BB169A47240042FA62 /* fake_photo2.png in Resources */,
 				FF7B53BC169A47240042FA62 /* fake_photo3.png in Resources */,
+				FF7B53BF169AE1090042FA62 /* bg_horizontal_scroll_panel_candidates.png in Resources */,
+				FF7B53C0169AE1090042FA62 /* bg_horizontal_scroll_panel_candidates@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
