@@ -14,7 +14,7 @@
 
 @implementation HomeViewController
 
-@synthesize scroll;
+@synthesize scroll, nearToYouCandidatesView, candidatesYouMayLikeView, candidatesWhoYouMayLikeView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +31,18 @@
     // Do any additional setup after loading the view from its nib.
 
     [scroll setContentSize:CGSizeMake(320, 585)];
+
+    nearToYouCandidatesTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 63, 305)];
+    [nearToYouCandidatesView addSubview:nearToYouCandidatesTableViewController.view];
+    [nearToYouCandidatesTableViewController scrollContentToLeft];
+
+    candidatesYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 63, 305)];
+    [candidatesYouMayLikeView addSubview:candidatesYouMayLikeTableViewController.view];
+    [candidatesYouMayLikeTableViewController scrollContentToLeft];
+
+    candidatesWhoYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 63, 305)];
+    [candidatesWhoYouMayLikeView addSubview:candidatesWhoYouMayLikeTableViewController.view];
+    [candidatesWhoYouMayLikeTableViewController scrollContentToLeft];
 }
 
 - (void)didReceiveMemoryWarning
