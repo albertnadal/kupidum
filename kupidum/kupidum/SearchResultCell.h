@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchResultViewController.h"
 
 @interface SearchResultCell : UITableViewCell
+{
+    SearchResultViewController *srvc;
+}
 
 @end

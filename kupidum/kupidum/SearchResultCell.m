@@ -13,8 +13,13 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
+    if (self)
+    {
+        [self.contentView setBackgroundColor:[UIColor whiteColor]];
+
+        srvc = [[SearchResultViewController alloc] initWithNibName:@"SearchResultViewController" bundle:nil];
+        [self.contentView addSubview:srvc.view];
+
     }
     return self;
 }

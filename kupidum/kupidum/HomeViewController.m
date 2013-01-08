@@ -62,6 +62,12 @@
     [self.navigationController pushViewController:srvc animated:YES];
 }
 
+- (IBAction)showDummyResults:(id)sender
+{
+    SearchResultsListViewController *srvc = [[SearchResultsListViewController alloc] initWithNibName:@"SearchResultsListViewController" bundle:nil];
+    [self.navigationController pushViewController:srvc animated:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -30,5 +30,6 @@
 @property (strong, nonatomic) IBOutlet UIView *candidatesWhoYouMayLikeView;
 
 - (void)showPeopleLivingNearToUser:(NSString *)theUser;
+- (IBAction)showDummyResults:(id)sender;
 
 @end
