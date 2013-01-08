@@ -7,6 +7,8 @@
 //
 
 #import "HomeViewController.h"
+#import "SearchResultsListViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface HomeViewController ()
 
@@ -14,7 +16,7 @@
 
 @implementation HomeViewController
 
-@synthesize scroll, nearToYouCandidatesView, candidatesYouMayLikeView, candidatesWhoYouMayLikeView;
+@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView, candidatesWhoYouMayLikeView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,19 +32,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    [scroll setContentSize:CGSizeMake(320, 585)];
+    [scroll setContentSize:CGSizeMake(320, 605)];
 
-    nearToYouCandidatesTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 63, 305)];
+    profileResumeView.layer.cornerRadius = 5.0;
+    profileResumeView.layer.masksToBounds = YES;
+
+    nearToYouCandidatesTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 70, 305)];
     [nearToYouCandidatesView addSubview:nearToYouCandidatesTableViewController.view];
+    nearToYouCandidatesView.layer.cornerRadius = 5.0;
+    nearToYouCandidatesView.layer.masksToBounds = YES;
     [nearToYouCandidatesTableViewController scrollContentToLeft];
 
-    candidatesYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 63, 305)];
+    candidatesYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 70, 305)];
     [candidatesYouMayLikeView addSubview:candidatesYouMayLikeTableViewController.view];
+    candidatesYouMayLikeView.layer.cornerRadius = 5.0;
+    candidatesYouMayLikeView.layer.masksToBounds = YES;
     [candidatesYouMayLikeTableViewController scrollContentToLeft];
 
-    candidatesWhoYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 63, 305)];
+    candidatesWhoYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 70, 305)];
     [candidatesWhoYouMayLikeView addSubview:candidatesWhoYouMayLikeTableViewController.view];
+    candidatesWhoYouMayLikeView.layer.cornerRadius = 5.0;
+    candidatesWhoYouMayLikeView.layer.masksToBounds = YES;
     [candidatesWhoYouMayLikeTableViewController scrollContentToLeft];
+}
+
+- (void)showPeopleLivingNearToUser:(NSString *)theUser
+{
+    SearchResultsListViewController *srvc = [[SearchResultsListViewController alloc] initWithNibName:@"SearchResultsViewController" bundle:nil];
+    [self.navigationController pushViewController:srvc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

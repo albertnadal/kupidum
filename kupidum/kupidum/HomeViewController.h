@@ -12,6 +12,7 @@
 @interface HomeViewController : UIViewController <UIScrollViewDelegate>
 {
     IBOutlet UIScrollView *scroll;
+    IBOutlet UIView *profileResumeView;
     IBOutlet UIView *nearToYouCandidatesView;
     IBOutlet UIView *candidatesYouMayLikeView;
     IBOutlet UIView *candidatesWhoYouMayLikeView;
@@ -23,8 +24,11 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
+@property (strong, nonatomic) IBOutlet UIView *profileResumeView;
 @property (strong, nonatomic) IBOutlet UIView *nearToYouCandidatesView;
 @property (strong, nonatomic) IBOutlet UIView *candidatesYouMayLikeView;
 @property (strong, nonatomic) IBOutlet UIView *candidatesWhoYouMayLikeView;
+
+- (void)showPeopleLivingNearToUser:(NSString *)theUser;
 
 @end

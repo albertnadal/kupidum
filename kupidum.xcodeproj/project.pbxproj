@@ -155,6 +155,11 @@
 		FF7B5426169B68740042FA62 /* KPDUsersHorizontalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B5423169B68740042FA62 /* KPDUsersHorizontalTableViewController.m */; };
 		FF7B5427169B68740042FA62 /* SimplePullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B5425169B68740042FA62 /* SimplePullRefreshTableViewController.m */; };
 		FF7B5429169B6FE10042FA62 /* fake_photo4.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B5428169B6FE10042FA62 /* fake_photo4.png */; };
+		FF7B542E169C40440042FA62 /* SearchResultsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B542C169C40440042FA62 /* SearchResultsListViewController.m */; };
+		FF7B542F169C40440042FA62 /* SearchResultsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7B542D169C40440042FA62 /* SearchResultsListViewController.xib */; };
+		FF7B5439169C68870042FA62 /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B5438169C68870042FA62 /* SearchResultCell.m */; };
+		FF7B543D169C69060042FA62 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B543B169C68FF0042FA62 /* SearchResultViewController.m */; };
+		FF7B543E169C69060042FA62 /* SearchResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7B543C169C69000042FA62 /* SearchResultViewController.xib */; };
 		FFAE275E1699C6FA00B82CF6 /* WCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE275D1699C6FA00B82CF6 /* WCAlertView.m */; };
 		FFEDFEDC168E457B00C493AB /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED2168E457B00C493AB /* NSBubbleData.m */; };
 		FFEDFEDD168E457B00C493AB /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED4168E457B00C493AB /* UIBubbleHeaderTableViewCell.m */; };
@@ -350,6 +355,14 @@
 		FF7B5424169B68740042FA62 /* SimplePullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimplePullRefreshTableViewController.h; path = kupidum/commons/SimplePullRefreshTableViewController.h; sourceTree = "<group>"; };
 		FF7B5425169B68740042FA62 /* SimplePullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimplePullRefreshTableViewController.m; path = kupidum/commons/SimplePullRefreshTableViewController.m; sourceTree = "<group>"; };
 		FF7B5428169B6FE10042FA62 /* fake_photo4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fake_photo4.png; path = kupidum/images/fake_photo4.png; sourceTree = "<group>"; };
+		FF7B542B169C40440042FA62 /* SearchResultsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchResultsListViewController.h; path = kupidum/SearchResultsListViewController.h; sourceTree = "<group>"; };
+		FF7B542C169C40440042FA62 /* SearchResultsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchResultsListViewController.m; path = kupidum/SearchResultsListViewController.m; sourceTree = "<group>"; };
+		FF7B542D169C40440042FA62 /* SearchResultsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchResultsListViewController.xib; path = kupidum/SearchResultsListViewController.xib; sourceTree = "<group>"; };
+		FF7B5437169C68860042FA62 /* SearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchResultCell.h; path = kupidum/SearchResultCell.h; sourceTree = "<group>"; };
+		FF7B5438169C68870042FA62 /* SearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchResultCell.m; path = kupidum/SearchResultCell.m; sourceTree = "<group>"; };
+		FF7B543A169C68FE0042FA62 /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchResultViewController.h; path = kupidum/SearchResultViewController.h; sourceTree = "<group>"; };
+		FF7B543B169C68FF0042FA62 /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchResultViewController.m; path = kupidum/SearchResultViewController.m; sourceTree = "<group>"; };
+		FF7B543C169C69000042FA62 /* SearchResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchResultViewController.xib; path = kupidum/SearchResultViewController.xib; sourceTree = "<group>"; };
 		FFAE275C1699C6FA00B82CF6 /* WCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WCAlertView.h; path = kupidum/WCAlertView/WCAlertView/WCAlertView.h; sourceTree = "<group>"; };
 		FFAE275D1699C6FA00B82CF6 /* WCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WCAlertView.m; path = kupidum/WCAlertView/WCAlertView/WCAlertView.m; sourceTree = "<group>"; };
 		FFEDFED1168E457B00C493AB /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBubbleData.h; path = kupidum/UIBubbleTableView/src/NSBubbleData.h; sourceTree = "<group>"; };
@@ -541,6 +554,7 @@
 		B7EF68001659001800F20DF3 /* kupidum */ = {
 			isa = PBXGroup;
 			children = (
+				FF7B542A169C3ECC0042FA62 /* SearchResults */,
 				B7EF68681659237200F20DF3 /* Initial */,
 				B79E6AA816595702004C472F /* Login */,
 				B79E6AB216596723004C472F /* Register */,
@@ -797,6 +811,21 @@
 			path = kupidum/base64;
 			sourceTree = "<group>";
 		};
+		FF7B542A169C3ECC0042FA62 /* SearchResults */ = {
+			isa = PBXGroup;
+			children = (
+				FF7B542B169C40440042FA62 /* SearchResultsListViewController.h */,
+				FF7B542C169C40440042FA62 /* SearchResultsListViewController.m */,
+				FF7B542D169C40440042FA62 /* SearchResultsListViewController.xib */,
+				FF7B5437169C68860042FA62 /* SearchResultCell.h */,
+				FF7B5438169C68870042FA62 /* SearchResultCell.m */,
+				FF7B543A169C68FE0042FA62 /* SearchResultViewController.h */,
+				FF7B543B169C68FF0042FA62 /* SearchResultViewController.m */,
+				FF7B543C169C69000042FA62 /* SearchResultViewController.xib */,
+			);
+			name = SearchResults;
+			sourceTree = "<group>";
+		};
 		FFAE275A1699C68700B82CF6 /* WCAlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1014,6 +1043,8 @@
 				FF7B541F169B676F0042FA62 /* arrow.png in Resources */,
 				FF7B5420169B676F0042FA62 /* arrow@2x.png in Resources */,
 				FF7B5429169B6FE10042FA62 /* fake_photo4.png in Resources */,
+				FF7B542F169C40440042FA62 /* SearchResultsListViewController.xib in Resources */,
+				FF7B543E169C69060042FA62 /* SearchResultViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1052,6 +1083,9 @@
 				FF7B538C1699EFCC0042FA62 /* HomeViewController.m in Sources */,
 				FF7B5426169B68740042FA62 /* KPDUsersHorizontalTableViewController.m in Sources */,
 				FF7B5427169B68740042FA62 /* SimplePullRefreshTableViewController.m in Sources */,
+				FF7B542E169C40440042FA62 /* SearchResultsListViewController.m in Sources */,
+				FF7B5439169C68870042FA62 /* SearchResultCell.m in Sources */,
+				FF7B543D169C69060042FA62 /* SearchResultViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

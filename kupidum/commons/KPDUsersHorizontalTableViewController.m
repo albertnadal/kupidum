@@ -107,7 +107,40 @@
         UIImageView *imatge = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.height,self.view.frame.size.height)];
         [imatge setImage:[UIImage imageNamed:@"fake_photo4.png"]];
         [cell.contentView addSubview:imatge];
-        [cell.contentView setBackgroundColor:[UIColor grayColor]];
+        [cell.contentView setBackgroundColor:[UIColor whiteColor]];
+
+        int bottom_container_height = 14;
+        int bottom_container_padding = 1;
+        int age_text_width = 18;
+
+        UIView *bottom_container = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - bottom_container_height, self.view.frame.size.height, bottom_container_height)];
+        [bottom_container setBackgroundColor:[UIColor blackColor]];
+        [bottom_container setAlpha:0.60];
+        [cell.contentView addSubview:bottom_container];
+
+        UILabel *age_text = [[UILabel alloc] initWithFrame:CGRectMake(bottom_container_padding, bottom_container.frame.origin.y, age_text_width, bottom_container_height)];
+        [age_text setTextColor:[UIColor whiteColor]];
+        [age_text setBackgroundColor:[UIColor clearColor]];
+        [age_text setTextAlignment:NSTextAlignmentCenter];
+        [age_text setText:@"23"];
+        [age_text setAlpha:0.85];
+        [age_text setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
+        [age_text setAdjustsFontSizeToFitWidth:YES];
+        [cell.contentView addSubview:age_text];
+
+        UILabel *alias_text = [[UILabel alloc] initWithFrame:CGRectMake(age_text.frame.origin.x + age_text.frame.size.width, bottom_container.frame.origin.y, bottom_container.frame.size.width - (age_text.frame.origin.x + age_text.frame.size.width) - bottom_container_padding, bottom_container_height)];
+        [alias_text setTextColor:[UIColor whiteColor]];
+        [alias_text setBackgroundColor:[UIColor clearColor]];
+        [alias_text setTextAlignment:NSTextAlignmentCenter];
+        [alias_text setText:@"gclooney"];
+        [alias_text setAlpha:0.80];
+        [alias_text setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
+        [alias_text setAdjustsFontSizeToFitWidth:YES];
+        [cell.contentView addSubview:alias_text];
+
+        UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, self.view.frame.size.height)];
+        [separator setBackgroundColor:[UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [cell.contentView addSubview:separator];
 
         cell.transform = CGAffineTransformMakeRotation(M_PI * -0.5);
     }
