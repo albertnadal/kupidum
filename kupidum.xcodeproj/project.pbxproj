@@ -160,6 +160,10 @@
 		FF7B5439169C68870042FA62 /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B5438169C68870042FA62 /* SearchResultCell.m */; };
 		FF7B543D169C69060042FA62 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B543B169C68FF0042FA62 /* SearchResultViewController.m */; };
 		FF7B543E169C69060042FA62 /* SearchResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7B543C169C69000042FA62 /* SearchResultViewController.xib */; };
+		FF7B5441169C7E450042FA62 /* bg_search_result_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B543F169C7E360042FA62 /* bg_search_result_cell.png */; };
+		FF7B5442169C7E450042FA62 /* bg_search_result_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B5440169C7E400042FA62 /* bg_search_result_cell@2x.png */; };
+		FF7B5445169C7F200042FA62 /* arrow_search_result_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B5443169C7F1A0042FA62 /* arrow_search_result_cell.png */; };
+		FF7B5446169C7F200042FA62 /* arrow_search_result_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B5444169C7F1D0042FA62 /* arrow_search_result_cell@2x.png */; };
 		FFAE275E1699C6FA00B82CF6 /* WCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE275D1699C6FA00B82CF6 /* WCAlertView.m */; };
 		FFEDFEDC168E457B00C493AB /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED2168E457B00C493AB /* NSBubbleData.m */; };
 		FFEDFEDD168E457B00C493AB /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED4168E457B00C493AB /* UIBubbleHeaderTableViewCell.m */; };
@@ -363,6 +367,10 @@
 		FF7B543A169C68FE0042FA62 /* SearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchResultViewController.h; path = kupidum/SearchResultViewController.h; sourceTree = "<group>"; };
 		FF7B543B169C68FF0042FA62 /* SearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchResultViewController.m; path = kupidum/SearchResultViewController.m; sourceTree = "<group>"; };
 		FF7B543C169C69000042FA62 /* SearchResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchResultViewController.xib; path = kupidum/SearchResultViewController.xib; sourceTree = "<group>"; };
+		FF7B543F169C7E360042FA62 /* bg_search_result_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_search_result_cell.png; path = kupidum/images/bg_search_result_cell.png; sourceTree = "<group>"; };
+		FF7B5440169C7E400042FA62 /* bg_search_result_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_search_result_cell@2x.png"; path = "kupidum/images/bg_search_result_cell@2x.png"; sourceTree = "<group>"; };
+		FF7B5443169C7F1A0042FA62 /* arrow_search_result_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow_search_result_cell.png; path = kupidum/images/arrow_search_result_cell.png; sourceTree = "<group>"; };
+		FF7B5444169C7F1D0042FA62 /* arrow_search_result_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow_search_result_cell@2x.png"; path = "kupidum/images/arrow_search_result_cell@2x.png"; sourceTree = "<group>"; };
 		FFAE275C1699C6FA00B82CF6 /* WCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WCAlertView.h; path = kupidum/WCAlertView/WCAlertView/WCAlertView.h; sourceTree = "<group>"; };
 		FFAE275D1699C6FA00B82CF6 /* WCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WCAlertView.m; path = kupidum/WCAlertView/WCAlertView/WCAlertView.m; sourceTree = "<group>"; };
 		FFEDFED1168E457B00C493AB /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBubbleData.h; path = kupidum/UIBubbleTableView/src/NSBubbleData.h; sourceTree = "<group>"; };
@@ -599,6 +607,10 @@
 				FF7B53A4169A34200042FA62 /* online_green_led_normal@2x.png */,
 				FF7B541D169B676F0042FA62 /* arrow.png */,
 				FF7B541E169B676F0042FA62 /* arrow@2x.png */,
+				FF7B5443169C7F1A0042FA62 /* arrow_search_result_cell.png */,
+				FF7B5444169C7F1D0042FA62 /* arrow_search_result_cell@2x.png */,
+				FF7B543F169C7E360042FA62 /* bg_search_result_cell.png */,
+				FF7B5440169C7E400042FA62 /* bg_search_result_cell@2x.png */,
 				FF7B53BD169AE1080042FA62 /* bg_horizontal_scroll_panel_candidates.png */,
 				FF7B53BE169AE1080042FA62 /* bg_horizontal_scroll_panel_candidates@2x.png */,
 				FF7B53B7169A47230042FA62 /* fake_photo1.png */,
@@ -1045,6 +1057,10 @@
 				FF7B5429169B6FE10042FA62 /* fake_photo4.png in Resources */,
 				FF7B542F169C40440042FA62 /* SearchResultsListViewController.xib in Resources */,
 				FF7B543E169C69060042FA62 /* SearchResultViewController.xib in Resources */,
+				FF7B5441169C7E450042FA62 /* bg_search_result_cell.png in Resources */,
+				FF7B5442169C7E450042FA62 /* bg_search_result_cell@2x.png in Resources */,
+				FF7B5445169C7F200042FA62 /* arrow_search_result_cell.png in Resources */,
+				FF7B5446169C7F200042FA62 /* arrow_search_result_cell@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

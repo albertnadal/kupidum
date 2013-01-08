@@ -14,6 +14,8 @@
 
 @implementation SearchResultViewController
 
+@synthesize image, greenLed, username, city, age, height, status, personality, looking;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
