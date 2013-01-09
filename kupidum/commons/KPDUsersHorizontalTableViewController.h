@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "SimplePullRefreshTableViewController.h"
+#import "KPDUsersHorizontalTableViewControllerDelegate.h"
 
-@interface KPDUsersHorizontalTableViewController : SimplePullRefreshTableViewController <UIAlertViewDelegate>
+@interface KPDUsersHorizontalTableViewController : SimplePullRefreshTableViewController
+{
+    id<KPDUsersHorizontalTableViewControllerDelegate> delegate;
+}
+
+@property (nonatomic, retain) id<KPDUsersHorizontalTableViewControllerDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)scrollContentToLeft;

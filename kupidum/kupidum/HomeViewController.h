@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "KPDUsersHorizontalTableViewController.h"
 
-@interface HomeViewController : UIViewController <UIScrollViewDelegate>
+@interface HomeViewController : UIViewController <UIScrollViewDelegate, KPDUsersHorizontalTableViewControllerDelegate>
 {
     IBOutlet UIScrollView *scroll;
     IBOutlet UIView *profileResumeView;
@@ -30,6 +30,6 @@
 @property (strong, nonatomic) IBOutlet UIView *candidatesWhoYouMayLikeView;
 
 - (void)showPeopleLivingNearToUser:(NSString *)theUser;
-- (IBAction)showDummyResults:(id)sender;
+- (void)showAlert;
 
 @end

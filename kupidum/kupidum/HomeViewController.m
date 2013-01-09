@@ -38,31 +38,33 @@
     profileResumeView.layer.masksToBounds = YES;
 
     nearToYouCandidatesTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 70, 305)];
+    [nearToYouCandidatesTableViewController setDelegate:self];
     [nearToYouCandidatesView addSubview:nearToYouCandidatesTableViewController.view];
     nearToYouCandidatesView.layer.cornerRadius = 5.0;
     nearToYouCandidatesView.layer.masksToBounds = YES;
     [nearToYouCandidatesTableViewController scrollContentToLeft];
 
     candidatesYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 70, 305)];
+    [candidatesYouMayLikeTableViewController setDelegate:self];
     [candidatesYouMayLikeView addSubview:candidatesYouMayLikeTableViewController.view];
     candidatesYouMayLikeView.layer.cornerRadius = 5.0;
     candidatesYouMayLikeView.layer.masksToBounds = YES;
     [candidatesYouMayLikeTableViewController scrollContentToLeft];
 
     candidatesWhoYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 70, 305)];
+    [candidatesWhoYouMayLikeTableViewController setDelegate:self];
     [candidatesWhoYouMayLikeView addSubview:candidatesWhoYouMayLikeTableViewController.view];
     candidatesWhoYouMayLikeView.layer.cornerRadius = 5.0;
     candidatesWhoYouMayLikeView.layer.masksToBounds = YES;
     [candidatesWhoYouMayLikeTableViewController scrollContentToLeft];
 }
 
-- (void)showPeopleLivingNearToUser:(NSString *)theUser
+- (void)usersHorizontalTableViewControllerDidRefresh:(KPDUsersHorizontalTableViewController *)tableViewController
 {
-    SearchResultsListViewController *srvc = [[SearchResultsListViewController alloc] initWithNibName:@"SearchResultsViewController" bundle:nil];
-    [self.navigationController pushViewController:srvc animated:YES];
+    [self showPeopleLivingNearToUser:@"Superwoman"];
 }
 
-- (IBAction)showDummyResults:(id)sender
+- (void)showPeopleLivingNearToUser:(NSString *)theUser
 {
     SearchResultsListViewController *srvc = [[SearchResultsListViewController alloc] initWithNibName:@"SearchResultsListViewController" bundle:nil];
     [self.navigationController pushViewController:srvc animated:YES];
@@ -72,6 +74,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [nearToYouCandidatesTableViewController scrollContentToLeft];
+    [candidatesYouMayLikeTableViewController scrollContentToLeft];
+    [candidatesWhoYouMayLikeTableViewController scrollContentToLeft];
 }
 
 @end

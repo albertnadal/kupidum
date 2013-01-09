@@ -10,15 +10,21 @@
 
 @interface KPDUsersHorizontalTableViewController ()
 
+- (void)usersHorizontalTableViewControllerDidRefresh;
+
 @end
 
 @implementation KPDUsersHorizontalTableViewController
+
+@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self)
     {
+        delegate = nil;
+
         int x = (frame.origin.x - (frame.size.width / 2)) + (frame.size.height / 2);
         int y = (frame.origin.y - (frame.size.height / 2)) + (frame.size.width / 2);
 
@@ -40,6 +46,8 @@
 {
     self = [super initWithStyle:style];
     if (self) {
+        delegate = nil;
+
         // Custom initialization
     }
     return self;
@@ -59,18 +67,15 @@
 
 - (void)refresh
 {
-    [self performSelector:@selector(showAlert) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(usersHorizontalTableViewControllerDidRefresh) withObject:nil afterDelay:0.5];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)usersHorizontalTableViewControllerDidRefresh
 {
+    if((delegate!=nil) && ([delegate respondsToSelector:@selector(usersHorizontalTableViewControllerDidRefresh:)]))
+        [delegate usersHorizontalTableViewControllerDidRefresh:self];
+
     [self stopLoading];
-}
-
-- (void)showAlert
-{
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Refresh" message:@"It seems works!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
 }
 
 #pragma mark - Table view data source
