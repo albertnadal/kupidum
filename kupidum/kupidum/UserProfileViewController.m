@@ -7,12 +7,18 @@
 //
 
 #import "UserProfileViewController.h"
+#import "KPDUIUtilities.h"
 
 @interface UserProfileViewController ()
+
+- (void)showNavigationBarButtons;
+- (void)backPressed;
 
 @end
 
 @implementation UserProfileViewController
+
+@synthesize scroll;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,13 +32,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self showNavigationBarButtons];
+    [scroll setContentSize:CGSizeMake(320, 600)];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)showNavigationBarButtons
+{
+    UIButton *backButton = [KPDUIUtilities customCircleBarButtonWithImage:@"nav_black_circle_button.png"
+                                                           andInsideImage:@"nav_arrow_back_button.png"
+                                                              andSelector:@selector(backPressed)
+                                                                andTarget:self];
+    
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:backButton]];
+}
+
+- (void)backPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

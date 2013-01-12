@@ -8,6 +8,7 @@
 
 #import "SearchResultsListViewController.h"
 #import "SearchResultCell.h"
+#import "UserProfileViewController.h"
 #import "KPDUIUtilities.h"
 
 @interface SearchResultsListViewController ()
@@ -95,7 +96,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil];
+    [self.navigationController pushViewController:upvc animated:YES];
 }
 
 @end

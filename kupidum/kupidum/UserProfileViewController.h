@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface UserProfileViewController : UIViewController
+{
+    IBOutlet UIScrollView *scroll;
+}
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scroll;
 
 @end

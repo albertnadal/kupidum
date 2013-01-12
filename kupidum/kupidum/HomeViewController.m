@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "SearchResultsListViewController.h"
+#import "UserProfileViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface HomeViewController ()
@@ -68,6 +69,12 @@
 {
     SearchResultsListViewController *srvc = [[SearchResultsListViewController alloc] initWithNibName:@"SearchResultsListViewController" bundle:nil];
     [self.navigationController pushViewController:srvc animated:YES];
+}
+
+- (IBAction)showUserProfile:(id)sender
+{
+    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil];
+    [self.navigationController pushViewController:upvc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
