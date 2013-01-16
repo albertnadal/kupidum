@@ -28,6 +28,12 @@
 		FF25A5CB168683B600F5DB58 /* VideoconferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF25A5C9168683B600F5DB58 /* VideoconferenceViewController.m */; };
 		FF25A5CC168683B600F5DB58 /* VideoconferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF25A5CA168683B600F5DB58 /* VideoconferenceViewController.xib */; };
 		FF25A5D71688B97400F5DB58 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF25A5D61688B97300F5DB58 /* QuartzCore.framework */; };
+		FF2B5ECF16A42AA500D580BE /* libIBAForms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF2B5ECA16A428C500D580BE /* libIBAForms.a */; };
+		FF2B5EDB16A4659A00D580BE /* SampleFormDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5ED616A4659A00D580BE /* SampleFormDataSource.m */; };
+		FF2B5EDD16A4659A00D580BE /* ShowcaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EDA16A4659A00D580BE /* ShowcaseModel.m */; };
+		FF2B5EE016A46D1300D580BE /* StringToNumberTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EDF16A46D1300D580BE /* StringToNumberTransformer.m */; };
+		FF2B5EE516A46D4B00D580BE /* ShowcaseButtonStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EE216A46D4B00D580BE /* ShowcaseButtonStyle.m */; };
+		FF2B5EE616A46D4B00D580BE /* ShowcaseFieldStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EE416A46D4B00D580BE /* ShowcaseFieldStyle.m */; };
 		FF35CC26169F1BD8003AE44D /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF35CC24169F1BD7003AE44D /* UserProfileViewController.m */; };
 		FF35CC27169F1BD8003AE44D /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF35CC25169F1BD7003AE44D /* UserProfileViewController.xib */; };
 		FF35CC2A16A1BC83003AE44D /* bg_profile_top_panel.png in Resources */ = {isa = PBXBuildFile; fileRef = FF35CC2816A1BC82003AE44D /* bg_profile_top_panel.png */; };
@@ -206,6 +212,23 @@
 		FFEDFF05168E57B000C493AB /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFEDFF03168E57B000C493AB /* ChatViewController.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FF2B5EC916A428C500D580BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = IBAForms;
+		};
+		FF2B5ECD16A42A5500D580BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = IBAForms;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		B7EF67F61659001800F20DF3 /* kupidum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kupidum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7EF67FA1659001800F20DF3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -237,6 +260,17 @@
 		FF25A5CA168683B600F5DB58 /* VideoconferenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoconferenceViewController.xib; path = kupidum/VideoconferenceViewController.xib; sourceTree = "<group>"; };
 		FF25A5D51688988400F5DB58 /* KPDClientSIPDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDClientSIPDelegate.h; path = kupidum/rtc/KPDClientSIPDelegate.h; sourceTree = "<group>"; };
 		FF25A5D61688B97300F5DB58 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IBAForms.xcodeproj; path = ../third_party/IBAForms/library/IBAForms.xcodeproj; sourceTree = "<group>"; };
+		FF2B5ED516A4659A00D580BE /* SampleFormDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleFormDataSource.h; path = kupidum/IBAForms/SampleFormDataSource.h; sourceTree = "<group>"; };
+		FF2B5ED616A4659A00D580BE /* SampleFormDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleFormDataSource.m; path = kupidum/IBAForms/SampleFormDataSource.m; sourceTree = "<group>"; };
+		FF2B5ED916A4659A00D580BE /* ShowcaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowcaseModel.h; path = kupidum/IBAForms/ShowcaseModel.h; sourceTree = "<group>"; };
+		FF2B5EDA16A4659A00D580BE /* ShowcaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShowcaseModel.m; path = kupidum/IBAForms/ShowcaseModel.m; sourceTree = "<group>"; };
+		FF2B5EDE16A46D1300D580BE /* StringToNumberTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringToNumberTransformer.h; path = kupidum/IBAForms/StringToNumberTransformer.h; sourceTree = "<group>"; };
+		FF2B5EDF16A46D1300D580BE /* StringToNumberTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringToNumberTransformer.m; path = kupidum/IBAForms/StringToNumberTransformer.m; sourceTree = "<group>"; };
+		FF2B5EE116A46D4B00D580BE /* ShowcaseButtonStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowcaseButtonStyle.h; path = kupidum/IBAForms/ShowcaseButtonStyle.h; sourceTree = "<group>"; };
+		FF2B5EE216A46D4B00D580BE /* ShowcaseButtonStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShowcaseButtonStyle.m; path = kupidum/IBAForms/ShowcaseButtonStyle.m; sourceTree = "<group>"; };
+		FF2B5EE316A46D4B00D580BE /* ShowcaseFieldStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowcaseFieldStyle.h; path = kupidum/IBAForms/ShowcaseFieldStyle.h; sourceTree = "<group>"; };
+		FF2B5EE416A46D4B00D580BE /* ShowcaseFieldStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShowcaseFieldStyle.m; path = kupidum/IBAForms/ShowcaseFieldStyle.m; sourceTree = "<group>"; };
 		FF35CC23169F1BD7003AE44D /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserProfileViewController.h; path = kupidum/UserProfileViewController.h; sourceTree = "<group>"; };
 		FF35CC24169F1BD7003AE44D /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileViewController.m; path = kupidum/UserProfileViewController.m; sourceTree = "<group>"; };
 		FF35CC25169F1BD7003AE44D /* UserProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserProfileViewController.xib; path = kupidum/UserProfileViewController.xib; sourceTree = "<group>"; };
@@ -448,6 +482,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF2B5ECF16A42AA500D580BE /* libIBAForms.a in Frameworks */,
 				FF25A5D71688B97400F5DB58 /* QuartzCore.framework in Frameworks */,
 				FF25A5B116867B0B00F5DB58 /* CoreAudio.framework in Frameworks */,
 				FF25A5AF16867A0200F5DB58 /* CFNetwork.framework in Frameworks */,
@@ -564,6 +599,7 @@
 		B7EF67EB1659001800F20DF3 = {
 			isa = PBXGroup;
 			children = (
+				FFB003A816A4234400BD122C /* IBAForms */,
 				FF3744F91685ED6F0098BBF1 /* RTC */,
 				FF749734167F2B1400AF971F /* base64 */,
 				B7074442166BDB10007E8B23 /* commons */,
@@ -787,6 +823,14 @@
 			name = Videoconference;
 			sourceTree = "<group>";
 		};
+		FF2B5EC316A428C400D580BE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FF2B5ECA16A428C500D580BE /* libIBAForms.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FF35CC21169F1BA2003AE44D /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -919,6 +963,24 @@
 			name = WCAlertView;
 			sourceTree = "<group>";
 		};
+		FFB003A816A4234400BD122C /* IBAForms */ = {
+			isa = PBXGroup;
+			children = (
+				FF2B5ED516A4659A00D580BE /* SampleFormDataSource.h */,
+				FF2B5ED616A4659A00D580BE /* SampleFormDataSource.m */,
+				FF2B5ED916A4659A00D580BE /* ShowcaseModel.h */,
+				FF2B5EDA16A4659A00D580BE /* ShowcaseModel.m */,
+				FF2B5EDE16A46D1300D580BE /* StringToNumberTransformer.h */,
+				FF2B5EDF16A46D1300D580BE /* StringToNumberTransformer.m */,
+				FF2B5EE116A46D4B00D580BE /* ShowcaseButtonStyle.h */,
+				FF2B5EE216A46D4B00D580BE /* ShowcaseButtonStyle.m */,
+				FF2B5EE316A46D4B00D580BE /* ShowcaseFieldStyle.h */,
+				FF2B5EE416A46D4B00D580BE /* ShowcaseFieldStyle.m */,
+				FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */,
+			);
+			name = IBAForms;
+			sourceTree = "<group>";
+		};
 		FFEDFECD168E44B900C493AB /* UIBubbleTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -989,6 +1051,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FF2B5ECE16A42A5500D580BE /* PBXTargetDependency */,
 			);
 			name = kupidum;
 			productName = kupidum;
@@ -1014,12 +1077,28 @@
 			mainGroup = B7EF67EB1659001800F20DF3;
 			productRefGroup = B7EF67F71659001800F20DF3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FF2B5EC316A428C400D580BE /* Products */;
+					ProjectRef = FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B7EF67F51659001800F20DF3 /* kupidum */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FF2B5ECA16A428C500D580BE /* libIBAForms.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libIBAForms.a;
+			remoteRef = FF2B5EC916A428C500D580BE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B7EF67F41659001800F20DF3 /* Resources */ = {
@@ -1194,10 +1273,23 @@
 				FF7B5439169C68870042FA62 /* SearchResultCell.m in Sources */,
 				FF7B543D169C69060042FA62 /* SearchResultViewController.m in Sources */,
 				FF35CC26169F1BD8003AE44D /* UserProfileViewController.m in Sources */,
+				FF2B5EDB16A4659A00D580BE /* SampleFormDataSource.m in Sources */,
+				FF2B5EDD16A4659A00D580BE /* ShowcaseModel.m in Sources */,
+				FF2B5EE016A46D1300D580BE /* StringToNumberTransformer.m in Sources */,
+				FF2B5EE516A46D4B00D580BE /* ShowcaseButtonStyle.m in Sources */,
+				FF2B5EE616A46D4B00D580BE /* ShowcaseFieldStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FF2B5ECE16A42A5500D580BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IBAForms;
+			targetProxy = FF2B5ECD16A42A5500D580BE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B7EF68031659001800F20DF3 /* InfoPlist.strings */ = {
@@ -1288,6 +1380,7 @@
 					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjmedia/include",
 					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjlib-util/include",
 					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg",
+					"${SRCROOT}/../third_party/IBAForms/library/headers",
 				);
 				INFOPLIST_FILE = "kupidum/kupidum-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -1339,6 +1432,7 @@
 					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjmedia/include",
 					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjlib-util/include",
 					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg",
+					"${SRCROOT}/../third_party/IBAForms/library/headers",
 				);
 				INFOPLIST_FILE = "kupidum/kupidum-Info.plist";
 				LIBRARY_SEARCH_PATHS = (

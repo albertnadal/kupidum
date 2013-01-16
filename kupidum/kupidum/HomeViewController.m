@@ -10,6 +10,7 @@
 #import "SearchResultsListViewController.h"
 #import "UserProfileViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SampleFormDataSource.h"
 
 @interface HomeViewController ()
 
@@ -73,7 +74,14 @@
 
 - (IBAction)showUserProfile:(id)sender
 {
-    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil];
+	NSMutableDictionary *sampleFormModel = [[NSMutableDictionary alloc] init];
+
+	// Values set on the model will be reflected in the form fields.
+	[sampleFormModel setObject:@"A value contained in the model" forKey:@"readOnlyText"];
+
+	SampleFormDataSource *sampleFormDataSource = [[SampleFormDataSource alloc] initWithModel:sampleFormModel];
+
+    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil formDataSource:sampleFormDataSource];
     [self.navigationController pushViewController:upvc animated:YES];
 }
 

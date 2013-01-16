@@ -44,6 +44,7 @@
 						<string key="NSFrameSize">{320, 455}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="736707864"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -241,7 +242,7 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage" id="228074717">
+								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">fake_photo1.png</string>
 								</object>
@@ -271,7 +272,10 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIImage" ref="228074717"/>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">fake_photo2.png</string>
+								</object>
 							</object>
 							<object class="IBUIButton" id="364999826">
 								<reference key="NSNextResponder" ref="736707864"/>
@@ -373,6 +377,7 @@
 								<string key="NSFrame">{{164, 501}, {147, 42}}</string>
 								<reference key="NSSuperview" ref="736707864"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -682,8 +687,27 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">UserProfileViewController</string>
+					<string key="className">IBAFormViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">tableView</string>
+						<string key="NS.object.0">UITableView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">tableView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/IBAFormViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UserProfileViewController</string>
+					<string key="superclassName">IBAFormViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">scroll</string>
 						<string key="NS.object.0">UIScrollView</string>
@@ -712,6 +736,7 @@
 			<string key="bg_profile_top_panel.png">{307, 26}</string>
 			<string key="blue_button.png">{147, 42}</string>
 			<string key="fake_photo1.png">{184, 184}</string>
+			<string key="fake_photo2.png">{184, 184}</string>
 			<string key="fake_photo3.png">{184, 369}</string>
 			<string key="green_button.png">{147, 42}</string>
 			<string key="img_camera_white.png">{25, 14}</string>

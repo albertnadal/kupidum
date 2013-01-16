@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <IBAForms/IBAFormViewController.h>
 
-@interface UserProfileViewController : UIViewController
+@interface UserProfileViewController : IBAFormViewController
 {
     IBOutlet UIScrollView *scroll;
 }

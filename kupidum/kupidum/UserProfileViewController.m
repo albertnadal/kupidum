@@ -20,6 +20,9 @@
 
 @synthesize scroll;
 
+const int basicInformationPanelHeight = 550;
+const int detailedInformationPanelHeight = 1150;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -29,11 +32,22 @@
     return self;
 }
 
+- (void)loadView
+{
+	[super loadView];
+
+	UITableView *formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
+	[formTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+	[self setTableView:formTableView];
+
+    [self.scroll addSubview:formTableView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self showNavigationBarButtons];
-    [scroll setContentSize:CGSizeMake(320, 600)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + detailedInformationPanelHeight)];
 }
 
 - (void)didReceiveMemoryWarning
