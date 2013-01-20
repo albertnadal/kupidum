@@ -248,19 +248,19 @@
 		FF25A5AC1686794400F5DB58 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FF25A5AE16867A0200F5DB58 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		FF25A5B016867B0B00F5DB58 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
-		FF25A5B316867CCC00F5DB58 /* libg7221codec-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libg7221codec-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/lib/libg7221codec-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF25A5B416867CCC00F5DB58 /* libgsmcodec-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libgsmcodec-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/lib/libgsmcodec-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF25A5B516867CCC00F5DB58 /* libilbccodec-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libilbccodec-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/lib/libilbccodec-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF25A5B616867CCC00F5DB58 /* libmilenage-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmilenage-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/lib/libmilenage-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF25A5B716867CCC00F5DB58 /* libresample-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libresample-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/lib/libresample-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF25A5B816867CCC00F5DB58 /* libspeex-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libspeex-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/lib/libspeex-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF25A5B916867CCC00F5DB58 /* libsrtp-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsrtp-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/lib/libsrtp-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF25A5B316867CCC00F5DB58 /* libg7221codec-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libg7221codec-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/lib/libg7221codec-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF25A5B416867CCC00F5DB58 /* libgsmcodec-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libgsmcodec-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/lib/libgsmcodec-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF25A5B516867CCC00F5DB58 /* libilbccodec-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libilbccodec-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/lib/libilbccodec-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF25A5B616867CCC00F5DB58 /* libmilenage-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmilenage-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/lib/libmilenage-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF25A5B716867CCC00F5DB58 /* libresample-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libresample-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/lib/libresample-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF25A5B816867CCC00F5DB58 /* libspeex-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libspeex-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/lib/libspeex-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF25A5B916867CCC00F5DB58 /* libsrtp-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsrtp-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/lib/libsrtp-arm-apple-darwin9.a"; sourceTree = "<group>"; };
 		FF25A5C8168683B600F5DB58 /* VideoconferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoconferenceViewController.h; path = kupidum/VideoconferenceViewController.h; sourceTree = "<group>"; };
 		FF25A5C9168683B600F5DB58 /* VideoconferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoconferenceViewController.m; path = kupidum/VideoconferenceViewController.m; sourceTree = "<group>"; };
 		FF25A5CA168683B600F5DB58 /* VideoconferenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoconferenceViewController.xib; path = kupidum/VideoconferenceViewController.xib; sourceTree = "<group>"; };
 		FF25A5D51688988400F5DB58 /* KPDClientSIPDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDClientSIPDelegate.h; path = kupidum/rtc/KPDClientSIPDelegate.h; sourceTree = "<group>"; };
 		FF25A5D61688B97300F5DB58 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IBAForms.xcodeproj; path = ../third_party/IBAForms/library/IBAForms.xcodeproj; sourceTree = "<group>"; };
+		FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IBAForms.xcodeproj; path = ../kupidum_third_party/IBAForms/library/IBAForms.xcodeproj; sourceTree = "<group>"; };
 		FF2B5ED516A4659A00D580BE /* SampleFormDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleFormDataSource.h; path = kupidum/IBAForms/SampleFormDataSource.h; sourceTree = "<group>"; };
 		FF2B5ED616A4659A00D580BE /* SampleFormDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleFormDataSource.m; path = kupidum/IBAForms/SampleFormDataSource.m; sourceTree = "<group>"; };
 		FF2B5ED916A4659A00D580BE /* ShowcaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowcaseModel.h; path = kupidum/IBAForms/ShowcaseModel.h; sourceTree = "<group>"; };
@@ -292,27 +292,27 @@
 		FF35CC4116A1EAD3003AE44D /* img_letter_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_letter_white@2x.png"; path = "kupidum/images/img_letter_white@2x.png"; sourceTree = "<group>"; };
 		FF35CC4216A1EAD4003AE44D /* img_star_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_star_white.png; path = kupidum/images/img_star_white.png; sourceTree = "<group>"; };
 		FF35CC4316A1EAD4003AE44D /* img_star_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_star_white@2x.png"; path = "kupidum/images/img_star_white@2x.png"; sourceTree = "<group>"; };
-		FF3744FF1685F3190098BBF1 /* libpj-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpj-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjlib/lib/libpj-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF3744FF1685F3190098BBF1 /* libpj-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpj-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjlib/lib/libpj-arm-apple-darwin9.a"; sourceTree = "<group>"; };
 		FF3745001685F3190098BBF1 /* libpjlib-util-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjlib-util-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjlib-util/lib/libpjlib-util-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF3745011685F3190098BBF1 /* libpjmedia-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF3745021685F3190098BBF1 /* libpjmedia-audiodev-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-audiodev-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-audiodev-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF3745031685F3190098BBF1 /* libpjmedia-codec-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-codec-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-codec-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF3745041685F3190098BBF1 /* libpjmedia-videodev-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-videodev-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-videodev-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF3745051685F3190098BBF1 /* libpjsdp-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsdp-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjsdp-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF3745061685F3190098BBF1 /* libpjnath-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjnath-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjnath/lib/libpjnath-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF3745071685F3190098BBF1 /* libpjsip-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjsip/lib/libpjsip-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF3745081685F3190098BBF1 /* libpjsip-simple-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-simple-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjsip/lib/libpjsip-simple-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF3745091685F3190098BBF1 /* libpjsip-ua-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-ua-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjsip/lib/libpjsip-ua-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF37450A1685F3190098BBF1 /* libpjsua-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsua-arm-apple-darwin9.a"; path = "../third_party/pjsip/pjproject-2.0-beta/pjsip/lib/libpjsua-arm-apple-darwin9.a"; sourceTree = "<group>"; };
-		FF3745171685F3FD0098BBF1 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavcodec/libavcodec.a"; sourceTree = "<group>"; };
-		FF3745191685F4DD0098BBF1 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavdevice/libavdevice.a"; sourceTree = "<group>"; };
-		FF37451A1685F4DD0098BBF1 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavfilter/libavfilter.a"; sourceTree = "<group>"; };
-		FF37451B1685F4DD0098BBF1 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavformat/libavformat.a"; sourceTree = "<group>"; };
-		FF37451C1685F4DD0098BBF1 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavutil/libavutil.a"; sourceTree = "<group>"; };
-		FF37451D1685F4DD0098BBF1 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswresample/libswresample.a"; sourceTree = "<group>"; };
-		FF37451E1685F4DD0098BBF1 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = "../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswscale/libswscale.a"; sourceTree = "<group>"; };
-		FF3745261685F5A60098BBF1 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../third_party/openssl/lib/libcrypto.a; sourceTree = "<group>"; };
-		FF3745271685F5A60098BBF1 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../third_party/openssl/lib/libssl.a; sourceTree = "<group>"; };
+		FF3745011685F3190098BBF1 /* libpjmedia-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF3745021685F3190098BBF1 /* libpjmedia-audiodev-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-audiodev-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-audiodev-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF3745031685F3190098BBF1 /* libpjmedia-codec-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-codec-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-codec-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF3745041685F3190098BBF1 /* libpjmedia-videodev-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjmedia-videodev-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjmedia-videodev-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF3745051685F3190098BBF1 /* libpjsdp-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsdp-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjmedia/lib/libpjsdp-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF3745061685F3190098BBF1 /* libpjnath-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjnath-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjnath/lib/libpjnath-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF3745071685F3190098BBF1 /* libpjsip-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjsip/lib/libpjsip-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF3745081685F3190098BBF1 /* libpjsip-simple-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-simple-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjsip/lib/libpjsip-simple-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF3745091685F3190098BBF1 /* libpjsip-ua-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsip-ua-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjsip/lib/libpjsip-ua-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF37450A1685F3190098BBF1 /* libpjsua-arm-apple-darwin9.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libpjsua-arm-apple-darwin9.a"; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/pjsip/lib/libpjsua-arm-apple-darwin9.a"; sourceTree = "<group>"; };
+		FF3745171685F3FD0098BBF1 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavcodec/libavcodec.a"; sourceTree = "<group>"; };
+		FF3745191685F4DD0098BBF1 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavdevice/libavdevice.a"; sourceTree = "<group>"; };
+		FF37451A1685F4DD0098BBF1 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavfilter/libavfilter.a"; sourceTree = "<group>"; };
+		FF37451B1685F4DD0098BBF1 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavformat/libavformat.a"; sourceTree = "<group>"; };
+		FF37451C1685F4DD0098BBF1 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavutil/libavutil.a"; sourceTree = "<group>"; };
+		FF37451D1685F4DD0098BBF1 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswresample/libswresample.a"; sourceTree = "<group>"; };
+		FF37451E1685F4DD0098BBF1 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = "../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswscale/libswscale.a"; sourceTree = "<group>"; };
+		FF3745261685F5A60098BBF1 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../kupidum_third_party/openssl/lib/libcrypto.a; sourceTree = "<group>"; };
+		FF3745271685F5A60098BBF1 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../kupidum_third_party/openssl/lib/libssl.a; sourceTree = "<group>"; };
 		FF374533168617D90098BBF1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		FF374535168617FC0098BBF1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FF3745371686181F0098BBF1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -1374,34 +1374,34 @@
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				HEADER_SEARCH_PATHS = (
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjsip/include",
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjlib/include",
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjnath/include",
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjmedia/include",
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjlib-util/include",
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg",
-					"${SRCROOT}/../third_party/IBAForms/library/headers",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjsip/include",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjlib/include",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjnath/include",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjmedia/include",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjlib-util/include",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg",
+					"${SRCROOT}/../kupidum_third_party/IBAForms/library/headers",
 				);
 				INFOPLIST_FILE = "kupidum/kupidum-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavcodec\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavformat\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavutil\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswresample\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswscale\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavfilter\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavdevice\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/webrtc/trunk/xcodebuild/Debug-iphoneos\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/openssl/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/openssl\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/webrtc/trunk/xcodebuild\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/pjnath/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/pjsip/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/pjlib-util/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/pjmedia/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/pjlib/lib\"",
-					"\"$(SRCROOT)/../third_party/openssl/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavcodec\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavformat\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavutil\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswresample\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswscale\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavfilter\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavdevice\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/webrtc/trunk/xcodebuild/Debug-iphoneos\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/openssl/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/openssl\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/webrtc/trunk/xcodebuild\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjnath/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjsip/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjlib-util/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjmedia/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjlib/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/openssl/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/lib\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1426,34 +1426,34 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "PJ_AUTOCONF=1";
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				HEADER_SEARCH_PATHS = (
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjsip/include",
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjlib/include",
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjnath/include",
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjmedia/include",
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/pjlib-util/include",
-					"${SRCROOT}/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg",
-					"${SRCROOT}/../third_party/IBAForms/library/headers",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjsip/include",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjlib/include",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjnath/include",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjmedia/include",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjlib-util/include",
+					"${SRCROOT}/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg",
+					"${SRCROOT}/../kupidum_third_party/IBAForms/library/headers",
 				);
 				INFOPLIST_FILE = "kupidum/kupidum-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavcodec\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavformat\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavutil\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswresample\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswscale\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavfilter\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavdevice\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/webrtc/trunk/xcodebuild/Debug-iphoneos\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/openssl/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/openssl\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/webrtc/trunk/xcodebuild\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/pjnath/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/pjsip/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/pjlib-util/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/pjmedia/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/pjlib/lib\"",
-					"\"$(SRCROOT)/../third_party/openssl/lib\"",
-					"\"$(SRCROOT)/../third_party/pjsip/pjproject-2.0-beta/third_party/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavcodec\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavformat\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavutil\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswresample\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libswscale\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavfilter\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/ffmpeg/libavdevice\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/webrtc/trunk/xcodebuild/Debug-iphoneos\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/openssl/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/openssl\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/webrtc/trunk/xcodebuild\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjnath/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjsip/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjlib-util/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjmedia/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/pjlib/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/openssl/lib\"",
+					"\"$(SRCROOT)/../kupidum_third_party/pjsip/pjproject-2.0-beta/third_party/lib\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
