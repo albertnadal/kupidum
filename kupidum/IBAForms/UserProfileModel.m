@@ -12,20 +12,15 @@
 // permissions and limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import "UserProfileModel.h"
 
-@interface ShowcaseModel : NSObject {
-	BOOL shouldAutoRotate_;
-	BOOL tableViewStyleGrouped_;
-	BOOL modalPresentation_;
-    BOOL displayNavigationToolbar_;
-	UIModalPresentationStyle modalPresentationStyle_;
-}
 
-@property (nonatomic, assign) BOOL shouldAutoRotate;
-@property (nonatomic, assign) BOOL tableViewStyleGrouped;
-@property (nonatomic, assign) BOOL modalPresentation;
-@property (nonatomic, assign) BOOL displayNavigationToolbar;
-@property (nonatomic, assign) UIModalPresentationStyle modalPresentationStyle;
+@implementation UserProfileModel
+
+@synthesize shouldAutoRotate = shouldAutoRotate_;
+@synthesize tableViewStyleGrouped = tableViewStyleGrouped_;
+@synthesize modalPresentation = modalPresentation_;
+@synthesize displayNavigationToolbar = displayNavigationToolbar_;
+@synthesize modalPresentationStyle = modalPresentationStyle_;
 
 @end

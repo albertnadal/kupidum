@@ -152,7 +152,7 @@
     else            { /*Nothing to do now*/ }
 }
 
-// Public methods called from ChatViewController
+// Public methods called from ConversationViewController.h
 
 - (void)sendInstantMessageToUser:(NSString *)toUser withContent:(NSString *)textMessage
 {

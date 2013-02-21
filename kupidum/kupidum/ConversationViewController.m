@@ -1,17 +1,17 @@
 //
-//  ChatViewController.m
+//  ConversationViewController.h.m
 //  kupidum
 //
 //  Created by Albert Nadal Garriga on 28/12/12.
 //  Copyright (c) 2012 laFruitera.com. All rights reserved.
 //
 
-#import "ChatViewController.h"
+#import "ConversationViewController.h"
 #import "UIBubbleTableView.h"
 #import "UIBubbleTableViewDataSource.h"
 #import "NSBubbleData.h"
 
-@interface ChatViewController ()
+@interface ConversationViewController ()
 {
     IBOutlet UIBubbleTableView *bubbleTable;
     IBOutlet UIView *textInputView;
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation ChatViewController
+@implementation ConversationViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

@@ -21,7 +21,7 @@
 @synthesize scroll;
 
 const int basicInformationPanelHeight = 550;
-const int detailedInformationPanelHeight = 1150;
+const int detailedInformationPanelHeight = 1300;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,6 +39,7 @@ const int detailedInformationPanelHeight = 1150;
 	UITableView *formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
 	[formTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[self setTableView:formTableView];
+    [formTableView setScrollEnabled:NO];
 
     [self.scroll addSubview:formTableView];
 }

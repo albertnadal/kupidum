@@ -22,12 +22,61 @@
 - (id)initWithModel:(id)aModel {
 	if (self = [super initWithModel:aModel]) {
 		// Some basic form fields that accept text input
-		IBAFormSection *basicFieldSection = [self addSectionWithHeaderTitle:@"Basic Form Fields" footerTitle:nil];
+		IBAFormSection *basicFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"La teva aparença", @"") footerTitle:nil];
 
-		[basicFieldSection addFormField:[[IBATextFormField alloc] initWithKeyPath:@"text" title:@"Text"]];
+		NSArray *eyeColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Negre", @""),
+																					 NSLocalizedString(@"Marró", @""),
+																					 NSLocalizedString(@"Blau", @""),
+																					 NSLocalizedString(@"Verd", @""),
+																					 nil]];
+
+		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"eyeColorPickListItem"
+                                                                                title:NSLocalizedString(@"Color d'ulls", @"")
+                                                                   valueTransformer:nil
+                                                                      selectionMode:IBAPickListSelectionModeSingle
+                                                                            options:eyeColorListOptions]];
+
+		NSArray *heightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"179 cm", @""),
+                                                                                         NSLocalizedString(@"178 cm", @""),
+                                                                                         NSLocalizedString(@"177 cm", @""),
+                                                                                         NSLocalizedString(@"176 cm", @""),
+                                                                                         nil]];
+        
+		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"heightPickListItem"
+                                                                                title:NSLocalizedString(@"Alçada", @"")
+                                                                     valueTransformer:nil
+                                                                        selectionMode:IBAPickListSelectionModeSingle
+                                                                              options:heightListOptions]];
+
+		NSArray *weightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"80 kg", @""),
+                                                                                       NSLocalizedString(@"79 kg", @""),
+                                                                                       NSLocalizedString(@"78 kg", @""),
+                                                                                       NSLocalizedString(@"77 kg", @""),
+                                                                                       nil]];
+        
+		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"weightPickListItem"
+                                                                                title:NSLocalizedString(@"Pes", @"")
+                                                                     valueTransformer:nil
+                                                                        selectionMode:IBAPickListSelectionModeSingle
+                                                                              options:weightListOptions]];
+
+		NSArray *hairColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Negre", @""),
+                                                                                         NSLocalizedString(@"Marró", @""),
+                                                                                         NSLocalizedString(@"Blau", @""),
+                                                                                         NSLocalizedString(@"Verd", @""),
+                                                                                         nil]];
+        
+		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"hairColorPickListItem"
+                                                                                title:NSLocalizedString(@"Color del cabell", @"")
+                                                                     valueTransformer:nil
+                                                                        selectionMode:IBAPickListSelectionModeSingle
+                                                                              options:hairColorListOptions]];
+
+/*		[basicFieldSection addFormField:[[IBATextFormField alloc] initWithKeyPath:@"text" title:@"Text"]];
 		[IBATextFormField passwordTextFormFieldWithSection:basicFieldSection keyPath:@"password" title:@"Password" valueTransformer:nil];
 		[basicFieldSection addFormField:[[IBABooleanFormField alloc] initWithKeyPath:@"booleanSwitchValue" title:@"Switch"]];
 		[basicFieldSection addFormField:[[IBABooleanFormField alloc] initWithKeyPath:@"booleanCheckValue" title:@"Check" type:IBABooleanFormFieldTypeCheck]];
+*/
 		
 		// Styled form fields
 		IBAFormSection *styledFieldSection = [self addSectionWithHeaderTitle:@"Styled Fields" footerTitle:nil];

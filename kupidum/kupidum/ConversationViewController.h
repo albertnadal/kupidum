@@ -1,5 +1,5 @@
 //
-//  ChatViewController.h
+//  ConversationViewController.h
 //  kupidum
 //
 //  Created by Albert Nadal Garriga on 28/12/12.
@@ -11,6 +11,6 @@
 #import "KPDClientSIP.h"
 #import "KPDAudioUtilities.h"
 
-@interface ChatViewController : UIViewController<UIBubbleTableViewDataSource, KPDClientSIPDelegate>
+@interface ConversationViewController : UIViewController<UIBubbleTableViewDataSource, KPDClientSIPDelegate>
 
 @end

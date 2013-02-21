@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "InitialScreenViewController.h"
 #import "HomeViewController.h"
-#import "ChatViewController.h"
+#import "ConversationViewController.h"
 #import "VideoconferenceViewController.h"
 #import "FinderViewController.h"
 
@@ -44,7 +44,7 @@
 {
     FinderViewController *finderViewController = [[FinderViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
     VideoconferenceViewController *videoconferenceViewController = [[VideoconferenceViewController alloc] initWithNibName:@"VideoconferenceViewController" bundle:nil];
-    ChatViewController *chatViewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
+    ConversationViewController *conversationViewController = [[ConversationViewController alloc] initWithNibName:@"ConversationViewController" bundle:nil];
     UIViewController *finderViewController2 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
 
     UIViewController *homeViewController = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
@@ -56,7 +56,7 @@
     [finderNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Cercar", @"") image:[UIImage imageNamed:@"tab_icon_search"] tag:2]];
     [finderViewController2 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Missatges", @"") image:[UIImage imageNamed:@"tab_icon_msg"] tag:3]];
 
-    UINavigationController *chatNavigationController = [[UINavigationController alloc] initWithRootViewController:chatViewController];
+    UINavigationController *chatNavigationController = [[UINavigationController alloc] initWithRootViewController:conversationViewController];
     [chatNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Xat", @"") image:[UIImage imageNamed:@"tab_icon_chat"] tag:4]];
     [videoconferenceViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
 

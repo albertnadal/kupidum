@@ -30,7 +30,7 @@
 		FF25A5D71688B97400F5DB58 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF25A5D61688B97300F5DB58 /* QuartzCore.framework */; };
 		FF2B5ECF16A42AA500D580BE /* libIBAForms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF2B5ECA16A428C500D580BE /* libIBAForms.a */; };
 		FF2B5EDB16A4659A00D580BE /* SampleFormDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5ED616A4659A00D580BE /* SampleFormDataSource.m */; };
-		FF2B5EDD16A4659A00D580BE /* ShowcaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EDA16A4659A00D580BE /* ShowcaseModel.m */; };
+		FF2B5EDD16A4659A00D580BE /* UserProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EDA16A4659A00D580BE /* UserProfileModel.m */; };
 		FF2B5EE016A46D1300D580BE /* StringToNumberTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EDF16A46D1300D580BE /* StringToNumberTransformer.m */; };
 		FF2B5EE516A46D4B00D580BE /* ShowcaseButtonStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EE216A46D4B00D580BE /* ShowcaseButtonStyle.m */; };
 		FF2B5EE616A46D4B00D580BE /* ShowcaseFieldStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EE416A46D4B00D580BE /* ShowcaseFieldStyle.m */; };
@@ -148,6 +148,8 @@
 		FF749823167F2F7200AF971F /* bg_bottom_cela_filtre.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7497FA167F2F7200AF971F /* bg_bottom_cela_filtre.png */; };
 		FF749824167F2F7200AF971F /* bg_boto_login.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7497FB167F2F7200AF971F /* bg_boto_login.png */; };
 		FF749825167F2F7200AF971F /* bg_boto_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7497FC167F2F7200AF971F /* bg_boto_facebook.png */; };
+		FF775DDB16D63C9E00096474 /* img_blue_transparent_gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = FF775DD916D63C9E00096474 /* img_blue_transparent_gradient.png */; };
+		FF775DDC16D63C9E00096474 /* img_blue_transparent_gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF775DDA16D63C9E00096474 /* img_blue_transparent_gradient@2x.png */; };
 		FF7B37DB169507CB00E2EA07 /* home_prototype.png in Resources */ = {isa = PBXBuildFile; fileRef = FF7B37DA169507CB00E2EA07 /* home_prototype.png */; };
 		FF7B538C1699EFCC0042FA62 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B538A1699EFCC0042FA62 /* HomeViewController.m */; };
 		FF7B538D1699EFCC0042FA62 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7B538B1699EFCC0042FA62 /* HomeViewController.xib */; };
@@ -208,8 +210,8 @@
 		FFEDFEF4168E458800C493AB /* typingSomeone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFEDFEEA168E458800C493AB /* typingSomeone@2x.png */; };
 		FFEDFEFE168E461400C493AB /* avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = FFEDFEFC168E461400C493AB /* avatar1.png */; };
 		FFEDFEFF168E461400C493AB /* halloween.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FFEDFEFD168E461400C493AB /* halloween.jpg */; };
-		FFEDFF04168E57B000C493AB /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFF02168E57B000C493AB /* ChatViewController.m */; };
-		FFEDFF05168E57B000C493AB /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFEDFF03168E57B000C493AB /* ChatViewController.xib */; };
+		FFEDFF04168E57B000C493AB /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFF02168E57B000C493AB /* ConversationViewController.m */; };
+		FFEDFF05168E57B000C493AB /* ConversationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFEDFF03168E57B000C493AB /* ConversationViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -263,8 +265,8 @@
 		FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IBAForms.xcodeproj; path = ../kupidum_third_party/IBAForms/library/IBAForms.xcodeproj; sourceTree = "<group>"; };
 		FF2B5ED516A4659A00D580BE /* SampleFormDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleFormDataSource.h; path = kupidum/IBAForms/SampleFormDataSource.h; sourceTree = "<group>"; };
 		FF2B5ED616A4659A00D580BE /* SampleFormDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleFormDataSource.m; path = kupidum/IBAForms/SampleFormDataSource.m; sourceTree = "<group>"; };
-		FF2B5ED916A4659A00D580BE /* ShowcaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowcaseModel.h; path = kupidum/IBAForms/ShowcaseModel.h; sourceTree = "<group>"; };
-		FF2B5EDA16A4659A00D580BE /* ShowcaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShowcaseModel.m; path = kupidum/IBAForms/ShowcaseModel.m; sourceTree = "<group>"; };
+		FF2B5ED916A4659A00D580BE /* UserProfileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserProfileModel.h; path = kupidum/IBAForms/UserProfileModel.h; sourceTree = "<group>"; };
+		FF2B5EDA16A4659A00D580BE /* UserProfileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileModel.m; path = kupidum/IBAForms/UserProfileModel.m; sourceTree = "<group>"; };
 		FF2B5EDE16A46D1300D580BE /* StringToNumberTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringToNumberTransformer.h; path = kupidum/IBAForms/StringToNumberTransformer.h; sourceTree = "<group>"; };
 		FF2B5EDF16A46D1300D580BE /* StringToNumberTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StringToNumberTransformer.m; path = kupidum/IBAForms/StringToNumberTransformer.m; sourceTree = "<group>"; };
 		FF2B5EE116A46D4B00D580BE /* ShowcaseButtonStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShowcaseButtonStyle.h; path = kupidum/IBAForms/ShowcaseButtonStyle.h; sourceTree = "<group>"; };
@@ -399,6 +401,8 @@
 		FF7497FA167F2F7200AF971F /* bg_bottom_cela_filtre.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_bottom_cela_filtre.png; path = kupidum/images/bg_bottom_cela_filtre.png; sourceTree = "<group>"; };
 		FF7497FB167F2F7200AF971F /* bg_boto_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_boto_login.png; path = kupidum/images/bg_boto_login.png; sourceTree = "<group>"; };
 		FF7497FC167F2F7200AF971F /* bg_boto_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_boto_facebook.png; path = kupidum/images/bg_boto_facebook.png; sourceTree = "<group>"; };
+		FF775DD916D63C9E00096474 /* img_blue_transparent_gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_blue_transparent_gradient.png; path = kupidum/images/img_blue_transparent_gradient.png; sourceTree = "<group>"; };
+		FF775DDA16D63C9E00096474 /* img_blue_transparent_gradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_blue_transparent_gradient@2x.png"; path = "kupidum/images/img_blue_transparent_gradient@2x.png"; sourceTree = "<group>"; };
 		FF7B37DA169507CB00E2EA07 /* home_prototype.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_prototype.png; path = kupidum/images/home_prototype.png; sourceTree = "<group>"; };
 		FF7B53891699EFCC0042FA62 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = kupidum/HomeViewController.h; sourceTree = "<group>"; };
 		FF7B538A1699EFCC0042FA62 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = kupidum/HomeViewController.m; sourceTree = "<group>"; };
@@ -472,9 +476,9 @@
 		FFEDFEEA168E458800C493AB /* typingSomeone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "typingSomeone@2x.png"; path = "kupidum/UIBubbleTableView/images/typingSomeone@2x.png"; sourceTree = "<group>"; };
 		FFEDFEFC168E461400C493AB /* avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = avatar1.png; path = kupidum/UIBubbleTableView/avatar1.png; sourceTree = "<group>"; };
 		FFEDFEFD168E461400C493AB /* halloween.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = halloween.jpg; path = kupidum/UIBubbleTableView/halloween.jpg; sourceTree = "<group>"; };
-		FFEDFF01168E57B000C493AB /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = kupidum/ChatViewController.h; sourceTree = "<group>"; };
-		FFEDFF02168E57B000C493AB /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = kupidum/ChatViewController.m; sourceTree = "<group>"; };
-		FFEDFF03168E57B000C493AB /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatViewController.xib; path = kupidum/ChatViewController.xib; sourceTree = "<group>"; };
+		FFEDFF01168E57B000C493AB /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConversationViewController.h; path = kupidum/ConversationViewController.h; sourceTree = "<group>"; };
+		FFEDFF02168E57B000C493AB /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConversationViewController.m; path = kupidum/ConversationViewController.m; sourceTree = "<group>"; };
+		FFEDFF03168E57B000C493AB /* ConversationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConversationViewController.xib; path = kupidum/ConversationViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -707,6 +711,8 @@
 				FF7B53B8169A47230042FA62 /* fake_photo2.png */,
 				FF7B53B9169A47240042FA62 /* fake_photo3.png */,
 				FF7B5428169B6FE10042FA62 /* fake_photo4.png */,
+				FF775DD916D63C9E00096474 /* img_blue_transparent_gradient.png */,
+				FF775DDA16D63C9E00096474 /* img_blue_transparent_gradient@2x.png */,
 				FF35CC3C16A1EAD1003AE44D /* img_camera_white.png */,
 				FF35CC3D16A1EAD1003AE44D /* img_camera_white@2x.png */,
 				FF35CC3E16A1EAD1003AE44D /* img_chat_white.png */,
@@ -968,8 +974,8 @@
 			children = (
 				FF2B5ED516A4659A00D580BE /* SampleFormDataSource.h */,
 				FF2B5ED616A4659A00D580BE /* SampleFormDataSource.m */,
-				FF2B5ED916A4659A00D580BE /* ShowcaseModel.h */,
-				FF2B5EDA16A4659A00D580BE /* ShowcaseModel.m */,
+				FF2B5ED916A4659A00D580BE /* UserProfileModel.h */,
+				FF2B5EDA16A4659A00D580BE /* UserProfileModel.m */,
 				FF2B5EDE16A46D1300D580BE /* StringToNumberTransformer.h */,
 				FF2B5EDF16A46D1300D580BE /* StringToNumberTransformer.m */,
 				FF2B5EE116A46D4B00D580BE /* ShowcaseButtonStyle.h */,
@@ -1030,9 +1036,9 @@
 		FFEDFF00168E577C00C493AB /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				FFEDFF01168E57B000C493AB /* ChatViewController.h */,
-				FFEDFF02168E57B000C493AB /* ChatViewController.m */,
-				FFEDFF03168E57B000C493AB /* ChatViewController.xib */,
+				FFEDFF01168E57B000C493AB /* ConversationViewController.h */,
+				FFEDFF02168E57B000C493AB /* ConversationViewController.m */,
+				FFEDFF03168E57B000C493AB /* ConversationViewController.xib */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1170,7 +1176,7 @@
 				FFEDFEF4168E458800C493AB /* typingSomeone@2x.png in Resources */,
 				FFEDFEFE168E461400C493AB /* avatar1.png in Resources */,
 				FFEDFEFF168E461400C493AB /* halloween.jpg in Resources */,
-				FFEDFF05168E57B000C493AB /* ChatViewController.xib in Resources */,
+				FFEDFF05168E57B000C493AB /* ConversationViewController.xib in Resources */,
 				FF4902961690F4AE00500ABB /* incoming_message.aif in Resources */,
 				FF4902971690F4AE00500ABB /* send_message.aif in Resources */,
 				FF4902A31691049600500ABB /* incoming_call.wav in Resources */,
@@ -1231,6 +1237,8 @@
 				FF35CC4916A1EAD4003AE44D /* img_letter_white@2x.png in Resources */,
 				FF35CC4A16A1EAD4003AE44D /* img_star_white.png in Resources */,
 				FF35CC4B16A1EAD4003AE44D /* img_star_white@2x.png in Resources */,
+				FF775DDB16D63C9E00096474 /* img_blue_transparent_gradient.png in Resources */,
+				FF775DDC16D63C9E00096474 /* img_blue_transparent_gradient@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1263,7 +1271,7 @@
 				FFEDFEDE168E457B00C493AB /* UIBubbleTableView.m in Sources */,
 				FFEDFEDF168E457B00C493AB /* UIBubbleTableViewCell.m in Sources */,
 				FFEDFEE0168E457B00C493AB /* UIBubbleTypingTableViewCell.m in Sources */,
-				FFEDFF04168E57B000C493AB /* ChatViewController.m in Sources */,
+				FFEDFF04168E57B000C493AB /* ConversationViewController.m in Sources */,
 				FF4902A11690F63E00500ABB /* KPDAudioUtilities.m in Sources */,
 				FFAE275E1699C6FA00B82CF6 /* WCAlertView.m in Sources */,
 				FF7B538C1699EFCC0042FA62 /* HomeViewController.m in Sources */,
@@ -1274,7 +1282,7 @@
 				FF7B543D169C69060042FA62 /* SearchResultViewController.m in Sources */,
 				FF35CC26169F1BD8003AE44D /* UserProfileViewController.m in Sources */,
 				FF2B5EDB16A4659A00D580BE /* SampleFormDataSource.m in Sources */,
-				FF2B5EDD16A4659A00D580BE /* ShowcaseModel.m in Sources */,
+				FF2B5EDD16A4659A00D580BE /* UserProfileModel.m in Sources */,
 				FF2B5EE016A46D1300D580BE /* StringToNumberTransformer.m in Sources */,
 				FF2B5EE516A46D4B00D580BE /* ShowcaseButtonStyle.m in Sources */,
 				FF2B5EE616A46D4B00D580BE /* ShowcaseFieldStyle.m in Sources */,
