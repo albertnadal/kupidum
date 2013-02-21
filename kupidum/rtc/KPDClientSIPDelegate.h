@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KPDUser.h"
 
 @class KPDClientSIP;
 
@@ -14,6 +15,6 @@
 
 - (void)clientDidReceivedVideocall:(KPDClientSIP *)client fromUser:(NSString *)theUser;
 - (void)videoconferenceDidBegan:(KPDClientSIP *)client;
-- (void)clientDidReceivedInstantMessage:(KPDClientSIP *)client fromUser:(NSString *)fromUser withContent:(NSString *)textMessage;
+- (void)clientDidReceivedInstantMessage:(KPDClientSIP *)client fromUser:(KPDUser *)fromUser withContent:(NSString *)textMessage;
 
 @end

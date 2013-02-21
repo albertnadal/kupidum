@@ -88,13 +88,15 @@
             [delegate videoconferenceDidBegan:self];
 }
 
-- (void)instantMessageReceivedFromUser:(NSString *)fromUser withContent:(NSString *)textMessage
+- (void)instantMessageReceivedFromUser:(NSString *)fromSIPUser withContent:(NSString *)textMessage
 {
+    KPDUser *_fromUser = [[KPDUser alloc] initWithUsername:fromSIPUser];
+
     NSLog(@"Text message: %@", textMessage);
 
     for(id<KPDClientSIPDelegate> delegate in delegates)
         if([delegate respondsToSelector:@selector(clientDidReceivedInstantMessage:fromUser:withContent:)])
-            [delegate clientDidReceivedInstantMessage:self fromUser:fromUser withContent:textMessage];
+            [delegate clientDidReceivedInstantMessage:self fromUser:_fromUser withContent:textMessage];
 }
 
 
@@ -154,9 +156,9 @@
 
 // Public methods called from ConversationViewController.h
 
-- (void)sendInstantMessageToUser:(NSString *)toUser withContent:(NSString *)textMessage
+- (void)sendInstantMessageToUser:(KPDUser *)toUser withContent:(NSString *)textMessage
 {
-    const char *user = [toUser cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *user = [[toUser username] cStringUsingEncoding:NSUTF8StringEncoding];
     const char *messageBody = [textMessage cStringUsingEncoding:NSUTF8StringEncoding];
 
     send_message((char *)user, (char *)messageBody);

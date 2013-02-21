@@ -10,6 +10,7 @@
 #import "UIBubbleTableView.h"
 #import "UIBubbleTableViewDataSource.h"
 #import "NSBubbleData.h"
+#import "KPDUser.h"
 
 @interface ConversationViewController ()
 {
@@ -36,7 +37,7 @@
     return self;
 }
 
-- (void)clientDidReceivedInstantMessage:(KPDClientSIP *)client fromUser:(NSString *)fromUser withContent:(NSString *)textMessage
+- (void)clientDidReceivedInstantMessage:(KPDClientSIP *)client fromUser:(KPDUser *)fromUser withContent:(NSString *)textMessage
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
@@ -163,7 +164,8 @@
 
 - (IBAction)sayPressed:(id)sender
 {
-    [[KPDClientSIP sharedInstance] sendInstantMessageToUser:@"silvia" withContent:textField.text];
+    KPDUser *toUser = [[KPDUser alloc] initWithUsername:@"silvia"];
+    [[KPDClientSIP sharedInstance] sendInstantMessageToUser:toUser withContent:textField.text];
 
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 

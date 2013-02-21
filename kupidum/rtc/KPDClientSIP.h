@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "KPDClientSIPDelegate.h"
+#import "KPDUser.h"
 
 @interface KPDClientSIP : NSObject
 {
@@ -26,7 +27,7 @@
 // Methods called from pjsip_wrapper
 - (void)receivedIncomingCall:(int)callId;
 - (void)videoStreamStartTransmiting:(int)callId;
-- (void)instantMessageReceivedFromUser:(NSString *)fromUser withContent:(NSString *)textMessage;
+- (void)instantMessageReceivedFromUser:(NSString *)fromSIPUser withContent:(NSString *)textMessage;
 
 // Public methods for SIP register signaling
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword;
@@ -45,6 +46,6 @@
 - (UIView *)getVideoStreamView;
 
 // Public methods called from ConversationViewController.h
-- (void)sendInstantMessageToUser:(NSString *)toUser withContent:(NSString *)textMessage;
+- (void)sendInstantMessageToUser:(KPDUser *)toUser withContent:(NSString *)textMessage;
 
 @end
