@@ -15,5 +15,8 @@
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
 - (void)showKupidumTabBar;
+- (void)createEditableCopyOfDatabaseIfNeeded;
+
+- (void)dbTest;
 
 @end

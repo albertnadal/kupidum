@@ -9,5 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @interface UserChatViewController : UIViewController
+{
+    IBOutlet UIImageView *image;
+    IBOutlet UILabel *username;
+    IBOutlet UILabel *lastMessage;
+    IBOutlet UILabel *dateUpdate;
+}
+
+@property (nonatomic, retain) UIImageView *image;
+@property (nonatomic, retain) UILabel *username;
+@property (nonatomic, retain) UILabel *lastMessage;
+@property (nonatomic, retain) UILabel *dateUpdate;
 
 @end

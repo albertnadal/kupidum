@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KPDClientSIP.h"
+#import "KPDAudioUtilities.h"
 
-@interface ChatViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, KPDClientSIPDelegate>
 {
-    
+    IBOutlet UITableView *usersTable;
 }
+
+@property (strong, nonatomic) IBOutlet UITableView *usersTable;
 
 @end

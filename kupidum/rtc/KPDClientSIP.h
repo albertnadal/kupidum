@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "KPDClientSIPDelegate.h"
+#import "KPDUserSingleton.h"
 #import "KPDUser.h"
+#import "KPDChat.h"
+#import "KPDChatMessage.h"
 
 @interface KPDClientSIP : NSObject
 {

@@ -12,11 +12,16 @@
 {
     NSString *username;
     NSString *avatarURL;
+    UIImage *avatar;
 }
 
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *avatarURL;
+@property (nonatomic, retain) UIImage *avatar;
 
 - (id)initWithUsername:(NSString *)_username;
+- (bool)usernameIsInDatabase:(NSString *)_username;
+- (void)retrieveDataFromWebService;
+- (void)saveToDatabase;
 
 @end

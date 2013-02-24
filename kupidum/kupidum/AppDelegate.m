@@ -7,17 +7,29 @@
 //
 
 #import "AppDelegate.h"
+#import "KupidumDBSingleton.h"
 #import "InitialScreenViewController.h"
 #import "HomeViewController.h"
-#import "ConversationViewController.h"
+#import "ChatViewController.h"
 #import "VideoconferenceViewController.h"
 #import "FinderViewController.h"
+
+#define FMDBQuickCheck(SomeBool) { if (!(SomeBool)) { NSLog(@"Failure on line %d", __LINE__); abort(); } }
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     sleep(1);
+
+    [self createDatabaseIfNeeded];
+
+
+#warning remove the following lines
+[[KPDUserSingleton sharedInstance] setUsername:@"albert"];
+[[KPDClientSIP sharedInstance] registerToServerWithUser:@"albert" password:@"albert"];
+
+
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
@@ -40,11 +52,38 @@
     return YES;
 }
 
+- (void)createDatabaseIfNeeded
+{
+/*    BOOL success;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db", KUPIDUM_DB_FILENAME]];
+    success = [fileManager fileExistsAtPath:writableDBPath];
+    if (success)
+        return;
+
+    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db", KUPIDUM_DB_FILENAME]];
+    success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
+    if (!success) {
+        NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
+    }
+*/
+    FMDatabase *db = [[KupidumDBSingleton sharedInstance] db];
+
+    [db beginTransaction];
+    [db executeUpdate:@"create table user (username text primary key, avatar_url text, avatar blob)"];
+    [db executeUpdate:@"create table chat (username_a text, username_b text, last_message text, date_last_message date)"];
+    [db executeUpdate:@"create table conversation (from_username text, to_username text, message text, date_message date)"];
+    [db commit];
+}
+
 - (void)showKupidumTabBar
 {
     FinderViewController *finderViewController = [[FinderViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
     VideoconferenceViewController *videoconferenceViewController = [[VideoconferenceViewController alloc] initWithNibName:@"VideoconferenceViewController" bundle:nil];
-    ConversationViewController *conversationViewController = [[ConversationViewController alloc] initWithNibName:@"ConversationViewController" bundle:nil];
+    ChatViewController *chatViewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
     UIViewController *finderViewController2 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
 
     UIViewController *homeViewController = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
@@ -56,7 +95,7 @@
     [finderNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Cercar", @"") image:[UIImage imageNamed:@"tab_icon_search"] tag:2]];
     [finderViewController2 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Missatges", @"") image:[UIImage imageNamed:@"tab_icon_msg"] tag:3]];
 
-    UINavigationController *chatNavigationController = [[UINavigationController alloc] initWithRootViewController:conversationViewController];
+    UINavigationController *chatNavigationController = [[UINavigationController alloc] initWithRootViewController:chatViewController];
     [chatNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Xat", @"") image:[UIImage imageNamed:@"tab_icon_chat"] tag:4]];
     [videoconferenceViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
 

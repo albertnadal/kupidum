@@ -9,6 +9,11 @@
 #import "KPDClientSIP.h"
 #import "pjsip_wrapper.h"
 
+#import "FMDatabase.h"
+#import "FMDatabaseAdditions.h"
+#import "FMDatabasePool.h"
+#import "FMDatabaseQueue.h"
+
 @implementation KPDClientSIP
 
 
@@ -65,6 +70,9 @@
 
     main_pjsip(self, (char*)user, (char*)password, (char*)userAgent); //Creates pjsip instance and register user to SIP server
 
+    KPDUserSingleton *user_singleton = [KPDUserSingleton sharedInstance];
+    [user_singleton setUsername:theUser];
+
     setEnableVideoDriver(true);
 }
 
@@ -90,13 +98,22 @@
 
 - (void)instantMessageReceivedFromUser:(NSString *)fromSIPUser withContent:(NSString *)textMessage
 {
-    KPDUser *_fromUser = [[KPDUser alloc] initWithUsername:fromSIPUser];
+    NSString *localUsername = [[KPDUserSingleton sharedInstance] username];
+
+    KPDUser *fromUser = [[KPDUser alloc] initWithUsername:fromSIPUser];
+    KPDUser *toUser = [[KPDUser alloc] initWithUsername:localUsername];
+
+    KPDChat *chat = [[KPDChat alloc] initWithUser:fromUser andUser:toUser andMessage:textMessage andDateLastMessage:[NSDate date]];
+    #pragma unused(chat)
+
+    KPDChatMessage *message = [[KPDChatMessage alloc] initWithFromUser:fromUser toUser:toUser message:textMessage date:[NSDate date]];
+    [message saveToDatabase];
 
     NSLog(@"Text message: %@", textMessage);
 
     for(id<KPDClientSIPDelegate> delegate in delegates)
         if([delegate respondsToSelector:@selector(clientDidReceivedInstantMessage:fromUser:withContent:)])
-            [delegate clientDidReceivedInstantMessage:self fromUser:_fromUser withContent:textMessage];
+            [delegate clientDidReceivedInstantMessage:self fromUser:fromUser withContent:textMessage];
 }
 
 
@@ -158,6 +175,17 @@
 
 - (void)sendInstantMessageToUser:(KPDUser *)toUser withContent:(NSString *)textMessage
 {
+    NSString *localUsername = [[KPDUserSingleton sharedInstance] username];
+
+    KPDUser *fromUser = [[KPDUser alloc] initWithUsername:localUsername];
+
+    KPDChat *chat = [[KPDChat alloc] initWithUser:fromUser andUser:toUser andMessage:textMessage andDateLastMessage:[NSDate date]];
+    #pragma unused(chat)
+
+    KPDChatMessage *message = [[KPDChatMessage alloc] initWithFromUser:fromUser toUser:toUser message:textMessage date:[NSDate date]];
+    [message saveToDatabase];
+
+
     const char *user = [[toUser username] cStringUsingEncoding:NSUTF8StringEncoding];
     const char *messageBody = [textMessage cStringUsingEncoding:NSUTF8StringEncoding];
 

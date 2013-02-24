@@ -10,7 +10,15 @@
 #import "UIBubbleTableViewDataSource.h"
 #import "KPDClientSIP.h"
 #import "KPDAudioUtilities.h"
+#import "KPDChat.h"
 
 @interface ConversationViewController : UIViewController<UIBubbleTableViewDataSource, KPDClientSIPDelegate>
+{
+    KPDChat *chat;
+}
+
+@property (nonatomic, retain) KPDChat *chat;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil withChat:(KPDChat *)_chat;
 
 @end

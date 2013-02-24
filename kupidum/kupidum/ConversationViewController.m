@@ -10,6 +10,9 @@
 #import "UIBubbleTableView.h"
 #import "UIBubbleTableViewDataSource.h"
 #import "NSBubbleData.h"
+#import "KPDUserSingleton.h"
+#import "KPDChatConversation.h"
+#import "KPDChatMessage.h"
 #import "KPDUser.h"
 
 @interface ConversationViewController ()
@@ -17,7 +20,7 @@
     IBOutlet UIBubbleTableView *bubbleTable;
     IBOutlet UIView *textInputView;
     IBOutlet UITextField *textField;
-    
+
     NSMutableArray *bubbleData;
 }
 
@@ -27,46 +30,120 @@
 
 @implementation ConversationViewController
 
+@synthesize chat;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil withChat:(KPDChat *)_chat
+{
+    if(self = [self initWithNibName:nibNameOrNil bundle:nil])
+    {
+        chat = _chat;
+
+        if([[[chat usernameA] username] isEqualToString:[[KPDUserSingleton sharedInstance] username]])
+                self.title = [[chat usernameA] username];
+        else    self.title = [[chat usernameB] username];
+    }
+
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         [[KPDClientSIP sharedInstance] addDelegate:self];
+        chat = nil;
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[KPDClientSIP sharedInstance] removeDelegate:self];
 }
 
 - (void)clientDidReceivedInstantMessage:(KPDClientSIP *)client fromUser:(KPDUser *)fromUser withContent:(NSString *)textMessage
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
-
         NSBubbleData *receivedBubble = [NSBubbleData dataWithText:textMessage date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeSomeoneElse];
-        receivedBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
+
+        receivedBubble.avatar = [UIImage imageNamed:@"img_front_face_anonymous_woman.png"];
+
+        if([[[chat usernameA] username] isEqualToString:[[KPDUserSingleton sharedInstance] username]])
+        {
+            // My avatar
+            if(([[chat usernameA] avatarURL]) && (![[[chat usernameA] avatarURL] isEqualToString:@""]))
+                receivedBubble.avatar = [[chat usernameA] avatar];
+        }
+        else
+        {
+            // Remote user avatar
+            if(([[chat usernameB] avatarURL]) && (![[[chat usernameB] avatarURL] isEqualToString:@""]))
+                receivedBubble.avatar = [[chat usernameB] avatar];
+        }
 
         [bubbleData addObject:receivedBubble];
         [bubbleTable reloadData];
 
-        NSURL *incomingMessageAudioUrl = [[NSBundle mainBundle] URLForResource:@"incoming_message" withExtension:@"aif"];
-        [[KPDAudioUtilities sharedInstance] playRingtone:incomingMessageAudioUrl];
+//        NSURL *incomingMessageAudioUrl = [[NSBundle mainBundle] URLForResource:@"incoming_message" withExtension:@"aif"];
+//        [[KPDAudioUtilities sharedInstance] playRingtone:incomingMessageAudioUrl];
     });
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-/*    NSBubbleData *heyBubble = [NSBubbleData dataWithText:@"Hey, halloween is soon" date:[NSDate dateWithTimeIntervalSinceNow:-300] type:BubbleTypeSomeoneElse];
-    heyBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
-    
-    NSBubbleData *photoBubble = [NSBubbleData dataWithImage:[UIImage imageNamed:@"halloween.jpg"] date:[NSDate dateWithTimeIntervalSinceNow:-290] type:BubbleTypeSomeoneElse];
-    photoBubble.avatar = [UIImage imageNamed:@"avatar1.png"];
-    
-    NSBubbleData *replyBubble = [NSBubbleData dataWithText:@"Wow.. Really cool picture out there. iPhone 5 has really nice camera, yeah?" date:[NSDate dateWithTimeIntervalSinceNow:-5] type:BubbleTypeMine];
-    replyBubble.avatar = nil;
-*/    
+
+    bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
+    textField.text = @"";
+    [textField resignFirstResponder];
+
+    if(!chat)
+        return;
+
+    KPDChatConversation *conversation = [chat conversation];
     bubbleData = [[NSMutableArray alloc] init]; //initWithObjects:heyBubble, photoBubble, replyBubble, nil];
+
+    for(int i=0; i < [[conversation chatMessages] count]; i++)
+    {
+        KPDChatMessage *msg = [[conversation chatMessages] objectAtIndex:i];
+
+        NSBubbleType msgDirection;
+        UIImage *avatar = nil;
+
+        if([[[msg fromUser] username] isEqualToString:[[KPDUserSingleton sharedInstance] username]])
+        {
+            // Message from local user
+            msgDirection = BubbleTypeMine;
+            avatar = [[msg fromUser] avatar];
+        }
+        else
+        {
+            // Message from remote user
+            msgDirection = BubbleTypeSomeoneElse;
+            avatar = [[msg toUser] avatar];
+        }
+
+        NSBubbleData *sayBubble = [NSBubbleData dataWithText:[msg message] date:[msg dateMessage] type:msgDirection];
+
+        sayBubble.avatar = [UIImage imageNamed:@"img_front_face_anonymous_woman.png"];
+
+        if([[[chat usernameA] username] isEqualToString:[[KPDUserSingleton sharedInstance] username]])
+        {
+            // My avatar
+            if(([[chat usernameA] avatarURL]) && (![[[chat usernameA] avatarURL] isEqualToString:@""]))
+                sayBubble.avatar = [[chat usernameA] avatar];
+        }
+        else
+        {
+            // Remote user avatar
+            if(([[chat usernameB] avatarURL]) && (![[[chat usernameB] avatarURL] isEqualToString:@""]))
+                sayBubble.avatar = [[chat usernameB] avatar];
+        }
+
+        [bubbleData addObject:sayBubble];
+    }
 
     bubbleTable.bubbleDataSource = self;
     
@@ -164,12 +241,32 @@
 
 - (IBAction)sayPressed:(id)sender
 {
-    KPDUser *toUser = [[KPDUser alloc] initWithUsername:@"silvia"];
+    KPDUser *toUser = [chat usernameA];
+
+    if([[toUser username] isEqualToString:[[KPDUserSingleton sharedInstance] username]])
+        toUser = [chat usernameB];
+
     [[KPDClientSIP sharedInstance] sendInstantMessageToUser:toUser withContent:textField.text];
 
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
 
     NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
+
+    sayBubble.avatar = [UIImage imageNamed:@"img_front_face_anonymous_woman.png"];
+    
+    if([[[chat usernameA] username] isEqualToString:[[KPDUserSingleton sharedInstance] username]])
+    {
+        // My avatar
+        if(([[chat usernameA] avatarURL]) && (![[[chat usernameA] avatarURL] isEqualToString:@""]))
+            sayBubble.avatar = [[chat usernameA] avatar];
+    }
+    else
+    {
+        // Remote user avatar
+        if(([[chat usernameB] avatarURL]) && (![[[chat usernameB] avatarURL] isEqualToString:@""]))
+            sayBubble.avatar = [[chat usernameB] avatar];
+    }
+
     [bubbleData addObject:sayBubble];
 
     textField.text = @"";
