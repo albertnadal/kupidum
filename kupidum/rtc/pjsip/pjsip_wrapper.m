@@ -82,6 +82,21 @@ static NSString* to_NSString(const pj_str_t* s, NSStringEncoding e)
     return [[NSString alloc] initWithBytes:s->ptr length:s->slen encoding:e];
 }
 
+NSString* getUserFromSIPUri(NSString *sipUri)
+{
+    NSRange start = [sipUri rangeOfString:@"<sip:"];
+    NSRange end = [sipUri rangeOfString:@">"];
+    int length = end.location - start.location - start.length;
+    int location = start.location + start.length;
+    NSRange user_domain_range;
+    user_domain_range.location = location;
+    user_domain_range.length = length;
+    NSString *userAndDomain = [sipUri substringWithRange:user_domain_range];
+    
+    NSRange arroba_range = [userAndDomain rangeOfString:@"@"];
+    return [[userAndDomain substringWithRange:NSMakeRange(0, arroba_range.location)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
 static bool is_video_possible(pjsua_call_id call_id)
 {
     pjsua_call_info callInfo;
@@ -266,6 +281,16 @@ static void on_reg_state2(pjsua_acc_id reg_acc_id, pjsua_reg_info *info)
 
 static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
 {
+/*    NSString *fromString = to_NSString(from, NSUTF8StringEncoding);
+    //        NSString *toString = to_NSString(to, NSUTF8StringEncoding);
+    NSString *mimeTypeString = to_NSString(mime_type, NSUTF8StringEncoding);
+    NSString *bodyString = to_NSString(body, NSUTF8StringEncoding);
+    
+    if([mimeTypeString isEqualToString:@"text/plain"])
+    {
+        NSString *fromUser = getUserFromSIPUri(fromString);*/
+
+
     pjsua_call_info callInfo;
     pjsua_call_get_info(call_id, &callInfo);
     
@@ -287,10 +312,11 @@ static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
     else if(callInfo.state == PJSIP_INV_STATE_INCOMING)
     {
         // Case when this is the user agent that receives an INVITE from another user agent
-        NSLog(@"Receiving an INVITE...");
+        NSString *fromString = to_NSString(&callInfo.remote_contact, NSUTF8StringEncoding);
+        NSString *fromUser = getUserFromSIPUri(fromString);
 
         current_call_has_video = is_video_possible(call_id);
-        [client receivedIncomingCall:call_id];
+        [client receivedIncomingCall:call_id fromUser:fromUser];
     }
     else if(callInfo.state == PJSIP_INV_STATE_CONFIRMED)
     {
@@ -370,13 +396,16 @@ static void on_call_media_state(pjsua_call_id call_id)
 
     if(is_video_active(call_id) || is_remote_video_active(call_id))
     {
+        NSString *userString = to_NSString(&callInfo.remote_contact, NSUTF8StringEncoding);
+        NSString *user = getUserFromSIPUri(userString);
+
         // Setup the current h.263+ configuration
         setup_video_codec_params();
 
         // Start video stream
         set_video_stream(call_id, PJSUA_CALL_VID_STRM_START_TRANSMIT, PJMEDIA_DIR_NONE);
 
-        [client videoStreamStartTransmiting:call_id];
+        [client videoStreamStartTransmiting:call_id toUser:user];
     }
     else
     {
@@ -608,21 +637,6 @@ static RTCEventOptions *RTCEventOptions_from_header(const pjsip_hdr *header)
     return retValue;
 }
 */
-
-NSString* getUserFromSIPUri(NSString *sipUri)
-{
-    NSRange start = [sipUri rangeOfString:@"<sip:"];
-    NSRange end = [sipUri rangeOfString:@">"];
-    int length = end.location - start.location - start.length;
-    int location = start.location + start.length;
-    NSRange user_domain_range;
-    user_domain_range.location = location;
-    user_domain_range.length = length;
-    NSString *userAndDomain = [sipUri substringWithRange:user_domain_range];
-
-    NSRange arroba_range = [userAndDomain rangeOfString:@"@"];
-    return [[userAndDomain substringWithRange:NSMakeRange(0, arroba_range.location)] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-}
 
 static void on_pager2(pjsua_call_id call_id, const pj_str_t *from, const pj_str_t *to, const pj_str_t *contact, const pj_str_t *mime_type, const pj_str_t *body, pjsip_rx_data *rdata, pjsua_acc_id acc_id)
 {

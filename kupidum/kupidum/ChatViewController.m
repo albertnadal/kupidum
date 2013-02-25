@@ -24,6 +24,7 @@
 {
     if(self = [super init])
     {
+        self.title = NSLocalizedString(@"Xats", @"");
         usersHistory = nil;
         [[KPDClientSIP sharedInstance] addDelegate:self];
         [self reloadUsersHistoryList];
@@ -37,6 +38,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        self.title = NSLocalizedString(@"Xats", @"");
         usersHistory = nil;
         [[KPDClientSIP sharedInstance] addDelegate:self];
         [self reloadUsersHistoryList];
@@ -128,7 +130,7 @@
         if([remote_username isEqualToString:[[KPDUserSingleton sharedInstance] username]])
             remote_username = [[chat usernameB] username];
 
-        cell = [[UserChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier username:[[chat usernameA] username] lastMessage:[chat lastMessage] lastDateMessage:dateLastMessage];
+        cell = [[UserChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier username:remote_username lastMessage:[chat lastMessage] lastDateMessage:dateLastMessage];
     }
     else
     {

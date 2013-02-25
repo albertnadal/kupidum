@@ -9,11 +9,6 @@
 #import "KPDClientSIP.h"
 #import "pjsip_wrapper.h"
 
-#import "FMDatabase.h"
-#import "FMDatabaseAdditions.h"
-#import "FMDatabasePool.h"
-#import "FMDatabaseQueue.h"
-
 @implementation KPDClientSIP
 
 
@@ -78,22 +73,31 @@
 
 // Public methods called from pjsip_wrapper
 
-- (void)receivedIncomingCall:(int)callId
+- (void)receivedIncomingCall:(int)callId fromUser:(NSString *)fromSIPUser
 {
+    NSString *localUsername = [[KPDUserSingleton sharedInstance] username];
+    KPDUser *toUser = [[KPDUser alloc] initWithUsername:localUsername];
+    KPDUser *fromUser = [[KPDUser alloc] initWithUsername:fromSIPUser];
+
+    KPDVideocall *videocall = [[KPDVideocall alloc] initWithFromUser:fromUser andToUser:toUser andIsIncoming:true andDate:[NSDate date]];
+#pragma unused(videocall)
+
     currentCallId = callId;
 
     for(id<KPDClientSIPDelegate> delegate in delegates)
         if([delegate respondsToSelector:@selector(clientDidReceivedVideocall:fromUser:)])
-            [delegate clientDidReceivedVideocall:self fromUser:@"Sílvia"];
+            [delegate clientDidReceivedVideocall:self fromUser:fromSIPUser];
 }
 
-- (void)videoStreamStartTransmiting:(int)callId
+- (void)videoStreamStartTransmiting:(int)callId toUser:(NSString *)user
 {
+    KPDUser *_user = [[KPDUser alloc] initWithUsername:user];
+
     currentCallId = callId;
 
     for(id<KPDClientSIPDelegate> delegate in delegates)
-        if([delegate respondsToSelector:@selector(videoconferenceDidBegan:)])
-            [delegate videoconferenceDidBegan:self];
+        if([delegate respondsToSelector:@selector(videoconferenceDidBegan:withRemoteUser:)])
+            [delegate videoconferenceDidBegan:self withRemoteUser:_user];
 }
 
 - (void)instantMessageReceivedFromUser:(NSString *)fromSIPUser withContent:(NSString *)textMessage
@@ -167,8 +171,23 @@
     const char *user = [theUser cStringUsingEncoding:NSUTF8StringEncoding];
     int status;
 
-    if(videoFlag)   status = videocall((char*)user);
-    else            { /*Nothing to do now*/ }
+    if(videoFlag)
+    {
+        NSString *localUsername = [[KPDUserSingleton sharedInstance] username];
+        KPDUser *toUser = [[KPDUser alloc] initWithUsername:theUser];
+        KPDUser *fromUser = [[KPDUser alloc] initWithUsername:localUsername];
+
+        KPDVideocall *_videocall = [[KPDVideocall alloc] initWithFromUser:fromUser andToUser:toUser andIsIncoming:false andDate:[NSDate date]];
+#pragma unused(_videocall)
+
+        // Send videocall request to remote user
+        status = videocall((char*)user);
+
+        for(id<KPDClientSIPDelegate> delegate in delegates)
+            if([delegate respondsToSelector:@selector(clientDidSendVideocallRequestToUser:)])
+                [delegate clientDidSendVideocallRequestToUser:toUser];
+    }
+    else            { /*Nothing to do now with only audio calls*/ }
 }
 
 // Public methods called from ConversationViewController.h

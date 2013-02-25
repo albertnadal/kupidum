@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 laFruitera.com. All rights reserved.
 //
 
-#import "WCAlertView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "VideoconferenceViewController.h"
+#import "KPDUIUtilities.h"
 
 @interface VideoconferenceViewController ()
 
@@ -19,15 +19,35 @@
 @synthesize usernameField;
 @synthesize passwordField;
 @synthesize videoView;
+@synthesize remoteUser;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil withRemoteUser:(KPDUser *)_remoteUser
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:nibNameOrNil bundle:nil];
     if (self) {
         // Custom initialization
+        remoteUser = _remoteUser;
+        self.title = [remoteUser username];
+
         [[KPDClientSIP sharedInstance] addDelegate:self];
     }
     return self;
+}
+
+- (void)showNavigationBarButtons
+{
+    UIButton *backButton = [KPDUIUtilities customCircleBarButtonWithImage:@"nav_black_circle_button.png"
+                                                           andInsideImage:@"nav_arrow_back_button.png"
+                                                              andSelector:@selector(backPressed)
+                                                                andTarget:self];
+    
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:backButton]];
+}
+
+- (void)backPressed
+{
+    [[KPDClientSIP sharedInstance] hangUp];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)showEmbededVideoView
@@ -76,6 +96,13 @@
     [passwordField resignFirstResponder];
 }
 
+- (void)sendCallRequest
+{
+    [[KPDClientSIP sharedInstance] callUser:[remoteUser username] withVideo:TRUE];
+
+    [self showEmbededVideoView];
+}
+
 - (IBAction)callUser:(id)sender
 {
     [[KPDClientSIP sharedInstance] callUser:@"silvia" withVideo:TRUE];
@@ -88,49 +115,23 @@
     [[KPDClientSIP sharedInstance] hangUp];
 }
 
-- (void)videoconferenceDidBegan:(KPDClientSIP *)client
+- (void)videoconferenceDidBegan:(KPDClientSIP *)client withRemoteUser:(KPDUser *)user
 {
     [self showEmbededVideoView];
 }
 
-- (void)showIncomingVideocallAlertFromUser:(id)theUser
-{    
-    [WCAlertView showAlertWithTitle:[NSString stringWithFormat:@"%@ is now calling you!", (NSString *)theUser] message:@"Do you want to Accept or Reject the videocall?" customizationBlock:^(WCAlertView *alertView) {
-        
-        // You can also set different appearance for this alert using customization block
-        alertView.style = WCAlertViewStyleWhiteHatched;
-        alertView.alertViewStyle = UIAlertViewStyleDefault;
-        
-    } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
-        
-        [[KPDAudioUtilities sharedInstance] stopRingtone];
-        
-        if (buttonIndex == 0)
-        {
-            // Reject the videocall
-            [[KPDClientSIP sharedInstance] rejectCall];
-        }
-        else if (buttonIndex == 1)
-        {
-            // Accept the videocall
-            [[KPDClientSIP sharedInstance] acceptCall];
-        }
-        
-    } cancelButtonTitle:@"Reject" otherButtonTitles:@"Accept", nil];
-}
-
 - (void)clientDidReceivedVideocall:(KPDClientSIP *)client fromUser:(NSString *)theUser
 {
-    NSURL *incomingVideocallAudioUrl = [[NSBundle mainBundle] URLForResource:@"incoming_call" withExtension:@"wav"];
-    [[KPDAudioUtilities sharedInstance] playRingtoneInLoop:incomingVideocallAudioUrl];
+//    NSURL *incomingVideocallAudioUrl = [[NSBundle mainBundle] URLForResource:@"incoming_call" withExtension:@"wav"];
+//    [[KPDAudioUtilities sharedInstance] playRingtoneInLoop:incomingVideocallAudioUrl];
 
-    [self performSelectorOnMainThread:@selector(showIncomingVideocallAlertFromUser:) withObject:theUser waitUntilDone:YES];
+//    [self performSelectorOnMainThread:@selector(showIncomingVideocallAlertFromUser:) withObject:theUser waitUntilDone:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self showNavigationBarButtons];
 }
 
 - (void)didReceiveMemoryWarning

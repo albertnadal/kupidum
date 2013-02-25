@@ -11,8 +11,8 @@
 #import "InitialScreenViewController.h"
 #import "HomeViewController.h"
 #import "ChatViewController.h"
-#import "VideoconferenceViewController.h"
 #import "FinderViewController.h"
+#import "VideocallViewController.h"
 
 #define FMDBQuickCheck(SomeBool) { if (!(SomeBool)) { NSLog(@"Failure on line %d", __LINE__); abort(); } }
 
@@ -26,8 +26,8 @@
 
 
 #warning remove the following lines
-[[KPDUserSingleton sharedInstance] setUsername:@"albert"];
-[[KPDClientSIP sharedInstance] registerToServerWithUser:@"albert" password:@"albert"];
+[[KPDUserSingleton sharedInstance] setUsername:@"silvia"];
+[[KPDClientSIP sharedInstance] registerToServerWithUser:@"silvia" password:@"silvia"];
 
 
 
@@ -54,35 +54,26 @@
 
 - (void)createDatabaseIfNeeded
 {
-/*    BOOL success;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSError *error;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *writableDBPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db", KUPIDUM_DB_FILENAME]];
-    success = [fileManager fileExistsAtPath:writableDBPath];
-    if (success)
-        return;
-
-    NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db", KUPIDUM_DB_FILENAME]];
-    success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
-    if (!success) {
-        NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
-    }
-*/
     FMDatabase *db = [[KupidumDBSingleton sharedInstance] db];
 
     [db beginTransaction];
+    // User tables
     [db executeUpdate:@"create table user (username text primary key, avatar_url text, avatar blob)"];
+
+    // Chat tables
     [db executeUpdate:@"create table chat (username_a text, username_b text, last_message text, date_last_message date)"];
     [db executeUpdate:@"create table conversation (from_username text, to_username text, message text, date_message date)"];
+
+    // Videocall tables
+    [db executeUpdate:@"create table videocall (from_username text, to_username text, length int, first_incoming_frame blob, is_incoming_call bool, missed bool, date_call date)"];
+
     [db commit];
 }
 
 - (void)showKupidumTabBar
 {
     FinderViewController *finderViewController = [[FinderViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
-    VideoconferenceViewController *videoconferenceViewController = [[VideoconferenceViewController alloc] initWithNibName:@"VideoconferenceViewController" bundle:nil];
+    VideocallViewController *videocallViewController = [[VideocallViewController alloc] initWithNibName:@"VideocallViewController" bundle:nil];
     ChatViewController *chatViewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
     UIViewController *finderViewController2 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
 
@@ -97,11 +88,14 @@
 
     UINavigationController *chatNavigationController = [[UINavigationController alloc] initWithRootViewController:chatViewController];
     [chatNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Xat", @"") image:[UIImage imageNamed:@"tab_icon_chat"] tag:4]];
-    [videoconferenceViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
+
+    UINavigationController *videocallNavigationController = [[UINavigationController alloc] initWithRootViewController:videocallViewController];
+    [videocallNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_chat"] tag:4]];
+    [videocallViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
 
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[homeNavigationController, finderNavigationController, finderViewController2, chatNavigationController, videoconferenceViewController];
-    [self.tabBarController setSelectedViewController:videoconferenceViewController];
+    self.tabBarController.viewControllers = @[homeNavigationController, finderNavigationController, finderViewController2, chatNavigationController, videocallNavigationController];
+    [self.tabBarController setSelectedViewController:videocallNavigationController];
     self.window.rootViewController = self.tabBarController;
 }
 

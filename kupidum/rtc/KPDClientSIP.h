@@ -12,6 +12,7 @@
 #import "KPDUser.h"
 #import "KPDChat.h"
 #import "KPDChatMessage.h"
+#import "KPDVideocall.h"
 
 @interface KPDClientSIP : NSObject
 {
@@ -28,8 +29,8 @@
 - (void)removeDelegate:(id<KPDClientSIPDelegate>)theDelegate;
 
 // Methods called from pjsip_wrapper
-- (void)receivedIncomingCall:(int)callId;
-- (void)videoStreamStartTransmiting:(int)callId;
+- (void)receivedIncomingCall:(int)callId fromUser:(NSString *)fromSIPUser;
+- (void)videoStreamStartTransmiting:(int)callId toUser:(NSString *)user;
 - (void)instantMessageReceivedFromUser:(NSString *)fromSIPUser withContent:(NSString *)textMessage;
 
 // Public methods for SIP register signaling

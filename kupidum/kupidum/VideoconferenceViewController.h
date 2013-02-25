@@ -15,16 +15,22 @@
     IBOutlet UITextField *usernameField;
     IBOutlet UITextField *passwordField;
     IBOutlet UIView *videoView;
+
+    KPDUser *remoteUser;
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *usernameField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong, nonatomic) IBOutlet UIView *videoView;
+@property (strong, nonatomic) KPDUser *remoteUser;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil withRemoteUser:(KPDUser *)_remoteUser;
 - (IBAction)connect:(id)sender;
 - (IBAction)callUser:(id)sender;
 - (IBAction)hangUp:(id)sender;
 - (void)showEmbededVideoView;
-- (void)showIncomingVideocallAlertFromUser:(id)theUser;
+- (void)sendCallRequest;
+- (void)showNavigationBarButtons;
+- (void)backPressed;
 
 @end
