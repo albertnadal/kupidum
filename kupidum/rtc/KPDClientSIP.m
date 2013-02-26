@@ -100,6 +100,17 @@
             [delegate videoconferenceDidBegan:self withRemoteUser:_user];
 }
 
+- (void)videocallEnded:(int)callId WithUser:(NSString *)user
+{
+    KPDUser *_user = [[KPDUser alloc] initWithUsername:user];
+
+    currentCallId = callId;
+
+    for(id<KPDClientSIPDelegate> delegate in delegates)
+        if([delegate respondsToSelector:@selector(videoconferenceDidEnd:withRemoteUser:)])
+            [delegate videoconferenceDidEnd:self withRemoteUser:_user];
+}
+
 - (void)instantMessageReceivedFromUser:(NSString *)fromSIPUser withContent:(NSString *)textMessage
 {
     NSString *localUsername = [[KPDUserSingleton sharedInstance] username];
@@ -146,6 +157,10 @@
     setOutgoingVideoStreamViewHidden(isHidden);
 }
 
+- (void) setVideoStreamViewFrame:(CGRect) remoteCgrect{
+    setVideoStreamViewFrame(remoteCgrect);
+}
+
 - (void) setIngoingVideoStreamViewFrame:(CGRect) remoteCgrect{
     setIngoingVideoStreamViewFrame(remoteCgrect);
 }
@@ -188,6 +203,18 @@
                 [delegate clientDidSendVideocallRequestToUser:toUser];
     }
     else            { /*Nothing to do now with only audio calls*/ }
+}
+
+- (void)useFrontalCamera
+{
+    KPDVideoDevice *frontDevice = getDefaultFrontVideoDevice();
+    setOutgoingVideoStreamDevice(frontDevice);
+}
+
+- (void)useBackCamera
+{
+    KPDVideoDevice *backDevice = getDefaultBackVideoDevice();
+    setOutgoingVideoStreamDevice(backDevice);
 }
 
 // Public methods called from ConversationViewController.h

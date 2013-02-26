@@ -15,6 +15,7 @@
 
 - (void)clientDidReceivedVideocall:(KPDClientSIP *)client fromUser:(NSString *)theUser;
 - (void)videoconferenceDidBegan:(KPDClientSIP *)client withRemoteUser:(KPDUser *)user;
+- (void)videoconferenceDidEnd:(KPDClientSIP *)client withRemoteUser:(KPDUser *)user;
 - (void)clientDidSendVideocallRequestToUser:(KPDUser *)toUser;
 - (void)clientDidReceivedInstantMessage:(KPDClientSIP *)client fromUser:(KPDUser *)fromUser withContent:(NSString *)textMessage;
 

@@ -98,8 +98,12 @@
             // Accept the videocall
             [videocall setMissed:false];
 
+            bool animated = ([self.tabBarController selectedViewController] == self);
+
             VideoconferenceViewController *vvc = [[VideoconferenceViewController alloc] initWithNibName:@"VideoconferenceViewController" withRemoteUser:fromUser];
-            [self.navigationController pushViewController:vvc animated:YES];
+            [self.navigationController pushViewController:vvc animated:animated];
+
+            [self.tabBarController setSelectedViewController:self.navigationController];
 
             [[KPDClientSIP sharedInstance] acceptCall];
         }
@@ -178,23 +182,23 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    KPDChat *chat = [usersHistory objectAtIndex:indexPath.row];
+    KPDVideocall *videocall = [usersHistory objectAtIndex:indexPath.row];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *dateLastMessage = [formatter stringFromDate:[chat dateLastMessage]];
+    NSString *dateCall = [formatter stringFromDate:[videocall dateCall]];
 
     if (!cell)
     {
-        NSString *remote_username = [[chat usernameA] username];
+        NSString *remote_username = [[videocall toUser] username];
         if([remote_username isEqualToString:[[KPDUserSingleton sharedInstance] username]])
-            remote_username = [[chat usernameB] username];
+            remote_username = [[videocall fromUser] username];
 
-        cell = [[UserChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier username:remote_username lastMessage:[chat lastMessage] lastDateMessage:dateLastMessage];
+        cell = [[UserChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier username:remote_username lastMessage:@"" lastDateMessage:dateCall];
     }
     else
     {
-        [[[(UserChatCell *)cell ucvc] lastMessage] setText:[chat lastMessage]];
-        [[[(UserChatCell *)cell ucvc] dateUpdate] setText:dateLastMessage];
+        [[[(UserChatCell *)cell ucvc] lastMessage] setText:@""];
+        [[[(UserChatCell *)cell ucvc] dateUpdate] setText:dateCall];
     }
 
     return cell;

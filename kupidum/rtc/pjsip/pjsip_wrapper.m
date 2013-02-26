@@ -16,8 +16,8 @@
 //#import "CNCMessageParser.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-#define PJSIP_LOG_LEVEL 4
-#define PJSIP_LOG_ENABLED true
+#define PJSIP_LOG_LEVEL 0
+#define PJSIP_LOG_ENABLED false
 
 static pjsua_acc_id acc_id;
 static pjsua_acc_config acc_cfg;
@@ -75,7 +75,7 @@ static const char * get_charstr_from_value(id value);
 
 KPDClientSIP *client;
 KPDVideoDeviceView *videoDeviceView;
-KPDVideoDeviceView *outgoingVideoDeviceView;
+//KPDVideoDeviceView *outgoingVideoDeviceView;
 
 static NSString* to_NSString(const pj_str_t* s, NSStringEncoding e)
 {
@@ -347,12 +347,20 @@ static void on_call_state (pjsua_call_id call_id, pjsip_event *e)
 
         setEnableVideoCall(false);
 
+        setEnableVideoDriver(false);
+        setEnableVideoDriver(true);
+
+        NSString *fromString = to_NSString(&callInfo.remote_contact, NSUTF8StringEncoding);
+        NSString *fromUser = getUserFromSIPUri(fromString);
+
+        [client videocallEnded:call_id WithUser:fromUser];
+
         // Print call stats
-        char stats_string[5000];
+/*        char stats_string[5000];
         const char *indent_char = " ";
 
         pjsua_call_dump(call_id, PJ_TRUE, stats_string, 5000, indent_char);
-        NSLog(@"STATS: (%s)", stats_string);
+        NSLog(@"STATS: (%s)", stats_string);*/
     }
     else
     {
@@ -1050,11 +1058,11 @@ bool setEnableVideoDriver(bool v)
     // Hide/init video views
     if(v)
     {
-         [videoDeviceView initializeView];
+        [videoDeviceView performSelectorOnMainThread:@selector(initializeView) withObject:nil waitUntilDone:YES];
     }
     else
     {
-         [videoDeviceView releaseDeviceView];
+        [videoDeviceView performSelectorOnMainThread:@selector(releaseDeviceView) withObject:nil waitUntilDone:YES];
     }
 
     return true;
@@ -1064,11 +1072,11 @@ bool setEnableReceiveNotificationsFromVideoDriver(bool v)
 {
     if(v)
     {
-        [videoDeviceView startNotificationListeners];
+        [videoDeviceView performSelectorOnMainThread:@selector(startNotificationListeners) withObject:nil waitUntilDone:YES];
     }
     else
     {
-        [videoDeviceView stopNotificationListeners];
+        [videoDeviceView performSelectorOnMainThread:@selector(stopNotificationListeners) withObject:nil waitUntilDone:YES];
     }
 
     return true;
@@ -1566,6 +1574,9 @@ void hangup_call(int call_id)
     pjsua_msg_data_init(&messageData);
 //    add_optional_headers(&messageData, options);
     pjsua_call_hangup(call_id, 0, NULL, &messageData);
+
+//    setEnableVideoDriver(false);
+//    setEnableVideoDriver(true);
 }
 
 //void busy_call(int call_id, RTCEventOptions * options)

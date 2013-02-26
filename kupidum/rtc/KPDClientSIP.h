@@ -32,6 +32,7 @@
 - (void)receivedIncomingCall:(int)callId fromUser:(NSString *)fromSIPUser;
 - (void)videoStreamStartTransmiting:(int)callId toUser:(NSString *)user;
 - (void)instantMessageReceivedFromUser:(NSString *)fromSIPUser withContent:(NSString *)textMessage;
+- (void)videocallEnded:(int)callId WithUser:(NSString *)user;
 
 // Public methods for SIP register signaling
 - (void)registerToServerWithUser:(NSString *)theUser password:(NSString *)thePassword;
@@ -43,11 +44,14 @@
 - (void)rejectCall;
 - (void)setIngoingVideoStreamViewHidden:(BOOL) isHidden;
 - (void)setOutgoingVideoStreamViewHidden:(BOOL) isHidden;
+- (void)setVideoStreamViewFrame:(CGRect) remoteCgrect;
 - (void)setIngoingVideoStreamViewFrame:(CGRect) remoteCgrect;
 - (void)setOutgoingVideoStreamViewFrame:(CGRect) localCgrect;
 - (UIView *)getIngoingVideoStreamView;
 - (UIView *)getOutgoingVideoStreamView;
 - (UIView *)getVideoStreamView;
+- (void)useFrontalCamera;
+- (void)useBackCamera;
 
 // Public methods called from ConversationViewController.h
 - (void)sendInstantMessageToUser:(KPDUser *)toUser withContent:(NSString *)textMessage;

@@ -124,10 +124,12 @@
 {
     int ingoingVideoWidth = viewFrame.size.width;
     int ingoingVideoHeight = viewFrame.size.height;
-    int outgoingMargin = 10;
+
+    int outgoingVideoWidth = ingoingVideoWidth * 0.35;
+    int outgoingVideoHeight = ingoingVideoHeight * 0.35;
 
     CGRect remoteCgrect = CGRectMake(0, 0, ingoingVideoWidth, ingoingVideoHeight);
-    CGRect localCgrect = CGRectMake((ingoingVideoWidth - 96) - outgoingMargin, (ingoingVideoHeight - 128) - outgoingMargin, 96, 128);
+    CGRect localCgrect = CGRectMake(0, ingoingVideoHeight - outgoingVideoHeight, outgoingVideoWidth, outgoingVideoHeight);
 
     [self setFrame:remoteCgrect];
     [self setPreviewFrame:localCgrect];
