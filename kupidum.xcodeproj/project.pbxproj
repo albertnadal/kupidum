@@ -237,6 +237,14 @@
 		FFAE275E1699C6FA00B82CF6 /* WCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE275D1699C6FA00B82CF6 /* WCAlertView.m */; };
 		FFAE7CD816DBFB7300F3E684 /* img_camera_white_striped.png in Resources */ = {isa = PBXBuildFile; fileRef = FFAE7CD616DBFB5E00F3E684 /* img_camera_white_striped.png */; };
 		FFAE7CD916DBFB7300F3E684 /* img_camera_white_striped@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFAE7CD716DBFB6900F3E684 /* img_camera_white_striped@2x.png */; };
+		FFC5B11816DE0D6D00CFD587 /* KPDMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = FFC5B11716DE0D6D00CFD587 /* KPDMessage.m */; };
+		FFC5B11D16DE22F600CFD587 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFC5B11B16DE22F600CFD587 /* MessageViewController.m */; };
+		FFC5B11E16DE22F600CFD587 /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFC5B11C16DE22F600CFD587 /* MessageViewController.xib */; };
+		FFC5B12116DE297100CFD587 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFC5B12016DE297100CFD587 /* MessageCell.m */; };
+		FFC5B12516DE29A200CFD587 /* MessageCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFC5B12316DE29A200CFD587 /* MessageCellViewController.m */; };
+		FFC5B12616DE29A200CFD587 /* MessageCellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFC5B12416DE29A200CFD587 /* MessageCellViewController.xib */; };
+		FFC5B12A16DE696300CFD587 /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFC5B12816DE696300CFD587 /* MessageDetailViewController.m */; };
+		FFC5B12B16DE696300CFD587 /* MessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFC5B12916DE696300CFD587 /* MessageDetailViewController.xib */; };
 		FFEDFEDC168E457B00C493AB /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED2168E457B00C493AB /* NSBubbleData.m */; };
 		FFEDFEDD168E457B00C493AB /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED4168E457B00C493AB /* UIBubbleHeaderTableViewCell.m */; };
 		FFEDFEDE168E457B00C493AB /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED6168E457B00C493AB /* UIBubbleTableView.m */; };
@@ -558,6 +566,19 @@
 		FFAE275D1699C6FA00B82CF6 /* WCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WCAlertView.m; path = kupidum/WCAlertView/WCAlertView/WCAlertView.m; sourceTree = "<group>"; };
 		FFAE7CD616DBFB5E00F3E684 /* img_camera_white_striped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_camera_white_striped.png; path = kupidum/images/img_camera_white_striped.png; sourceTree = "<group>"; };
 		FFAE7CD716DBFB6900F3E684 /* img_camera_white_striped@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_camera_white_striped@2x.png"; path = "kupidum/images/img_camera_white_striped@2x.png"; sourceTree = "<group>"; };
+		FFC5B11616DE0D6C00CFD587 /* KPDMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDMessage.h; path = kupidum/kupidum/KPDMessage.h; sourceTree = "<group>"; };
+		FFC5B11716DE0D6D00CFD587 /* KPDMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDMessage.m; path = kupidum/kupidum/KPDMessage.m; sourceTree = "<group>"; };
+		FFC5B11A16DE22F600CFD587 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageViewController.h; path = kupidum/MessageViewController.h; sourceTree = "<group>"; };
+		FFC5B11B16DE22F600CFD587 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageViewController.m; path = kupidum/MessageViewController.m; sourceTree = "<group>"; };
+		FFC5B11C16DE22F600CFD587 /* MessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageViewController.xib; path = kupidum/MessageViewController.xib; sourceTree = "<group>"; };
+		FFC5B11F16DE297100CFD587 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCell.h; path = kupidum/MessageCell.h; sourceTree = "<group>"; };
+		FFC5B12016DE297100CFD587 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCell.m; path = kupidum/MessageCell.m; sourceTree = "<group>"; };
+		FFC5B12216DE29A200CFD587 /* MessageCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageCellViewController.h; path = kupidum/MessageCellViewController.h; sourceTree = "<group>"; };
+		FFC5B12316DE29A200CFD587 /* MessageCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageCellViewController.m; path = kupidum/MessageCellViewController.m; sourceTree = "<group>"; };
+		FFC5B12416DE29A200CFD587 /* MessageCellViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageCellViewController.xib; path = kupidum/MessageCellViewController.xib; sourceTree = "<group>"; };
+		FFC5B12716DE696300CFD587 /* MessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageDetailViewController.h; path = kupidum/MessageDetailViewController.h; sourceTree = "<group>"; };
+		FFC5B12816DE696300CFD587 /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageDetailViewController.m; path = kupidum/MessageDetailViewController.m; sourceTree = "<group>"; };
+		FFC5B12916DE696300CFD587 /* MessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageDetailViewController.xib; path = kupidum/MessageDetailViewController.xib; sourceTree = "<group>"; };
 		FFEDFED1168E457B00C493AB /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBubbleData.h; path = kupidum/UIBubbleTableView/src/NSBubbleData.h; sourceTree = "<group>"; };
 		FFEDFED2168E457B00C493AB /* NSBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBubbleData.m; path = kupidum/UIBubbleTableView/src/NSBubbleData.m; sourceTree = "<group>"; };
 		FFEDFED3168E457B00C493AB /* UIBubbleHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBubbleHeaderTableViewCell.h; path = kupidum/UIBubbleTableView/src/UIBubbleHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -763,6 +784,7 @@
 				B79E6AB216596723004C472F /* Register */,
 				FF25A5C51686832900F5DB58 /* Home */,
 				B70F46B21673F242004C8741 /* Finder */,
+				FFC5B11916DE22C800CFD587 /* Message */,
 				FFEDFF00168E577C00C493AB /* Chat */,
 				FF25A5D416871E6B00F5DB58 /* Videoconference */,
 				FF7497A3167F2D4800AF971F /* AppDelegate.h */,
@@ -1106,6 +1128,8 @@
 				FF85F0C416D81BB400F839B5 /* KPDChatMessage.m */,
 				FF85F0D416DB822A00F839B5 /* KPDVideocall.h */,
 				FF85F0D516DB822B00F839B5 /* KPDVideocall.m */,
+				FFC5B11616DE0D6C00CFD587 /* KPDMessage.h */,
+				FFC5B11716DE0D6D00CFD587 /* KPDMessage.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1192,6 +1216,24 @@
 				FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */,
 			);
 			name = IBAForms;
+			sourceTree = "<group>";
+		};
+		FFC5B11916DE22C800CFD587 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				FFC5B11A16DE22F600CFD587 /* MessageViewController.h */,
+				FFC5B11B16DE22F600CFD587 /* MessageViewController.m */,
+				FFC5B11C16DE22F600CFD587 /* MessageViewController.xib */,
+				FFC5B11F16DE297100CFD587 /* MessageCell.h */,
+				FFC5B12016DE297100CFD587 /* MessageCell.m */,
+				FFC5B12216DE29A200CFD587 /* MessageCellViewController.h */,
+				FFC5B12316DE29A200CFD587 /* MessageCellViewController.m */,
+				FFC5B12416DE29A200CFD587 /* MessageCellViewController.xib */,
+				FFC5B12716DE696300CFD587 /* MessageDetailViewController.h */,
+				FFC5B12816DE696300CFD587 /* MessageDetailViewController.m */,
+				FFC5B12916DE696300CFD587 /* MessageDetailViewController.xib */,
+			);
+			name = Message;
 			sourceTree = "<group>";
 		};
 		FFEDFECD168E44B900C493AB /* UIBubbleTableView */ = {
@@ -1480,6 +1522,9 @@
 				FF8511AF16DCEDEB00B464F9 /* img_front_camera@2x.png in Resources */,
 				FF8511B016DCEDEB00B464F9 /* img_back_camera.png in Resources */,
 				FF8511B116DCEDEB00B464F9 /* img_back_camera@2x.png in Resources */,
+				FFC5B11E16DE22F600CFD587 /* MessageViewController.xib in Resources */,
+				FFC5B12616DE29A200CFD587 /* MessageCellViewController.xib in Resources */,
+				FFC5B12B16DE696300CFD587 /* MessageDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1544,6 +1589,11 @@
 				FF85F0D116DB7C4A00F839B5 /* VideocallViewController.m in Sources */,
 				FF85F0D616DB822B00F839B5 /* KPDVideocall.m in Sources */,
 				FF85118016DCC58000B464F9 /* AKSegmentedControl.m in Sources */,
+				FFC5B11816DE0D6D00CFD587 /* KPDMessage.m in Sources */,
+				FFC5B11D16DE22F600CFD587 /* MessageViewController.m in Sources */,
+				FFC5B12116DE297100CFD587 /* MessageCell.m in Sources */,
+				FFC5B12516DE29A200CFD587 /* MessageCellViewController.m in Sources */,
+				FFC5B12A16DE696300CFD587 /* MessageDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

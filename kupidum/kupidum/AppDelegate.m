@@ -13,6 +13,7 @@
 #import "ChatViewController.h"
 #import "FinderViewController.h"
 #import "VideocallViewController.h"
+#import "MessageViewController.h"
 
 #define FMDBQuickCheck(SomeBool) { if (!(SomeBool)) { NSLog(@"Failure on line %d", __LINE__); abort(); } }
 
@@ -67,15 +68,21 @@
     // Videocall tables
     [db executeUpdate:@"create table videocall (from_username text, to_username text, length int, first_incoming_frame blob, is_incoming_call bool, missed bool, date_call date)"];
 
+    // Messages
+    [db executeUpdate:@"create table message (from_username text, to_username text, subject text, message text, read bool, date_message date)"];
+
+//    [db executeUpdate:@"insert into message (from_username, to_username, subject, message, read, date_message) values (?, ?, ?, ?, ?, ?)", @"albert", @"silvia", @"Hola!", @"Hola, que tal? com va?", [NSNumber numberWithBool:true], [NSDate date]];
+
+
     [db commit];
 }
 
 - (void)showKupidumTabBar
 {
+    MessageViewController *messageViewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
     FinderViewController *finderViewController = [[FinderViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
     VideocallViewController *videocallViewController = [[VideocallViewController alloc] initWithNibName:@"VideocallViewController" bundle:nil];
     ChatViewController *chatViewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
-    UIViewController *finderViewController2 = [[UIViewController alloc] initWithNibName:@"FinderViewController" bundle:nil];
 
     UIViewController *homeViewController = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
     UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
@@ -84,7 +91,10 @@
 
     UINavigationController *finderNavigationController = [[UINavigationController alloc] initWithRootViewController:finderViewController];
     [finderNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Cercar", @"") image:[UIImage imageNamed:@"tab_icon_search"] tag:2]];
-    [finderViewController2 setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Missatges", @"") image:[UIImage imageNamed:@"tab_icon_msg"] tag:3]];
+
+    UINavigationController *messageNavigationController = [[UINavigationController alloc] initWithRootViewController:messageViewController];
+    [messageNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Missatges", @"") image:[UIImage imageNamed:@"tab_icon_msg"] tag:3]];
+    [messageViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Missatges", @"") image:[UIImage imageNamed:@"tab_icon_msg"] tag:3]];
 
     UINavigationController *chatNavigationController = [[UINavigationController alloc] initWithRootViewController:chatViewController];
     [chatNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Xat", @"") image:[UIImage imageNamed:@"tab_icon_chat"] tag:4]];
@@ -94,7 +104,7 @@
     [videocallViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
 
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[homeNavigationController, finderNavigationController, finderViewController2, chatNavigationController, videocallNavigationController];
+    self.tabBarController.viewControllers = @[homeNavigationController, finderNavigationController, messageNavigationController, chatNavigationController, videocallNavigationController];
     [self.tabBarController setSelectedViewController:videocallNavigationController];
     self.window.rootViewController = self.tabBarController;
 }

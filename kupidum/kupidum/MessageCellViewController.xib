@@ -88,15 +88,49 @@
 					<object class="IBUILabel" id="2317819">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{72, 37}, {195, 19}}</string>
+						<string key="NSFrame">{{72, 26}, {195, 19}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1048328781"/>
+						<reference key="NSNextKeyView" ref="210211555"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="709836591">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<string key="IBUIText">Hola!</string>
+						<object class="NSColor" key="IBUITextColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
+						</object>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">0</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<string key="name">HelveticaNeue-Bold</string>
+							<string key="family">Helvetica Neue</string>
+							<int key="traits">2</int>
+							<double key="pointSize">14</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">HelveticaNeue-Bold</string>
+							<double key="NSSize">14</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+					</object>
+					<object class="IBUILabel" id="210211555">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{72, 45}, {238, 24}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="13733533"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="709836591"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -113,11 +147,11 @@
 							<string key="name">HelveticaNeue-Medium</string>
 							<string key="family">Helvetica Neue</string>
 							<int key="traits">0</int>
-							<double key="pointSize">14</double>
+							<double key="pointSize">12</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">HelveticaNeue-Medium</string>
-							<double key="NSSize">14</double>
+							<double key="NSSize">12</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -157,7 +191,7 @@
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
-					<object class="IBUIImageView" id="1048328781">
+					<object class="IBUIImageView" id="13733533">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{296, 25}, {14, 21}}</string>
@@ -209,14 +243,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lastMessage</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="2317819"/>
-					</object>
-					<int key="connectionID">76</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dateUpdate</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="347920550"/>
@@ -230,6 +256,22 @@
 						<reference key="destination" ref="1032734958"/>
 					</object>
 					<int key="connectionID">78</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">subject</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="2317819"/>
+					</object>
+					<int key="connectionID">80</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">headOfMessage</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="210211555"/>
+					</object>
+					<int key="connectionID">81</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -248,7 +290,8 @@
 							<reference ref="1070208104"/>
 							<reference ref="2317819"/>
 							<reference ref="347920550"/>
-							<reference ref="1048328781"/>
+							<reference ref="210211555"/>
+							<reference ref="13733533"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -288,14 +331,19 @@
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">79</int>
+						<reference key="object" ref="210211555"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">82</int>
-						<reference key="object" ref="1048328781"/>
+						<reference key="object" ref="13733533"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
-				<string key="-1.CustomClassName">UserChatViewController</string>
+				<string key="-1.CustomClassName">MessageCellViewController</string>
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -304,6 +352,7 @@
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="41.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="79.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="82.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
@@ -315,12 +364,13 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">UserChatViewController</string>
+					<string key="className">MessageCellViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="dateUpdate">UILabel</string>
+						<string key="headOfMessage">UILabel</string>
 						<string key="image">UIImageView</string>
-						<string key="lastMessage">UILabel</string>
+						<string key="subject">UILabel</string>
 						<string key="username">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -328,12 +378,16 @@
 							<string key="name">dateUpdate</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="headOfMessage">
+							<string key="name">headOfMessage</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="image">
 							<string key="name">image</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="lastMessage">
-							<string key="name">lastMessage</string>
+						<object class="IBToOneOutletInfo" key="subject">
+							<string key="name">subject</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="username">
@@ -343,7 +397,7 @@
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/UserChatViewController.h</string>
+						<string key="minorKey">./Classes/MessageCellViewController.h</string>
 					</object>
 				</object>
 			</array>
