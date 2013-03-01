@@ -21,7 +21,7 @@
 @synthesize scroll;
 
 const int basicInformationPanelHeight = 550;
-const int detailedInformationPanelHeight = 1300;
+const int detailedInformationPanelHeight = 1500;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

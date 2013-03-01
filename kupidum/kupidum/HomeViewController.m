@@ -34,7 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    [scroll setContentSize:CGSizeMake(320, 605)];
+    [scroll setContentSize:CGSizeMake(320, 615)];
 
     profileResumeView.layer.cornerRadius = 5.0;
     profileResumeView.layer.masksToBounds = YES;
