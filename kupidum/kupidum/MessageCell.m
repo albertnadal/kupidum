@@ -17,7 +17,7 @@
     if(self = [[MessageCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])
     {
         NSLog(@"Subject: %@ | Message: %@", [_msg subject], [_msg message]);
-        [[ucvc username] setText:_remote_user];
+        [[ucvc username] setText:[NSString stringWithFormat:@"%@ →%@", [_msg.fromUser username], [_msg.toUser username]]];
         [[ucvc subject] setText:[_msg subject]];
         [[ucvc headOfMessage] setText:[_msg message]];
         [[ucvc dateUpdate] setText:_date];

@@ -7,26 +7,53 @@
 //
 
 #import "MessageDetailViewController.h"
+#import "MessageComposeViewController.h"
+#import "KPDUIUtilities.h"
 
 @interface MessageDetailViewController ()
-
+- (void)showNavigationBarButtons;
+- (void)backPressed;
 @end
 
 @implementation MessageDetailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize fromAvatar, toAvatar, fromLabel, toLabel, dateLabel, subjectLabel, messageLabel, scroll, sendMessageButton, msg;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil withMsg:(KPDMessage *)_msg
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:nibNameOrNil bundle:nil];
     if (self) {
-        // Custom initialization
+        msg = _msg;
+        self.title = [NSString stringWithFormat:@"%@ →%@", [msg.fromUser username], [msg.toUser username]];
     }
     return self;
+}
+
+- (void)showNavigationBarButtons
+{
+    UIButton *backButton = [KPDUIUtilities customCircleBarButtonWithImage:@"nav_black_circle_button.png"
+                                                           andInsideImage:@"nav_arrow_back_button.png"
+                                                              andSelector:@selector(backPressed)
+                                                                andTarget:self];
+
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:backButton]];
+}
+
+- (void)backPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)replyMessage:(id)sender
+{    
+    MessageComposeViewController *mcvc = [[MessageComposeViewController alloc] initWithNibName:@"MessageComposeViewController" toUser:[msg fromUser] fromUser:[msg toUser]];
+    [self.navigationController pushViewController:mcvc animated:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self showNavigationBarButtons];
 }
 
 - (void)didReceiveMemoryWarning

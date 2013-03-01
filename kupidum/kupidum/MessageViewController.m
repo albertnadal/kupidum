@@ -7,6 +7,7 @@
 //
 
 #import "MessageViewController.h"
+#import "MessageDetailViewController.h"
 #import "MessageCell.h"
 #import "KPDUserSingleton.h"
 #import "KPDUser.h"
@@ -133,8 +134,8 @@
 {
     KPDMessage *msg = [usersHistory objectAtIndex:indexPath.row];
 
-/*    ConversationViewController *cvc = [[ConversationViewController alloc] initWithNibName:@"ConversationViewController" withChat:chat];
-    [self.navigationController pushViewController:cvc animated:YES];*/
+    MessageDetailViewController *mdvc = [[MessageDetailViewController alloc] initWithNibName:@"MessageDetailViewController" withMsg:msg];
+    [self.navigationController pushViewController:mdvc animated:YES];
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
