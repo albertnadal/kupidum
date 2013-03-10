@@ -14,8 +14,12 @@
 
 #import <IBAForms/IBAFormDataSource.h>
 
-@interface SampleFormDataSource : IBAFormDataSource {
-	
+@interface ProfileFormDataSource : IBAFormDataSource {
+	IBAFormFieldStyle *readOnlyStyle;
+	IBAFormFieldStyle *readWriteStyle;
 }
+
+- (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly;
+- (void)loadStyles;
 
 @end

@@ -13,16 +13,23 @@
 //
 
 #import <IBAForms/IBAForms.h>
-#import "SampleFormDataSource.h"
+#import "ProfileFormDataSource.h"
 #import "StringToNumberTransformer.h"
 #import "ShowcaseButtonStyle.h"
 
-@implementation SampleFormDataSource
+@implementation ProfileFormDataSource
 
-- (id)initWithModel:(id)aModel {
+- (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly
+{
 	if (self = [super initWithModel:aModel]) {
+
+        [self loadStyles];
+
+        IBAFormFieldStyle *selectedStyle = readOnly ? readOnlyStyle:readWriteStyle;
+
 		// Some basic form fields that accept text input
 		IBAFormSection *basicFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"La meva aparença", @"") footerTitle:nil];
+        [basicFieldSection setFormFieldStyle:selectedStyle];
 
 		NSArray *eyeColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                      NSLocalizedString(@"[4]Avellana", @""),
@@ -37,7 +44,8 @@
                                                                                 title:NSLocalizedString(@"Color d'ulls", @"")
                                                                    valueTransformer:nil
                                                                       selectionMode:IBAPickListSelectionModeSingle
-                                                                            options:eyeColorListOptions]];
+                                                                            options:eyeColorListOptions
+                                                                         isReadOnly:readOnly]];
 
         NSMutableArray *heightArray = [[NSMutableArray alloc] init];
         [heightArray addObject:NSLocalizedString(@"[0]Prefereixo no dir-ho", @"")];
@@ -50,7 +58,8 @@
                                                                                 title:NSLocalizedString(@"Alçada", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:heightListOptions]];
+                                                                              options:heightListOptions
+                                                                           isReadOnly:readOnly]];
 
         NSMutableArray *weightArray = [[NSMutableArray alloc] init];
         [weightArray addObject:NSLocalizedString(@"[0]Prefereixo no dir-ho", @"")];
@@ -63,7 +72,8 @@
                                                                                 title:NSLocalizedString(@"Pes", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:weightListOptions]];
+                                                                              options:weightListOptions
+                                                                           isReadOnly:readOnly]];
 
 		NSArray *hairColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                          NSLocalizedString(@"[1]Blanc", @""),
@@ -78,7 +88,8 @@
                                                                                 title:NSLocalizedString(@"Color del cabell", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:hairColorListOptions]];
+                                                                              options:hairColorListOptions
+                                                                           isReadOnly:readOnly]];
 
 		NSArray *hairSizeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                           NSLocalizedString(@"[1]Rapat", @""),
@@ -94,7 +105,8 @@
                                                                                 title:NSLocalizedString(@"Llargada del cabell", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:hairSizeListOptions]];
+                                                                              options:hairSizeListOptions
+                                                                           isReadOnly:readOnly]];
 
 		NSArray *bodyLookListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                          NSLocalizedString(@"[1]Explosiu", @""),
@@ -110,7 +122,8 @@
                                                                                 title:NSLocalizedString(@"El meu aspecte", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:bodyLookListOptions]];
+                                                                              options:bodyLookListOptions
+                                                                           isReadOnly:readOnly]];
 
 
 		NSArray *myHighlightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -133,11 +146,13 @@
                                                                                 title:NSLocalizedString(@"El més atractiu de mi", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:myHighlightListOptions]];
+                                                                              options:myHighlightListOptions
+                                                                           isReadOnly:readOnly]];
 
 
 
 		IBAFormSection *valuesFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els meus valors", @"") footerTitle:nil];
+        [valuesFieldSection setFormFieldStyle:selectedStyle];
 
 		NSArray *citizenshipListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                                  NSLocalizedString(@"[56]Espanyola", @""),
@@ -345,7 +360,8 @@
                                                                                 title:NSLocalizedString(@"La meva nacionalitat", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:citizenshipListOptions]];
+                                                                              options:citizenshipListOptions
+                                                                           isReadOnly:readOnly]];
 
 
 		NSArray *ethnicalOriginListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -362,7 +378,8 @@
                                                                                 title:NSLocalizedString(@"El meu origen ètnic", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:ethnicalOriginListOptions]];
+                                                                              options:ethnicalOriginListOptions
+                                                                           isReadOnly:readOnly]];
 
 
 		NSArray *religionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -383,7 +400,8 @@
                                                                                 title:NSLocalizedString(@"La meva religió", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:religionListOptions]];
+                                                                              options:religionListOptions
+                                                                           isReadOnly:readOnly]];
 
         
         
@@ -397,7 +415,8 @@
                                                                                 title:NSLocalizedString(@"Pràctica religiosa", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:religionLevelListOptions]];
+                                                                              options:religionLevelListOptions
+                                                                           isReadOnly:readOnly]];
 
 
 		NSArray *marriageOpinionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -413,7 +432,8 @@
                                                                                 title:NSLocalizedString(@"Per mi, el matrimoni és", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:marriageOpinionListOptions]];
+                                                                              options:marriageOpinionListOptions
+                                                                           isReadOnly:readOnly]];
 
 
 		NSArray *romanticismLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -427,7 +447,8 @@
                                                                                 title:NSLocalizedString(@"Sóc romàntic", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:romanticismLevelListOptions]];
+                                                                              options:romanticismLevelListOptions
+                                                                           isReadOnly:readOnly]];
 
 
         
@@ -444,11 +465,13 @@
                                                                                 title:NSLocalizedString(@"Vull tenir fills", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:iWantChildrensListOptions]];
+                                                                              options:iWantChildrensListOptions
+                                                                           isReadOnly:readOnly]];
 
 
 
 		IBAFormSection *professionalSituationFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"La meva situació professional", @"") footerTitle:nil];
+        [professionalSituationFieldSection setFormFieldStyle:selectedStyle];
 
 		NSArray *studiesLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                                NSLocalizedString(@"[1]Institut o inferior", @""),
@@ -463,7 +486,8 @@
                                                                                  title:NSLocalizedString(@"El meu nivell d'estudis", @"")
                                                                       valueTransformer:nil
                                                                          selectionMode:IBAPickListSelectionModeSingle
-                                                                               options:studiesLevelListOptions]];
+                                                                               options:studiesLevelListOptions
+                                                                            isReadOnly:readOnly]];
 
 
 		NSArray *languagesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -536,7 +560,8 @@
                                                                                                 title:NSLocalizedString(@"Idiomes que parlo", @"")
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeMultiple
-                                                                                              options:languagesListOptions]];
+                                                                                              options:languagesListOptions
+                                                                                           isReadOnly:readOnly]];
 
 
 		NSArray *myBusinessListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -611,7 +636,8 @@
                                                                                                 title:NSLocalizedString(@"La meva professió", @"")
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                                              options:myBusinessListOptions]];
+                                                                                              options:myBusinessListOptions
+                                                                                           isReadOnly:readOnly]];
 
 
 		NSArray *salaryListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -628,11 +654,13 @@
                                                                                                 title:NSLocalizedString(@"Els meus ingressos", @"")
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                                              options:salaryListOptions]];
+                                                                                              options:salaryListOptions
+                                                                                           isReadOnly:readOnly]];
 
 
 
 		IBAFormSection *lifestyleFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"El meu estil de vida", @"") footerTitle:nil];
+        [lifestyleFieldSection setFormFieldStyle:selectedStyle];
 
 		NSArray *myStyleListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                              NSLocalizedString(@"[3]A la moda", @""),
@@ -651,7 +679,8 @@
                                                                                                 title:NSLocalizedString(@"El meu estil", @"")
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                                              options:myStyleListOptions]];
+                                                                                              options:myStyleListOptions
+                                                                                           isReadOnly:readOnly]];
 
 
 		NSArray *alimentListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -668,7 +697,8 @@
                                                                                     title:NSLocalizedString(@"La meva alimentació", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeSingle
-                                                                                  options:alimentListOptions]];
+                                                                                  options:alimentListOptions
+                                                                               isReadOnly:readOnly]];
 
 
 
@@ -683,7 +713,8 @@
                                                                                     title:NSLocalizedString(@"Fumo", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeSingle
-                                                                                  options:smokeListOptions]];
+                                                                                  options:smokeListOptions
+                                                                               isReadOnly:readOnly]];
 
 
 		NSArray *animalsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -705,11 +736,13 @@
                                                                                     title:NSLocalizedString(@"Els meus animals", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeSingle
-                                                                                  options:animalsListOptions]];
+                                                                                  options:animalsListOptions
+                                                                               isReadOnly:readOnly]];
 
 
 
 		IBAFormSection *interestsFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els meus interessos", @"") footerTitle:nil];
+        [interestsFieldSection setFormFieldStyle:selectedStyle];
         
 		NSArray *myHobbiesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                           NSLocalizedString(@"[6]exposiciones/museos", @""),
@@ -749,7 +782,8 @@
                                                                                     title:NSLocalizedString(@"Les meves aficions", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
-                                                                                  options:myHobbiesListOptions]];
+                                                                                  options:myHobbiesListOptions
+                                                                               isReadOnly:readOnly]];
 
 
 
@@ -801,7 +835,8 @@
                                                                                     title:NSLocalizedString(@"Els meus esports", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
-                                                                                  options:mySportsListOptions]];
+                                                                                  options:mySportsListOptions
+                                                                               isReadOnly:readOnly]];
 
 
 
@@ -827,11 +862,13 @@
                                                                                     title:NSLocalizedString(@"Les meves sortides", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
-                                                                                  options:mySparetimeListOptions]];
+                                                                                  options:mySparetimeListOptions
+                                                                               isReadOnly:readOnly]];
 
 
 
 		IBAFormSection *preferencesFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els meus gustos culturals", @"") footerTitle:nil];
+        [preferencesFieldSection setFormFieldStyle:selectedStyle];
 
 		NSArray *musicListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                       NSLocalizedString(@"[24]ambiente / de relajación", @""),
@@ -866,7 +903,8 @@
                                                                                     title:NSLocalizedString(@"Gustos musicals", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
-                                                                                  options:musicListOptions]];
+                                                                                  options:musicListOptions
+                                                                               isReadOnly:readOnly]];
 
 
 
@@ -898,149 +936,19 @@
                                                                                       title:NSLocalizedString(@"Pel·lícules preferides", @"")
                                                                            valueTransformer:nil
                                                                               selectionMode:IBAPickListSelectionModeMultiple
-                                                                                    options:moviesListOptions]];
-
-
-
-
-/*		[basicFieldSection addFormField:[[IBATextFormField alloc] initWithKeyPath:@"text" title:@"Text"]];
-		[IBATextFormField passwordTextFormFieldWithSection:basicFieldSection keyPath:@"password" title:@"Password" valueTransformer:nil];
-		[basicFieldSection addFormField:[[IBABooleanFormField alloc] initWithKeyPath:@"booleanSwitchValue" title:@"Switch"]];
-		[basicFieldSection addFormField:[[IBABooleanFormField alloc] initWithKeyPath:@"booleanCheckValue" title:@"Check" type:IBABooleanFormFieldTypeCheck]];
-
-		
-		// Styled form fields
-		IBAFormSection *styledFieldSection = [self addSectionWithHeaderTitle:@"Styled Fields" footerTitle:nil];
-
-		IBAFormFieldStyle *style = [[IBAFormFieldStyle alloc] init];
-		style.labelTextColor = [UIColor blackColor];
-		style.labelFont = [UIFont systemFontOfSize:14];
-		style.labelTextAlignment = UITextAlignmentLeft;
-		style.valueTextAlignment = UITextAlignmentRight;
-		style.valueTextColor = [UIColor darkGrayColor];
-		style.activeColor = [UIColor colorWithRed:0.934 green:0.791 blue:0.905 alpha:1.000];
-
-		styledFieldSection.formFieldStyle = style;
-
-		[styledFieldSection addFormField:[[IBATextFormField alloc] initWithKeyPath:@"textStyled" title:@"Text"]];
-		[IBATextFormField passwordTextFormFieldWithSection:styledFieldSection keyPath:@"passwordStyled" title:@"Password" valueTransformer:nil];
-
-		// Date fields
-		IBAFormSection *dateFieldSection = [self addSectionWithHeaderTitle:@"Dates" footerTitle:nil];
-
-		NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
-		[dateTimeFormatter setDateStyle:NSDateFormatterShortStyle];
-		[dateTimeFormatter setTimeStyle:NSDateFormatterNoStyle];
-		[dateTimeFormatter setDateFormat:@"EEE d MMM  h:mm a"];
-
-		[dateFieldSection addFormField:[[IBADateFormField alloc] initWithKeyPath:@"dateTime"
-															 title:@"Date & Time"
-													  defaultValue:[NSDate date]
-															  type:IBADateFormFieldTypeDateTime
-													 dateFormatter:dateTimeFormatter]];
-
-		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setDateStyle:NSDateFormatterShortStyle];
-		[dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-		[dateFormatter setDateFormat:@"EEE d MMM yyyy"];
-
-		[dateFieldSection addFormField:[[IBADateFormField alloc] initWithKeyPath:@"date"
-																			title:@"Date"
-																	 defaultValue:[NSDate date]
-																			 type:IBADateFormFieldTypeDate
-																	dateFormatter:dateFormatter]];
-
-		NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-		[timeFormatter setDateStyle:NSDateFormatterShortStyle];
-		[timeFormatter setTimeStyle:NSDateFormatterNoStyle];
-		[timeFormatter setDateFormat:@"h:mm a"];
-
-		[dateFieldSection addFormField:[[IBADateFormField alloc] initWithKeyPath:@"time"
-																		title:@"Time"
-																 defaultValue:[NSDate date]
-																		 type:IBADateFormFieldTypeTime
-																dateFormatter:timeFormatter]];
-
-		// Picklists
-		IBAFormSection *pickListSection = [self addSectionWithHeaderTitle:@"Pick Lists" footerTitle:nil];
-
-		NSArray *pickListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:@"Apples",
-																					 @"Bananas",
-																					 @"Oranges",
-																					 @"Lemons",
-																					 nil]];
-
-		[pickListSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"singlePickListItem"
-																			   title:@"Single"
-																	valueTransformer:nil
-																	   selectionMode:IBAPickListSelectionModeSingle
-																			 options:pickListOptions]];
-
-		NSArray *carListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:@"Honda",
-																					  @"BMW",
-																					  @"Holden",
-																					  @"Ford",
-																					  @"Toyota",
-																					  @"Mitsubishi",
-																					  nil]];
-
-		IBAPickListFormOptionsStringTransformer *transformer = [[IBAPickListFormOptionsStringTransformer alloc] initWithPickListOptions:carListOptions];
-		[pickListSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"multiplePickListItems"
-																			   title:@"Multiple"
-																	valueTransformer:transformer
-																	   selectionMode:IBAPickListSelectionModeMultiple
-																			 options:carListOptions]];
-
-		// An example of modifying the UITextInputTraits of an IBATextFormField and using an NSValueTransformer
-		IBAFormSection *textInputTraitsSection = [self addSectionWithHeaderTitle:@"Traits & Transformations" footerTitle:nil];
-		IBATextFormField *numberField = [[IBATextFormField alloc] initWithKeyPath:@"number"
-																			title:@"Number"
-																 valueTransformer:[StringToNumberTransformer instance]];
-		[textInputTraitsSection addFormField:numberField];
-		numberField.textFormFieldCell.textField.keyboardType = UIKeyboardTypeNumberPad;
-
-
-		// Read-only fields
-		IBAFormFieldStyle *readonlyFieldStyle = [[IBAFormFieldStyle alloc] init];
-		readonlyFieldStyle.labelFrame = CGRectMake(IBAFormFieldLabelX, IBAFormFieldLabelY, IBAFormFieldLabelWidth + 100, IBAFormFieldLabelHeight);
-		readonlyFieldStyle.labelTextAlignment = UITextAlignmentLeft;
-    
-		IBAFormSection *readonlyFieldSection = [self addSectionWithHeaderTitle:@"Read-Only Fields" footerTitle:nil];
-		
-        // IBAReadOnlyTextFormField displays the value the field is bound in a read-only text view. The title is displayed as the field's label.
-		[readonlyFieldSection addFormField:[[IBAReadOnlyTextFormField alloc] initWithKeyPath:@"readOnlyText" title:@"Read Only"]];
-		
-        // IBATitleFormField displays the provided title in the field's label. No value is displayed for the field.
-		[readonlyFieldSection addFormField:[[IBATitleFormField alloc] initWithTitle:@"A title"]];
-        
-		// IBALabelFormField displays the value the field is bound to as the field's label.
-		IBALabelFormField *labelField = [[IBALabelFormField alloc] initWithKeyPath:@"readOnlyText"];
-		labelField.formFieldStyle = readonlyFieldStyle;
-		[readonlyFieldSection addFormField:labelField];
-
-
-
-		// Some examples of how you might use the button form field
-		IBAFormSection *buttonsSection = [self addSectionWithHeaderTitle:@"Buttons" footerTitle:nil];
-		buttonsSection.formFieldStyle = [[ShowcaseButtonStyle alloc] init];
-
-		[buttonsSection addFormField:[[IBAButtonFormField alloc] initWithTitle:@"Go to Google"
-																		   icon:nil
-																 executionBlock:^{
-																	 [[UIApplication sharedApplication]
-																	  openURL:[NSURL URLWithString:@"http://www.google.com"]];
-																 }]];
-
-		[buttonsSection addFormField:[[IBAButtonFormField alloc] initWithTitle:@"Compose email"
-																		   icon:nil
-																 executionBlock:^{
-																	 [[UIApplication sharedApplication]
-																	  openURL:[NSURL URLWithString:@"mailto:info@google.com"]];
-																 }]];
-*/
+                                                                                    options:moviesListOptions
+                                                                                 isReadOnly:readOnly]];
     }
 
     return self;
+}
+
+- (void)loadStyles
+{
+    readOnlyStyle = [[IBAFormFieldStyle alloc] init];
+
+    readWriteStyle = [[IBAFormFieldStyle alloc] init];
+    readWriteStyle.valueBackgroundColor = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:240.0/255.0 alpha:1.000];
 }
 
 - (void)setModelValue:(id)value forKeyPath:(NSString *)keyPath {
