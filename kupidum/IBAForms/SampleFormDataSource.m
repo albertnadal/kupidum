@@ -24,13 +24,13 @@
 		// Some basic form fields that accept text input
 		IBAFormSection *basicFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"La meva aparença", @"") footerTitle:nil];
 
-		NSArray *eyeColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                     NSLocalizedString(@"Avellana", @""),
-																					 NSLocalizedString(@"Blaus", @""),
-																					 NSLocalizedString(@"Grisos", @""),
-																					 NSLocalizedString(@"Marrons", @""),
-																					 NSLocalizedString(@"Negres", @""),
-																					 NSLocalizedString(@"Verds", @""),
+		NSArray *eyeColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                     NSLocalizedString(@"[4]Avellana", @""),
+																					 NSLocalizedString(@"[1]Blaus", @""),
+																					 NSLocalizedString(@"[2]Grisos", @""),
+																					 NSLocalizedString(@"[3]Marrons", @""),
+																					 NSLocalizedString(@"[6]Negres", @""),
+																					 NSLocalizedString(@"[5]Verds", @""),
 																					 nil]];
 
 		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"eyeColorPickListItem"
@@ -40,9 +40,9 @@
                                                                             options:eyeColorListOptions]];
 
         NSMutableArray *heightArray = [[NSMutableArray alloc] init];
-        [heightArray addObject:NSLocalizedString(@"Prefereixo no dir-ho", @"")];
+        [heightArray addObject:NSLocalizedString(@"[0]Prefereixo no dir-ho", @"")];
         for(int h=140; h<200; h++)
-            [heightArray addObject:[NSString stringWithFormat:@"%d cm", h]];
+            [heightArray addObject:[NSString stringWithFormat:@"[%d]%d cm", h, h]];
 
 		NSArray *heightListOptions = [IBAPickListFormOption pickListOptionsForStrings:heightArray];
 
@@ -53,9 +53,9 @@
                                                                               options:heightListOptions]];
 
         NSMutableArray *weightArray = [[NSMutableArray alloc] init];
-        [weightArray addObject:NSLocalizedString(@"Prefereixo no dir-ho", @"")];
+        [weightArray addObject:NSLocalizedString(@"[0]Prefereixo no dir-ho", @"")];
         for(int h=40; h<120; h++)
-            [weightArray addObject:[NSString stringWithFormat:@"%d kg", h]];
+            [weightArray addObject:[NSString stringWithFormat:@"[%d]%d kg", h, h]];
 
 		NSArray *weightListOptions = [IBAPickListFormOption pickListOptionsForStrings:weightArray];
 
@@ -65,13 +65,13 @@
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:weightListOptions]];
 
-		NSArray *hairColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                         NSLocalizedString(@"Blanc", @""),
-                                                                                         NSLocalizedString(@"Castany", @""),
-                                                                                         NSLocalizedString(@"Gris", @""),
-                                                                                         NSLocalizedString(@"Moreno", @""),
-                                                                                         NSLocalizedString(@"Pèl-roig", @""),
-                                                                                         NSLocalizedString(@"Ros", @""),
+		NSArray *hairColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                         NSLocalizedString(@"[1]Blanc", @""),
+                                                                                         NSLocalizedString(@"[4]Castany", @""),
+                                                                                         NSLocalizedString(@"[5]Gris", @""),
+                                                                                         NSLocalizedString(@"[3]Moreno", @""),
+                                                                                         NSLocalizedString(@"[7]Pèl-roig", @""),
+                                                                                         NSLocalizedString(@"[2]Ros", @""),
                                                                                          nil]];
         
 		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"hairColorPickListItem"
@@ -80,14 +80,14 @@
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:hairColorListOptions]];
 
-		NSArray *hairSizeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                          NSLocalizedString(@"Rapat", @""),
-                                                                                          NSLocalizedString(@"Molt curt", @""),
-                                                                                          NSLocalizedString(@"Curt", @""),
-                                                                                          NSLocalizedString(@"Semillarg", @""),
-                                                                                          NSLocalizedString(@"Llarg", @""),
-                                                                                          NSLocalizedString(@"Molt llarg", @""),
-                                                                                          NSLocalizedString(@"Sense pèl", @""),
+		NSArray *hairSizeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                          NSLocalizedString(@"[1]Rapat", @""),
+                                                                                          NSLocalizedString(@"[2]Molt curt", @""),
+                                                                                          NSLocalizedString(@"[3]Curt", @""),
+                                                                                          NSLocalizedString(@"[4]Semillarg", @""),
+                                                                                          NSLocalizedString(@"[5]Llarg", @""),
+                                                                                          NSLocalizedString(@"[6]Molt llarg", @""),
+                                                                                          NSLocalizedString(@"[7]Sense pèl", @""),
                                                                                           nil]];
         
 		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"hairSizePickListItem"
@@ -96,14 +96,14 @@
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:hairSizeListOptions]];
 
-		NSArray *bodyLookListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                         NSLocalizedString(@"Explosiu", @""),
-                                                                                         NSLocalizedString(@"Molt agradable de veure", @""),
-                                                                                         NSLocalizedString(@"Agradable de veure", @""),
-                                                                                         NSLocalizedString(@"En la mitjana", @""),
-                                                                                         NSLocalizedString(@"No gaire dolent", @""),
-                                                                                         NSLocalizedString(@"No ho he de dir jo", @""),
-                                                                                         NSLocalizedString(@"El físic no té importància", @""),
+		NSArray *bodyLookListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                         NSLocalizedString(@"[1]Explosiu", @""),
+                                                                                         NSLocalizedString(@"[2]Molt agradable de veure", @""),
+                                                                                         NSLocalizedString(@"[3]Agradable de veure", @""),
+                                                                                         NSLocalizedString(@"[4]En la mitjana", @""),
+                                                                                         NSLocalizedString(@"[5]No gaire dolent", @""),
+                                                                                         NSLocalizedString(@"[6]No ho he de dir jo", @""),
+                                                                                         NSLocalizedString(@"[7]El físic no té importància", @""),
                                                                                          nil]];
         
 		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"bodyLookListItem"
@@ -113,19 +113,20 @@
                                                                               options:bodyLookListOptions]];
 
 
-		NSArray *myHighlightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                         NSLocalizedString(@"La meva boca", @""),
-                                                                                         NSLocalizedString(@"El meu cabell", @""),
-                                                                                         NSLocalizedString(@"El meu nas", @""),
-                                                                                         NSLocalizedString(@"La meva nuca", @""),
-                                                                                         NSLocalizedString(@"El meu somriure", @""),
-                                                                                         NSLocalizedString(@"El meu cul", @""),
-                                                                                         NSLocalizedString(@"Les meves mans", @""),
-                                                                                         NSLocalizedString(@"Els meus músculs", @""),
-                                                                                         NSLocalizedString(@"Els meus ulls", @""),
-                                                                                         NSLocalizedString(@"Els meus pectorals", @""),
-                                                                                         NSLocalizedString(@"Les meves cames", @""),
-                                                                                         NSLocalizedString(@"El més bonic no està a la llista", @""),
+		NSArray *myHighlightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                         NSLocalizedString(@"[3]La meva boca", @""),
+                                                                                         NSLocalizedString(@"[4]El meu cabell", @""),
+                                                                                         NSLocalizedString(@"[13]El meu nas", @""),
+                                                                                         NSLocalizedString(@"[10]La meva nuca", @""),
+                                                                                         NSLocalizedString(@"[2]El meu somriure", @""),
+                                                                                         NSLocalizedString(@"[5]El meu cul", @""),
+                                                                                         NSLocalizedString(@"[6]Les meves mans", @""),
+                                                                                         NSLocalizedString(@"[11]Els meus músculs", @""),
+                                                                                         NSLocalizedString(@"[1]Els meus ulls", @""),
+                                                                                         NSLocalizedString(@"[7]Els meus pectorals", @""),
+                                                                                         NSLocalizedString(@"[8]Les meves cames", @""),
+                                                                                         NSLocalizedString(@"[9]Els meus peus", @""),
+                                                                                         NSLocalizedString(@"[10]El més bonic no està a la llista", @""),
                                                                                          nil]];
 
 		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"myHighlightListItem"
@@ -138,7 +139,7 @@
 
 		IBAFormSection *valuesFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els meus valors", @"") footerTitle:nil];
 
-		NSArray *nationColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+		NSArray *citizenshipListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                                  NSLocalizedString(@"[56]Espanyola", @""),
                                                                                                  NSLocalizedString(@"[5]Alemana", @""),
                                                                                                  NSLocalizedString(@"[10]Argentina", @""),
@@ -344,17 +345,17 @@
                                                                                 title:NSLocalizedString(@"La meva nacionalitat", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:nationColorListOptions]];
+                                                                              options:citizenshipListOptions]];
 
 
-		NSArray *ethnicalOriginListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                            NSLocalizedString(@"Europeu", @""),
-                                                                                            NSLocalizedString(@"Hispà", @""),
-                                                                                            NSLocalizedString(@"Africà", @""),
-                                                                                            NSLocalizedString(@"Àrab", @""),
-                                                                                            NSLocalizedString(@"Aisàtic", @""),
-                                                                                            NSLocalizedString(@"Indi", @""),
-                                                                                            NSLocalizedString(@"Un altre", @""),
+		NSArray *ethnicalOriginListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                            NSLocalizedString(@"[1]Europeu", @""),
+                                                                                            NSLocalizedString(@"[5]Hispà", @""),
+                                                                                            NSLocalizedString(@"[2]Africà", @""),
+                                                                                            NSLocalizedString(@"[3]Àrab", @""),
+                                                                                            NSLocalizedString(@"[4]Asiàtic", @""),
+                                                                                            NSLocalizedString(@"[7]Indi", @""),
+                                                                                            NSLocalizedString(@"[6]Un altre", @""),
                                                                                             nil]];
         
 		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"ethnicalOriginListItem"
@@ -364,18 +365,18 @@
                                                                               options:ethnicalOriginListOptions]];
 
 
-		NSArray *religionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                               NSLocalizedString(@"Agnòstic", @""),
-                                                                                               NSLocalizedString(@"Ateu", @""),
-                                                                                               NSLocalizedString(@"Budista", @""),
-                                                                                               NSLocalizedString(@"Catòlic", @""),
-                                                                                               NSLocalizedString(@"Cristià", @""),
-                                                                                               NSLocalizedString(@"Hinduista", @""),
-                                                                                               NSLocalizedString(@"Jueu", @""),
-                                                                                               NSLocalizedString(@"Musulmà", @""),
-                                                                                               NSLocalizedString(@"Ortodox", @""),
-                                                                                               NSLocalizedString(@"Protestant", @""),
-                                                                                               NSLocalizedString(@"Un altre", @""),
+		NSArray *religionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                               NSLocalizedString(@"[12]Agnòstic", @""),
+                                                                                               NSLocalizedString(@"[11]Ateu", @""),
+                                                                                               NSLocalizedString(@"[22]Budista", @""),
+                                                                                               NSLocalizedString(@"[18]Catòlic", @""),
+                                                                                               NSLocalizedString(@"[25]Cristià", @""),
+                                                                                               NSLocalizedString(@"[23]Hinduista", @""),
+                                                                                               NSLocalizedString(@"[20]Jueu", @""),
+                                                                                               NSLocalizedString(@"[21]Musulmà", @""),
+                                                                                               NSLocalizedString(@"[24]Ortodox", @""),
+                                                                                               NSLocalizedString(@"[19]Protestant", @""),
+                                                                                               NSLocalizedString(@"[13]Un altre", @""),
                                                                                                nil]];
 
 		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"religionListItem"
@@ -386,10 +387,10 @@
 
         
         
-		NSArray *religionLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                         NSLocalizedString(@"Practicant", @""),
-                                                                                         NSLocalizedString(@"Practicant ocasional", @""),
-                                                                                         NSLocalizedString(@"No practicant", @""),
+		NSArray *religionLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                         NSLocalizedString(@"[1]Practicant", @""),
+                                                                                         NSLocalizedString(@"[2]Practicant ocasional", @""),
+                                                                                         NSLocalizedString(@"[3]No practicant", @""),
                                                                                          nil]];
 
 		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"religionLevelListItem"
@@ -399,13 +400,13 @@
                                                                               options:religionLevelListOptions]];
 
 
-		NSArray *marriageOpinionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                              NSLocalizedString(@"Sagrat", @""),
-                                                                                              NSLocalizedString(@"Molt important", @""),
-                                                                                              NSLocalizedString(@"Important", @""),
-                                                                                              NSLocalizedString(@"No és indispensable", @""),
-                                                                                              NSLocalizedString(@"Impensable", @""),
-                                                                                              NSLocalizedString(@"No em tornaré a casar", @""),
+		NSArray *marriageOpinionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                              NSLocalizedString(@"[1]Sagrat", @""),
+                                                                                              NSLocalizedString(@"[2]Molt important", @""),
+                                                                                              NSLocalizedString(@"[3]Important", @""),
+                                                                                              NSLocalizedString(@"[4]No és indispensable", @""),
+                                                                                              NSLocalizedString(@"[5]Impensable", @""),
+                                                                                              NSLocalizedString(@"[6]No em tornaré a casar", @""),
                                                                                               nil]];
 
 		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"marriageOpinionListItem"
@@ -415,11 +416,11 @@
                                                                               options:marriageOpinionListOptions]];
 
 
-		NSArray *romanticismLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                                NSLocalizedString(@"Molt romàntic", @""),
-                                                                                                NSLocalizedString(@"Bastant romàntic", @""),
-                                                                                                NSLocalizedString(@"Poc romàntic", @""),
-                                                                                                NSLocalizedString(@"Gens romàntic", @""),
+		NSArray *romanticismLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                                NSLocalizedString(@"[1]Molt romàntic", @""),
+                                                                                                NSLocalizedString(@"[2]Bastant romàntic", @""),
+                                                                                                NSLocalizedString(@"[3]Poc romàntic", @""),
+                                                                                                NSLocalizedString(@"[4]Gens romàntic", @""),
                                                                                                 nil]];
 
 		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"romanticismLevelListItem"
@@ -430,13 +431,13 @@
 
 
         
-		NSArray *iWantChildrensListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                                 NSLocalizedString(@"No", @""),
-                                                                                                 NSLocalizedString(@"Sí, 1", @""),
-                                                                                                 NSLocalizedString(@"Sí, 2", @""),
-                                                                                                 NSLocalizedString(@"Sí, 3", @""),
-                                                                                                 NSLocalizedString(@"Sí, més de 3", @""),
-                                                                                                 NSLocalizedString(@"Sí, número no decidit", @""),
+		NSArray *iWantChildrensListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                                 NSLocalizedString(@"[1]No", @""),
+                                                                                                 NSLocalizedString(@"[2]Sí, 1", @""),
+                                                                                                 NSLocalizedString(@"[3]Sí, 2", @""),
+                                                                                                 NSLocalizedString(@"[4]Sí, 3", @""),
+                                                                                                 NSLocalizedString(@"[5]Sí, més de 3", @""),
+                                                                                                 NSLocalizedString(@"[6]Sí, número no decidit", @""),
                                                                                                  nil]];
         
 		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"iWantChildrensListItem"
@@ -449,13 +450,13 @@
 
 		IBAFormSection *professionalSituationFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"La meva situació professional", @"") footerTitle:nil];
 
-		NSArray *studiesLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                               NSLocalizedString(@"Institut o inferior", @""),
-                                                                                               NSLocalizedString(@"Batxillerat", @""),
-                                                                                               NSLocalizedString(@"Mòdul professional", @""),
-                                                                                               NSLocalizedString(@"Diplomat", @""),
-                                                                                               NSLocalizedString(@"Llicenciat o superior", @""),
-                                                                                               NSLocalizedString(@"Altres", @""),
+		NSArray *studiesLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                               NSLocalizedString(@"[1]Institut o inferior", @""),
+                                                                                               NSLocalizedString(@"[2]Batxillerat", @""),
+                                                                                               NSLocalizedString(@"[3]Mòdul professional", @""),
+                                                                                               NSLocalizedString(@"[4]Diplomat", @""),
+                                                                                               NSLocalizedString(@"[5]Llicenciat o superior", @""),
+                                                                                               NSLocalizedString(@"[6]Altres", @""),
                                                                                                nil]];
         
 		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"studiesLevelListItem"
@@ -465,13 +466,71 @@
                                                                                options:studiesLevelListOptions]];
 
 
-		NSArray *languagesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                             NSLocalizedString(@"Anglés", @""),
-                                                                                             NSLocalizedString(@"Castellà", @""),
-                                                                                             NSLocalizedString(@"Català", @""),
-                                                                                             NSLocalizedString(@"Francés", @""),
-                                                                                             NSLocalizedString(@"Altres", @""),
-                                                                                             nil]];
+		NSArray *languagesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                          NSLocalizedString(@"[4]inglés", @""),
+                                                                                          NSLocalizedString(@"[22]francés", @""),
+                                                                                          NSLocalizedString(@"[3]alemán", @""),
+                                                                                          NSLocalizedString(@"[30]italiano", @""),
+                                                                                          NSLocalizedString(@"[46]portugués", @""),
+                                                                                          NSLocalizedString(@"[5]árabe", @""),
+                                                                                          NSLocalizedString(@"[48]ruso", @""),
+                                                                                          NSLocalizedString(@"[47]rumano", @""),
+                                                                                          NSLocalizedString(@"[45]polaco", @""),
+                                                                                          NSLocalizedString(@"[52]sueco", @""),
+                                                                                          NSLocalizedString(@"[24]griego", @""),
+                                                                                          NSLocalizedString(@"[39]holandés", @""),
+                                                                                          NSLocalizedString(@"[1]afrikaner", @""),
+                                                                                          NSLocalizedString(@"[2]albanés", @""),
+                                                                                          NSLocalizedString(@"[6]armenio", @""),
+                                                                                          NSLocalizedString(@"[7]azerbaiyano", @""),
+                                                                                          NSLocalizedString(@"[8]bengalí", @""),
+                                                                                          NSLocalizedString(@"[9]bielorruso", @""),
+                                                                                          NSLocalizedString(@"[10]birmano", @""),
+                                                                                          NSLocalizedString(@"[11]bosnio", @""),
+                                                                                          NSLocalizedString(@"[12]búlgaro", @""),
+                                                                                          NSLocalizedString(@"[32]canadiense", @""),
+                                                                                          NSLocalizedString(@"[13]catalán", @""),
+                                                                                          NSLocalizedString(@"[56]checo", @""),
+                                                                                          NSLocalizedString(@"[14]chino (cantonés)", @""),
+                                                                                          NSLocalizedString(@"[15]chino (mandarín)", @""),
+                                                                                          NSLocalizedString(@"[16]coreano", @""),
+                                                                                          NSLocalizedString(@"[17]croata", @""),
+                                                                                          NSLocalizedString(@"[18]danés", @""),
+                                                                                          NSLocalizedString(@"[50]eslovaco", @""),
+                                                                                          NSLocalizedString(@"[51]esloveno", @""),
+                                                                                          NSLocalizedString(@"[19]español", @""),
+                                                                                          NSLocalizedString(@"[20]estonio", @""),
+                                                                                          NSLocalizedString(@"[21]finlandés", @""),
+                                                                                          NSLocalizedString(@"[23]georgiano", @""),
+                                                                                          NSLocalizedString(@"[25]hebreo", @""),
+                                                                                          NSLocalizedString(@"[26]hindi", @""),
+                                                                                          NSLocalizedString(@"[27]húngaro", @""),
+                                                                                          NSLocalizedString(@"[28]indonesio", @""),
+                                                                                          NSLocalizedString(@"[29]iraní", @""),
+                                                                                          NSLocalizedString(@"[31]japonés", @""),
+                                                                                          NSLocalizedString(@"[33]kazajo", @""),
+                                                                                          NSLocalizedString(@"[34]letón", @""),
+                                                                                          NSLocalizedString(@"[35]lituano", @""),
+                                                                                          NSLocalizedString(@"[36]macedonio", @""),
+                                                                                          NSLocalizedString(@"[37]malasio", @""),
+                                                                                          NSLocalizedString(@"[38]moldavo", @""),
+                                                                                          NSLocalizedString(@"[40]nepalés", @""),
+                                                                                          NSLocalizedString(@"[41]noruego", @""),
+                                                                                          NSLocalizedString(@"[64]otro", @""),
+                                                                                          NSLocalizedString(@"[44]pashto", @""),
+                                                                                          NSLocalizedString(@"[49]serbio", @""),
+                                                                                          NSLocalizedString(@"[53]suahili", @""),
+                                                                                          NSLocalizedString(@"[58]tailandés", @""),
+                                                                                          NSLocalizedString(@"[55]tamil", @""),
+                                                                                          NSLocalizedString(@"[54]tayiko", @""),
+                                                                                          NSLocalizedString(@"[57]telugu", @""),
+                                                                                          NSLocalizedString(@"[59]turcomeno", @""),
+                                                                                          NSLocalizedString(@"[60]turco", @""),
+                                                                                          NSLocalizedString(@"[61]ucraniano", @""),
+                                                                                          NSLocalizedString(@"[42]urdu", @""),
+                                                                                          NSLocalizedString(@"[43]uzbeko", @""),
+                                                                                          NSLocalizedString(@"[62]vietnamita", @""),
+                                                                                          nil]];
 
 		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"languagesListItem"
                                                                                                 title:NSLocalizedString(@"Idiomes que parlo", @"")
@@ -555,14 +614,14 @@
                                                                                               options:myBusinessListOptions]];
 
 
-		NSArray *salaryListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                             NSLocalizedString(@"Menys de 10.000€/any", @""),
-                                                                                             NSLocalizedString(@"De 10 a 20.000€/any", @""),
-                                                                                             NSLocalizedString(@"De 20 a 30.000€/any", @""),
-                                                                                             NSLocalizedString(@"De 30 a 50.000€/any", @""),
-                                                                                             NSLocalizedString(@"De 50 a 75.000€/any", @""),
-                                                                                             NSLocalizedString(@"De 75 a 100.000€/any", @""),
-                                                                                             NSLocalizedString(@"Més de 100.000€/any", @""),
+		NSArray *salaryListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                             NSLocalizedString(@"[1]Menys de 10.000€/any", @""),
+                                                                                             NSLocalizedString(@"[2]De 10 a 20.000€/any", @""),
+                                                                                             NSLocalizedString(@"[3]De 20 a 30.000€/any", @""),
+                                                                                             NSLocalizedString(@"[4]De 30 a 50.000€/any", @""),
+                                                                                             NSLocalizedString(@"[5]De 50 a 75.000€/any", @""),
+                                                                                             NSLocalizedString(@"[6]De 75 a 100.000€/any", @""),
+                                                                                             NSLocalizedString(@"[7]Més de 100.000€/any", @""),
                                                                                              nil]];
 
 		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"salaryListItem"
@@ -575,17 +634,17 @@
 
 		IBAFormSection *lifestyleFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"El meu estil de vida", @"") footerTitle:nil];
 
-		NSArray *myStyleListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                             NSLocalizedString(@"A la moda", @""),
-                                                                                             NSLocalizedString(@"Bohemi", @""),
-                                                                                             NSLocalizedString(@"Clàssic", @""),
-                                                                                             NSLocalizedString(@"Esportiu", @""),
-                                                                                             NSLocalizedString(@"Despreocupat", @""),
-                                                                                             NSLocalizedString(@"Ètnic", @""),
-                                                                                             NSLocalizedString(@"Negocis", @""),
-                                                                                             NSLocalizedString(@"Pijo", @""),
-                                                                                             NSLocalizedString(@"Rock", @""),
-                                                                                             NSLocalizedString(@"Altres", @""),
+		NSArray *myStyleListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                             NSLocalizedString(@"[3]A la moda", @""),
+                                                                                             NSLocalizedString(@"[8]Bohemi", @""),
+                                                                                             NSLocalizedString(@"[2]Clàssic", @""),
+                                                                                             NSLocalizedString(@"[6]Esportiu", @""),
+                                                                                             NSLocalizedString(@"[5]Despreocupat", @""),
+                                                                                             NSLocalizedString(@"[7]Ètnic", @""),
+                                                                                             NSLocalizedString(@"[4]Negocis", @""),
+                                                                                             NSLocalizedString(@"[1]Pijo", @""),
+                                                                                             NSLocalizedString(@"[9]Rock", @""),
+                                                                                             NSLocalizedString(@"[11]Altres", @""),
                                                                                              nil]];
 
 		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"myStyleListItem"
@@ -595,14 +654,14 @@
                                                                                               options:myStyleListOptions]];
 
 
-		NSArray *alimentListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                        NSLocalizedString(@"A dieta", @""),
-                                                                                        NSLocalizedString(@"Casher", @""),
-                                                                                        NSLocalizedString(@"Menjo de tot", @""),
-                                                                                        NSLocalizedString(@"Halal", @""),
-                                                                                        NSLocalizedString(@"Macrobiòtic", @""),
-                                                                                        NSLocalizedString(@"Vegà", @""),
-                                                                                        NSLocalizedString(@"Vegetarià", @""),
+		NSArray *alimentListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                        NSLocalizedString(@"[6]A dieta", @""),
+                                                                                        NSLocalizedString(@"[4]Casher", @""),
+                                                                                        NSLocalizedString(@"[1]Menjo de tot", @""),
+                                                                                        NSLocalizedString(@"[5]Halal", @""),
+                                                                                        NSLocalizedString(@"[7]Macrobiòtic", @""),
+                                                                                        NSLocalizedString(@"[3]Vegà", @""),
+                                                                                        NSLocalizedString(@"[2]Vegetarià", @""),
                                                                                         nil]];
         
 		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"alimentListItem"
@@ -613,11 +672,11 @@
 
 
 
-		NSArray *smokeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                        NSLocalizedString(@"No (el fumo no és un problema)", @""),
-                                                                                        NSLocalizedString(@"No (no m'agrada el fum)", @""),
-                                                                                        NSLocalizedString(@"Sí, ocasionalment", @""),
-                                                                                        NSLocalizedString(@"Sí, regularment", @""),
+		NSArray *smokeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                        NSLocalizedString(@"[3]No (el fumo no és un problema)", @""),
+                                                                                        NSLocalizedString(@"[4]No (no m'agrada el fum)", @""),
+                                                                                        NSLocalizedString(@"[1]Sí, ocasionalment", @""),
+                                                                                        NSLocalizedString(@"[2]Sí, regularment", @""),
                                                                                         nil]];
 
 		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"smokeListItem"
@@ -627,11 +686,19 @@
                                                                                   options:smokeListOptions]];
 
 
-		NSArray *animalsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                      NSLocalizedString(@"Canari", @""),
-                                                                                      NSLocalizedString(@"Gat", @""),
-                                                                                      NSLocalizedString(@"Gos", @""),
-                                                                                      NSLocalizedString(@"Hamster", @""),
+		NSArray *animalsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                      NSLocalizedString(@"[3]Animal exòtic", @""),
+                                                                                      NSLocalizedString(@"[8]Cavall/poni", @""),
+                                                                                      NSLocalizedString(@"[9]Conill", @""),
+                                                                                      NSLocalizedString(@"[1]Gats", @""),
+                                                                                      NSLocalizedString(@"[7]Hàmster/ratolí", @""),
+                                                                                      NSLocalizedString(@"[5]Insectes", @""),
+                                                                                      NSLocalizedString(@"[2]Gos", @""),
+                                                                                      NSLocalizedString(@"[4]Peix", @""),
+                                                                                      NSLocalizedString(@"[6]Ocell", @""),
+                                                                                      NSLocalizedString(@"[10]Rèptil", @""),
+                                                                                      NSLocalizedString(@"[11]Altre animal", @""),
+                                                                                      NSLocalizedString(@"[12]No tinc animals", @""),
                                                                                       nil]];
 
 		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"animalsListItem"
@@ -644,38 +711,38 @@
 
 		IBAFormSection *interestsFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els meus interessos", @"") footerTitle:nil];
         
-		NSArray *myHobbiesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                          NSLocalizedString(@"exposiciones/museos", @""),
-                                                                                          NSLocalizedString(@"informática", @""),
-                                                                                          NSLocalizedString(@"lectura", @""),
-                                                                                          NSLocalizedString(@"teatro", @""),
-                                                                                          NSLocalizedString(@"viajes", @""),
-                                                                                          NSLocalizedString(@"cocina", @""),
-                                                                                          NSLocalizedString(@"compras", @""),
-                                                                                          NSLocalizedString(@"deporte", @""),
-                                                                                          NSLocalizedString(@"foto", @""),
-                                                                                          NSLocalizedString(@"música", @""),
-                                                                                          NSLocalizedString(@"animales", @""),
-                                                                                          NSLocalizedString(@"pintura", @""),
-                                                                                          NSLocalizedString(@"actividad caritativa", @""),
-                                                                                          NSLocalizedString(@"ajedrez", @""),
-                                                                                          NSLocalizedString(@"automóvil", @""),
-                                                                                          NSLocalizedString(@"bricolaje", @""),
-                                                                                          NSLocalizedString(@"colección de figuritas", @""),
-                                                                                          NSLocalizedString(@"costura/punto", @""),
-                                                                                          NSLocalizedString(@"danza", @""),
-                                                                                          NSLocalizedString(@"decoración", @""),
-                                                                                          NSLocalizedString(@"dibujo", @""),
-                                                                                          NSLocalizedString(@"escritura", @""),
-                                                                                          NSLocalizedString(@"internet", @""),
-                                                                                          NSLocalizedString(@"jardinería", @""),
-                                                                                          NSLocalizedString(@"juegos de cartas", @""),
-                                                                                          NSLocalizedString(@"juegos de rol", @""),
-                                                                                          NSLocalizedString(@"juegos de sociedad", @""),
-                                                                                          NSLocalizedString(@"paseos", @""),
-                                                                                          NSLocalizedString(@"televisión", @""),
-                                                                                          NSLocalizedString(@"videojuegos", @""),
-                                                                                          NSLocalizedString(@"Altres", @""),
+		NSArray *myHobbiesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                          NSLocalizedString(@"[6]exposiciones/museos", @""),
+                                                                                          NSLocalizedString(@"[14]informática", @""),
+                                                                                          NSLocalizedString(@"[10]lectura", @""),
+                                                                                          NSLocalizedString(@"[1]teatro", @""),
+                                                                                          NSLocalizedString(@"[16]viajes", @""),
+                                                                                          NSLocalizedString(@"[9]cocina", @""),
+                                                                                          NSLocalizedString(@"[2]compras", @""),
+                                                                                          NSLocalizedString(@"[15]deporte", @""),
+                                                                                          NSLocalizedString(@"[22]foto", @""),
+                                                                                          NSLocalizedString(@"[7]música", @""),
+                                                                                          NSLocalizedString(@"[21]animales", @""),
+                                                                                          NSLocalizedString(@"[12]pintura", @""),
+                                                                                          NSLocalizedString(@"[24]actividad caritativa", @""),
+                                                                                          NSLocalizedString(@"[27]ajedrez", @""),
+                                                                                          NSLocalizedString(@"[20]automóvil", @""),
+                                                                                          NSLocalizedString(@"[3]bricolaje", @""),
+                                                                                          NSLocalizedString(@"[44]colección de figuritas", @""),
+                                                                                          NSLocalizedString(@"[25]costura/punto", @""),
+                                                                                          NSLocalizedString(@"[5]danza", @""),
+                                                                                          NSLocalizedString(@"[26]decoración", @""),
+                                                                                          NSLocalizedString(@"[13]dibujo", @""),
+                                                                                          NSLocalizedString(@"[8]escritura", @""),
+                                                                                          NSLocalizedString(@"[19]internet", @""),
+                                                                                          NSLocalizedString(@"[4]jardinería", @""),
+                                                                                          NSLocalizedString(@"[28]juegos de cartas", @""),
+                                                                                          NSLocalizedString(@"[29]juegos de rol", @""),
+                                                                                          NSLocalizedString(@"[30]juegos de sociedad", @""),
+                                                                                          NSLocalizedString(@"[17]paseos", @""),
+                                                                                          NSLocalizedString(@"[11]televisión", @""),
+                                                                                          NSLocalizedString(@"[18]videojuegos", @""),
+                                                                                          NSLocalizedString(@"[23]Altres", @""),
                                                                                           nil]];
 
 		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"myHobbiesListItem"
@@ -686,48 +753,48 @@
 
 
 
-		NSArray *mySportsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                         NSLocalizedString(@"fútbol", @""),
-                                                                                         NSLocalizedString(@"baloncesto", @""),
-                                                                                         NSLocalizedString(@"fitness", @""),
-                                                                                         NSLocalizedString(@"jogging", @""),
-                                                                                         NSLocalizedString(@"natación", @""),
-                                                                                         NSLocalizedString(@"vela", @""),
-                                                                                         NSLocalizedString(@"windsurf", @""),
-                                                                                         NSLocalizedString(@"ciclismo", @""),
-                                                                                         NSLocalizedString(@"deportes de riesgo", @""),
-                                                                                         NSLocalizedString(@"ski/snowboard", @""),
-                                                                                         NSLocalizedString(@"tenis", @""),
-                                                                                         NSLocalizedString(@"surf", @""),
-                                                                                         NSLocalizedString(@"atletismo", @""),
-                                                                                         NSLocalizedString(@"automóvil", @""),
-                                                                                         NSLocalizedString(@"bádminton", @""),
-                                                                                         NSLocalizedString(@"balonmano", @""),
-                                                                                         NSLocalizedString(@"béisbol", @""),
-                                                                                         NSLocalizedString(@"boxeo", @""),
-                                                                                         NSLocalizedString(@"cricket", @""),
-                                                                                         NSLocalizedString(@"danza", @""),
-                                                                                         NSLocalizedString(@"deportes de combate", @""),
-                                                                                         NSLocalizedString(@"deportes mecánicos", @""),
-                                                                                         NSLocalizedString(@"equitación", @""),
-                                                                                         NSLocalizedString(@"fútbol americano", @""),
-                                                                                         NSLocalizedString(@"gimnasia", @""),
-                                                                                         NSLocalizedString(@"golf", @""),
-                                                                                         NSLocalizedString(@"hockey", @""),
-                                                                                         NSLocalizedString(@"judo", @""),
-                                                                                         NSLocalizedString(@"kárate", @""),
-                                                                                         NSLocalizedString(@"moto", @""),
-                                                                                         NSLocalizedString(@"ninguno", @""),
-                                                                                         NSLocalizedString(@"otros deportes acuáticos", @""),
-                                                                                         NSLocalizedString(@"roller", @""),
-                                                                                         NSLocalizedString(@"rugby", @""),
-                                                                                         NSLocalizedString(@"senderismo/trekking", @""),
-                                                                                         NSLocalizedString(@"skateboard", @""),
-                                                                                         NSLocalizedString(@"skiing", @""),
-                                                                                         NSLocalizedString(@"squash", @""),
-                                                                                         NSLocalizedString(@"tenis de mesa", @""),
-                                                                                         NSLocalizedString(@"volley-ball", @""),
-                                                                                         NSLocalizedString(@"Altres", @""),
+		NSArray *mySportsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                         NSLocalizedString(@"[9]fútbol", @""),
+                                                                                         NSLocalizedString(@"[4]baloncesto", @""),
+                                                                                         NSLocalizedString(@"[41]fitness", @""),
+                                                                                         NSLocalizedString(@"[34]jogging", @""),
+                                                                                         NSLocalizedString(@"[17]natación", @""),
+                                                                                         NSLocalizedString(@"[26]vela", @""),
+                                                                                         NSLocalizedString(@"[18]windsurf", @""),
+                                                                                         NSLocalizedString(@"[7]ciclismo", @""),
+                                                                                         NSLocalizedString(@"[38]deportes de riesgo", @""),
+                                                                                         NSLocalizedString(@"[22]ski/snowboard", @""),
+                                                                                         NSLocalizedString(@"[25]tenis", @""),
+                                                                                         NSLocalizedString(@"[19]surf", @""),
+                                                                                         NSLocalizedString(@"[1]atletismo", @""),
+                                                                                         NSLocalizedString(@"[2]automóvil", @""),
+                                                                                         NSLocalizedString(@"[30]bádminton", @""),
+                                                                                         NSLocalizedString(@"[12]balonmano", @""),
+                                                                                         NSLocalizedString(@"[3]béisbol", @""),
+                                                                                         NSLocalizedString(@"[5]boxeo", @""),
+                                                                                         NSLocalizedString(@"[31]cricket", @""),
+                                                                                         NSLocalizedString(@"[8]danza", @""),
+                                                                                         NSLocalizedString(@"[37]deportes de combate", @""),
+                                                                                         NSLocalizedString(@"[39]deportes mecánicos", @""),
+                                                                                         NSLocalizedString(@"[32]equitación", @""),
+                                                                                         NSLocalizedString(@"[33]fútbol americano", @""),
+                                                                                         NSLocalizedString(@"[11]gimnasia", @""),
+                                                                                         NSLocalizedString(@"[10]golf", @""),
+                                                                                         NSLocalizedString(@"[13]hockey", @""),
+                                                                                         NSLocalizedString(@"[14]judo", @""),
+                                                                                         NSLocalizedString(@"[15]kárate", @""),
+                                                                                         NSLocalizedString(@"[16]moto", @""),
+                                                                                         NSLocalizedString(@"[29]ninguno", @""),
+                                                                                         NSLocalizedString(@"[20]otros deportes acuáticos", @""),
+                                                                                         NSLocalizedString(@"[36]roller", @""),
+                                                                                         NSLocalizedString(@"[21]rugby", @""),
+                                                                                         NSLocalizedString(@"[35]senderismo/trekking", @""),
+                                                                                         NSLocalizedString(@"[24]skateboard", @""),
+                                                                                         NSLocalizedString(@"[46]skiing", @""),
+                                                                                         NSLocalizedString(@"[23]squash", @""),
+                                                                                         NSLocalizedString(@"[40]tenis de mesa", @""),
+                                                                                         NSLocalizedString(@"[27]volley-ball", @""),
+                                                                                         NSLocalizedString(@"[28]Altres", @""),
                                                                                          nil]];
 
 		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"mySportsListItem"
@@ -738,22 +805,22 @@
 
 
 
-		NSArray *mySparetimeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                            NSLocalizedString(@"acontecimiento deportivo", @""),
-                                                                                            NSLocalizedString(@"after work", @""),
-                                                                                            NSLocalizedString(@"bares / pubs", @""),
-                                                                                            NSLocalizedString(@"cine", @""),
-                                                                                            NSLocalizedString(@"concierto", @""),
-                                                                                            NSLocalizedString(@"discoteca", @""),
-                                                                                            NSLocalizedString(@"espectáculos de danza", @""),
-                                                                                            NSLocalizedString(@"familia", @""),
-                                                                                            NSLocalizedString(@"fiestas entre amigos", @""),
-                                                                                            NSLocalizedString(@"ópera", @""),
-                                                                                            NSLocalizedString(@"restaurante", @""),
-                                                                                            NSLocalizedString(@"teatro", @""),
-                                                                                            NSLocalizedString(@"karaoke", @""),
-                                                                                            NSLocalizedString(@"leer", @""),
-                                                                                            NSLocalizedString(@"Altres", @""),
+		NSArray *mySparetimeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                            NSLocalizedString(@"[13]acontecimiento deportivo", @""),
+                                                                                            NSLocalizedString(@"[6]after work", @""),
+                                                                                            NSLocalizedString(@"[4]bares / pubs", @""),
+                                                                                            NSLocalizedString(@"[9]cine", @""),
+                                                                                            NSLocalizedString(@"[7]concierto", @""),
+                                                                                            NSLocalizedString(@"[8]discoteca", @""),
+                                                                                            NSLocalizedString(@"[10]espectáculos de danza", @""),
+                                                                                            NSLocalizedString(@"[2]familia", @""),
+                                                                                            NSLocalizedString(@"[11]fiestas entre amigos", @""),
+                                                                                            NSLocalizedString(@"[5]ópera", @""),
+                                                                                            NSLocalizedString(@"[1]restaurante", @""),
+                                                                                            NSLocalizedString(@"[3]teatro", @""),
+                                                                                            NSLocalizedString(@"[14]karaoke", @""),
+                                                                                            NSLocalizedString(@"[15]leer", @""),
+                                                                                            NSLocalizedString(@"[12]Altres", @""),
                                                                                             nil]];
 
 		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"mySparetimeListItem"
@@ -766,33 +833,33 @@
 
 		IBAFormSection *preferencesFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els meus interessos", @"") footerTitle:nil];
 
-		NSArray *musicListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                      NSLocalizedString(@"ambiente / de relajación", @""),
-                                                                                      NSLocalizedString(@"blues", @""),
-                                                                                      NSLocalizedString(@"independiente", @""),
-                                                                                      NSLocalizedString(@"latina", @""),
-                                                                                      NSLocalizedString(@"ópera", @""),
-                                                                                      NSLocalizedString(@"reggae", @""),
-                                                                                      NSLocalizedString(@"clásica", @""),
-                                                                                      NSLocalizedString(@"electrónca-tecno", @""),
-                                                                                      NSLocalizedString(@"funk", @""),
-                                                                                      NSLocalizedString(@"jazz", @""),
-                                                                                      NSLocalizedString(@"pop-rock", @""),
-                                                                                      NSLocalizedString(@"rap", @""),
-                                                                                      NSLocalizedString(@"bandas sonoras", @""),
-                                                                                      NSLocalizedString(@"country", @""),
-                                                                                      NSLocalizedString(@"dance y DJ", @""),
-                                                                                      NSLocalizedString(@"disco", @""),
-                                                                                      NSLocalizedString(@"folk", @""),
-                                                                                      NSLocalizedString(@"gospel", @""),
-                                                                                      NSLocalizedString(@"hard rock", @""),
-                                                                                      NSLocalizedString(@"música tradicional", @""),
-                                                                                      NSLocalizedString(@"r'n'b", @""),
-                                                                                      NSLocalizedString(@"soul", @""),
-                                                                                      NSLocalizedString(@"trip-hop", @""),
-                                                                                      NSLocalizedString(@"variedades", @""),
-                                                                                      NSLocalizedString(@"world music", @""),
-                                                                                      NSLocalizedString(@"Altres", @""),
+		NSArray *musicListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                      NSLocalizedString(@"[24]ambiente / de relajación", @""),
+                                                                                      NSLocalizedString(@"[1]blues", @""),
+                                                                                      NSLocalizedString(@"[7]independiente", @""),
+                                                                                      NSLocalizedString(@"[19]latina", @""),
+                                                                                      NSLocalizedString(@"[20]ópera", @""),
+                                                                                      NSLocalizedString(@"[23]reggae", @""),
+                                                                                      NSLocalizedString(@"[2]clásica", @""),
+                                                                                      NSLocalizedString(@"[4]electrónca-tecno", @""),
+                                                                                      NSLocalizedString(@"[25]funk", @""),
+                                                                                      NSLocalizedString(@"[8]jazz", @""),
+                                                                                      NSLocalizedString(@"[11]pop-rock", @""),
+                                                                                      NSLocalizedString(@"[12]rap", @""),
+                                                                                      NSLocalizedString(@"[9]bandas sonoras", @""),
+                                                                                      NSLocalizedString(@"[3]country", @""),
+                                                                                      NSLocalizedString(@"[18]dance y DJ", @""),
+                                                                                      NSLocalizedString(@"[26]disco", @""),
+                                                                                      NSLocalizedString(@"[21]folk", @""),
+                                                                                      NSLocalizedString(@"[22]gospel", @""),
+                                                                                      NSLocalizedString(@"[6]hard rock", @""),
+                                                                                      NSLocalizedString(@"[5]música tradicional", @""),
+                                                                                      NSLocalizedString(@"[13]r'n'b", @""),
+                                                                                      NSLocalizedString(@"[14]soul", @""),
+                                                                                      NSLocalizedString(@"[15]trip-hop", @""),
+                                                                                      NSLocalizedString(@"[16]variedades", @""),
+                                                                                      NSLocalizedString(@"[10]world music", @""),
+                                                                                      NSLocalizedString(@"[17]Altres", @""),
                                                                                             nil]];
         
 		[preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"musicListItem"
@@ -803,28 +870,28 @@
 
 
 
-		NSArray *moviesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"Prefereixo no dir-ho", @""),
-                                                                                       NSLocalizedString(@"de acción", @""),
-                                                                                       NSLocalizedString(@"de aventuras", @""),
-                                                                                       NSLocalizedString(@"de terror", @""),
-                                                                                       NSLocalizedString(@"documentales", @""),
-                                                                                       NSLocalizedString(@"las comedias sentimentales", @""),
-                                                                                       NSLocalizedString(@"ciencia-ficción", @""),
-                                                                                       NSLocalizedString(@"cómicas", @""),
-                                                                                       NSLocalizedString(@"de autor", @""),
-                                                                                       NSLocalizedString(@"dramáticas", @""),
-                                                                                       NSLocalizedString(@"fantásticas", @""),
-                                                                                       NSLocalizedString(@"las comedias musicales", @""),
-                                                                                       NSLocalizedString(@"policíacas", @""),
-                                                                                       NSLocalizedString(@"animación", @""),
-                                                                                       NSLocalizedString(@"cortometrajes", @""),
-                                                                                       NSLocalizedString(@"de guerra", @""),
-                                                                                       NSLocalizedString(@"de vaqueros", @""),
-                                                                                       NSLocalizedString(@"eróticas", @""),
-                                                                                       NSLocalizedString(@"históricas", @""),
-                                                                                       NSLocalizedString(@"los dibujos animados", @""),
-                                                                                       NSLocalizedString(@"manga", @""),
-                                                                                       NSLocalizedString(@"Altres", @""),
+		NSArray *moviesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
+                                                                                       NSLocalizedString(@"[2]de acción", @""),
+                                                                                       NSLocalizedString(@"[4]de aventuras", @""),
+                                                                                       NSLocalizedString(@"[6]de terror", @""),
+                                                                                       NSLocalizedString(@"[7]documentales", @""),
+                                                                                       NSLocalizedString(@"[15]las comedias sentimentales", @""),
+                                                                                       NSLocalizedString(@"[11]ciencia-ficción", @""),
+                                                                                       NSLocalizedString(@"[9]cómicas", @""),
+                                                                                       NSLocalizedString(@"[3]de autor", @""),
+                                                                                       NSLocalizedString(@"[8]dramáticas", @""),
+                                                                                       NSLocalizedString(@"[12]fantásticas", @""),
+                                                                                       NSLocalizedString(@"[14]las comedias musicales", @""),
+                                                                                       NSLocalizedString(@"[17]policíacas", @""),
+                                                                                       NSLocalizedString(@"[21]animación", @""),
+                                                                                       NSLocalizedString(@"[1]cortometrajes", @""),
+                                                                                       NSLocalizedString(@"[5]de guerra", @""),
+                                                                                       NSLocalizedString(@"[18]de vaqueros", @""),
+                                                                                       NSLocalizedString(@"[10]eróticas", @""),
+                                                                                       NSLocalizedString(@"[13]históricas", @""),
+                                                                                       NSLocalizedString(@"[16]los dibujos animados", @""),
+                                                                                       NSLocalizedString(@"[20]manga", @""),
+                                                                                       NSLocalizedString(@"[19]Altres", @""),
                                                                                        nil]];
 
 		[preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"moviesListItem"

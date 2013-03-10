@@ -71,8 +71,26 @@
     // Messages
     [db executeUpdate:@"create table message (from_username text, to_username text, subject text, message text, read bool, date_message date)"];
 
-//    [db executeUpdate:@"insert into message (from_username, to_username, subject, message, read, date_message) values (?, ?, ?, ?, ?, ?)", @"albert", @"silvia", @"Hola!", @"Hola, que tal? com va?", [NSNumber numberWithBool:true], [NSDate date]];
+    // User profile
+    [db executeUpdate:@"create table user_profile (username text primary key, eye_color_id int, body_height int, body_weight int, hair_color_id int, hair_size_id int, body_look_id int, body_highlight_id int, citizenship_id int, ethnic_id int, religion_id int, religious_practice_id int, marriage_opinion_id int, romanticism_level_id int, want_children_id int, study_level_id int, profession_id int, salary_id int, style_id int, alimentation_id int, smoke_level_id int, animal_id int)"];
 
+//    [db executeUpdate:@"create table movie (movie_id int primary key, name text)"];
+    [db executeUpdate:@"create table user_movie (user_movie_id int primary key, username text, movie_id int)"];
+
+//    [db executeUpdate:@"create table music (music_id int primary key, name text)"];
+    [db executeUpdate:@"create table user_music (user_music_id int primary key, username text, music_id int)"];
+
+//    [db executeUpdate:@"create table sparetime_activity (sparetime_activity_id int primary key, name text)"];
+    [db executeUpdate:@"create table user_sparetime_activity (user_sparetime_activity_id int primary key, username text, sparetime_activity_id int)"];
+
+//    [db executeUpdate:@"create table sport (sport_id int primary key, name text)"];
+    [db executeUpdate:@"create table user_sport (user_sport_id int primary key, username text, sport_id int)"];
+
+//    [db executeUpdate:@"create table hobby (hobby_id int primary key, name text)"];
+    [db executeUpdate:@"create table user_hobby (user_hobby_id int primary key, username text, hobby_id int)"];
+
+//    [db executeUpdate:@"create table language (language_id int primary key, name text)"];
+    [db executeUpdate:@"create table user_language (user_language_id int primary key, username text, language_id int)"];
 
     [db commit];
 }
@@ -105,7 +123,7 @@
 
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[homeNavigationController, finderNavigationController, messageNavigationController, chatNavigationController, videocallNavigationController];
-    [self.tabBarController setSelectedViewController:videocallNavigationController];
+    [self.tabBarController setSelectedViewController:homeNavigationController];
     self.window.rootViewController = self.tabBarController;
 }
 
