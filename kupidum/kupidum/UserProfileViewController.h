@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <IBAForms/IBAFormViewController.h>
+#import <IBAforms/IBAFormConstants.h>
 
 @interface UserProfileViewController : IBAFormViewController
 {
