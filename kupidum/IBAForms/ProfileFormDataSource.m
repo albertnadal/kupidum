@@ -14,9 +14,6 @@
 
 #import <IBAForms/IBAForms.h>
 #import "ProfileFormDataSource.h"
-#import "StringToNumberTransformer.h"
-#import "ShowcaseButtonStyle.h"
-#import "StringToNumberTransformer.h"
 
 @implementation ProfileFormDataSource
 

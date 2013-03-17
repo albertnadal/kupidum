@@ -15,32 +15,59 @@
 #import <IBAForms/IBAFormDataSource.h>
 
 static const NSString *kEyeColorUserProfileField = @"kEyeColor";
+#pragma unused(kEyeColorUserProfileField)
 static const NSString *kHeightUserProfileField = @"kHeight";
+#pragma unused(kHeightUserProfileField)
 static const NSString *kWeightUserProfileField = @"kWeight";
+#pragma unused(kWeightUserProfileField)
 static const NSString *kHairColorUserProfileField = @"kHairColor";
+#pragma unused(kHairColorUserProfileField)
 static const NSString *kHairSizeUserProfileField = @"kHairSize";
+#pragma unused(kHairSizeUserProfileField)
 static const NSString *kBodyLookUserProfileField = @"kBodyLook";
+#pragma unused(kBodyLookUserProfileField)
 static const NSString *kMyHighlightUserProfileField = @"kMyHighlight";
+#pragma unused(kMyHighlightUserProfileField)
 static const NSString *kNationUserProfileField = @"kNation";
+#pragma unused(kNationUserProfileField)
 static const NSString *kEthnicalOriginUserProfileField = @"kEthnicalOrigin";
+#pragma unused(kEthnicalOriginUserProfileField)
 static const NSString *kReligionUserProfileField = @"kReligion";
+#pragma unused(kReligionUserProfileField)
 static const NSString *kReligionLevelUserProfileField = @"kReligionLevel";
+#pragma unused(kReligionLevelUserProfileField)
 static const NSString *kMarriageOpinionUserProfileField = @"kMarriageOpinion";
+#pragma unused(kMarriageOpinionUserProfileField)
 static const NSString *kRomanticismLevelUserProfileField = @"kRomanticismLevel";
+#pragma unused(kRomanticismLevelUserProfileField)
 static const NSString *kIWantChildrensUserProfileField = @"kIWantChildren";
+#pragma unused(kIWantChildrensUserProfileField)
 static const NSString *kStudiesLevelUserProfileField = @"kStudiesLevel";
+#pragma unused(kStudiesLevelUserProfileField)
 static const NSString *kLanguagesUserProfileField = @"kLanguages";
+#pragma unused(kLanguagesUserProfileField)
 static const NSString *kMyBusinessUserProfileField = @"kMyBusiness";
+#pragma unused(kMyBusinessUserProfileField)
 static const NSString *kSalaryUserProfileField = @"kSalary";
+#pragma unused(kSalaryUserProfileField)
 static const NSString *kMyStyleUserProfileField = @"kMyStyle";
+#pragma unused(kMyStyleUserProfileField)
 static const NSString *kAlimentUserProfileField = @"kAliment";
+#pragma unused(kAlimentUserProfileField)
 static const NSString *kSmokeUserProfileField = @"kSmoke";
+#pragma unused(kSmokeUserProfileField)
 static const NSString *kAnimalsUserProfileField = @"kAnimals";
+#pragma unused(kAnimalsUserProfileField)
 static const NSString *kMyHobbiesUserProfileField = @"kMyHobbies";
+#pragma unused(kMyHobbiesUserProfileField)
 static const NSString *kMySportsUserProfileField = @"kMySports";
+#pragma unused(kMySportsUserProfileField)
 static const NSString *kMySparetimeUserProfileField = @"kMySparetime";
+#pragma unused(kMySparetimeUserProfileField)
 static const NSString *kMusicUserProfileField = @"kMusic";
+#pragma unused(kMusicUserProfileField)
 static const NSString *kMoviesUserProfileField = @"kMovies";
+#pragma unused(kMoviesUserProfileField)
 
 @interface ProfileFormDataSource : IBAFormDataSource {
 	IBAFormFieldStyle *readOnlyStyle;
