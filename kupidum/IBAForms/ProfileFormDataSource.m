@@ -40,12 +40,15 @@
 																					 NSLocalizedString(@"[5]Verds", @""),
 																					 nil]];
 
-        IBAPickListFormField *eyeColorPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:@"eyeColorPickListItem"
+        IBAPickListFormOptionsStringTransformer *transformer = [[IBAPickListFormOptionsStringTransformer alloc] initWithPickListOptions:eyeColorListOptions];
+
+        IBAPickListFormField *eyeColorPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kEyeColorUserProfileField
                                                                                               title:NSLocalizedString(@"Color d'ulls", @"")
-                                                                                   valueTransformer:nil
+                                                                                   valueTransformer:transformer
                                                                                       selectionMode:IBAPickListSelectionModeSingle
                                                                                             options:eyeColorListOptions
                                                                                          isReadOnly:readOnly];
+        
 		[basicFieldSection addFormField:eyeColorPickFormField];
 
         NSMutableArray *heightArray = [[NSMutableArray alloc] init];
@@ -55,7 +58,7 @@
 
 		NSArray *heightListOptions = [IBAPickListFormOption pickListOptionsForStrings:heightArray];
 
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"heightPickListItem"
+		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHeightUserProfileField
                                                                                 title:NSLocalizedString(@"Alçada", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -69,7 +72,7 @@
 
 		NSArray *weightListOptions = [IBAPickListFormOption pickListOptionsForStrings:weightArray];
 
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"weightPickListItem"
+		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kWeightUserProfileField
                                                                                 title:NSLocalizedString(@"Pes", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -85,7 +88,7 @@
                                                                                          NSLocalizedString(@"[2]Ros", @""),
                                                                                          nil]];
         
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"hairColorPickListItem"
+		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHairColorUserProfileField
                                                                                 title:NSLocalizedString(@"Color del cabell", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -102,7 +105,7 @@
                                                                                           NSLocalizedString(@"[7]Sense pèl", @""),
                                                                                           nil]];
         
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"hairSizePickListItem"
+		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHairSizeUserProfileField
                                                                                 title:NSLocalizedString(@"Llargada del cabell", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -119,7 +122,7 @@
                                                                                          NSLocalizedString(@"[7]El físic no té importància", @""),
                                                                                          nil]];
         
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"bodyLookListItem"
+		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kBodyLookUserProfileField
                                                                                 title:NSLocalizedString(@"El meu aspecte", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -143,7 +146,7 @@
                                                                                          NSLocalizedString(@"[10]El més bonic no està a la llista", @""),
                                                                                          nil]];
 
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"myHighlightListItem"
+		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyHighlightUserProfileField
                                                                                 title:NSLocalizedString(@"El més atractiu de mi", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -357,7 +360,7 @@
                                                                                                  NSLocalizedString(@"[196]Zimbabuense", @""),
                                                                                                  nil]];
 
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"nationPickListItem"
+		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kNationUserProfileField
                                                                                 title:NSLocalizedString(@"La meva nacionalitat", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -375,7 +378,7 @@
                                                                                             NSLocalizedString(@"[6]Un altre", @""),
                                                                                             nil]];
         
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"ethnicalOriginListItem"
+		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kEthnicalOriginUserProfileField
                                                                                 title:NSLocalizedString(@"El meu origen ètnic", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -397,7 +400,7 @@
                                                                                                NSLocalizedString(@"[13]Un altre", @""),
                                                                                                nil]];
 
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"religionListItem"
+		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kReligionUserProfileField
                                                                                 title:NSLocalizedString(@"La meva religió", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -412,7 +415,7 @@
                                                                                          NSLocalizedString(@"[3]No practicant", @""),
                                                                                          nil]];
 
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"religionLevelListItem"
+		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kReligionLevelUserProfileField
                                                                                 title:NSLocalizedString(@"Pràctica religiosa", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -429,7 +432,7 @@
                                                                                               NSLocalizedString(@"[6]No em tornaré a casar", @""),
                                                                                               nil]];
 
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"marriageOpinionListItem"
+		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMarriageOpinionUserProfileField
                                                                                 title:NSLocalizedString(@"Per mi, el matrimoni és", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -444,7 +447,7 @@
                                                                                                 NSLocalizedString(@"[4]Gens romàntic", @""),
                                                                                                 nil]];
 
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"romanticismLevelListItem"
+		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kRomanticismLevelUserProfileField
                                                                                 title:NSLocalizedString(@"Sóc romàntic", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -462,7 +465,7 @@
                                                                                                  NSLocalizedString(@"[6]Sí, número no decidit", @""),
                                                                                                  nil]];
         
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"iWantChildrensListItem"
+		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kIWantChildrensUserProfileField
                                                                                 title:NSLocalizedString(@"Vull tenir fills", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -483,7 +486,7 @@
                                                                                                NSLocalizedString(@"[6]Altres", @""),
                                                                                                nil]];
         
-		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"studiesLevelListItem"
+		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kStudiesLevelUserProfileField
                                                                                  title:NSLocalizedString(@"El meu nivell d'estudis", @"")
                                                                       valueTransformer:nil
                                                                          selectionMode:IBAPickListSelectionModeSingle
@@ -557,7 +560,7 @@
                                                                                           NSLocalizedString(@"[62]vietnamita", @""),
                                                                                           nil]];
 
-		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"languagesListItem"
+		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kLanguagesUserProfileField
                                                                                                 title:NSLocalizedString(@"Idiomes que parlo", @"")
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeMultiple
@@ -633,7 +636,7 @@
                                                                                            NSLocalizedString(@"[57]otros", @""),
                                                                                              nil]];
         
-		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"myBusinessListItem"
+		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyBusinessUserProfileField
                                                                                                 title:NSLocalizedString(@"La meva professió", @"")
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -651,7 +654,7 @@
                                                                                              NSLocalizedString(@"[7]Més de 100.000€/any", @""),
                                                                                              nil]];
 
-		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"salaryListItem"
+		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kSalaryUserProfileField
                                                                                                 title:NSLocalizedString(@"Els meus ingressos", @"")
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -676,7 +679,7 @@
                                                                                              NSLocalizedString(@"[11]Altres", @""),
                                                                                              nil]];
 
-		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"myStyleListItem"
+		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyStyleUserProfileField
                                                                                                 title:NSLocalizedString(@"El meu estil", @"")
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeSingle
@@ -694,7 +697,7 @@
                                                                                         NSLocalizedString(@"[2]Vegetarià", @""),
                                                                                         nil]];
         
-		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"alimentListItem"
+		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kAlimentUserProfileField
                                                                                     title:NSLocalizedString(@"La meva alimentació", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeSingle
@@ -710,7 +713,7 @@
                                                                                         NSLocalizedString(@"[2]Sí, regularment", @""),
                                                                                         nil]];
 
-		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"smokeListItem"
+		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kSmokeUserProfileField
                                                                                     title:NSLocalizedString(@"Fumo", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeSingle
@@ -733,7 +736,7 @@
                                                                                       NSLocalizedString(@"[12]No tinc animals", @""),
                                                                                       nil]];
 
-		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"animalsListItem"
+		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kAnimalsUserProfileField
                                                                                     title:NSLocalizedString(@"Els meus animals", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeSingle
@@ -779,7 +782,7 @@
                                                                                           NSLocalizedString(@"[23]Altres", @""),
                                                                                           nil]];
 
-		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"myHobbiesListItem"
+		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyHobbiesUserProfileField
                                                                                     title:NSLocalizedString(@"Les meves aficions", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
@@ -832,7 +835,7 @@
                                                                                          NSLocalizedString(@"[28]Altres", @""),
                                                                                          nil]];
 
-		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"mySportsListItem"
+		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMySportsUserProfileField
                                                                                     title:NSLocalizedString(@"Els meus esports", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
@@ -859,7 +862,7 @@
                                                                                             NSLocalizedString(@"[12]Altres", @""),
                                                                                             nil]];
 
-		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"mySparetimeListItem"
+		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMySparetimeUserProfileField
                                                                                     title:NSLocalizedString(@"Les meves sortides", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
@@ -900,7 +903,7 @@
                                                                                       NSLocalizedString(@"[17]Altres", @""),
                                                                                             nil]];
         
-		[preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"musicListItem"
+		[preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMusicUserProfileField
                                                                                     title:NSLocalizedString(@"Gustos musicals", @"")
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
@@ -933,7 +936,7 @@
                                                                                        NSLocalizedString(@"[19]Altres", @""),
                                                                                        nil]];
 
-		[preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"moviesListItem"
+		[preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMoviesUserProfileField
                                                                                       title:NSLocalizedString(@"Pel·lícules preferides", @"")
                                                                            valueTransformer:nil
                                                                               selectionMode:IBAPickListSelectionModeMultiple
@@ -942,6 +945,11 @@
     }
 
     return self;
+}
+
+- (NSDictionary *)getModelWithValues
+{
+    return self.model;
 }
 
 - (void)loadStyles

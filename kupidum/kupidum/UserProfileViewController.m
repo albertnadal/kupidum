@@ -7,6 +7,7 @@
 //
 
 #import "UserProfileViewController.h"
+#import "ProfileFormDataSource.h"
 #import "KPDUIUtilities.h"
 
 @interface UserProfileViewController ()
@@ -121,16 +122,18 @@ const int numberOfFieldsInCultureSection = 2;
 
     editButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Save", @"")
                                                   style: UIBarButtonItemStyleDone
-                                                 target: self.navigationController
+                                                 target: self
                                                  action: @selector(saveUserProfile)];
-    [editButton setEnabled:FALSE];
+    [editButton setEnabled:TRUE];
 
     [self.navigationItem setRightBarButtonItem:editButton];
 }
 
 - (void)saveUserProfile
 {
-    
+    NSLog(@"saveUserProfile");
+    if([self.formDataSource respondsToSelector:@selector(getModelWithValues)])
+        NSLog(@"Model: %@", [(ProfileFormDataSource *)self.formDataSource getModelWithValues]);
 }
 
 - (void)backPressed

@@ -80,7 +80,7 @@
 	NSMutableDictionary *model = [[NSMutableDictionary alloc] init];
     NSArray *selectedEyeColorListOption = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[5]Verds"]];
 
-	[model setObject:selectedEyeColorListOption forKey:@"eyeColorPickListItem"];
+	[model setObject:selectedEyeColorListOption forKey:kEyeColorUserProfileField];
     return model;
 }
 
