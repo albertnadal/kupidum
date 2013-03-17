@@ -36,7 +36,7 @@
 		FF25A5CC168683B600F5DB58 /* VideoconferenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF25A5CA168683B600F5DB58 /* VideoconferenceViewController.xib */; };
 		FF25A5D71688B97400F5DB58 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF25A5D61688B97300F5DB58 /* QuartzCore.framework */; };
 		FF2B5ECF16A42AA500D580BE /* libIBAForms.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF2B5ECA16A428C500D580BE /* libIBAForms.a */; };
-		FF2B5EDB16A4659A00D580BE /* SampleFormDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5ED616A4659A00D580BE /* SampleFormDataSource.m */; };
+		FF2B5EDB16A4659A00D580BE /* ProfileFormDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5ED616A4659A00D580BE /* ProfileFormDataSource.m */; };
 		FF2B5EDD16A4659A00D580BE /* UserProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EDA16A4659A00D580BE /* UserProfileModel.m */; };
 		FF2B5EE016A46D1300D580BE /* StringToNumberTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EDF16A46D1300D580BE /* StringToNumberTransformer.m */; };
 		FF2B5EE516A46D4B00D580BE /* ShowcaseButtonStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2B5EE216A46D4B00D580BE /* ShowcaseButtonStyle.m */; };
@@ -337,8 +337,8 @@
 		FF25A5D51688988400F5DB58 /* KPDClientSIPDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDClientSIPDelegate.h; path = kupidum/rtc/KPDClientSIPDelegate.h; sourceTree = "<group>"; };
 		FF25A5D61688B97300F5DB58 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IBAForms.xcodeproj; path = ../kupidum_third_party/IBAForms/library/IBAForms.xcodeproj; sourceTree = "<group>"; };
-		FF2B5ED516A4659A00D580BE /* SampleFormDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleFormDataSource.h; path = kupidum/IBAForms/SampleFormDataSource.h; sourceTree = "<group>"; };
-		FF2B5ED616A4659A00D580BE /* SampleFormDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleFormDataSource.m; path = kupidum/IBAForms/SampleFormDataSource.m; sourceTree = "<group>"; };
+		FF2B5ED516A4659A00D580BE /* ProfileFormDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileFormDataSource.h; path = kupidum/IBAForms/ProfileFormDataSource.h; sourceTree = "<group>"; };
+		FF2B5ED616A4659A00D580BE /* ProfileFormDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileFormDataSource.m; path = kupidum/IBAForms/ProfileFormDataSource.m; sourceTree = "<group>"; };
 		FF2B5ED916A4659A00D580BE /* UserProfileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserProfileModel.h; path = kupidum/IBAForms/UserProfileModel.h; sourceTree = "<group>"; };
 		FF2B5EDA16A4659A00D580BE /* UserProfileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileModel.m; path = kupidum/IBAForms/UserProfileModel.m; sourceTree = "<group>"; };
 		FF2B5EDE16A46D1300D580BE /* StringToNumberTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StringToNumberTransformer.h; path = kupidum/IBAForms/StringToNumberTransformer.h; sourceTree = "<group>"; };
@@ -1229,8 +1229,8 @@
 		FFB003A816A4234400BD122C /* IBAForms */ = {
 			isa = PBXGroup;
 			children = (
-				FF2B5ED516A4659A00D580BE /* SampleFormDataSource.h */,
-				FF2B5ED616A4659A00D580BE /* SampleFormDataSource.m */,
+				FF2B5ED516A4659A00D580BE /* ProfileFormDataSource.h */,
+				FF2B5ED616A4659A00D580BE /* ProfileFormDataSource.m */,
 				FF2B5ED916A4659A00D580BE /* UserProfileModel.h */,
 				FF2B5EDA16A4659A00D580BE /* UserProfileModel.m */,
 				FF2B5EDE16A46D1300D580BE /* StringToNumberTransformer.h */,
@@ -1604,7 +1604,7 @@
 				FF7B5439169C68870042FA62 /* SearchResultCell.m in Sources */,
 				FF7B543D169C69060042FA62 /* SearchResultViewController.m in Sources */,
 				FF35CC26169F1BD8003AE44D /* UserProfileViewController.m in Sources */,
-				FF2B5EDB16A4659A00D580BE /* SampleFormDataSource.m in Sources */,
+				FF2B5EDB16A4659A00D580BE /* ProfileFormDataSource.m in Sources */,
 				FF2B5EDD16A4659A00D580BE /* UserProfileModel.m in Sources */,
 				FF2B5EE016A46D1300D580BE /* StringToNumberTransformer.m in Sources */,
 				FF2B5EE516A46D4B00D580BE /* ShowcaseButtonStyle.m in Sources */,

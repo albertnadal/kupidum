@@ -11,8 +11,11 @@
 #import "UserProfileViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ProfileFormDataSource.h"
+#import <IBAForms/IBAForms.h>
 
 @interface HomeViewController ()
+
+- (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_;
 
 @end
 
@@ -72,16 +75,24 @@
     [self.navigationController pushViewController:srvc animated:YES];
 }
 
+- (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_
+{
+	NSMutableDictionary *model = [[NSMutableDictionary alloc] init];
+    NSArray *selectedEyeColorListOption = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[5]Verds"]];
+
+	[model setObject:selectedEyeColorListOption forKey:@"eyeColorPickListItem"];
+    return model;
+}
+
 - (IBAction)showUserProfile:(id)sender
 {
-	NSMutableDictionary *sampleFormModel = [[NSMutableDictionary alloc] init];
+    NSString *username = @"albert";
 
-	// Values set on the model will be reflected in the form fields.
-	[sampleFormModel setObject:@"A value contained in the model" forKey:@"readOnlyText"];
+    NSMutableDictionary *model = [self retrieveUserProfileModelForUser:username];
 
-	ProfileFormDataSource *sampleFormDataSource = [[ProfileFormDataSource alloc] initWithModel:sampleFormModel isReadOnly:FALSE];
+	ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:FALSE];
 
-    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil formDataSource:sampleFormDataSource];
+    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil formDataSource:profileFormDataSource];
     [self.navigationController pushViewController:upvc animated:YES];
 }
 

@@ -10,7 +10,11 @@
 #import "KPDUIUtilities.h"
 
 @interface UserProfileViewController ()
+{
+    UIBarButtonItem *editButton;
+}
 
+- (void)saveUserProfile;
 - (void)restoreOriginalProfileScrollSize:(NSNotification *)notification;
 - (void)registerSelector:(SEL)selector withNotification:(NSString *)notificationKey;
 - (void)showFormField:(NSNotification *)notification;
@@ -112,8 +116,21 @@ const int numberOfFieldsInCultureSection = 2;
                                                            andInsideImage:@"nav_arrow_back_button.png"
                                                               andSelector:@selector(backPressed)
                                                                 andTarget:self];
-    
+
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:backButton]];
+
+    editButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Save", @"")
+                                                  style: UIBarButtonItemStyleDone
+                                                 target: self.navigationController
+                                                 action: @selector(saveUserProfile)];
+    [editButton setEnabled:FALSE];
+
+    [self.navigationItem setRightBarButtonItem:editButton];
+}
+
+- (void)saveUserProfile
+{
+    
 }
 
 - (void)backPressed

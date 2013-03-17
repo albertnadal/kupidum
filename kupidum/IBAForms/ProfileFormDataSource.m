@@ -40,12 +40,13 @@
 																					 NSLocalizedString(@"[5]Verds", @""),
 																					 nil]];
 
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:@"eyeColorPickListItem"
-                                                                                title:NSLocalizedString(@"Color d'ulls", @"")
-                                                                   valueTransformer:nil
-                                                                      selectionMode:IBAPickListSelectionModeSingle
-                                                                            options:eyeColorListOptions
-                                                                         isReadOnly:readOnly]];
+        IBAPickListFormField *eyeColorPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:@"eyeColorPickListItem"
+                                                                                              title:NSLocalizedString(@"Color d'ulls", @"")
+                                                                                   valueTransformer:nil
+                                                                                      selectionMode:IBAPickListSelectionModeSingle
+                                                                                            options:eyeColorListOptions
+                                                                                         isReadOnly:readOnly];
+		[basicFieldSection addFormField:eyeColorPickFormField];
 
         NSMutableArray *heightArray = [[NSMutableArray alloc] init];
         [heightArray addObject:NSLocalizedString(@"[0]Prefereixo no dir-ho", @"")];
