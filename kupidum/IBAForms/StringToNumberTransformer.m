@@ -32,8 +32,16 @@
 	return [NSNumber numberWithInteger:[value integerValue]];
 }
 
-- (NSString *)reverseTransformedValue:(NSNumber *)value {
-	return [value stringValue];
+- (NSString *)reverseTransformedValue:(NSArray *)values {
+    if([values count])
+    {
+        IBAPickListFormOption *value = [values objectAtIndex:0];
+        return value.name;
+    }
+    else
+    {
+        return @"";
+    }
 }
 
 @end

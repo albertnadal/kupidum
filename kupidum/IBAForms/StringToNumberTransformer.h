@@ -13,7 +13,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <IBAForms/IBAForms.h>
 
 @interface StringToNumberTransformer : NSObject {
 

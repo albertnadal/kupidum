@@ -16,6 +16,7 @@
 #import "ProfileFormDataSource.h"
 #import "StringToNumberTransformer.h"
 #import "ShowcaseButtonStyle.h"
+#import "StringToNumberTransformer.h"
 
 @implementation ProfileFormDataSource
 
@@ -40,11 +41,9 @@
 																					 NSLocalizedString(@"[5]Verds", @""),
 																					 nil]];
 
-        IBAPickListFormOptionsStringTransformer *transformer = [[IBAPickListFormOptionsStringTransformer alloc] initWithPickListOptions:eyeColorListOptions];
-
         IBAPickListFormField *eyeColorPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kEyeColorUserProfileField
                                                                                               title:NSLocalizedString(@"Color d'ulls", @"")
-                                                                                   valueTransformer:transformer
+                                                                                   valueTransformer:nil /*[StringToNumberTransformer instance]*/
                                                                                       selectionMode:IBAPickListSelectionModeSingle
                                                                                             options:eyeColorListOptions
                                                                                          isReadOnly:readOnly];
@@ -949,7 +948,40 @@
 
 - (NSDictionary *)getModelWithValues
 {
-    return self.model;
+    NSMutableDictionary *modelWithValues = [[NSMutableDictionary alloc] init];
+
+    for (NSString* key in self.model)
+    {
+        NSArray *items = [self.model objectForKey:key];
+
+        if([[self.model objectForKey:key] isKindOfClass:[NSSet class]])
+            items = [[self.model objectForKey:key] allObjects];
+
+        NSMutableArray *itemsWithValues = [[NSMutableArray alloc] init];
+
+        for(int i=0; i<[items count]; i++)
+        {
+            NSString *itemNameWithValue = ((IBAPickListFormOption *)[items objectAtIndex:i]).name;
+            NSString *itemName = itemNameWithValue;
+            NSString *itemValue = @"";
+
+            NSRange range_open_clautador = [itemNameWithValue rangeOfString:@"["];
+            NSRange range_close_clautador = [itemNameWithValue rangeOfString:@"]"];
+            if(range_open_clautador.location < range_close_clautador.location)
+            {
+                int range_length = range_close_clautador.location - (range_open_clautador.location + 1);
+                itemValue = [itemNameWithValue substringWithRange:NSMakeRange(range_open_clautador.location + 1, range_length)];
+                itemName = [itemNameWithValue stringByReplacingCharactersInRange:NSMakeRange(range_open_clautador.location, range_length + 2) withString:@""];
+            }
+
+            NSDictionary *pairValueName = @{ itemValue : itemName };
+            [itemsWithValues addObject:pairValueName];
+        }
+
+        [modelWithValues setObject:itemsWithValues forKey:key];
+    }
+
+    return [NSDictionary dictionaryWithDictionary:modelWithValues];
 }
 
 - (void)loadStyles

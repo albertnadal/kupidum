@@ -131,7 +131,6 @@ const int numberOfFieldsInCultureSection = 2;
 
 - (void)saveUserProfile
 {
-    NSLog(@"saveUserProfile");
     if([self.formDataSource respondsToSelector:@selector(getModelWithValues)])
         NSLog(@"Model: %@", [(ProfileFormDataSource *)self.formDataSource getModelWithValues]);
 }
