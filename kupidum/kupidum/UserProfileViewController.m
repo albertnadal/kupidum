@@ -12,15 +12,22 @@
 
 @interface UserProfileViewController ()
 {
+    bool isReadOnly;
+    bool editMode;
+    bool profileIsEditable;
     UIBarButtonItem *editButton;
+    UIBarButtonItem *doneButton;
+    UITableView *formTableView;
 }
 
+- (void)beginEditMode;
 - (void)saveUserProfile;
 - (void)restoreOriginalProfileScrollSize:(NSNotification *)notification;
 - (void)registerSelector:(SEL)selector withNotification:(NSString *)notificationKey;
 - (void)showFormField:(NSNotification *)notification;
 - (void)showNavigationBarButtons;
 - (void)backPressed;
+- (void)reloadFormTableView;
 
 @end
 
@@ -39,11 +46,22 @@ const int numberOfFieldsInLifestyleSection = 4;
 const int numberOfFieldsInInterestsSection = 3;
 const int numberOfFieldsInCultureSection = 2;
 
+- (id)init
+{
+    if(self = [super init])
+    {
+
+    }
+
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+
     }
     return self;
 }
@@ -87,7 +105,7 @@ const int numberOfFieldsInCultureSection = 2;
 {
 	[super loadView];
 
-	UITableView *formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
+	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
 	[formTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[self setTableView:formTableView];
     [formTableView setScrollEnabled:NO];
@@ -98,8 +116,14 @@ const int numberOfFieldsInCultureSection = 2;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"superwoman";
+
     [self registerSelector:@selector(showFormField:) withNotification:IBAInputRequestorShowFormField];
     [self registerSelector:@selector(restoreOriginalProfileScrollSize:) withNotification:IBAInputRequestorRestoreOriginalProfileSize];
+
+    isReadOnly = [(ProfileFormDataSource *)self.formDataSource isReadOnly];
+    profileIsEditable = TRUE; //This must be set after load user profile from DB or web service //!isReadOnly;
+    editMode = true;
 
     [self showNavigationBarButtons];
     [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + detailedInformationPanelHeight)];
@@ -117,22 +141,60 @@ const int numberOfFieldsInCultureSection = 2;
                                                            andInsideImage:@"nav_arrow_back_button.png"
                                                               andSelector:@selector(backPressed)
                                                                 andTarget:self];
-
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:backButton]];
 
-    editButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Save", @"")
-                                                  style: UIBarButtonItemStyleDone
-                                                 target: self
-                                                 action: @selector(saveUserProfile)];
-    [editButton setEnabled:TRUE];
 
-    [self.navigationItem setRightBarButtonItem:editButton];
+    if(profileIsEditable)
+    {
+        // Edit button
+        editButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Edit", @"")
+                                                      style: UIBarButtonItemStyleDone
+                                                     target: self
+                                                     action: @selector(beginEditMode)];
+        [editButton setEnabled:TRUE];
+        [self.navigationItem setRightBarButtonItem:editButton];
+
+        // Done button
+        doneButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Done", @"")
+                                                      style: UIBarButtonItemStyleDone
+                                                     target: self
+                                                     action: @selector(saveUserProfile)];
+    }
+}
+
+- (void)reloadFormTableView
+{
+    bool isReadOnly_ = editMode ? false : true;
+	ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:self.formDataSource.model isReadOnly:isReadOnly_];
+    self.formDataSource = profileFormDataSource;
+    
+    [formTableView removeFromSuperview];
+	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
+	[formTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+	[self setTableView:formTableView];
+    [formTableView setScrollEnabled:NO];
+    
+    [self.scroll addSubview:formTableView];
+    [super viewDidLoad];
+}
+
+- (void)beginEditMode
+{
+    editMode = true;
+    [self.navigationItem setRightBarButtonItem:doneButton];
+
+    [self reloadFormTableView];
 }
 
 - (void)saveUserProfile
 {
     if([self.formDataSource respondsToSelector:@selector(getModelWithValues)])
         NSLog(@"Model: %@", [(ProfileFormDataSource *)self.formDataSource getModelWithValues]);
+
+    editMode = false;
+    [self.navigationItem setRightBarButtonItem:editButton];
+
+    [self reloadFormTableView];
 }
 
 - (void)backPressed

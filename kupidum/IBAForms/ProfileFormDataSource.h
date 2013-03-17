@@ -70,12 +70,17 @@ static const NSString *kMoviesUserProfileField = @"kMovies";
 #pragma unused(kMoviesUserProfileField)
 
 @interface ProfileFormDataSource : IBAFormDataSource {
+    bool isReadOnly;
 	IBAFormFieldStyle *readOnlyStyle;
 	IBAFormFieldStyle *readWriteStyle;
 }
 
+@property (atomic) bool isReadOnly;
+
 - (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly;
 - (void)loadStyles;
+- (void)reloadData;
 - (NSDictionary *)getModelWithValues;
+- (void)setReadOnly:(bool)readOnly;
 
 @end

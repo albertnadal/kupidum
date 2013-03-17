@@ -90,7 +90,7 @@
 
     NSMutableDictionary *model = [self retrieveUserProfileModelForUser:username];
 
-	ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:FALSE];
+	ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES];
 
     UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil formDataSource:profileFormDataSource];
     [self.navigationController pushViewController:upvc animated:YES];

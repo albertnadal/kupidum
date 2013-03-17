@@ -17,13 +17,24 @@
 
 @implementation ProfileFormDataSource
 
+@synthesize isReadOnly;
+
 - (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly
 {
 	if (self = [super initWithModel:aModel]) {
 
-        [self loadStyles];
+        isReadOnly = readOnly;
 
-        IBAFormFieldStyle *selectedStyle = readOnly ? readOnlyStyle:readWriteStyle;
+        [self loadStyles];
+        [self reloadData];
+    }
+
+    return self;
+}
+    
+- (void)reloadData
+{
+        IBAFormFieldStyle *selectedStyle = isReadOnly ? readOnlyStyle:readWriteStyle;
 
 		// Some basic form fields that accept text input
 		IBAFormSection *basicFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"La meva aparença", @"") footerTitle:nil];
@@ -40,11 +51,11 @@
 
         IBAPickListFormField *eyeColorPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kEyeColorUserProfileField
                                                                                               title:NSLocalizedString(@"Color d'ulls", @"")
-                                                                                   valueTransformer:nil /*[StringToNumberTransformer instance]*/
+                                                                                   valueTransformer:nil
                                                                                       selectionMode:IBAPickListSelectionModeSingle
                                                                                             options:eyeColorListOptions
-                                                                                         isReadOnly:readOnly];
-        
+                                                                                         isReadOnly:isReadOnly];
+
 		[basicFieldSection addFormField:eyeColorPickFormField];
 
         NSMutableArray *heightArray = [[NSMutableArray alloc] init];
@@ -59,7 +70,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:heightListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
         NSMutableArray *weightArray = [[NSMutableArray alloc] init];
         [weightArray addObject:NSLocalizedString(@"[0]Prefereixo no dir-ho", @"")];
@@ -73,7 +84,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:weightListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 		NSArray *hairColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                          NSLocalizedString(@"[1]Blanc", @""),
@@ -89,7 +100,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:hairColorListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 		NSArray *hairSizeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                           NSLocalizedString(@"[1]Rapat", @""),
@@ -106,7 +117,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:hairSizeListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 		NSArray *bodyLookListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                          NSLocalizedString(@"[1]Explosiu", @""),
@@ -123,7 +134,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:bodyLookListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 
 		NSArray *myHighlightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -147,7 +158,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:myHighlightListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 
 
@@ -361,7 +372,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:citizenshipListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 
 		NSArray *ethnicalOriginListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -379,7 +390,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:ethnicalOriginListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 
 		NSArray *religionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -401,7 +412,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:religionListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
         
         
@@ -416,7 +427,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:religionLevelListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 
 		NSArray *marriageOpinionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -433,7 +444,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:marriageOpinionListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 
 		NSArray *romanticismLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -448,7 +459,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:romanticismLevelListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 
         
@@ -466,7 +477,7 @@
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                               options:iWantChildrensListOptions
-                                                                           isReadOnly:readOnly]];
+                                                                           isReadOnly:isReadOnly]];
 
 
 
@@ -487,7 +498,7 @@
                                                                       valueTransformer:nil
                                                                          selectionMode:IBAPickListSelectionModeSingle
                                                                                options:studiesLevelListOptions
-                                                                            isReadOnly:readOnly]];
+                                                                            isReadOnly:isReadOnly]];
 
 
 		NSArray *languagesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -561,7 +572,7 @@
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeMultiple
                                                                                               options:languagesListOptions
-                                                                                           isReadOnly:readOnly]];
+                                                                                           isReadOnly:isReadOnly]];
 
 
 		NSArray *myBusinessListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -637,7 +648,7 @@
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                                               options:myBusinessListOptions
-                                                                                           isReadOnly:readOnly]];
+                                                                                           isReadOnly:isReadOnly]];
 
 
 		NSArray *salaryListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -655,7 +666,7 @@
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                                               options:salaryListOptions
-                                                                                           isReadOnly:readOnly]];
+                                                                                           isReadOnly:isReadOnly]];
 
 
 
@@ -680,7 +691,7 @@
                                                                                      valueTransformer:nil
                                                                                         selectionMode:IBAPickListSelectionModeSingle
                                                                                               options:myStyleListOptions
-                                                                                           isReadOnly:readOnly]];
+                                                                                           isReadOnly:isReadOnly]];
 
 
 		NSArray *alimentListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -698,7 +709,7 @@
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeSingle
                                                                                   options:alimentListOptions
-                                                                               isReadOnly:readOnly]];
+                                                                               isReadOnly:isReadOnly]];
 
 
 
@@ -714,7 +725,7 @@
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeSingle
                                                                                   options:smokeListOptions
-                                                                               isReadOnly:readOnly]];
+                                                                               isReadOnly:isReadOnly]];
 
 
 		NSArray *animalsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -737,7 +748,7 @@
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeSingle
                                                                                   options:animalsListOptions
-                                                                               isReadOnly:readOnly]];
+                                                                               isReadOnly:isReadOnly]];
 
 
 
@@ -783,7 +794,7 @@
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
                                                                                   options:myHobbiesListOptions
-                                                                               isReadOnly:readOnly]];
+                                                                               isReadOnly:isReadOnly]];
 
 
 
@@ -836,7 +847,7 @@
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
                                                                                   options:mySportsListOptions
-                                                                               isReadOnly:readOnly]];
+                                                                               isReadOnly:isReadOnly]];
 
 
 
@@ -863,7 +874,7 @@
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
                                                                                   options:mySparetimeListOptions
-                                                                               isReadOnly:readOnly]];
+                                                                               isReadOnly:isReadOnly]];
 
 
 
@@ -904,7 +915,7 @@
                                                                          valueTransformer:nil
                                                                             selectionMode:IBAPickListSelectionModeMultiple
                                                                                   options:musicListOptions
-                                                                               isReadOnly:readOnly]];
+                                                                               isReadOnly:isReadOnly]];
 
 
 
@@ -937,10 +948,7 @@
                                                                            valueTransformer:nil
                                                                               selectionMode:IBAPickListSelectionModeMultiple
                                                                                     options:moviesListOptions
-                                                                                 isReadOnly:readOnly]];
-    }
-
-    return self;
+                                                                                 isReadOnly:isReadOnly]];
 }
 
 - (NSDictionary *)getModelWithValues
@@ -981,12 +989,23 @@
     return [NSDictionary dictionaryWithDictionary:modelWithValues];
 }
 
+- (void)setReadOnly:(bool)readOnly
+{
+    isReadOnly = readOnly;
+
+    IBAFormFieldStyle *selectedStyle = readOnly ? readOnlyStyle:readWriteStyle;
+    [self setFormFieldStyle:selectedStyle];
+    [self reloadData];
+}
+
 - (void)loadStyles
 {
     readOnlyStyle = [[IBAFormFieldStyle alloc] init];
+    [readOnlyStyle setIsReadOnly:YES];
 
     readWriteStyle = [[IBAFormFieldStyle alloc] init];
-    readWriteStyle.valueBackgroundColor = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:240.0/255.0 alpha:1.000];
+    [readWriteStyle setIsReadOnly:NO];
+//    readWriteStyle.valueBackgroundColor = [UIColor colorWithRed:253.0/255.0 green:255.0/255.0 blue:229.0/255.0 alpha:1.000];
 }
 
 - (void)setModelValue:(id)value forKeyPath:(NSString *)keyPath {
