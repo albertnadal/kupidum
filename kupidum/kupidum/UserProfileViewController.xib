@@ -228,7 +228,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{7, 41}, {153, 153}}</string>
 								<reference key="NSSuperview" ref="736707864"/>
-								<reference key="NSNextKeyView" ref="565149018"/>
+								<reference key="NSNextKeyView" ref="746448597"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -242,7 +242,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{161, 41}, {151, 305}}</string>
 								<reference key="NSSuperview" ref="736707864"/>
-								<reference key="NSNextKeyView" ref="377342887"/>
+								<reference key="NSNextKeyView" ref="983696568"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -256,7 +256,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{7, 195}, {153, 151}}</string>
 								<reference key="NSSuperview" ref="736707864"/>
-								<reference key="NSNextKeyView" ref="928845602"/>
+								<reference key="NSNextKeyView" ref="318220916"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -421,7 +421,7 @@
 								<reference key="IBUIFontDescription" ref="551032561"/>
 								<reference key="IBUIFont" ref="195232301"/>
 							</object>
-							<object class="IBUIButton" id="377342887">
+							<object class="IBUIButton" id="983696568">
 								<reference key="NSNextResponder" ref="736707864"/>
 								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{161, 41}, {151, 305}}</string>
@@ -433,7 +433,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<double key="IBUIImageEdgeInsets.top">266</double>
+								<double key="IBUIImageEdgeInsets.top">267</double>
 								<double key="IBUIImageEdgeInsets.bottom">0.0</double>
 								<double key="IBUIImageEdgeInsets.left">114</double>
 								<double key="IBUIImageEdgeInsets.right">0.0</double>
@@ -443,21 +443,21 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="391172492"/>
-								<object class="NSCustomResource" key="IBUINormalImage" id="104618187">
+								<object class="NSCustomResource" key="IBUINormalImage" id="283345545">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">img_button_photo_camera.png</string>
 								</object>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="220482765">
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="737434163">
 									<int key="type">2</int>
 									<double key="pointSize">15</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="947799675">
+								<object class="NSFont" key="IBUIFont" id="659130112">
 									<string key="NSName">Helvetica-Bold</string>
 									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
-							<object class="IBUIButton" id="565149018">
+							<object class="IBUIButton" id="746448597">
 								<reference key="NSNextResponder" ref="736707864"/>
 								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{8, 40}, {152, 154}}</string>
@@ -479,11 +479,11 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="391172492"/>
-								<reference key="IBUINormalImage" ref="104618187"/>
-								<reference key="IBUIFontDescription" ref="220482765"/>
-								<reference key="IBUIFont" ref="947799675"/>
+								<reference key="IBUINormalImage" ref="283345545"/>
+								<reference key="IBUIFontDescription" ref="737434163"/>
+								<reference key="IBUIFont" ref="659130112"/>
 							</object>
-							<object class="IBUIButton" id="928845602">
+							<object class="IBUIButton" id="318220916">
 								<reference key="NSNextResponder" ref="736707864"/>
 								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{8, 195}, {152, 151}}</string>
@@ -495,7 +495,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<double key="IBUIImageEdgeInsets.top">113</double>
+								<double key="IBUIImageEdgeInsets.top">114</double>
 								<double key="IBUIImageEdgeInsets.bottom">0.0</double>
 								<double key="IBUIImageEdgeInsets.left">115</double>
 								<double key="IBUIImageEdgeInsets.right">0.0</double>
@@ -505,9 +505,9 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="391172492"/>
-								<reference key="IBUINormalImage" ref="104618187"/>
-								<reference key="IBUIFontDescription" ref="220482765"/>
-								<reference key="IBUIFont" ref="947799675"/>
+								<reference key="IBUINormalImage" ref="283345545"/>
+								<reference key="IBUIFontDescription" ref="737434163"/>
+								<reference key="IBUIFont" ref="659130112"/>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 455}</string>
@@ -581,7 +581,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">bodySilouetePhotoButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="377342887"/>
+						<reference key="destination" ref="983696568"/>
 					</object>
 					<int key="connectionID">38</int>
 				</object>
@@ -589,7 +589,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">faceFrontPhotoButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="565149018"/>
+						<reference key="destination" ref="746448597"/>
 					</object>
 					<int key="connectionID">39</int>
 				</object>
@@ -597,7 +597,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">faceProfilePhotoButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="928845602"/>
+						<reference key="destination" ref="318220916"/>
 					</object>
 					<int key="connectionID">40</int>
 				</object>
@@ -636,7 +636,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">showMenuSelectPhotoOrTakePhoto:</string>
-						<reference key="source" ref="565149018"/>
+						<reference key="source" ref="746448597"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -645,7 +645,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">showMenuSelectPhotoOrTakePhoto:</string>
-						<reference key="source" ref="377342887"/>
+						<reference key="source" ref="983696568"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -654,7 +654,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">showMenuSelectPhotoOrTakePhoto:</string>
-						<reference key="source" ref="928845602"/>
+						<reference key="source" ref="318220916"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -713,9 +713,9 @@
 							<reference ref="523793039"/>
 							<reference ref="117518985"/>
 							<reference ref="516546156"/>
-							<reference ref="377342887"/>
-							<reference ref="565149018"/>
-							<reference ref="928845602"/>
+							<reference ref="983696568"/>
+							<reference ref="746448597"/>
+							<reference ref="318220916"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">scroll</string>
@@ -800,19 +800,19 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">35</int>
-						<reference key="object" ref="377342887"/>
+						<reference key="object" ref="983696568"/>
 						<reference key="parent" ref="736707864"/>
 						<string key="objectName">bodySilouetePhotoButton</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">33</int>
-						<reference key="object" ref="565149018"/>
+						<reference key="object" ref="746448597"/>
 						<reference key="parent" ref="736707864"/>
 						<string key="objectName">faceFrontPhotoButton</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
-						<reference key="object" ref="928845602"/>
+						<reference key="object" ref="318220916"/>
 						<reference key="parent" ref="736707864"/>
 						<string key="objectName">faceProfilePhotoButton</string>
 					</object>

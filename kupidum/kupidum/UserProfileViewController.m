@@ -33,6 +33,7 @@
 - (void)backPressed;
 - (void)reloadFormTableView;
 - (void)updateTakePhotoButtonsVisibility;
+- (UIImage *)cropSilouettePicture:(UIImage *)image;
 
 @end
 
@@ -104,42 +105,62 @@ const int numberOfFieldsInCultureSection = 2;
         [self.photoPicker setDelegate:self];
 	}
 
+    [imgDesiredPictureProfile removeFromSuperview];
+
 	if(buttonIndex == 0)
 	{
-		//Fer una foto
+		//Take a picture
         self.photoPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [imgDesiredPictureProfile removeFromSuperview];
         imgDesiredPictureProfile = [[UIImageView alloc] initWithFrame:CGRectMake(0, 72, 320, 320)];
         switch(photoTypeSelected)
         {
-            case kFaceFrontPhoto:   [imgDesiredPictureProfile setImage:[UIImage imageNamed:@"img_face_front_image_picker.png"]];
+            case kFaceFrontPhoto:   [imgDesiredPictureProfile setImage:[UIImage imageNamed:@"img_face_front_image_picker_woman.png"]];
                                     break;
-            case kFaceProfilePhoto: [imgDesiredPictureProfile setImage:[UIImage imageNamed:@"img_face_front_image_picker.png"]];
+            case kFaceProfilePhoto: [imgDesiredPictureProfile setImage:[UIImage imageNamed:@"img_face_profile_image_picker_woman.png"]];
                                     break;
-            case kBodySilouette:    [imgDesiredPictureProfile setImage:[UIImage imageNamed:@"img_face_front_image_picker.png"]];
+            case kBodySilouette:    [imgDesiredPictureProfile setImage:[UIImage imageNamed:@"img_body_silhouette_image_picker_woman.png"]];
                                     break;
         }
         [self.photoPicker.view addSubview:imgDesiredPictureProfile];
 	}
 	else if(buttonIndex == 1)
 	{
-		//Escollir del carret
+		//Choose photoroll
         self.photoPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	}
+    else
+    {
+        //Cancel pressed
+        return;
+    }
 
     self.photoPicker.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:self.photoPicker animated:YES completion:nil];
+}
+
+- (UIImage *)cropSilouettePicture:(UIImage *)image
+{
+    float finalWidth = image.size.height * 0.4918f;
+    float finalHeight = image.size.height;
+    
+    CGRect cropArea = CGRectMake((image.size.width/2.0f) - (finalWidth/2.0f), 0, finalWidth, finalHeight);
+    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, cropArea);
+    UIImage *imageCropped = [UIImage imageWithCGImage:imageRef scale:1.0f orientation:image.imageOrientation];
+    CGImageRelease(imageRef);
+    return imageCropped;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
     switch(photoTypeSelected)
     {
-        case kFaceFrontPhoto:   [faceFrontPhoto setImage:[[UIImage alloc] initWithData:UIImageJPEGRepresentation(image, 1.0)]];
+        case kFaceFrontPhoto:   [faceFrontPhoto setImage:image];
                                 break;
-        case kFaceProfilePhoto: [faceProfilePhoto setImage:[[UIImage alloc] initWithData:UIImageJPEGRepresentation(image, 1.0)]];
+
+        case kFaceProfilePhoto: [faceProfilePhoto setImage:image];
                                 break;
-        case kBodySilouette:    [bodySilouetePhoto setImage:[[UIImage alloc] initWithData:UIImageJPEGRepresentation(image, 1.0)]];
+
+        case kBodySilouette:    [bodySilouetePhoto setImage:[self cropSilouettePicture:image]];
                                 break;
     }
 
