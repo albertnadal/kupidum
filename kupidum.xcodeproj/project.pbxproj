@@ -88,6 +88,9 @@
 		FF4902A31691049600500ABB /* incoming_call.wav in Resources */ = {isa = PBXBuildFile; fileRef = FF4902A21691049600500ABB /* incoming_call.wav */; };
 		FF61D2F116F5F3AB00529429 /* img_pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = FF61D2EF16F5F3AB00529429 /* img_pencil.png */; };
 		FF61D2F216F5F3AB00529429 /* img_pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF61D2F016F5F3AB00529429 /* img_pencil@2x.png */; };
+		FF61D2F516F6141500529429 /* img_button_photo_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF61D2F316F6141500529429 /* img_button_photo_camera@2x.png */; };
+		FF61D2F616F6141500529429 /* img_button_photo_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = FF61D2F416F6141500529429 /* img_button_photo_camera.png */; };
+		FF61D2F916F6328E00529429 /* img_face_front_image_picker.png in Resources */ = {isa = PBXBuildFile; fileRef = FF61D2F816F6328E00529429 /* img_face_front_image_picker.png */; };
 		FF63708F169342A0009127E9 /* thin_upper_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF63708D169342A0009127E9 /* thin_upper_shadow@2x.png */; };
 		FF637090169342A0009127E9 /* thin_upper_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = FF63708E169342A0009127E9 /* thin_upper_shadow.png */; };
 		FF749737167F2B1400AF971F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FF749736167F2B1400AF971F /* Base64.m */; };
@@ -391,6 +394,9 @@
 		FF571935169D7C5600ED2E3B /* KPDUsersHorizontalTableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDUsersHorizontalTableViewControllerDelegate.h; path = kupidum/commons/KPDUsersHorizontalTableViewControllerDelegate.h; sourceTree = "<group>"; };
 		FF61D2EF16F5F3AB00529429 /* img_pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_pencil.png; sourceTree = "<group>"; };
 		FF61D2F016F5F3AB00529429 /* img_pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_pencil@2x.png"; sourceTree = "<group>"; };
+		FF61D2F316F6141500529429 /* img_button_photo_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_button_photo_camera@2x.png"; sourceTree = "<group>"; };
+		FF61D2F416F6141500529429 /* img_button_photo_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_button_photo_camera.png; sourceTree = "<group>"; };
+		FF61D2F816F6328E00529429 /* img_face_front_image_picker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_face_front_image_picker.png; sourceTree = "<group>"; };
 		FF63708D169342A0009127E9 /* thin_upper_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "thin_upper_shadow@2x.png"; path = "kupidum/images/thin_upper_shadow@2x.png"; sourceTree = "<group>"; };
 		FF63708E169342A0009127E9 /* thin_upper_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thin_upper_shadow.png; path = kupidum/images/thin_upper_shadow.png; sourceTree = "<group>"; };
 		FF749735167F2B1400AF971F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
@@ -857,6 +863,9 @@
 				FF7B53B8169A47230042FA62 /* fake_photo2.png */,
 				FF7B53B9169A47240042FA62 /* fake_photo3.png */,
 				FF7B5428169B6FE10042FA62 /* fake_photo4.png */,
+				FF61D2F816F6328E00529429 /* img_face_front_image_picker.png */,
+				FF61D2F316F6141500529429 /* img_button_photo_camera@2x.png */,
+				FF61D2F416F6141500529429 /* img_button_photo_camera.png */,
 				FF61D2EF16F5F3AB00529429 /* img_pencil.png */,
 				FF61D2F016F5F3AB00529429 /* img_pencil@2x.png */,
 				FF8511AA16DCEDEB00B464F9 /* img_front_camera.png */,
@@ -1550,6 +1559,9 @@
 				FFBC47B616E0DDA10035BA73 /* img_account_icon@2x.png in Resources */,
 				FF61D2F116F5F3AB00529429 /* img_pencil.png in Resources */,
 				FF61D2F216F5F3AB00529429 /* img_pencil@2x.png in Resources */,
+				FF61D2F516F6141500529429 /* img_button_photo_camera@2x.png in Resources */,
+				FF61D2F616F6141500529429 /* img_button_photo_camera.png in Resources */,
+				FF61D2F916F6328E00529429 /* img_face_front_image_picker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
