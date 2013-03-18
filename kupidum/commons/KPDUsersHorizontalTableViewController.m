@@ -55,7 +55,7 @@
 
 - (void)scrollContentToLeft
 {
-    NSIndexPath* ipath = [NSIndexPath indexPathForRow:5 inSection:0];
+    NSIndexPath* ipath = [NSIndexPath indexPathForRow:4 inSection:0];
     [(UITableView *)self.view scrollToRowAtIndexPath:ipath atScrollPosition:UITableViewScrollPositionBottom animated: NO];
 }
 
@@ -89,12 +89,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 6;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.view.frame.size.height;
+    return 90.0f; //self.view.frame.size.height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -109,8 +109,9 @@
                 initWithStyle: UITableViewCellStyleDefault
                 reuseIdentifier: CellIdentifier];
 
-        UIImageView *imatge = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.height,self.view.frame.size.height)];
+        UIImageView *imatge = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,90.0f,128.0f)];
         [imatge setImage:[UIImage imageNamed:@"fake_photo4.png"]];
+        [imatge setContentMode:UIViewContentModeScaleToFill];
         [cell.contentView addSubview:imatge];
         [cell.contentView setBackgroundColor:[UIColor whiteColor]];
 

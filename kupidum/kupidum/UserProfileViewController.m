@@ -9,9 +9,11 @@
 #import "UserProfileViewController.h"
 #import "ProfileFormDataSource.h"
 #import "KPDUIUtilities.h"
+#import <IBAForms/IBAForms.h>
 
 @interface UserProfileViewController ()
 {
+    NSString *username;
     bool isReadOnly;
     bool editMode;
     bool profileIsEditable;
@@ -20,6 +22,7 @@
     UITableView *formTableView;
     UIImagePickerController *photoPicker;
     UIImageView *imgDesiredPictureProfile;
+    float containerButtonsHeight;
 }
 
 @property (nonatomic, retain) UIImagePickerController *photoPicker;
@@ -34,14 +37,16 @@
 - (void)reloadFormTableView;
 - (void)updateTakePhotoButtonsVisibility;
 - (UIImage *)cropSilouettePicture:(UIImage *)image;
+- (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_;
 
 @end
 
 @implementation UserProfileViewController
 
-@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker;
+@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons;
 
-const float basicInformationPanelHeight = 550.0;
+const float basicInformationPanelHeight = 435.0;
+const float buttonsPanelHeight = 120.0f;
 const float detailedInformationPanelHeight = 1500.0;
 const float fieldCellHeight = 44.0;
 
@@ -56,20 +61,42 @@ const int numberOfFieldsInCultureSection = 2;
 {
     if(self = [super init])
     {
+        username = @"";
         imgDesiredPictureProfile = nil;
+        profileIsEditable = false;
+        editMode = false;
     }
 
     return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withUsername:(NSString *)username_
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    {
+        username = username_;
         imgDesiredPictureProfile = nil;
+
+        NSMutableDictionary *model = [self retrieveUserProfileModelForUser:username];
+        profileIsEditable = true; //This must be set after load user profile from DB or web service //!isReadOnly;
+        editMode = false;
+
+        ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES];
+        self.formDataSource = profileFormDataSource;
+
+        containerButtonsHeight = profileIsEditable ? 0.0f : buttonsPanelHeight;
     }
+
     return self;
+}
+
+- (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_
+{
+	NSMutableDictionary *model = [[NSMutableDictionary alloc] init];
+    NSArray *selectedEyeColorListOption = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[5]Verds"]];
+
+	[model setObject:selectedEyeColorListOption forKey:kEyeColorUserProfileField];
+    return model;
 }
 
 - (void)registerSelector:(SEL)selector withNotification:(NSString *)notificationKey
@@ -81,7 +108,7 @@ const int numberOfFieldsInCultureSection = 2;
 {
     [UIView beginAnimations:@"restoreProfileContentSize" context:nil];
     [UIView setAnimationDuration:0.3];
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + detailedInformationPanelHeight)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + detailedInformationPanelHeight)];
     [UIView commitAnimations];
 }
 
@@ -174,7 +201,7 @@ const int numberOfFieldsInCultureSection = 2;
 
 - (void)showFormField:(NSNotification *)notification
 {
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + detailedInformationPanelHeight + scroll.frame.size.height)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + detailedInformationPanelHeight + scroll.frame.size.height)];
 
 	NSIndexPath *indexPath = [[notification userInfo] objectForKey:@"indexPath"];
 
@@ -198,7 +225,7 @@ const int numberOfFieldsInCultureSection = 2;
 {
 	[super loadView];
 
-	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
+	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight + containerButtonsHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
 	[formTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[self setTableView:formTableView];
     [formTableView setScrollEnabled:NO];
@@ -211,17 +238,17 @@ const int numberOfFieldsInCultureSection = 2;
     [super viewDidLoad];
 
     imgDesiredPictureProfile = nil;
-    self.title = @"superwoman";
+    self.title = username;
 
     [self registerSelector:@selector(showFormField:) withNotification:IBAInputRequestorShowFormField];
     [self registerSelector:@selector(restoreOriginalProfileScrollSize:) withNotification:IBAInputRequestorRestoreOriginalProfileSize];
 
-    profileIsEditable = TRUE; //This must be set after load user profile from DB or web service //!isReadOnly;
-    editMode = false;
-
     [self showNavigationBarButtons];
     [self updateTakePhotoButtonsVisibility];
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + detailedInformationPanelHeight)];
+
+    [containerButtons setHidden:profileIsEditable];
+
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + detailedInformationPanelHeight)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -287,6 +314,10 @@ const int numberOfFieldsInCultureSection = 2;
     editMode = true;
     [self.navigationItem setRightBarButtonItem:doneButton];
 
+    [presentationPencil setHidden:NO];
+    [presentationTextView setEditable:YES];
+    [presentationTextView setUserInteractionEnabled:YES];
+
     [self updateTakePhotoButtonsVisibility];
     [self reloadFormTableView];
 }
@@ -298,6 +329,10 @@ const int numberOfFieldsInCultureSection = 2;
 
     editMode = false;
     [self.navigationItem setRightBarButtonItem:editButton];
+
+    [presentationPencil setHidden:YES];
+    [presentationTextView setEditable:NO];
+    [presentationTextView setUserInteractionEnabled:NO];
 
     [self updateTakePhotoButtonsVisibility];
     [self reloadFormTableView];
