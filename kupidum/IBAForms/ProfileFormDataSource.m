@@ -19,11 +19,12 @@
 
 @synthesize isReadOnly;
 
-- (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly
+- (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly showEmptyFields:(bool)showEmpty
 {
 	if (self = [super initWithModel:aModel]) {
 
         isReadOnly = readOnly;
+        showEmptyFields = showEmpty;
 
         [self loadStyles];
         [self reloadData];
@@ -56,7 +57,7 @@
                                                                                             options:eyeColorListOptions
                                                                                          isReadOnly:isReadOnly];
 
-		[basicFieldSection addFormField:eyeColorPickFormField];
+        [basicFieldSection addFormField:eyeColorPickFormField];
 
         NSMutableArray *heightArray = [[NSMutableArray alloc] init];
         [heightArray addObject:NSLocalizedString(@"[0]Prefereixo no dir-ho", @"")];
@@ -949,6 +950,28 @@
                                                                               selectionMode:IBAPickListSelectionModeMultiple
                                                                                     options:moviesListOptions
                                                                                  isReadOnly:isReadOnly]];
+}
+
+- (int)userSelectedIdentifierForKeyPath:(NSString *)keyPath
+{
+    NSArray *selectedListOption = [self.model objectForKey:keyPath];
+
+    if(![selectedListOption count])
+        return 0;
+
+    IBAPickListFormOption *firstSelectedOption = [selectedListOption objectAtIndex:0];
+    NSString *itemNameWithValue = [firstSelectedOption name];
+    NSString *itemValue = @"0";
+
+    NSRange range_open_clautador = [itemNameWithValue rangeOfString:@"["];
+    NSRange range_close_clautador = [itemNameWithValue rangeOfString:@"]"];
+    if(range_open_clautador.location < range_close_clautador.location)
+    {
+        int range_length = range_close_clautador.location - (range_open_clautador.location + 1);
+        itemValue = [itemNameWithValue substringWithRange:NSMakeRange(range_open_clautador.location + 1, range_length)];
+    }
+    
+    return [itemValue intValue];
 }
 
 - (NSDictionary *)getModelWithValues

@@ -109,7 +109,7 @@
                 initWithStyle: UITableViewCellStyleDefault
                 reuseIdentifier: CellIdentifier];
 
-        UIImageView *imatge = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,90.0f,128.0f)];
+        UIImageView *imatge = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,90.0f,90.0f)];
         [imatge setImage:[UIImage imageNamed:@"fake_photo4.png"]];
         [imatge setContentMode:UIViewContentModeScaleToFill];
         [cell.contentView addSubview:imatge];

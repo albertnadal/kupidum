@@ -20,7 +20,6 @@
     KPDUsersHorizontalTableViewController *nearToYouCandidatesTableViewController;
     KPDUsersHorizontalTableViewController *candidatesYouMayLikeTableViewController;
     KPDUsersHorizontalTableViewController *candidatesWhoYouMayLikeTableViewController;
-
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;

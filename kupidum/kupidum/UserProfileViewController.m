@@ -81,7 +81,7 @@ const int numberOfFieldsInCultureSection = 2;
         profileIsEditable = true; //This must be set after load user profile from DB or web service //!isReadOnly;
         editMode = false;
 
-        ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES];
+        ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:YES];
         self.formDataSource = profileFormDataSource;
 
         containerButtonsHeight = profileIsEditable ? 0.0f : buttonsPanelHeight;
@@ -93,9 +93,63 @@ const int numberOfFieldsInCultureSection = 2;
 - (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_
 {
 	NSMutableDictionary *model = [[NSMutableDictionary alloc] init];
+
     NSArray *selectedEyeColorListOption = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[5]Verds"]];
+    NSArray *heightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[180]180 cm"]];
+    NSArray *weightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[85]85 kg"]];
+    NSArray *hairColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[3]Moreno"]];
+    NSArray *hairSizeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[3]Curt"]];
+    NSArray *bodyLookListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[3]Agradable de veure"]];
+    NSArray *myHighlightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[1]Els meus ulls"]];
+    NSArray *citizenshipListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[56]Espanyola"]];
+    NSArray *ethnicalOriginListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[1]Europeu"]];
+    NSArray *religionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[25]Cristià"]];
+    NSArray *religionLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[2]Practicant ocasional"]];
+    NSArray *marriageOpinionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[5]Impensable"]];
+    NSArray *romanticismLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[2]Bastant romàntic"]];
+    NSArray *iWantChildrensListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[3]Sí, 2"]];
+    NSArray *studiesLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[5]Llicenciat o superior"]];
+    NSArray *languagesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObjects:@"[13]catalán", @"[19]español", nil]];
+    NSArray *myBusinessListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[37]ingeniero informático"]];
+    NSArray *salaryListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[4]De 30 a 50.000€/any"]];
+    NSArray *myStyleListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[9]Rock"]];
+    NSArray *alimentListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[1]Menjo de tot"]];
+    NSArray *smokeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[1]Sí, ocasionalment"]];
+    NSArray *animalsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[2]Gos"]];
+    NSArray *myHobbiesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[20]automóvil"]];
+    NSArray *mySportsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[9]fútbol"]];
+    NSArray *mySparetimeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[1]restaurante"]];
+    NSArray *musicListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[11]pop-rock"]];
+    NSArray *moviesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[11]ciencia-ficción"]];
 
 	[model setObject:selectedEyeColorListOption forKey:kEyeColorUserProfileField];
+	[model setObject:heightListOptions forKey:kHeightUserProfileField];
+	[model setObject:weightListOptions forKey:kWeightUserProfileField];
+	[model setObject:hairColorListOptions forKey:kHairColorUserProfileField];
+	[model setObject:hairSizeListOptions forKey:kHairSizeUserProfileField];
+	[model setObject:bodyLookListOptions forKey:kBodyLookUserProfileField];
+	[model setObject:myHighlightListOptions forKey:kMyHighlightUserProfileField];
+	[model setObject:citizenshipListOptions forKey:kNationUserProfileField];
+	[model setObject:ethnicalOriginListOptions forKey:kEthnicalOriginUserProfileField];
+	[model setObject:religionListOptions forKey:kReligionUserProfileField];
+	[model setObject:religionLevelListOptions forKey:kReligionLevelUserProfileField];
+	[model setObject:marriageOpinionListOptions forKey:kMarriageOpinionUserProfileField];
+	[model setObject:romanticismLevelListOptions forKey:kRomanticismLevelUserProfileField];
+	[model setObject:iWantChildrensListOptions forKey:kIWantChildrensUserProfileField];
+	[model setObject:studiesLevelListOptions forKey:kStudiesLevelUserProfileField];
+	[model setObject:languagesListOptions forKey:kLanguagesUserProfileField];
+	[model setObject:myBusinessListOptions forKey:kMyBusinessUserProfileField];
+	[model setObject:salaryListOptions forKey:kSalaryUserProfileField];
+	[model setObject:myStyleListOptions forKey:kMyStyleUserProfileField];
+	[model setObject:alimentListOptions forKey:kAlimentUserProfileField];
+	[model setObject:smokeListOptions forKey:kSmokeUserProfileField];
+	[model setObject:animalsListOptions forKey:kAnimalsUserProfileField];
+	[model setObject:myHobbiesListOptions forKey:kMyHobbiesUserProfileField];
+	[model setObject:mySportsListOptions forKey:kMySportsUserProfileField];
+	[model setObject:mySparetimeListOptions forKey:kMySparetimeUserProfileField];
+	[model setObject:musicListOptions forKey:kMusicUserProfileField];
+	[model setObject:moviesListOptions forKey:kMoviesUserProfileField];
+
     return model;
 }
 
@@ -287,7 +341,7 @@ const int numberOfFieldsInCultureSection = 2;
 - (void)reloadFormTableView
 {
     bool isReadOnly_ = editMode ? false : true;
-	ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:self.formDataSource.model isReadOnly:isReadOnly_];
+	ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:self.formDataSource.model isReadOnly:isReadOnly_ showEmptyFields:YES];
     self.formDataSource = profileFormDataSource;
     
     [formTableView removeFromSuperview];

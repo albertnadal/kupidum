@@ -37,26 +37,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    [scroll setContentSize:CGSizeMake(320, 688)];
+    [scroll setContentSize:CGSizeMake(320, 638)];
 
     profileResumeView.layer.cornerRadius = 5.0;
     profileResumeView.layer.masksToBounds = YES;
 
-    nearToYouCandidatesTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 126, 305)];
+    nearToYouCandidatesTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 90, 305)];
     [nearToYouCandidatesTableViewController setDelegate:self];
     [nearToYouCandidatesView addSubview:nearToYouCandidatesTableViewController.view];
     nearToYouCandidatesView.layer.cornerRadius = 5.0;
     nearToYouCandidatesView.layer.masksToBounds = YES;
     [nearToYouCandidatesTableViewController scrollContentToLeft];
 
-    candidatesYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 126, 305)];
+    candidatesYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 90, 305)];
     [candidatesYouMayLikeTableViewController setDelegate:self];
     [candidatesYouMayLikeView addSubview:candidatesYouMayLikeTableViewController.view];
     candidatesYouMayLikeView.layer.cornerRadius = 5.0;
     candidatesYouMayLikeView.layer.masksToBounds = YES;
     [candidatesYouMayLikeTableViewController scrollContentToLeft];
 
-    candidatesWhoYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 126, 305)];
+    candidatesWhoYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 90, 305)];
     [candidatesWhoYouMayLikeTableViewController setDelegate:self];
     [candidatesWhoYouMayLikeView addSubview:candidatesWhoYouMayLikeTableViewController.view];
     candidatesWhoYouMayLikeView.layer.cornerRadius = 5.0;

@@ -96,6 +96,7 @@
 		FF61D30B16F64BB500529429 /* img_button_photo_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = FF61D30716F64BB500529429 /* img_button_photo_camera.png */; };
 		FF61D30C16F64BB500529429 /* img_pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = FF61D30816F64BB500529429 /* img_pencil.png */; };
 		FF61D30D16F64BB500529429 /* img_pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF61D30916F64BB500529429 /* img_pencil@2x.png */; };
+		FF61D31016F7C9E100529429 /* KPDUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = FF61D30F16F7C9E100529429 /* KPDUserProfile.m */; };
 		FF63708F169342A0009127E9 /* thin_upper_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF63708D169342A0009127E9 /* thin_upper_shadow@2x.png */; };
 		FF637090169342A0009127E9 /* thin_upper_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = FF63708E169342A0009127E9 /* thin_upper_shadow.png */; };
 		FF749737167F2B1400AF971F /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FF749736167F2B1400AF971F /* Base64.m */; };
@@ -407,6 +408,8 @@
 		FF61D30716F64BB500529429 /* img_button_photo_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_button_photo_camera.png; path = kupidum/images/img_button_photo_camera.png; sourceTree = "<group>"; };
 		FF61D30816F64BB500529429 /* img_pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_pencil.png; path = kupidum/images/img_pencil.png; sourceTree = "<group>"; };
 		FF61D30916F64BB500529429 /* img_pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_pencil@2x.png"; path = "kupidum/images/img_pencil@2x.png"; sourceTree = "<group>"; };
+		FF61D30E16F7C9E100529429 /* KPDUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDUserProfile.h; path = kupidum/model/KPDUserProfile.h; sourceTree = "<group>"; };
+		FF61D30F16F7C9E100529429 /* KPDUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDUserProfile.m; path = kupidum/model/KPDUserProfile.m; sourceTree = "<group>"; };
 		FF63708D169342A0009127E9 /* thin_upper_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "thin_upper_shadow@2x.png"; path = "kupidum/images/thin_upper_shadow@2x.png"; sourceTree = "<group>"; };
 		FF63708E169342A0009127E9 /* thin_upper_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = thin_upper_shadow.png; path = kupidum/images/thin_upper_shadow.png; sourceTree = "<group>"; };
 		FF749735167F2B1400AF971F /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
@@ -1164,6 +1167,8 @@
 				FF85F0C716D8686C00F839B5 /* KPDUserSingleton.m */,
 				FF775DE316D66B6800096474 /* KPDUser.h */,
 				FF775DE416D66B6800096474 /* KPDUser.m */,
+				FF61D30E16F7C9E100529429 /* KPDUserProfile.h */,
+				FF61D30F16F7C9E100529429 /* KPDUserProfile.m */,
 				FF10044516D79F8D003FA3F9 /* KPDChat.h */,
 				FF10044616D79F8D003FA3F9 /* KPDChat.m */,
 				FF85F0C016D818AD00F839B5 /* KPDChatConversation.h */,
@@ -1648,6 +1653,7 @@
 				FFC5B12516DE29A200CFD587 /* MessageCellViewController.m in Sources */,
 				FFC5B12A16DE696300CFD587 /* MessageDetailViewController.m in Sources */,
 				FFBC47A916DF7ED50035BA73 /* MessageComposeViewController.m in Sources */,
+				FF61D31016F7C9E100529429 /* KPDUserProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
