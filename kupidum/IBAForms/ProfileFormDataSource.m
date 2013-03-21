@@ -57,7 +57,8 @@
                                                                                             options:eyeColorListOptions
                                                                                          isReadOnly:isReadOnly];
 
-        [basicFieldSection addFormField:eyeColorPickFormField];
+        if(([self userSelectedIdentifierForKeyPath:kEyeColorUserProfileField]) || (showEmptyFields))
+            [basicFieldSection addFormField:eyeColorPickFormField];
 
         NSMutableArray *heightArray = [[NSMutableArray alloc] init];
         [heightArray addObject:NSLocalizedString(@"[0]Prefereixo no dir-ho", @"")];
@@ -66,12 +67,13 @@
 
 		NSArray *heightListOptions = [IBAPickListFormOption pickListOptionsForStrings:heightArray];
 
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHeightUserProfileField
-                                                                                title:NSLocalizedString(@"Alçada", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:heightListOptions
-                                                                           isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kHeightUserProfileField]) || (showEmptyFields))
+            [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHeightUserProfileField
+                                                                                    title:NSLocalizedString(@"Alçada", @"")
+                                                                         valueTransformer:nil
+                                                                            selectionMode:IBAPickListSelectionModeSingle
+                                                                                  options:heightListOptions
+                                                                               isReadOnly:isReadOnly]];
 
         NSMutableArray *weightArray = [[NSMutableArray alloc] init];
         [weightArray addObject:NSLocalizedString(@"[0]Prefereixo no dir-ho", @"")];
@@ -80,12 +82,13 @@
 
 		NSArray *weightListOptions = [IBAPickListFormOption pickListOptionsForStrings:weightArray];
 
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kWeightUserProfileField
-                                                                                title:NSLocalizedString(@"Pes", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:weightListOptions
-                                                                           isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kWeightUserProfileField]) || (showEmptyFields))
+            [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kWeightUserProfileField
+                                                                                    title:NSLocalizedString(@"Pes", @"")
+                                                                         valueTransformer:nil
+                                                                            selectionMode:IBAPickListSelectionModeSingle
+                                                                                  options:weightListOptions
+                                                                               isReadOnly:isReadOnly]];
 
 		NSArray *hairColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                          NSLocalizedString(@"[1]Blanc", @""),
@@ -95,13 +98,14 @@
                                                                                          NSLocalizedString(@"[7]Pèl-roig", @""),
                                                                                          NSLocalizedString(@"[2]Ros", @""),
                                                                                          nil]];
-        
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHairColorUserProfileField
-                                                                                title:NSLocalizedString(@"Color del cabell", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:hairColorListOptions
-                                                                           isReadOnly:isReadOnly]];
+
+        if(([self userSelectedIdentifierForKeyPath:kHairColorUserProfileField]) || (showEmptyFields))
+            [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHairColorUserProfileField
+                                                                                    title:NSLocalizedString(@"Color del cabell", @"")
+                                                                         valueTransformer:nil
+                                                                            selectionMode:IBAPickListSelectionModeSingle
+                                                                                  options:hairColorListOptions
+                                                                               isReadOnly:isReadOnly]];
 
 		NSArray *hairSizeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                           NSLocalizedString(@"[1]Rapat", @""),
@@ -112,13 +116,14 @@
                                                                                           NSLocalizedString(@"[6]Molt llarg", @""),
                                                                                           NSLocalizedString(@"[7]Sense pèl", @""),
                                                                                           nil]];
-        
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHairSizeUserProfileField
-                                                                                title:NSLocalizedString(@"Llargada del cabell", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:hairSizeListOptions
-                                                                           isReadOnly:isReadOnly]];
+
+        if(([self userSelectedIdentifierForKeyPath:kHairSizeUserProfileField]) || (showEmptyFields))
+            [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHairSizeUserProfileField
+                                                                                    title:NSLocalizedString(@"Llargada del cabell", @"")
+                                                                         valueTransformer:nil
+                                                                            selectionMode:IBAPickListSelectionModeSingle
+                                                                                  options:hairSizeListOptions
+                                                                               isReadOnly:isReadOnly]];
 
 		NSArray *bodyLookListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                          NSLocalizedString(@"[1]Explosiu", @""),
@@ -129,13 +134,14 @@
                                                                                          NSLocalizedString(@"[6]No ho he de dir jo", @""),
                                                                                          NSLocalizedString(@"[7]El físic no té importància", @""),
                                                                                          nil]];
-        
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kBodyLookUserProfileField
-                                                                                title:NSLocalizedString(@"El meu aspecte", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:bodyLookListOptions
-                                                                           isReadOnly:isReadOnly]];
+
+        if(([self userSelectedIdentifierForKeyPath:kBodyLookUserProfileField]) || (showEmptyFields))
+            [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kBodyLookUserProfileField
+                                                                                    title:NSLocalizedString(@"El meu aspecte", @"")
+                                                                         valueTransformer:nil
+                                                                            selectionMode:IBAPickListSelectionModeSingle
+                                                                                  options:bodyLookListOptions
+                                                                               isReadOnly:isReadOnly]];
 
 
 		NSArray *myHighlightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -154,14 +160,21 @@
                                                                                          NSLocalizedString(@"[10]El més bonic no està a la llista", @""),
                                                                                          nil]];
 
-		[basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyHighlightUserProfileField
-                                                                                title:NSLocalizedString(@"El més atractiu de mi", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:myHighlightListOptions
-                                                                           isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kMyHighlightUserProfileField]) || (showEmptyFields))
+            [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyHighlightUserProfileField
+                                                                                    title:NSLocalizedString(@"El més atractiu de mi", @"")
+                                                                         valueTransformer:nil
+                                                                            selectionMode:IBAPickListSelectionModeSingle
+                                                                                  options:myHighlightListOptions
+                                                                               isReadOnly:isReadOnly]];
 
-
+        //Remove section if is empty
+        for(int i=0; i<[[self sections] count]; i++)
+        {
+            IBAFormSection *section = [[self sections] objectAtIndex:i];
+            if((section == basicFieldSection) && (![[section formFields] count]))
+                [[self sections] removeObjectAtIndex:i];
+        }
 
 		IBAFormSection *valuesFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els meus valors", @"") footerTitle:nil];
         [valuesFieldSection setFormFieldStyle:selectedStyle];
@@ -368,12 +381,13 @@
                                                                                                  NSLocalizedString(@"[196]Zimbabuense", @""),
                                                                                                  nil]];
 
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kNationUserProfileField
-                                                                                title:NSLocalizedString(@"La meva nacionalitat", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:citizenshipListOptions
-                                                                           isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kNationUserProfileField]) || (showEmptyFields))
+            [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kNationUserProfileField
+                                                                                     title:NSLocalizedString(@"La meva nacionalitat", @"")
+                                                                          valueTransformer:nil
+                                                                             selectionMode:IBAPickListSelectionModeSingle
+                                                                                   options:citizenshipListOptions
+                                                                                isReadOnly:isReadOnly]];
 
 
 		NSArray *ethnicalOriginListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -385,13 +399,14 @@
                                                                                             NSLocalizedString(@"[7]Indi", @""),
                                                                                             NSLocalizedString(@"[6]Un altre", @""),
                                                                                             nil]];
-        
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kEthnicalOriginUserProfileField
-                                                                                title:NSLocalizedString(@"El meu origen ètnic", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:ethnicalOriginListOptions
-                                                                           isReadOnly:isReadOnly]];
+
+        if(([self userSelectedIdentifierForKeyPath:kEthnicalOriginUserProfileField]) || (showEmptyFields))
+            [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kEthnicalOriginUserProfileField
+                                                                                     title:NSLocalizedString(@"El meu origen ètnic", @"")
+                                                                          valueTransformer:nil
+                                                                             selectionMode:IBAPickListSelectionModeSingle
+                                                                                   options:ethnicalOriginListOptions
+                                                                                isReadOnly:isReadOnly]];
 
 
 		NSArray *religionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -408,12 +423,13 @@
                                                                                                NSLocalizedString(@"[13]Un altre", @""),
                                                                                                nil]];
 
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kReligionUserProfileField
-                                                                                title:NSLocalizedString(@"La meva religió", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:religionListOptions
-                                                                           isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kReligionUserProfileField]) || (showEmptyFields))
+            [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kReligionUserProfileField
+                                                                                     title:NSLocalizedString(@"La meva religió", @"")
+                                                                          valueTransformer:nil
+                                                                             selectionMode:IBAPickListSelectionModeSingle
+                                                                                   options:religionListOptions
+                                                                                isReadOnly:isReadOnly]];
 
         
         
@@ -423,12 +439,13 @@
                                                                                          NSLocalizedString(@"[3]No practicant", @""),
                                                                                          nil]];
 
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kReligionLevelUserProfileField
-                                                                                title:NSLocalizedString(@"Pràctica religiosa", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:religionLevelListOptions
-                                                                           isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kReligionLevelUserProfileField]) || (showEmptyFields))
+            [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kReligionLevelUserProfileField
+                                                                                     title:NSLocalizedString(@"Pràctica religiosa", @"")
+                                                                          valueTransformer:nil
+                                                                             selectionMode:IBAPickListSelectionModeSingle
+                                                                                   options:religionLevelListOptions
+                                                                                isReadOnly:isReadOnly]];
 
 
 		NSArray *marriageOpinionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -440,12 +457,13 @@
                                                                                               NSLocalizedString(@"[6]No em tornaré a casar", @""),
                                                                                               nil]];
 
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMarriageOpinionUserProfileField
-                                                                                title:NSLocalizedString(@"Per mi, el matrimoni és", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:marriageOpinionListOptions
-                                                                           isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kMarriageOpinionUserProfileField]) || (showEmptyFields))
+            [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMarriageOpinionUserProfileField
+                                                                                     title:NSLocalizedString(@"Per mi, el matrimoni és", @"")
+                                                                          valueTransformer:nil
+                                                                             selectionMode:IBAPickListSelectionModeSingle
+                                                                                   options:marriageOpinionListOptions
+                                                                                isReadOnly:isReadOnly]];
 
 
 		NSArray *romanticismLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -455,12 +473,13 @@
                                                                                                 NSLocalizedString(@"[4]Gens romàntic", @""),
                                                                                                 nil]];
 
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kRomanticismLevelUserProfileField
-                                                                                title:NSLocalizedString(@"Sóc romàntic", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:romanticismLevelListOptions
-                                                                           isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kRomanticismLevelUserProfileField]) || (showEmptyFields))
+            [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kRomanticismLevelUserProfileField
+                                                                                     title:NSLocalizedString(@"Sóc romàntic", @"")
+                                                                          valueTransformer:nil
+                                                                             selectionMode:IBAPickListSelectionModeSingle
+                                                                                   options:romanticismLevelListOptions
+                                                                                isReadOnly:isReadOnly]];
 
 
         
@@ -472,14 +491,22 @@
                                                                                                  NSLocalizedString(@"[5]Sí, més de 3", @""),
                                                                                                  NSLocalizedString(@"[6]Sí, número no decidit", @""),
                                                                                                  nil]];
-        
-		[valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kIWantChildrensUserProfileField
-                                                                                title:NSLocalizedString(@"Vull tenir fills", @"")
-                                                                     valueTransformer:nil
-                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                              options:iWantChildrensListOptions
-                                                                           isReadOnly:isReadOnly]];
 
+        if(([self userSelectedIdentifierForKeyPath:kIWantChildrensUserProfileField]) || (showEmptyFields))
+            [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kIWantChildrensUserProfileField
+                                                                                     title:NSLocalizedString(@"Vull tenir fills", @"")
+                                                                          valueTransformer:nil
+                                                                             selectionMode:IBAPickListSelectionModeSingle
+                                                                                   options:iWantChildrensListOptions
+                                                                                isReadOnly:isReadOnly]];
+
+        //Remove section if is empty
+        for(int i=0; i<[[self sections] count]; i++)
+        {
+            IBAFormSection *section = [[self sections] objectAtIndex:i];
+            if((section == valuesFieldSection) && (![[section formFields] count]))
+                [[self sections] removeObjectAtIndex:i];
+        }
 
 
 		IBAFormSection *professionalSituationFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"La meva situació professional", @"") footerTitle:nil];
@@ -493,13 +520,14 @@
                                                                                                NSLocalizedString(@"[5]Llicenciat o superior", @""),
                                                                                                NSLocalizedString(@"[6]Altres", @""),
                                                                                                nil]];
-        
-		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kStudiesLevelUserProfileField
-                                                                                 title:NSLocalizedString(@"El meu nivell d'estudis", @"")
-                                                                      valueTransformer:nil
-                                                                         selectionMode:IBAPickListSelectionModeSingle
-                                                                               options:studiesLevelListOptions
-                                                                            isReadOnly:isReadOnly]];
+
+        if(([self userSelectedIdentifierForKeyPath:kStudiesLevelUserProfileField]) || (showEmptyFields))
+            [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kStudiesLevelUserProfileField
+                                                                                                    title:NSLocalizedString(@"El meu nivell d'estudis", @"")
+                                                                                         valueTransformer:nil
+                                                                                            selectionMode:IBAPickListSelectionModeSingle
+                                                                                                  options:studiesLevelListOptions
+                                                                                               isReadOnly:isReadOnly]];
 
 
 		NSArray *languagesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -568,12 +596,13 @@
                                                                                           NSLocalizedString(@"[62]vietnamita", @""),
                                                                                           nil]];
 
-		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kLanguagesUserProfileField
-                                                                                                title:NSLocalizedString(@"Idiomes que parlo", @"")
-                                                                                     valueTransformer:nil
-                                                                                        selectionMode:IBAPickListSelectionModeMultiple
-                                                                                              options:languagesListOptions
-                                                                                           isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kLanguagesUserProfileField]) || (showEmptyFields))
+            [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kLanguagesUserProfileField
+                                                                                                    title:NSLocalizedString(@"Idiomes que parlo", @"")
+                                                                                         valueTransformer:nil
+                                                                                            selectionMode:IBAPickListSelectionModeMultiple
+                                                                                                  options:languagesListOptions
+                                                                                               isReadOnly:isReadOnly]];
 
 
 		NSArray *myBusinessListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -643,13 +672,14 @@
                                                                                            NSLocalizedString(@"[56]técnico", @""),
                                                                                            NSLocalizedString(@"[57]otros", @""),
                                                                                              nil]];
-        
-		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyBusinessUserProfileField
-                                                                                                title:NSLocalizedString(@"La meva professió", @"")
-                                                                                     valueTransformer:nil
-                                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                                              options:myBusinessListOptions
-                                                                                           isReadOnly:isReadOnly]];
+
+        if(([self userSelectedIdentifierForKeyPath:kMyBusinessUserProfileField]) || (showEmptyFields))
+            [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyBusinessUserProfileField
+                                                                                                    title:NSLocalizedString(@"La meva professió", @"")
+                                                                                         valueTransformer:nil
+                                                                                            selectionMode:IBAPickListSelectionModeSingle
+                                                                                                  options:myBusinessListOptions
+                                                                                               isReadOnly:isReadOnly]];
 
 
 		NSArray *salaryListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -662,13 +692,21 @@
                                                                                              NSLocalizedString(@"[7]Més de 100.000€/any", @""),
                                                                                              nil]];
 
-		[professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kSalaryUserProfileField
-                                                                                                title:NSLocalizedString(@"Els meus ingressos", @"")
-                                                                                     valueTransformer:nil
-                                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                                              options:salaryListOptions
-                                                                                           isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kSalaryUserProfileField]) || (showEmptyFields))
+            [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kSalaryUserProfileField
+                                                                                                    title:NSLocalizedString(@"Els meus ingressos", @"")
+                                                                                         valueTransformer:nil
+                                                                                            selectionMode:IBAPickListSelectionModeSingle
+                                                                                                  options:salaryListOptions
+                                                                                               isReadOnly:isReadOnly]];
 
+        //Remove section if is empty
+        for(int i=0; i<[[self sections] count]; i++)
+        {
+            IBAFormSection *section = [[self sections] objectAtIndex:i];
+            if((section == professionalSituationFieldSection) && (![[section formFields] count]))
+                [[self sections] removeObjectAtIndex:i];
+        }
 
 
 		IBAFormSection *lifestyleFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"El meu estil de vida", @"") footerTitle:nil];
@@ -687,13 +725,13 @@
                                                                                              NSLocalizedString(@"[11]Altres", @""),
                                                                                              nil]];
 
-		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyStyleUserProfileField
-                                                                                                title:NSLocalizedString(@"El meu estil", @"")
-                                                                                     valueTransformer:nil
-                                                                                        selectionMode:IBAPickListSelectionModeSingle
-                                                                                              options:myStyleListOptions
-                                                                                           isReadOnly:isReadOnly]];
-
+        if(([self userSelectedIdentifierForKeyPath:kMyStyleUserProfileField]) || (showEmptyFields))
+            [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyStyleUserProfileField
+                                                                                                    title:NSLocalizedString(@"El meu estil", @"")
+                                                                                        valueTransformer:nil
+                                                                                            selectionMode:IBAPickListSelectionModeSingle
+                                                                                                options:myStyleListOptions
+                                                                                            isReadOnly:isReadOnly]];
 
 		NSArray *alimentListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
                                                                                         NSLocalizedString(@"[6]A dieta", @""),
@@ -704,13 +742,14 @@
                                                                                         NSLocalizedString(@"[3]Vegà", @""),
                                                                                         NSLocalizedString(@"[2]Vegetarià", @""),
                                                                                         nil]];
-        
-		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kAlimentUserProfileField
-                                                                                    title:NSLocalizedString(@"La meva alimentació", @"")
-                                                                         valueTransformer:nil
-                                                                            selectionMode:IBAPickListSelectionModeSingle
-                                                                                  options:alimentListOptions
-                                                                               isReadOnly:isReadOnly]];
+
+        if(([self userSelectedIdentifierForKeyPath:kAlimentUserProfileField]) || (showEmptyFields))
+            [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kAlimentUserProfileField
+                                                                                        title:NSLocalizedString(@"La meva alimentació", @"")
+                                                                             valueTransformer:nil
+                                                                                selectionMode:IBAPickListSelectionModeSingle
+                                                                                      options:alimentListOptions
+                                                                                   isReadOnly:isReadOnly]];
 
 
 
@@ -721,12 +760,13 @@
                                                                                         NSLocalizedString(@"[2]Sí, regularment", @""),
                                                                                         nil]];
 
-		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kSmokeUserProfileField
-                                                                                    title:NSLocalizedString(@"Fumo", @"")
-                                                                         valueTransformer:nil
-                                                                            selectionMode:IBAPickListSelectionModeSingle
-                                                                                  options:smokeListOptions
-                                                                               isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kSmokeUserProfileField]) || (showEmptyFields))
+            [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kSmokeUserProfileField
+                                                                                        title:NSLocalizedString(@"Fumo", @"")
+                                                                             valueTransformer:nil
+                                                                                selectionMode:IBAPickListSelectionModeSingle
+                                                                                      options:smokeListOptions
+                                                                                   isReadOnly:isReadOnly]];
 
 
 		NSArray *animalsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSArray arrayWithObjects:NSLocalizedString(@"[0]Prefereixo no dir-ho", @""),
@@ -744,13 +784,21 @@
                                                                                       NSLocalizedString(@"[12]No tinc animals", @""),
                                                                                       nil]];
 
-		[lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kAnimalsUserProfileField
-                                                                                    title:NSLocalizedString(@"Els meus animals", @"")
-                                                                         valueTransformer:nil
-                                                                            selectionMode:IBAPickListSelectionModeSingle
-                                                                                  options:animalsListOptions
-                                                                               isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kAnimalsUserProfileField]) || (showEmptyFields))
+            [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kAnimalsUserProfileField
+                                                                                        title:NSLocalizedString(@"Els meus animals", @"")
+                                                                             valueTransformer:nil
+                                                                                selectionMode:IBAPickListSelectionModeSingle
+                                                                                      options:animalsListOptions
+                                                                                   isReadOnly:isReadOnly]];
 
+        //Remove section if is empty
+        for(int i=0; i<[[self sections] count]; i++)
+        {
+            IBAFormSection *section = [[self sections] objectAtIndex:i];
+            if((section == lifestyleFieldSection) && (![[section formFields] count]))
+                [[self sections] removeObjectAtIndex:i];
+        }
 
 
 		IBAFormSection *interestsFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els meus interessos", @"") footerTitle:nil];
@@ -790,12 +838,13 @@
                                                                                           NSLocalizedString(@"[23]Altres", @""),
                                                                                           nil]];
 
-		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyHobbiesUserProfileField
-                                                                                    title:NSLocalizedString(@"Les meves aficions", @"")
-                                                                         valueTransformer:nil
-                                                                            selectionMode:IBAPickListSelectionModeMultiple
-                                                                                  options:myHobbiesListOptions
-                                                                               isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kMyHobbiesUserProfileField]) || (showEmptyFields))
+            [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyHobbiesUserProfileField
+                                                                                        title:NSLocalizedString(@"Les meves aficions", @"")
+                                                                             valueTransformer:nil
+                                                                                selectionMode:IBAPickListSelectionModeMultiple
+                                                                                      options:myHobbiesListOptions
+                                                                                   isReadOnly:isReadOnly]];
 
 
 
@@ -843,12 +892,13 @@
                                                                                          NSLocalizedString(@"[28]Altres", @""),
                                                                                          nil]];
 
-		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMySportsUserProfileField
-                                                                                    title:NSLocalizedString(@"Els meus esports", @"")
-                                                                         valueTransformer:nil
-                                                                            selectionMode:IBAPickListSelectionModeMultiple
-                                                                                  options:mySportsListOptions
-                                                                               isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kMySportsUserProfileField]) || (showEmptyFields))
+            [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMySportsUserProfileField
+                                                                                        title:NSLocalizedString(@"Els meus esports", @"")
+                                                                             valueTransformer:nil
+                                                                                selectionMode:IBAPickListSelectionModeMultiple
+                                                                                      options:mySportsListOptions
+                                                                                   isReadOnly:isReadOnly]];
 
 
 
@@ -870,13 +920,21 @@
                                                                                             NSLocalizedString(@"[12]Altres", @""),
                                                                                             nil]];
 
-		[interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMySparetimeUserProfileField
-                                                                                    title:NSLocalizedString(@"Les meves sortides", @"")
-                                                                         valueTransformer:nil
-                                                                            selectionMode:IBAPickListSelectionModeMultiple
-                                                                                  options:mySparetimeListOptions
-                                                                               isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kMySparetimeUserProfileField]) || (showEmptyFields))
+            [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMySparetimeUserProfileField
+                                                                                        title:NSLocalizedString(@"Les meves sortides", @"")
+                                                                             valueTransformer:nil
+                                                                                selectionMode:IBAPickListSelectionModeMultiple
+                                                                                      options:mySparetimeListOptions
+                                                                                   isReadOnly:isReadOnly]];
 
+        //Remove section if is empty
+        for(int i=0; i<[[self sections] count]; i++)
+        {
+            IBAFormSection *section = [[self sections] objectAtIndex:i];
+            if((section == interestsFieldSection) && (![[section formFields] count]))
+                [[self sections] removeObjectAtIndex:i];
+        }
 
 
 		IBAFormSection *preferencesFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els meus gustos culturals", @"") footerTitle:nil];
@@ -910,13 +968,14 @@
                                                                                       NSLocalizedString(@"[10]world music", @""),
                                                                                       NSLocalizedString(@"[17]Altres", @""),
                                                                                             nil]];
-        
-		[preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMusicUserProfileField
-                                                                                    title:NSLocalizedString(@"Gustos musicals", @"")
-                                                                         valueTransformer:nil
-                                                                            selectionMode:IBAPickListSelectionModeMultiple
-                                                                                  options:musicListOptions
-                                                                               isReadOnly:isReadOnly]];
+
+        if(([self userSelectedIdentifierForKeyPath:kMusicUserProfileField]) || (showEmptyFields))
+            [preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMusicUserProfileField
+                                                                                          title:NSLocalizedString(@"Gustos musicals", @"")
+                                                                               valueTransformer:nil
+                                                                                  selectionMode:IBAPickListSelectionModeMultiple
+                                                                                        options:musicListOptions
+                                                                                     isReadOnly:isReadOnly]];
 
 
 
@@ -944,12 +1003,22 @@
                                                                                        NSLocalizedString(@"[19]Altres", @""),
                                                                                        nil]];
 
-		[preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMoviesUserProfileField
-                                                                                      title:NSLocalizedString(@"Pel·lícules preferides", @"")
-                                                                           valueTransformer:nil
-                                                                              selectionMode:IBAPickListSelectionModeMultiple
-                                                                                    options:moviesListOptions
-                                                                                 isReadOnly:isReadOnly]];
+        if(([self userSelectedIdentifierForKeyPath:kMoviesUserProfileField]) || (showEmptyFields))
+            [preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMoviesUserProfileField
+                                                                                          title:NSLocalizedString(@"Pel·lícules preferides", @"")
+                                                                               valueTransformer:nil
+                                                                                  selectionMode:IBAPickListSelectionModeMultiple
+                                                                                        options:moviesListOptions
+
+                                                                                     isReadOnly:isReadOnly]];
+    
+        //Remove section if is empty
+        for(int i=0; i<[[self sections] count]; i++)
+        {
+            IBAFormSection *section = [[self sections] objectAtIndex:i];
+            if((section == preferencesFieldSection) && (![[section formFields] count]))
+                [[self sections] removeObjectAtIndex:i];
+        }
 }
 
 - (int)userSelectedIdentifierForKeyPath:(NSString *)keyPath
