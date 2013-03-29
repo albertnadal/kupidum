@@ -21,7 +21,7 @@
 
 @implementation HomeViewController
 
-@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView, candidatesWhoYouMayLikeView;
+@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,31 +37,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    [scroll setContentSize:CGSizeMake(320, 638)];
+    [scroll setContentSize:CGSizeMake(320, 535)];
 
     profileResumeView.layer.cornerRadius = 5.0;
     profileResumeView.layer.masksToBounds = YES;
 
-    nearToYouCandidatesTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 90, 305)];
+    nearToYouCandidatesTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(0, 0, 98, 209)];
     [nearToYouCandidatesTableViewController setDelegate:self];
     [nearToYouCandidatesView addSubview:nearToYouCandidatesTableViewController.view];
-    nearToYouCandidatesView.layer.cornerRadius = 5.0;
+    nearToYouCandidatesView.layer.cornerRadius = 1.0;
     nearToYouCandidatesView.layer.masksToBounds = YES;
     [nearToYouCandidatesTableViewController scrollContentToLeft];
 
-    candidatesYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 90, 305)];
+    candidatesYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(0, 0, 98, 209)];
     [candidatesYouMayLikeTableViewController setDelegate:self];
     [candidatesYouMayLikeView addSubview:candidatesYouMayLikeTableViewController.view];
-    candidatesYouMayLikeView.layer.cornerRadius = 5.0;
+    candidatesYouMayLikeView.layer.cornerRadius = 1.0;
     candidatesYouMayLikeView.layer.masksToBounds = YES;
     [candidatesYouMayLikeTableViewController scrollContentToLeft];
-
-    candidatesWhoYouMayLikeTableViewController = [[KPDUsersHorizontalTableViewController alloc] initWithFrame:CGRectMake(1, 18, 90, 305)];
-    [candidatesWhoYouMayLikeTableViewController setDelegate:self];
-    [candidatesWhoYouMayLikeView addSubview:candidatesWhoYouMayLikeTableViewController.view];
-    candidatesWhoYouMayLikeView.layer.cornerRadius = 5.0;
-    candidatesWhoYouMayLikeView.layer.masksToBounds = YES;
-    [candidatesWhoYouMayLikeTableViewController scrollContentToLeft];
 }
 
 - (void)usersHorizontalTableViewControllerDidRefresh:(KPDUsersHorizontalTableViewController *)tableViewController
@@ -103,7 +96,6 @@
 
     [nearToYouCandidatesTableViewController scrollContentToLeft];
     [candidatesYouMayLikeTableViewController scrollContentToLeft];
-    [candidatesWhoYouMayLikeTableViewController scrollContentToLeft];
 }
 
 @end

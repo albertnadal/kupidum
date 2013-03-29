@@ -25,10 +25,11 @@
     {
         delegate = nil;
 
-        int x = (frame.origin.x - (frame.size.width / 2)) + (frame.size.height / 2);
-        int y = (frame.origin.y - (frame.size.height / 2)) + (frame.size.width / 2);
+        float x = (frame.origin.x - (frame.size.width / 2.0f)) + (frame.size.height / 2.0f);
+        float y = (frame.origin.y - (frame.size.height / 2.0f)) + (frame.size.width / 2.0f);
 
         self.view = [[UITableView alloc] initWithFrame:CGRectMake(x, y, frame.size.width, frame.size.height) style:UITableViewStylePlain];
+        [self.view setBackgroundColor:[UIColor whiteColor]];
 
         [self addPullToRefreshHeader];
         [(UITableView *)self.view setDataSource:self];
@@ -55,7 +56,7 @@
 
 - (void)scrollContentToLeft
 {
-    NSIndexPath* ipath = [NSIndexPath indexPathForRow:4 inSection:0];
+    NSIndexPath* ipath = [NSIndexPath indexPathForRow:2 inSection:0];
     [(UITableView *)self.view scrollToRowAtIndexPath:ipath atScrollPosition:UITableViewScrollPositionBottom animated: NO];
 }
 
@@ -89,12 +90,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 90.0f; //self.view.frame.size.height;
+    return 96.0f; //self.view.frame.size.height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -109,7 +110,7 @@
                 initWithStyle: UITableViewCellStyleDefault
                 reuseIdentifier: CellIdentifier];
 
-        UIImageView *imatge = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,90.0f,90.0f)];
+        UIImageView *imatge = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,96.0f,96.0f)];
         [imatge setImage:[UIImage imageNamed:@"fake_photo4.png"]];
         [imatge setContentMode:UIViewContentModeScaleToFill];
         [cell.contentView addSubview:imatge];
