@@ -7,7 +7,7 @@
 // http://www.apache.org/licenses/LICENSE-2.0 
 // 
 // Unless required by applicable law or agreed to in writing, software distributed under
-// the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF 
+// the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 // ANY KIND, either express or implied. See the License for the specific language governing
 // permissions and limitations under the License.
 //
@@ -15,9 +15,13 @@
 #import <IBAForms/IBAForms.h>
 #import "ProfileFormDataSource.h"
 
+static const int kUserProfileFormCellHeight = 44;
+static const int kUserProfileFormHeaderCellHeight = 48;
+
 @implementation ProfileFormDataSource
 
 @synthesize isReadOnly;
+@synthesize height;
 
 - (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly showEmptyFields:(bool)showEmpty
 {
@@ -25,6 +29,14 @@
 
         isReadOnly = readOnly;
         showEmptyFields = showEmpty;
+        height = 0;
+
+        numberOfFieldsInAppearanceSection = 0;
+        numberOfFieldsInValuesSection = 0;
+        numberOfFieldsInProfessionalSection = 0;
+        numberOfFieldsInLifestyleSection = 0;
+        numberOfFieldsInInterestsSection = 0;
+        numberOfFieldsInCultureSection = 0;
 
         [self loadStyles];
         [self reloadData];
@@ -32,9 +44,35 @@
 
     return self;
 }
-    
+
+- (int)getFormHeightToIndex:(NSIndexPath *)indexPath withCellHeight:(float)fieldCellHeight
+{
+    int numberOfFieldsInSection[6] = {  numberOfFieldsInAppearanceSection + 1,
+                                        numberOfFieldsInValuesSection + 1,
+                                        numberOfFieldsInProfessionalSection + 1,
+                                        numberOfFieldsInLifestyleSection + 1,
+                                        numberOfFieldsInInterestsSection + 1,
+                                        numberOfFieldsInCultureSection + 1 };
+
+    float previousSectionsHeight = 0;
+    for(int i=0; i <indexPath.section; i++)
+        previousSectionsHeight += (numberOfFieldsInSection[i] * fieldCellHeight);
+
+    return previousSectionsHeight + (indexPath.row * fieldCellHeight);
+}
+
 - (void)reloadData
 {
+        height = 0;
+
+        numberOfFieldsInAppearanceSection = 0;
+        numberOfFieldsInValuesSection = 0;
+        numberOfFieldsInProfessionalSection = 0;
+        numberOfFieldsInLifestyleSection = 0;
+        numberOfFieldsInInterestsSection = 0;
+        numberOfFieldsInCultureSection = 0;
+
+
         IBAFormFieldStyle *selectedStyle = isReadOnly ? readOnlyStyle:readWriteStyle;
 
 		// Some basic form fields that accept text input
@@ -168,12 +206,21 @@
                                                                                   options:myHighlightListOptions
                                                                                isReadOnly:isReadOnly]];
 
-        //Remove section if is empty
+        //Remove section if is empty and update form height
         for(int i=0; i<[[self sections] count]; i++)
         {
             IBAFormSection *section = [[self sections] objectAtIndex:i];
             if((section == basicFieldSection) && (![[section formFields] count]))
+            {
                 [[self sections] removeObjectAtIndex:i];
+            }
+            else if(section == basicFieldSection)
+            {
+                height+=kUserProfileFormHeaderCellHeight;
+                height+=(kUserProfileFormCellHeight * [[section formFields] count]);
+
+                numberOfFieldsInAppearanceSection = [[section formFields] count];
+            }
         }
 
 		IBAFormSection *valuesFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els meus valors", @"") footerTitle:nil];
@@ -500,12 +547,21 @@
                                                                                    options:iWantChildrensListOptions
                                                                                 isReadOnly:isReadOnly]];
 
-        //Remove section if is empty
+        //Remove section if is empty and update form height
         for(int i=0; i<[[self sections] count]; i++)
         {
             IBAFormSection *section = [[self sections] objectAtIndex:i];
             if((section == valuesFieldSection) && (![[section formFields] count]))
+            {
                 [[self sections] removeObjectAtIndex:i];
+            }
+            else if(section == valuesFieldSection)
+            {
+                height+=kUserProfileFormHeaderCellHeight;
+                height+=(kUserProfileFormCellHeight * [[section formFields] count]);
+
+                numberOfFieldsInValuesSection = [[section formFields] count];
+            }
         }
 
 
@@ -705,7 +761,16 @@
         {
             IBAFormSection *section = [[self sections] objectAtIndex:i];
             if((section == professionalSituationFieldSection) && (![[section formFields] count]))
+            {
                 [[self sections] removeObjectAtIndex:i];
+            }
+            else if(section == professionalSituationFieldSection)
+            {
+                height+=kUserProfileFormHeaderCellHeight;
+                height+=(kUserProfileFormCellHeight * [[section formFields] count]);
+
+                numberOfFieldsInProfessionalSection = [[section formFields] count];
+            }
         }
 
 
@@ -797,7 +862,16 @@
         {
             IBAFormSection *section = [[self sections] objectAtIndex:i];
             if((section == lifestyleFieldSection) && (![[section formFields] count]))
+            {
                 [[self sections] removeObjectAtIndex:i];
+            }
+            else if(section == lifestyleFieldSection)
+            {
+                height+=kUserProfileFormHeaderCellHeight;
+                height+=(kUserProfileFormCellHeight * [[section formFields] count]);
+
+                numberOfFieldsInLifestyleSection = [[section formFields] count];
+            }
         }
 
 
@@ -933,7 +1007,16 @@
         {
             IBAFormSection *section = [[self sections] objectAtIndex:i];
             if((section == interestsFieldSection) && (![[section formFields] count]))
+            {
                 [[self sections] removeObjectAtIndex:i];
+            }
+            else if(section == interestsFieldSection)
+            {
+                height+=kUserProfileFormHeaderCellHeight;
+                height+=(kUserProfileFormCellHeight * [[section formFields] count]);
+
+                numberOfFieldsInInterestsSection = [[section formFields] count];
+            }
         }
 
 
@@ -1017,7 +1100,16 @@
         {
             IBAFormSection *section = [[self sections] objectAtIndex:i];
             if((section == preferencesFieldSection) && (![[section formFields] count]))
+            {
                 [[self sections] removeObjectAtIndex:i];
+            }
+            else if(section == preferencesFieldSection)
+            {
+                height+=kUserProfileFormHeaderCellHeight;
+                height+=(kUserProfileFormCellHeight * [[section formFields] count]);
+
+                numberOfFieldsInCultureSection = [[section formFields] count];
+            }
         }
 }
 

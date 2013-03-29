@@ -1252,8 +1252,8 @@
 		FFB003A816A4234400BD122C /* IBAForms */ = {
 			isa = PBXGroup;
 			children = (
-				FF2B5ED516A4659A00D580BE /* ProfileFormDataSource.h */,
 				FF2B5ED616A4659A00D580BE /* ProfileFormDataSource.m */,
+				FF2B5ED516A4659A00D580BE /* ProfileFormDataSource.h */,
 				FF2B5EC216A428C400D580BE /* IBAForms.xcodeproj */,
 			);
 			name = IBAForms;

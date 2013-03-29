@@ -74,9 +74,19 @@ static const NSString *kMoviesUserProfileField = @"kMovies";
     bool showEmptyFields;
 	IBAFormFieldStyle *readOnlyStyle;
 	IBAFormFieldStyle *readWriteStyle;
+    int height;
+
+    int numberOfFieldsInAppearanceSection;
+    int numberOfFieldsInValuesSection;
+    int numberOfFieldsInProfessionalSection;
+    int numberOfFieldsInLifestyleSection;
+    int numberOfFieldsInInterestsSection;
+    int numberOfFieldsInCultureSection;
 }
 
 @property (atomic) bool isReadOnly;
+@property (atomic) int height;
+
 
 - (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly showEmptyFields:(bool)showEmpty;
 - (void)loadStyles;
@@ -84,5 +94,6 @@ static const NSString *kMoviesUserProfileField = @"kMovies";
 - (NSDictionary *)getModelWithValues;
 - (void)setReadOnly:(bool)readOnly;
 - (int)userSelectedIdentifierForKeyPath:(NSString *)keyPath;
+- (int)getFormHeightToIndex:(NSIndexPath *)indexPath withCellHeight:(float)fieldCellHeight;
 
 @end
