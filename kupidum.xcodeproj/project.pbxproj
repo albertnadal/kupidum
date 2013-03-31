@@ -13,6 +13,8 @@
 		B7EF68051659001800F20DF3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7EF68031659001800F20DF3 /* InfoPlist.strings */; };
 		FF0F7D451707EDAA007BF55D /* UserNavigatorProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0F7D431707EDAA007BF55D /* UserNavigatorProfileViewController.m */; };
 		FF0F7D461707EDAA007BF55D /* UserNavigatorProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D441707EDAA007BF55D /* UserNavigatorProfileViewController.xib */; };
+		FF0F7D4917083BE9007BF55D /* img_tick_green.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D4717083BE9007BF55D /* img_tick_green.png */; };
+		FF0F7D4A17083BE9007BF55D /* img_tick_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D4817083BE9007BF55D /* img_tick_green@2x.png */; };
 		FF10043B16D7957F003FA3F9 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10043216D7957F003FA3F9 /* FMDatabase.m */; };
 		FF10043C16D7957F003FA3F9 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10043416D7957F003FA3F9 /* FMDatabaseAdditions.m */; };
 		FF10043D16D7957F003FA3F9 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10043616D7957F003FA3F9 /* FMDatabasePool.m */; };
@@ -329,6 +331,8 @@
 		FF0F7D421707EDAA007BF55D /* UserNavigatorProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserNavigatorProfileViewController.h; path = kupidum/UserNavigatorProfileViewController.h; sourceTree = "<group>"; };
 		FF0F7D431707EDAA007BF55D /* UserNavigatorProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserNavigatorProfileViewController.m; path = kupidum/UserNavigatorProfileViewController.m; sourceTree = "<group>"; };
 		FF0F7D441707EDAA007BF55D /* UserNavigatorProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserNavigatorProfileViewController.xib; path = kupidum/UserNavigatorProfileViewController.xib; sourceTree = "<group>"; };
+		FF0F7D4717083BE9007BF55D /* img_tick_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_tick_green.png; path = kupidum/images/img_tick_green.png; sourceTree = "<group>"; };
+		FF0F7D4817083BE9007BF55D /* img_tick_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_tick_green@2x.png"; path = "kupidum/images/img_tick_green@2x.png"; sourceTree = "<group>"; };
 		FF10043116D7957F003FA3F9 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = kupidum/fmdb/FMDatabase.h; sourceTree = "<group>"; };
 		FF10043216D7957F003FA3F9 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = kupidum/fmdb/FMDatabase.m; sourceTree = "<group>"; };
 		FF10043316D7957F003FA3F9 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = kupidum/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -918,6 +922,8 @@
 				FF7B53B8169A47230042FA62 /* fake_photo2.png */,
 				FF7B53B9169A47240042FA62 /* fake_photo3.png */,
 				FF7B5428169B6FE10042FA62 /* fake_photo4.png */,
+				FF0F7D4717083BE9007BF55D /* img_tick_green.png */,
+				FF0F7D4817083BE9007BF55D /* img_tick_green@2x.png */,
 				FFFCD1C217075B3C00BC29D6 /* img_horizontal_scroll_selected_item_indicator.png */,
 				FFFCD1C317075B3D00BC29D6 /* img_horizontal_scroll_selected_item_indicator@2x.png */,
 				FFFCD1BE170759BF00BC29D6 /* img_navigation_background.png */,
@@ -1674,6 +1680,8 @@
 				FFFCD1C417075B3D00BC29D6 /* img_horizontal_scroll_selected_item_indicator.png in Resources */,
 				FFFCD1C517075B3D00BC29D6 /* img_horizontal_scroll_selected_item_indicator@2x.png in Resources */,
 				FF0F7D461707EDAA007BF55D /* UserNavigatorProfileViewController.xib in Resources */,
+				FF0F7D4917083BE9007BF55D /* img_tick_green.png in Resources */,
+				FF0F7D4A17083BE9007BF55D /* img_tick_green@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
