@@ -43,10 +43,11 @@
 
 @implementation UserProfileViewController
 
-@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons;
+@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments;
 
 const float basicInformationPanelHeight = 435.0;
 const float buttonsPanelHeight = 120.0f;
+const float segmentsPanelHeight = 60.0f;
 const float detailedInformationPanelHeight = 1500.0;
 const float fieldCellHeight = 44.0;
 const float bottomMarginHeight = 20.0;
@@ -157,7 +158,7 @@ const float bottomMarginHeight = 20.0;
 {
     [UIView beginAnimations:@"restoreProfileContentSize" context:nil];
     [UIView setAnimationDuration:0.3];
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + formTableView.frame.size.height + bottomMarginHeight)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
     [UIView commitAnimations];
 }
 
@@ -250,7 +251,7 @@ const float bottomMarginHeight = 20.0;
 
 - (void)showFormField:(NSNotification *)notification
 {
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + detailedInformationPanelHeight + scroll.frame.size.height)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + detailedInformationPanelHeight + scroll.frame.size.height)];
 
 	NSIndexPath *indexPath = [[notification userInfo] objectForKey:@"indexPath"];
 
@@ -265,7 +266,7 @@ const float bottomMarginHeight = 20.0;
 {
 	[super loadView];
 
-	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight + containerButtonsHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
+	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
 	[formTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[self setTableView:formTableView];
     [formTableView setScrollEnabled:NO];
@@ -275,8 +276,16 @@ const float bottomMarginHeight = 20.0;
     formTableViewFrame.size.height = [(ProfileFormDataSource *)self.formDataSource height];
     [formTableView setFrame:formTableViewFrame];
 
+    // set container segments position
+    if(profileIsEditable)
+    {
+        CGRect containerSegmentsFrame = containerSegments.frame;
+        containerSegmentsFrame.origin.y = containerButtons.frame.origin.y;
+        [containerSegments setFrame:containerSegmentsFrame];
+    }
+
     // update scroll content size
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + formTableView.frame.size.height + bottomMarginHeight)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
 
     [self.scroll addSubview:formTableView];
 }
@@ -296,7 +305,7 @@ const float bottomMarginHeight = 20.0;
 
     [containerButtons setHidden:profileIsEditable];
 
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + formTableView.frame.size.height + bottomMarginHeight)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -340,7 +349,7 @@ const float bottomMarginHeight = 20.0;
     self.formDataSource = profileFormDataSource;
     
     [formTableView removeFromSuperview];
-	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
+	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight + segmentsPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
 	[formTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[self setTableView:formTableView];
     [formTableView setScrollEnabled:NO];
@@ -351,7 +360,7 @@ const float bottomMarginHeight = 20.0;
     [formTableView setFrame:formTableViewFrame];
 
     // update scroll content size
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + formTableView.frame.size.height + bottomMarginHeight)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
     
     [self.scroll addSubview:formTableView];
     [super viewDidLoad];

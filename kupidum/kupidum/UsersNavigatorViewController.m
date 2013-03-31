@@ -11,6 +11,8 @@
 #import "UserNavigatorProfileViewController.h"
 #import "KPDUser.h"
 #import "KPDUserProfile.h"
+#import "UserProfileViewController.h"
+#import "KPDUIUtilities.h"
 
 static const int kSpaceBetweenAvatars = 6;
 static const int kAvatarWidth = 65;
@@ -29,12 +31,15 @@ static const int kNavigationScrollMargin = 3;
     IBOutlet UIScrollView *scrollNavigator;
     IBOutlet UIScrollView *scrollProfiles;
     UIScrollView *activeScroll;
+
+    NSMutableArray *userNavigatorProfileViewControllers;
 }
 
 @property (nonatomic, retain) IBOutlet UsersNavigatorContainerView *scrollNavigatorContainer;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollNavigator;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollProfiles;
 
+- (void)showNavigationBarButtons;
 - (void)loadFakeUsers;
 - (void)showUsersNavigator;
 - (void)showUsersProfiles;
@@ -53,10 +58,20 @@ static const int kNavigationScrollMargin = 3;
         contentScrollNavigatorWidth = 0;
         contentScrollProfilesWidth = 0;
         activeScroll = nil;
+        userNavigatorProfileViewControllers = nil;
 
         [self loadFakeUsers];
     }
     return self;
+}
+
+- (void)showNavigationBarButtons
+{
+    UIButton *backButton = [KPDUIUtilities customCircleBarButtonWithImage:@"nav_black_circle_button.png"
+                                                           andInsideImage:@"nav_arrow_back_button.png"
+                                                              andSelector:@selector(backPressed)
+                                                                andTarget:self];
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:backButton]];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -147,14 +162,21 @@ static const int kNavigationScrollMargin = 3;
 
 - (void)showUsersProfiles
 {
+    if(userNavigatorProfileViewControllers)
+        [userNavigatorProfileViewControllers removeAllObjects];
+
+    userNavigatorProfileViewControllers = [[NSMutableArray alloc] init];
+
     int x = 0;
     for(int i=0; i<[usersProfiles count]; i++)
     {        
         KPDUserProfile *userProfile = [usersProfiles objectAtIndex:i];
 
         UserNavigatorProfileViewController *unpvc = [[UserNavigatorProfileViewController alloc] initWithNibName:@"UserNavigatorProfileViewController" bundle:nil];
+        [unpvc setDelegate:self];
         [unpvc.view setFrame:CGRectMake(x, 0, [UIScreen mainScreen].bounds.size.width, scrollProfiles.frame.size.height)];
         [scrollProfiles addSubview:unpvc.view];
+        [userNavigatorProfileViewControllers addObject:unpvc];
 
         x+=[UIScreen mainScreen].bounds.size.width;
     }
@@ -164,9 +186,17 @@ static const int kNavigationScrollMargin = 3;
     [scrollProfiles setContentSize:CGSizeMake(x, scrollProfiles.frame.size.height)];
 }
 
+- (void)showUserProfile:(NSString *)username
+{
+    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil withUsername:username];
+    [self.navigationController pushViewController:upvc animated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [self showNavigationBarButtons];
     [self setTitle:[NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), 1, [usersList count]]];
     [self showUsersNavigator];
     [self showUsersProfiles];

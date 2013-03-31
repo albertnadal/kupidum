@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserProfileViewController.h"
 
 @interface UserNavigatorProfileViewController : UIViewController
+{
+    id<KPDUserProfileDelegate> delegate;
+}
+
+@property (nonatomic, retain) id<KPDUserProfileDelegate> delegate;
+
+- (IBAction)showFullUserProfile:(id)sender;
 
 @end

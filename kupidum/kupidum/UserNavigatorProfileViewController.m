@@ -14,6 +14,8 @@
 
 @implementation UserNavigatorProfileViewController
 
+@synthesize delegate;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,6 +28,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // Invisible selector button
+    UIButton *selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [selectButton setBackgroundColor:[UIColor clearColor]];
+    [selectButton addTarget:self action:@selector(showFullUserProfile:) forControlEvents:UIControlEventTouchUpInside];
+    selectButton.frame = self.view.frame;
+    [self.view addSubview:selectButton];
+}
+
+- (IBAction)showFullUserProfile:(id)sender
+{
+    [self.delegate showUserProfile:@"albert"];
 }
 
 - (void)didReceiveMemoryWarning

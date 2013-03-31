@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserProfileViewController.h"
 
-@interface UsersNavigatorViewController : UIViewController<UIScrollViewDelegate>
+@interface UsersNavigatorViewController : UIViewController<UIScrollViewDelegate, KPDUserProfileDelegate>
 
 @end

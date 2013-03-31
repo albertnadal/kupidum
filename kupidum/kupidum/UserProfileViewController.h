@@ -28,6 +28,7 @@ typedef enum {
     IBOutlet UITextView *presentationTextView;
     IBOutlet UIImageView *presentationPencil;
     IBOutlet UIView *containerButtons;
+    IBOutlet UIView *containerSegments;
     KPDUserProfilePhoto photoTypeSelected;
 }
 
@@ -41,8 +42,15 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UITextView *presentationTextView;
 @property (strong, nonatomic) IBOutlet UIImageView *presentationPencil;
 @property (strong, nonatomic) IBOutlet UIView *containerButtons;
+@property (strong, nonatomic) IBOutlet UIView *containerSegments;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withUsername:(NSString *)username_;
 - (IBAction)showMenuSelectPhotoOrTakePhoto:(id)sender;
+
+@end
+
+@protocol KPDUserProfileDelegate
+
+- (void)showUserProfile:(NSString *)username;
 
 @end
