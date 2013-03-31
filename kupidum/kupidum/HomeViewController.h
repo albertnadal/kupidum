@@ -12,6 +12,7 @@
 @interface HomeViewController : UIViewController <UIScrollViewDelegate, KPDUsersHorizontalTableViewControllerDelegate>
 {
     IBOutlet UIScrollView *scroll;
+    IBOutlet UIImageView *background;
     IBOutlet UIView *profileResumeView;
     IBOutlet UIView *nearToYouCandidatesView;
     IBOutlet UIView *candidatesYouMayLikeView;
@@ -21,6 +22,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
+@property (strong, nonatomic) IBOutlet UIImageView *background;
 @property (strong, nonatomic) IBOutlet UIView *profileResumeView;
 @property (strong, nonatomic) IBOutlet UIView *nearToYouCandidatesView;
 @property (strong, nonatomic) IBOutlet UIView *candidatesYouMayLikeView;

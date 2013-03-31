@@ -7,21 +7,38 @@
 //
 
 #import "HomeViewController.h"
-#import "SearchResultsListViewController.h"
+#import "UsersNavigatorViewController.h"
 #import "UserProfileViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ProfileFormDataSource.h"
 #import <IBAForms/IBAForms.h>
 
+/*typedef enum ScrollDirection {
+    ScrollDirectionNone,
+    ScrollDirectionRight,
+    ScrollDirectionLeft,
+    ScrollDirectionUp,
+    ScrollDirectionDown,
+    ScrollDirectionCrazy,
+} ScrollDirection;*/
+
 @interface HomeViewController ()
+{
+/*    float lastContentOffset;
+    bool topBarIsMoving;
+    CGRect originalViewFrame;
+    ScrollDirection lastScrollDirection;*/
+}
 
 - (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_;
+- (void)hideTopBarAnimated;
+- (void)showTopBarAnimated;
 
 @end
 
 @implementation HomeViewController
 
-@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView;
+@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView, background;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,6 +54,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+/*    lastContentOffset = 0;
+    lastScrollDirection = ScrollDirectionNone;
+    topBarIsMoving = false;
+    originalViewFrame = self.view.frame;*/
     [scroll setContentSize:CGSizeMake(320, 535)];
 
     profileResumeView.layer.cornerRadius = 5.0;
@@ -55,7 +76,75 @@
     candidatesYouMayLikeView.layer.cornerRadius = 1.0;
     candidatesYouMayLikeView.layer.masksToBounds = YES;
     [candidatesYouMayLikeTableViewController scrollContentToLeft];
+
 }
+
+/*- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    ScrollDirection scrollDirection;
+    if (lastContentOffset > scrollView.contentOffset.y)
+        scrollDirection = ScrollDirectionDown;
+    else if (lastContentOffset <= scrollView.contentOffset.y)
+        scrollDirection = ScrollDirectionUp;
+    
+    lastContentOffset = scrollView.contentOffset.y;
+
+    if(scrollDirection == lastScrollDirection)
+        return;
+
+    lastScrollDirection = scrollDirection;
+
+    if((!topBarIsMoving) && (scrollDirection == ScrollDirectionUp) && (!self.navigationController.navigationBar.isHidden) && (scrollView.dragging))
+    {
+        NSLog(@"Up!");
+        [self performSelectorOnMainThread:@selector(hideTopBarAnimated) withObject:nil waitUntilDone:YES];
+    }
+    else if((!topBarIsMoving) && (scrollDirection == ScrollDirectionDown) && (self.navigationController.navigationBar.isHidden) && (scrollView.dragging))
+    {
+        NSLog(@"Down!");
+        [self performSelectorOnMainThread:@selector(showTopBarAnimated) withObject:nil waitUntilDone:YES];
+    }
+}
+
+- (void)hideTopBarAnimated
+{
+    if(topBarIsMoving)
+        return;
+
+    topBarIsMoving = true;
+
+#ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
+#if __IPHONE_OS_VERSION_MIN_REQUIRED > 30100
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
+#else
+    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
+#endif
+#endif
+
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+    topBarIsMoving = false;
+}
+
+- (void)showTopBarAnimated
+{
+    if(topBarIsMoving)
+        return;
+
+    topBarIsMoving = true;
+    
+#ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
+#if __IPHONE_OS_VERSION_MIN_REQUIRED > 30100
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
+#else
+    [[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
+#endif
+#endif
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    topBarIsMoving = false;
+}*/
 
 - (void)usersHorizontalTableViewControllerDidRefresh:(KPDUsersHorizontalTableViewController *)tableViewController
 {
@@ -64,8 +153,8 @@
 
 - (void)showPeopleLivingNearToUser:(NSString *)theUser
 {
-    SearchResultsListViewController *srvc = [[SearchResultsListViewController alloc] initWithNibName:@"SearchResultsListViewController" bundle:nil];
-    [self.navigationController pushViewController:srvc animated:YES];
+    UsersNavigatorViewController *unvc = [[UsersNavigatorViewController alloc] initWithNibName:@"UsersNavigatorViewController" bundle:nil];
+    [self.navigationController pushViewController:unvc animated:YES];
 }
 
 - (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_
