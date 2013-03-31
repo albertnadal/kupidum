@@ -8,6 +8,7 @@
 
 #import "UsersNavigatorViewController.h"
 #import "UsersNavigatorContainerView.h"
+#import "UserNavigatorProfileViewController.h"
 #import "KPDUser.h"
 #import "KPDUserProfile.h"
 
@@ -150,10 +151,10 @@ static const int kNavigationScrollMargin = 3;
     for(int i=0; i<[usersProfiles count]; i++)
     {        
         KPDUserProfile *userProfile = [usersProfiles objectAtIndex:i];
-        
-        UIImageView *userFrontPicture = [[UIImageView alloc] initWithFrame:CGRectMake(x, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width)];
-        [userFrontPicture setImage:[UIImage imageNamed:@"fake_photo1.png"]];
-        [scrollProfiles addSubview:userFrontPicture];
+
+        UserNavigatorProfileViewController *unpvc = [[UserNavigatorProfileViewController alloc] initWithNibName:@"UserNavigatorProfileViewController" bundle:nil];
+        [unpvc.view setFrame:CGRectMake(x, 0, [UIScreen mainScreen].bounds.size.width, scrollProfiles.frame.size.height)];
+        [scrollProfiles addSubview:unpvc.view];
 
         x+=[UIScreen mainScreen].bounds.size.width;
     }

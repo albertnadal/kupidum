@@ -11,6 +11,8 @@
 		B7EF67FD1659001800F20DF3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7EF67FC1659001800F20DF3 /* Foundation.framework */; };
 		B7EF67FF1659001800F20DF3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7EF67FE1659001800F20DF3 /* CoreGraphics.framework */; };
 		B7EF68051659001800F20DF3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7EF68031659001800F20DF3 /* InfoPlist.strings */; };
+		FF0F7D451707EDAA007BF55D /* UserNavigatorProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0F7D431707EDAA007BF55D /* UserNavigatorProfileViewController.m */; };
+		FF0F7D461707EDAA007BF55D /* UserNavigatorProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D441707EDAA007BF55D /* UserNavigatorProfileViewController.xib */; };
 		FF10043B16D7957F003FA3F9 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10043216D7957F003FA3F9 /* FMDatabase.m */; };
 		FF10043C16D7957F003FA3F9 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10043416D7957F003FA3F9 /* FMDatabaseAdditions.m */; };
 		FF10043D16D7957F003FA3F9 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10043616D7957F003FA3F9 /* FMDatabasePool.m */; };
@@ -324,6 +326,9 @@
 		B7EF68021659001800F20DF3 /* kupidum-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "kupidum-Info.plist"; sourceTree = "<group>"; };
 		B7EF68041659001800F20DF3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B7EF68081659001800F20DF3 /* kupidum-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "kupidum-Prefix.pch"; sourceTree = "<group>"; };
+		FF0F7D421707EDAA007BF55D /* UserNavigatorProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserNavigatorProfileViewController.h; path = kupidum/UserNavigatorProfileViewController.h; sourceTree = "<group>"; };
+		FF0F7D431707EDAA007BF55D /* UserNavigatorProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserNavigatorProfileViewController.m; path = kupidum/UserNavigatorProfileViewController.m; sourceTree = "<group>"; };
+		FF0F7D441707EDAA007BF55D /* UserNavigatorProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserNavigatorProfileViewController.xib; path = kupidum/UserNavigatorProfileViewController.xib; sourceTree = "<group>"; };
 		FF10043116D7957F003FA3F9 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = kupidum/fmdb/FMDatabase.h; sourceTree = "<group>"; };
 		FF10043216D7957F003FA3F9 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = kupidum/fmdb/FMDatabase.m; sourceTree = "<group>"; };
 		FF10043316D7957F003FA3F9 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = kupidum/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -1403,6 +1408,9 @@
 				FFFCD1B91707592E00BC29D6 /* UsersNavigatorViewController.h */,
 				FFFCD1BA1707592E00BC29D6 /* UsersNavigatorViewController.m */,
 				FFFCD1BB1707592E00BC29D6 /* UsersNavigatorViewController.xib */,
+				FF0F7D421707EDAA007BF55D /* UserNavigatorProfileViewController.h */,
+				FF0F7D431707EDAA007BF55D /* UserNavigatorProfileViewController.m */,
+				FF0F7D441707EDAA007BF55D /* UserNavigatorProfileViewController.xib */,
 			);
 			name = UserNavigation;
 			sourceTree = "<group>";
@@ -1665,6 +1673,7 @@
 				FFFCD1C1170759C100BC29D6 /* img_navigation_background@2x.png in Resources */,
 				FFFCD1C417075B3D00BC29D6 /* img_horizontal_scroll_selected_item_indicator.png in Resources */,
 				FFFCD1C517075B3D00BC29D6 /* img_horizontal_scroll_selected_item_indicator@2x.png in Resources */,
+				FF0F7D461707EDAA007BF55D /* UserNavigatorProfileViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1734,6 +1743,7 @@
 				FF61D31016F7C9E100529429 /* KPDUserProfile.m in Sources */,
 				FFFCD1BC1707592E00BC29D6 /* UsersNavigatorViewController.m in Sources */,
 				FFFCD1C81707728900BC29D6 /* UsersNavigatorContainerView.m in Sources */,
+				FF0F7D451707EDAA007BF55D /* UserNavigatorProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
