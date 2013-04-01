@@ -15,6 +15,12 @@
 		FF0F7D461707EDAA007BF55D /* UserNavigatorProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D441707EDAA007BF55D /* UserNavigatorProfileViewController.xib */; };
 		FF0F7D4917083BE9007BF55D /* img_tick_green.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D4717083BE9007BF55D /* img_tick_green.png */; };
 		FF0F7D4A17083BE9007BF55D /* img_tick_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D4817083BE9007BF55D /* img_tick_green@2x.png */; };
+		FF0F7D4F1709AEA3007BF55D /* MyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0F7D4D1709AEA3007BF55D /* MyAccountViewController.m */; };
+		FF0F7D501709AEA3007BF55D /* MyAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D4E1709AEA3007BF55D /* MyAccountViewController.xib */; };
+		FF0F7D571709DD38007BF55D /* bg_tableview_4rows.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D551709DD38007BF55D /* bg_tableview_4rows.png */; };
+		FF0F7D581709DD38007BF55D /* bg_tableview_4rows@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D561709DD38007BF55D /* bg_tableview_4rows@2x.png */; };
+		FF0F7D5B1709E95E007BF55D /* bg_logout_button.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D591709E95E007BF55D /* bg_logout_button.png */; };
+		FF0F7D5C1709E95E007BF55D /* bg_logout_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF0F7D5A1709E95E007BF55D /* bg_logout_button@2x.png */; };
 		FF10043B16D7957F003FA3F9 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10043216D7957F003FA3F9 /* FMDatabase.m */; };
 		FF10043C16D7957F003FA3F9 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10043416D7957F003FA3F9 /* FMDatabaseAdditions.m */; };
 		FF10043D16D7957F003FA3F9 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10043616D7957F003FA3F9 /* FMDatabasePool.m */; };
@@ -333,6 +339,13 @@
 		FF0F7D441707EDAA007BF55D /* UserNavigatorProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserNavigatorProfileViewController.xib; path = kupidum/UserNavigatorProfileViewController.xib; sourceTree = "<group>"; };
 		FF0F7D4717083BE9007BF55D /* img_tick_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_tick_green.png; path = kupidum/images/img_tick_green.png; sourceTree = "<group>"; };
 		FF0F7D4817083BE9007BF55D /* img_tick_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_tick_green@2x.png"; path = "kupidum/images/img_tick_green@2x.png"; sourceTree = "<group>"; };
+		FF0F7D4C1709AEA3007BF55D /* MyAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyAccountViewController.h; path = kupidum/MyAccountViewController.h; sourceTree = "<group>"; };
+		FF0F7D4D1709AEA3007BF55D /* MyAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyAccountViewController.m; path = kupidum/MyAccountViewController.m; sourceTree = "<group>"; };
+		FF0F7D4E1709AEA3007BF55D /* MyAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyAccountViewController.xib; path = kupidum/MyAccountViewController.xib; sourceTree = "<group>"; };
+		FF0F7D551709DD38007BF55D /* bg_tableview_4rows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_tableview_4rows.png; path = kupidum/images/bg_tableview_4rows.png; sourceTree = "<group>"; };
+		FF0F7D561709DD38007BF55D /* bg_tableview_4rows@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_tableview_4rows@2x.png"; path = "kupidum/images/bg_tableview_4rows@2x.png"; sourceTree = "<group>"; };
+		FF0F7D591709E95E007BF55D /* bg_logout_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_logout_button.png; path = kupidum/images/bg_logout_button.png; sourceTree = "<group>"; };
+		FF0F7D5A1709E95E007BF55D /* bg_logout_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_logout_button@2x.png"; path = "kupidum/images/bg_logout_button@2x.png"; sourceTree = "<group>"; };
 		FF10043116D7957F003FA3F9 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = kupidum/fmdb/FMDatabase.h; sourceTree = "<group>"; };
 		FF10043216D7957F003FA3F9 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = kupidum/fmdb/FMDatabase.m; sourceTree = "<group>"; };
 		FF10043316D7957F003FA3F9 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = kupidum/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -852,6 +865,7 @@
 		B7EF68001659001800F20DF3 /* kupidum */ = {
 			isa = PBXGroup;
 			children = (
+				FF0F7D4B1709AE2F007BF55D /* MyAccount */,
 				FFFCD1B8170758CF00BC29D6 /* UserNavigation */,
 				FF35CC21169F1BA2003AE44D /* UserProfile */,
 				FF7B542A169C3ECC0042FA62 /* SearchResults */,
@@ -910,10 +924,14 @@
 				FF35CC3316A1D210003AE44D /* green_button@2x.png */,
 				FF35CC3416A1D210003AE44D /* red_button.png */,
 				FF35CC3516A1D211003AE44D /* red_button@2x.png */,
+				FF0F7D591709E95E007BF55D /* bg_logout_button.png */,
+				FF0F7D5A1709E95E007BF55D /* bg_logout_button@2x.png */,
 				FF35CC2C16A1C488003AE44D /* bg_profile_medium_panel.png */,
 				FF35CC2D16A1C488003AE44D /* bg_profile_medium_panel@2x.png */,
 				FF35CC2816A1BC82003AE44D /* bg_profile_top_panel.png */,
 				FF35CC2916A1BC83003AE44D /* bg_profile_top_panel@2x.png */,
+				FF0F7D551709DD38007BF55D /* bg_tableview_4rows.png */,
+				FF0F7D561709DD38007BF55D /* bg_tableview_4rows@2x.png */,
 				FF7B543F169C7E360042FA62 /* bg_search_result_cell.png */,
 				FF7B5440169C7E400042FA62 /* bg_search_result_cell@2x.png */,
 				FF7B53BD169AE1080042FA62 /* bg_horizontal_scroll_panel_candidates.png */,
@@ -1042,6 +1060,16 @@
 				FF7497AC167F2D8400AF971F /* InitialScreenViewController.xib */,
 			);
 			name = Initial;
+			sourceTree = "<group>";
+		};
+		FF0F7D4B1709AE2F007BF55D /* MyAccount */ = {
+			isa = PBXGroup;
+			children = (
+				FF0F7D4C1709AEA3007BF55D /* MyAccountViewController.h */,
+				FF0F7D4D1709AEA3007BF55D /* MyAccountViewController.m */,
+				FF0F7D4E1709AEA3007BF55D /* MyAccountViewController.xib */,
+			);
+			name = MyAccount;
 			sourceTree = "<group>";
 		};
 		FF10043016D7955E003FA3F9 /* fmdb */ = {
@@ -1682,6 +1710,11 @@
 				FF0F7D461707EDAA007BF55D /* UserNavigatorProfileViewController.xib in Resources */,
 				FF0F7D4917083BE9007BF55D /* img_tick_green.png in Resources */,
 				FF0F7D4A17083BE9007BF55D /* img_tick_green@2x.png in Resources */,
+				FF0F7D501709AEA3007BF55D /* MyAccountViewController.xib in Resources */,
+				FF0F7D571709DD38007BF55D /* bg_tableview_4rows.png in Resources */,
+				FF0F7D581709DD38007BF55D /* bg_tableview_4rows@2x.png in Resources */,
+				FF0F7D5B1709E95E007BF55D /* bg_logout_button.png in Resources */,
+				FF0F7D5C1709E95E007BF55D /* bg_logout_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1752,6 +1785,7 @@
 				FFFCD1BC1707592E00BC29D6 /* UsersNavigatorViewController.m in Sources */,
 				FFFCD1C81707728900BC29D6 /* UsersNavigatorContainerView.m in Sources */,
 				FF0F7D451707EDAA007BF55D /* UserNavigatorProfileViewController.m in Sources */,
+				FF0F7D4F1709AEA3007BF55D /* MyAccountViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

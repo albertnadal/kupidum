@@ -40,6 +40,7 @@ static const int kNavigationScrollMargin = 3;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollProfiles;
 
 - (void)showNavigationBarButtons;
+- (void)backPressed;
 - (void)loadFakeUsers;
 - (void)showUsersNavigator;
 - (void)showUsersProfiles;
@@ -72,6 +73,11 @@ static const int kNavigationScrollMargin = 3;
                                                               andSelector:@selector(backPressed)
                                                                 andTarget:self];
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:backButton]];
+}
+
+- (void)backPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

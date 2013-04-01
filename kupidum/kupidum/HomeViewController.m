@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "UsersNavigatorViewController.h"
 #import "UserProfileViewController.h"
+#import "MyAccountViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ProfileFormDataSource.h"
 #import <IBAForms/IBAForms.h>
@@ -171,6 +172,30 @@
     NSString *username = @"albert";
     UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil withUsername:username];
     [self.navigationController pushViewController:upvc animated:YES];
+}
+
+- (IBAction)showUserAccount:(id)sender
+{
+    NSString *username = @"albert";
+    MyAccountViewController *mavc = [[MyAccountViewController alloc] initWithNibName:@"MyAccountViewController" bundle:nil withUsername:username];
+    [self.navigationController pushViewController:mavc animated:YES];
+}
+
+- (IBAction)showUserMessages:(id)sender
+{
+    self.tabBarController.selectedIndex = 2; // 2 => Messages screen index
+}
+
+- (IBAction)showRecentVisitors:(id)sender
+{
+    UsersNavigatorViewController *unvc = [[UsersNavigatorViewController alloc] initWithNibName:@"UsersNavigatorViewController" bundle:nil];
+    [self.navigationController pushViewController:unvc animated:YES];
+}
+
+- (IBAction)showRecentUsersInterestedWithMe:(id)sender
+{
+    UsersNavigatorViewController *unvc = [[UsersNavigatorViewController alloc] initWithNibName:@"UsersNavigatorViewController" bundle:nil];
+    [self.navigationController pushViewController:unvc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

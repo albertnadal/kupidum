@@ -30,5 +30,9 @@
 - (void)showPeopleLivingNearToUser:(NSString *)theUser;
 - (void)showAlert;
 - (IBAction)showUserProfile:(id)sender;
+- (IBAction)showUserAccount:(id)sender;
+- (IBAction)showUserMessages:(id)sender;
+- (IBAction)showRecentVisitors:(id)sender;
+- (IBAction)showRecentUsersInterestedWithMe:(id)sender;
 
 @end
