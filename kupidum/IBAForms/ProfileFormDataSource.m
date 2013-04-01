@@ -22,8 +22,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
 
 @synthesize isReadOnly;
 @synthesize height;
+@synthesize selectedForm;
 
-- (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly showEmptyFields:(bool)showEmpty
+- (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly showEmptyFields:(bool)showEmpty withFormType:(UserProfileFormType)formType
 {
 	if (self = [super initWithModel:aModel]) {
 
@@ -37,6 +38,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
         numberOfFieldsInLifestyleSection = 0;
         numberOfFieldsInInterestsSection = 0;
         numberOfFieldsInCultureSection = 0;
+
+        selectedForm = formType;
 
         [self loadStyles];
         [self reloadData];
@@ -62,6 +65,36 @@ static const int kUserProfileFormHeaderCellHeight = 48;
 }
 
 - (void)reloadData
+{
+    switch(selectedForm)
+    {
+        case kUserProfileFormMyDescription:
+                                            [self reloadMyDescriptionForm];
+                                            break;
+
+        case kUserProfileFormLookingFor:
+                                            [self reloadLookingForForm];
+                                            break;
+    }
+}
+
+- (void)reloadLookingForForm
+{
+    height = 0;
+    
+    numberOfFieldsInAppearanceSection = 0;
+    numberOfFieldsInValuesSection = 0;
+    numberOfFieldsInProfessionalSection = 0;
+    numberOfFieldsInLifestyleSection = 0;
+    numberOfFieldsInInterestsSection = 0;
+    numberOfFieldsInCultureSection = 0;
+    
+    
+    IBAFormFieldStyle *selectedStyle = isReadOnly ? readOnlyStyle:readWriteStyle;
+
+}
+
+- (void)reloadMyDescriptionForm
 {
         height = 0;
 

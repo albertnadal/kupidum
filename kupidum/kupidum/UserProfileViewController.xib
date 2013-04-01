@@ -46,7 +46,7 @@
 						<string key="NSFrameSize">{320, 568}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="736707864"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -448,15 +448,15 @@
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<object class="IBUIView" id="116350086">
+							<object class="IBUIView" id="221159040">
 								<reference key="NSNextResponder" ref="736707864"/>
 								<int key="NSvFlags">292</int>
 								<array class="NSMutableArray" key="NSSubviews">
-									<object class="IBUISegmentedControl" id="275282324">
-										<reference key="NSNextResponder" ref="116350086"/>
+									<object class="IBUISegmentedControl" id="282506112">
+										<reference key="NSNextResponder" ref="221159040"/>
 										<int key="NSvFlags">290</int>
 										<string key="NSFrame">{{0, 21}, {305, 44}}</string>
-										<reference key="NSSuperview" ref="116350086"/>
+										<reference key="NSSuperview" ref="221159040"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="676390684"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -489,7 +489,7 @@
 								<string key="NSFrame">{{7, 557}, {305, 70}}</string>
 								<reference key="NSSuperview" ref="736707864"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="275282324"/>
+								<reference key="NSNextKeyView" ref="282506112"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="57604974"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -592,7 +592,7 @@
 								<string key="NSFrame">{{287, 416}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="736707864"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="116350086"/>
+								<reference key="NSNextKeyView" ref="221159040"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -667,7 +667,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">containerSegments</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="116350086"/>
+						<reference key="destination" ref="221159040"/>
 					</object>
 					<int key="connectionID">63</int>
 				</object>
@@ -753,6 +753,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">formTypeSelector</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="282506112"/>
+					</object>
+					<int key="connectionID">64</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="736707864"/>
 						<reference key="destination" ref="372490531"/>
@@ -785,6 +793,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">50</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">changeUserProfileForm:</string>
+						<reference key="source" ref="282506112"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">65</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -824,7 +841,7 @@
 						<int key="objectID">8</int>
 						<reference key="object" ref="736707864"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="116350086"/>
+							<reference ref="221159040"/>
 							<reference ref="576736250"/>
 							<reference ref="832485932"/>
 							<reference ref="129550971"/>
@@ -847,9 +864,9 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">57</int>
-						<reference key="object" ref="116350086"/>
+						<reference key="object" ref="221159040"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="275282324"/>
+							<reference ref="282506112"/>
 						</array>
 						<reference key="parent" ref="736707864"/>
 						<string key="objectName">containerSegments</string>
@@ -969,8 +986,8 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">62</int>
-						<reference key="object" ref="275282324"/>
-						<reference key="parent" ref="116350086"/>
+						<reference key="object" ref="282506112"/>
+						<reference key="parent" ref="221159040"/>
 					</object>
 				</array>
 			</object>
@@ -1018,7 +1035,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">63</int>
+			<int key="maxID">65</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1044,17 +1061,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">UserProfileViewController</string>
 					<string key="superclassName">IBAFormViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">showMenuSelectPhotoOrTakePhoto:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">showMenuSelectPhotoOrTakePhoto:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="changeUserProfileForm:">id</string>
+						<string key="showMenuSelectPhotoOrTakePhoto:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="changeUserProfileForm:">
+							<string key="name">changeUserProfileForm:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showMenuSelectPhotoOrTakePhoto:">
 							<string key="name">showMenuSelectPhotoOrTakePhoto:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="bodySilouetePhoto">UIImageView</string>
 						<string key="bodySilouetePhotoButton">UIButton</string>
@@ -1064,6 +1084,7 @@
 						<string key="faceFrontPhotoButton">UIButton</string>
 						<string key="faceProfilePhoto">UIImageView</string>
 						<string key="faceProfilePhotoButton">UIButton</string>
+						<string key="formTypeSelector">UISegmentedControl</string>
 						<string key="presentationPencil">UIImageView</string>
 						<string key="presentationTextView">UITextView</string>
 						<string key="scroll">UIScrollView</string>
@@ -1100,6 +1121,10 @@
 						<object class="IBToOneOutletInfo" key="faceProfilePhotoButton">
 							<string key="name">faceProfilePhotoButton</string>
 							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="formTypeSelector">
+							<string key="name">formTypeSelector</string>
+							<string key="candidateClassName">UISegmentedControl</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="presentationPencil">
 							<string key="name">presentationPencil</string>

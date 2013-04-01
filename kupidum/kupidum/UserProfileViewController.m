@@ -7,7 +7,6 @@
 //
 
 #import "UserProfileViewController.h"
-#import "ProfileFormDataSource.h"
 #import "KPDUIUtilities.h"
 #import <IBAForms/IBAForms.h>
 
@@ -36,6 +35,7 @@
 - (void)backPressed;
 - (void)reloadFormTableView;
 - (void)updateTakePhotoButtonsVisibility;
+- (void)loadTableView;
 - (UIImage *)cropSilouettePicture:(UIImage *)image;
 - (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_;
 
@@ -43,7 +43,7 @@
 
 @implementation UserProfileViewController
 
-@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments;
+@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments, formTypeSelector, selectedForm;
 
 const float basicInformationPanelHeight = 435.0;
 const float buttonsPanelHeight = 120.0f;
@@ -60,6 +60,7 @@ const float bottomMarginHeight = 20.0;
         imgDesiredPictureProfile = nil;
         profileIsEditable = false;
         editMode = false;
+        selectedForm = kUserProfileFormMyDescription;
     }
 
     return self;
@@ -71,19 +72,35 @@ const float bottomMarginHeight = 20.0;
     {
         username = username_;
         imgDesiredPictureProfile = nil;
+        formTableView = nil;
 
         NSMutableDictionary *model = [self retrieveUserProfileModelForUser:username];
         profileIsEditable = true; //This must be set after load user profile from DB or web service //!isReadOnly;
         editMode = false;
+        selectedForm = kUserProfileFormMyDescription;
 
         bool showEmptyFields = NO;
-        ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields];
+        ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
         self.formDataSource = profileFormDataSource;
 
         containerButtonsHeight = profileIsEditable ? 0.0f : buttonsPanelHeight;
     }
 
     return self;
+}
+
+- (IBAction)changeUserProfileForm:(id)sender
+{
+    switch(self.formTypeSelector.selectedSegmentIndex)
+    {
+        case kUserProfileFormMyDescription: [self setSelectedForm:kUserProfileFormMyDescription];
+                                            break;
+
+        case kUserProfileFormLookingFor:    [self setSelectedForm:kUserProfileFormLookingFor];
+                                            break;
+    }
+
+    [self reloadFormTableView];
 }
 
 - (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_
@@ -262,9 +279,10 @@ const float bottomMarginHeight = 20.0;
     [self.scroll scrollRectToVisible:scrollToArea animated:YES];
 }
 
-- (void)loadView
+- (void)loadTableView
 {
-	[super loadView];
+    if(formTableView)
+        [formTableView removeFromSuperview];
 
 	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
 	[formTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
@@ -287,7 +305,13 @@ const float bottomMarginHeight = 20.0;
     // update scroll content size
     [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
 
-    [self.scroll addSubview:formTableView];
+    [self.scroll addSubview:formTableView];    
+}
+
+- (void)loadView
+{
+	[super loadView];
+    [self loadTableView];
 }
 
 - (void)viewDidLoad
@@ -345,7 +369,7 @@ const float bottomMarginHeight = 20.0;
 {
     bool isReadOnly_ = editMode ? false : true;
     bool showEmptyFields = NO;
-	ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:self.formDataSource.model isReadOnly:isReadOnly_ showEmptyFields:showEmptyFields];
+	ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:self.formDataSource.model isReadOnly:isReadOnly_ showEmptyFields:showEmptyFields withFormType:selectedForm];
     self.formDataSource = profileFormDataSource;
     
     [formTableView removeFromSuperview];

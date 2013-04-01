@@ -69,6 +69,12 @@ static const NSString *kMusicUserProfileField = @"kMusic";
 static const NSString *kMoviesUserProfileField = @"kMovies";
 #pragma unused(kMoviesUserProfileField)
 
+typedef enum UserProfileFormType
+{
+    kUserProfileFormMyDescription,
+    kUserProfileFormLookingFor
+}UserProfileFormType;
+
 @interface ProfileFormDataSource : IBAFormDataSource {
     bool isReadOnly;
     bool showEmptyFields;
@@ -82,15 +88,19 @@ static const NSString *kMoviesUserProfileField = @"kMovies";
     int numberOfFieldsInLifestyleSection;
     int numberOfFieldsInInterestsSection;
     int numberOfFieldsInCultureSection;
+
+    UserProfileFormType selectedForm;
 }
 
 @property (atomic) bool isReadOnly;
 @property (atomic) int height;
+@property (atomic) UserProfileFormType selectedForm;
 
-
-- (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly showEmptyFields:(bool)showEmpty;
+- (id)initWithModel:(id)aModel isReadOnly:(bool)readOnly showEmptyFields:(bool)showEmpty withFormType:(UserProfileFormType)formType;
 - (void)loadStyles;
 - (void)reloadData;
+- (void)reloadLookingForForm;
+- (void)reloadMyDescriptionForm;
 - (NSDictionary *)getModelWithValues;
 - (void)setReadOnly:(bool)readOnly;
 - (int)userSelectedIdentifierForKeyPath:(NSString *)keyPath;
