@@ -107,6 +107,7 @@ const float bottomMarginHeight = 20.0;
 {
 	NSMutableDictionary *model = [[NSMutableDictionary alloc] init];
 
+    // User description
     NSArray *selectedEyeColorListOption = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[5]Verds"]];
     NSArray *heightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[180]180 cm"]];
     NSArray *weightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[85]85 kg"]];
@@ -162,6 +163,26 @@ const float bottomMarginHeight = 20.0;
 	[model setObject:mySparetimeListOptions forKey:kMySparetimeUserProfileField];
 	[model setObject:musicListOptions forKey:kMusicUserProfileField];
 	[model setObject:moviesListOptions forKey:kMoviesUserProfileField];
+
+
+    // User candidate preferences
+    NSArray *candidateMinAgeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[25]25 anys"]];
+    NSArray *candidateMaxAgeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[40]40 anys"]];
+    NSArray *candidateMinWeightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[55]55 kg"]];
+    NSArray *candidateMaxWeightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[85]85 kg"]];
+    NSArray *candidateMaritalStatusListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[1]No casat mai"]];
+    NSArray *candidateWhereIsLivingListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[3]Amb els seus fills"]];
+    NSArray *candidateWantChildrensListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[3]Sí, 2"]];
+    NSArray *candidateHasChildrensListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:@"[1]Cap"]];
+
+	[model setObject:candidateMinAgeListOptions forKey:kMinAgeCandidateProfileField];
+	[model setObject:candidateMaxAgeListOptions forKey:kMaxAgeCandidateProfileField];
+	[model setObject:candidateMinWeightListOptions forKey:kMinWeightCandidateProfileField];
+	[model setObject:candidateMaxWeightListOptions forKey:kMaxWeightCandidateProfileField];
+	[model setObject:candidateMaritalStatusListOptions forKey:kMaritalStatusCandidateProfileField];
+	[model setObject:candidateWhereIsLivingListOptions forKey:kWhereIsLivingCandidateProfileField];
+	[model setObject:candidateWantChildrensListOptions forKey:kWantChildrensCandidateProfileField];
+	[model setObject:candidateHasChildrensListOptions forKey:kHasChildrensCandidateProfileField];
 
     return model;
 }

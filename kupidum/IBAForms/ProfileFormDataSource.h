@@ -69,6 +69,24 @@ static const NSString *kMusicUserProfileField = @"kMusic";
 static const NSString *kMoviesUserProfileField = @"kMovies";
 #pragma unused(kMoviesUserProfileField)
 
+static const NSString *kMinAgeCandidateProfileField = @"kMinAgeCandidate";
+#pragma unused(kMinAgeCandidateProfileField)
+static const NSString *kMaxAgeCandidateProfileField = @"kMaxAgeCandidate";
+#pragma unused(kMaxAgeCandidateProfileField)
+static const NSString *kMinWeightCandidateProfileField = @"kMinWeightCandidate";
+#pragma unused(kMinWeightCandidateProfileField)
+static const NSString *kMaxWeightCandidateProfileField = @"kMaxWeightCandidate";
+#pragma unused(kMaxWeightCandidateProfileField)
+static const NSString *kMaritalStatusCandidateProfileField = @"kMaritalStatusCandidate";
+#pragma unused(kMaritalStatusCandidateProfileField)
+static const NSString *kWhereIsLivingCandidateProfileField = @"kWhereIsLivingCandidate";
+#pragma unused(kWhereIsLivingCandidateProfileField)
+static const NSString *kWantChildrensCandidateProfileField = @"kWantChildrensCandidate";
+#pragma unused(kWantChildrensCandidateProfileField)
+static const NSString *kHasChildrensCandidateProfileField = @"kHasChildrensCandidate";
+#pragma unused(kHasChildrensCandidateProfileField)
+
+
 typedef enum UserProfileFormType
 {
     kUserProfileFormMyDescription,
