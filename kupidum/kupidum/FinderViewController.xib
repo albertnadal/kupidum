@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
+		<int key="IBDocument.SystemTarget">1552</int>
 		<string key="IBDocument.SystemVersion">11G63b</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1930</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -44,6 +44,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 26}, {320, 548}}</string>
 						<reference key="NSSuperview" ref="360193343"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="420790676"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -57,6 +58,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{320, 26}</string>
 						<reference key="NSSuperview" ref="360193343"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="87795839"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -70,6 +72,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 1}, {160, 25}}</string>
 						<reference key="NSSuperview" ref="360193343"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="365619104"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="540082972">
 							<int key="NSColorSpace">3</int>
@@ -109,13 +112,14 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{160, 1}, {160, 25}}</string>
 						<reference key="NSSuperview" ref="360193343"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="596474900"/>
 						<reference key="IBUIBackgroundColor" ref="540082972"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUINormalTitle">Gent a prop</string>
+						<string key="IBUINormalTitle">Perfils visitats</string>
 						<reference key="IBUIHighlightedTitleColor" ref="326623772"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -139,6 +143,7 @@
 						<int key="NSvFlags">272</int>
 						<string key="NSFrame">{{0, 26}, {320, 429}}</string>
 						<reference key="NSSuperview" ref="360193343"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="649403643"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
@@ -157,6 +162,7 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrameSize">{191, 153}</string>
 								<reference key="NSSuperview" ref="649403643"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="564192500"/>
 								<reference key="IBUIBackgroundColor" ref="540082972"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -175,6 +181,8 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 119}, {151, 21}}</string>
 								<reference key="NSSuperview" ref="649403643"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -201,6 +209,7 @@
 						</array>
 						<string key="NSFrame">{{64, 107}, {191, 153}}</string>
 						<reference key="NSSuperview" ref="360193343"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="563508481"/>
 						<reference key="IBUIBackgroundColor" ref="540082972"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -212,6 +221,7 @@
 				</array>
 				<string key="NSFrame">{{0, 64}, {320, 455}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1026383873"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -5566,7 +5576,78 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 			<nil key="sourceID"/>
 			<int key="maxID">59</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">FinderViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">subheaderPremut</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">subheaderPremut</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">subheaderPremut</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="botoIniciarCerca">UIButton</string>
+						<string key="boto_buscar">UIButton</string>
+						<string key="boto_nearby">UIButton</string>
+						<string key="contenidor_swipe_to_other_views">UIView</string>
+						<string key="finderScrollContent">UIView</string>
+						<string key="paginador">UIPageControl</string>
+						<string key="scroll">UIScrollView</string>
+						<string key="search_bar">UISearchBar</string>
+						<string key="subheaderImage">UIImageView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="botoIniciarCerca">
+							<string key="name">botoIniciarCerca</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="boto_buscar">
+							<string key="name">boto_buscar</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="boto_nearby">
+							<string key="name">boto_nearby</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="contenidor_swipe_to_other_views">
+							<string key="name">contenidor_swipe_to_other_views</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="finderScrollContent">
+							<string key="name">finderScrollContent</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="paginador">
+							<string key="name">paginador</string>
+							<string key="candidateClassName">UIPageControl</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scroll">
+							<string key="name">scroll</string>
+							<string key="candidateClassName">UIScrollView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="search_bar">
+							<string key="name">search_bar</string>
+							<string key="candidateClassName">UISearchBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="subheaderImage">
+							<string key="name">subheaderImage</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/FinderViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
@@ -5582,6 +5663,6 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 			<string key="caixa_flotant_swip.png">{382, 306}</string>
 			<string key="cell_accessory.png">{19, 28}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1930</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

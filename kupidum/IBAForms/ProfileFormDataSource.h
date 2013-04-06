@@ -14,77 +14,77 @@
 
 #import <IBAForms/IBAFormDataSource.h>
 
-static const NSString *kEyeColorUserProfileField = @"kEyeColor";
-#pragma unused(kEyeColorUserProfileField)
-static const NSString *kHeightUserProfileField = @"kHeight";
-#pragma unused(kHeightUserProfileField)
-static const NSString *kWeightUserProfileField = @"kWeight";
-#pragma unused(kWeightUserProfileField)
-static const NSString *kHairColorUserProfileField = @"kHairColor";
-#pragma unused(kHairColorUserProfileField)
-static const NSString *kHairSizeUserProfileField = @"kHairSize";
-#pragma unused(kHairSizeUserProfileField)
-static const NSString *kBodyLookUserProfileField = @"kBodyLook";
-#pragma unused(kBodyLookUserProfileField)
-static const NSString *kMyHighlightUserProfileField = @"kMyHighlight";
-#pragma unused(kMyHighlightUserProfileField)
-static const NSString *kNationUserProfileField = @"kNation";
-#pragma unused(kNationUserProfileField)
-static const NSString *kEthnicalOriginUserProfileField = @"kEthnicalOrigin";
-#pragma unused(kEthnicalOriginUserProfileField)
-static const NSString *kReligionUserProfileField = @"kReligion";
-#pragma unused(kReligionUserProfileField)
-static const NSString *kReligionLevelUserProfileField = @"kReligionLevel";
-#pragma unused(kReligionLevelUserProfileField)
-static const NSString *kMarriageOpinionUserProfileField = @"kMarriageOpinion";
-#pragma unused(kMarriageOpinionUserProfileField)
-static const NSString *kRomanticismLevelUserProfileField = @"kRomanticismLevel";
-#pragma unused(kRomanticismLevelUserProfileField)
-static const NSString *kIWantChildrensUserProfileField = @"kIWantChildren";
-#pragma unused(kIWantChildrensUserProfileField)
-static const NSString *kStudiesLevelUserProfileField = @"kStudiesLevel";
-#pragma unused(kStudiesLevelUserProfileField)
-static const NSString *kLanguagesUserProfileField = @"kLanguages";
-#pragma unused(kLanguagesUserProfileField)
-static const NSString *kMyBusinessUserProfileField = @"kMyBusiness";
-#pragma unused(kMyBusinessUserProfileField)
-static const NSString *kSalaryUserProfileField = @"kSalary";
-#pragma unused(kSalaryUserProfileField)
-static const NSString *kMyStyleUserProfileField = @"kMyStyle";
-#pragma unused(kMyStyleUserProfileField)
-static const NSString *kAlimentUserProfileField = @"kAliment";
-#pragma unused(kAlimentUserProfileField)
-static const NSString *kSmokeUserProfileField = @"kSmoke";
-#pragma unused(kSmokeUserProfileField)
-static const NSString *kAnimalsUserProfileField = @"kAnimals";
-#pragma unused(kAnimalsUserProfileField)
-static const NSString *kMyHobbiesUserProfileField = @"kMyHobbies";
-#pragma unused(kMyHobbiesUserProfileField)
-static const NSString *kMySportsUserProfileField = @"kMySports";
-#pragma unused(kMySportsUserProfileField)
-static const NSString *kMySparetimeUserProfileField = @"kMySparetime";
-#pragma unused(kMySparetimeUserProfileField)
-static const NSString *kMusicUserProfileField = @"kMusic";
-#pragma unused(kMusicUserProfileField)
-static const NSString *kMoviesUserProfileField = @"kMovies";
-#pragma unused(kMoviesUserProfileField)
+static NSString *const kEyeColorUserProfileField = @"kEyeColor";
+static NSString *const kHeightUserProfileField = @"kHeight";
+static NSString *const kWeightUserProfileField = @"kWeight";
+static NSString *const kHairColorUserProfileField = @"kHairColor";
+static NSString *const kHairSizeUserProfileField = @"kHairSize";
+static NSString *const kBodyLookUserProfileField = @"kBodyLook";
+static NSString *const kMainCharacteristicUserProfileField = @"kMainCharacteristic";
+static NSString *const kSilhouetteUserProfileField = @"kSilhouette";
+static NSString *const kMyHighlightUserProfileField = @"kMyHighlight";
+static NSString *const kMaritalStatusUserProfileField = @"kMaritalStatus";
+static NSString *const kHasChildrensUserProfileField = @"kHasChildrens";
+static NSString *const kWhereIsLivingUserProfileField = @"kWhereIsLiving";
+static NSString *const kNationUserProfileField = @"kNation";
+static NSString *const kEthnicalOriginUserProfileField = @"kEthnicalOrigin";
+static NSString *const kReligionUserProfileField = @"kReligion";
+static NSString *const kReligionLevelUserProfileField = @"kReligionLevel";
+static NSString *const kMarriageOpinionUserProfileField = @"kMarriageOpinion";
+static NSString *const kRomanticismLevelUserProfileField = @"kRomanticismLevel";
+static NSString *const kIWantChildrensUserProfileField = @"kIWantChildren";
+static NSString *const kStudiesLevelUserProfileField = @"kStudiesLevel";
+static NSString *const kLanguagesUserProfileField = @"kLanguages";
+static NSString *const kMyBusinessUserProfileField = @"kMyBusiness";
+static NSString *const kSalaryUserProfileField = @"kSalary";
+static NSString *const kMyStyleUserProfileField = @"kMyStyle";
+static NSString *const kAlimentUserProfileField = @"kAliment";
+static NSString *const kSmokeUserProfileField = @"kSmoke";
+static NSString *const kAnimalsUserProfileField = @"kAnimals";
+static NSString *const kMyHobbiesUserProfileField = @"kMyHobbies";
+static NSString *const kMySportsUserProfileField = @"kMySports";
+static NSString *const kMySparetimeUserProfileField = @"kMySparetime";
+static NSString *const kMusicUserProfileField = @"kMusic";
+static NSString *const kMoviesUserProfileField = @"kMovies";
 
-static const NSString *kMinAgeCandidateProfileField = @"kMinAgeCandidate";
-#pragma unused(kMinAgeCandidateProfileField)
-static const NSString *kMaxAgeCandidateProfileField = @"kMaxAgeCandidate";
-#pragma unused(kMaxAgeCandidateProfileField)
-static const NSString *kMinWeightCandidateProfileField = @"kMinWeightCandidate";
-#pragma unused(kMinWeightCandidateProfileField)
-static const NSString *kMaxWeightCandidateProfileField = @"kMaxWeightCandidate";
-#pragma unused(kMaxWeightCandidateProfileField)
-static const NSString *kMaritalStatusCandidateProfileField = @"kMaritalStatusCandidate";
-#pragma unused(kMaritalStatusCandidateProfileField)
-static const NSString *kWhereIsLivingCandidateProfileField = @"kWhereIsLivingCandidate";
-#pragma unused(kWhereIsLivingCandidateProfileField)
-static const NSString *kWantChildrensCandidateProfileField = @"kWantChildrensCandidate";
-#pragma unused(kWantChildrensCandidateProfileField)
-static const NSString *kHasChildrensCandidateProfileField = @"kHasChildrensCandidate";
-#pragma unused(kHasChildrensCandidateProfileField)
+static NSString *const kMinAgeCandidateProfileField = @"kMinAgeCandidate";
+static NSString *const kMaxAgeCandidateProfileField = @"kMaxAgeCandidate";
+static NSString *const kMinHeightCandidateProfileField = @"kMinHeightCandidate";
+static NSString *const kMaxHeightCandidateProfileField = @"kMaxHeightCandidate";
+static NSString *const kMinWeightCandidateProfileField = @"kMinWeightCandidate";
+static NSString *const kMaxWeightCandidateProfileField = @"kMaxWeightCandidate";
+static NSString *const kMaritalStatusCandidateProfileField = @"kMaritalStatusCandidate";
+static NSString *const kWhereIsLivingCandidateProfileField = @"kWhereIsLivingCandidate";
+static NSString *const kWantChildrensCandidateProfileField = @"kWantChildrensCandidate";
+static NSString *const kHasChildrensCandidateProfileField = @"kHasChildrensCandidate";
+static NSString *const kSilhouetteCandidateProfileField = @"kSilhouetteCandidate";
+static NSString *const kMainCharacteristicCandidateProfileField = @"kMainCharacteristicCandidate";
+static NSString *const kIsRomanticCandidateProfileField = @"kIsRomanticCandidate";
+static NSString *const kMarriageIsCandidateProfileField = @"kMarriageIsCandidate";
+static NSString *const kSmokesCandidateProfileField = @"kSmokesCandidate";
+static NSString *const kDietCandidateProfileField = @"kDietCandidate";
+static NSString *const kNationCandidateProfileField = @"kNationCandidate";
+static NSString *const kEthnicalOriginCandidateProfileField = @"kEthnicalOriginCandidate";
+static NSString *const kBodyLookCandidateProfileField = @"kBodyLookCandidate";
+static NSString *const kHairSizeCandidateProfileField = @"kHairSizeCandidate";
+static NSString *const kHairColorCandidateProfileField = @"kHairColorCandidate";
+static NSString *const kEyeColorCandidateProfileField = @"kEyeColorCandidate";
+static NSString *const kStyleCandidateProfileField = @"kStyleCandidate";
+static NSString *const kHighlightCandidateProfileField = @"kHighlightCandidate";
+static NSString *const kStudiesMinLevelCandidateProfileField = @"kStudiesMinLevelCandidate";
+static NSString *const kStudiesMaxLevelCandidateProfileField = @"kStudiesMaxLevelCandidate";
+static NSString *const kLanguagesCandidateProfileField = @"kLanguagesCandidate";
+static NSString *const kReligionCandidateProfileField = @"kReligionCandidate";
+static NSString *const kReligionLevelCandidateProfileField = @"kReligionLevelCandidate";
+static NSString *const kMyHobbiesCandidateProfileField = @"kMyHobbiesCandidate";
+static NSString *const kMySparetimeCandidateProfileField = @"kMySparetimeCandidate";
+static NSString *const kMusicCandidateProfileField = @"kMusicCandidate";
+static NSString *const kMoviesCandidateProfileField = @"kMoviesCandidate";
+static NSString *const kAnimalsCandidateProfileField = @"kAnimalsCandidate";
+static NSString *const kSportsCandidateProfileField = @"kSportsCandidate";
+static NSString *const kBusinessCandidateProfileField = @"kBusinessCandidate";
+static NSString *const kMinSalaryCandidateProfileField = @"kMinSalaryCandidate";
+static NSString *const kMaxSalaryCandidateProfileField = @"kMaxSalaryCandidate";
 
 
 typedef enum UserProfileFormType
@@ -101,6 +101,7 @@ typedef enum UserProfileFormType
     int height;
 
     int numberOfFieldsInAppearanceSection;
+    int numberOfFieldsInSituationSection;
     int numberOfFieldsInValuesSection;
     int numberOfFieldsInProfessionalSection;
     int numberOfFieldsInLifestyleSection;

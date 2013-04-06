@@ -18,7 +18,7 @@
 
     [self.navigationItem setTitle:NSLocalizedString(@"Troba gent interessant", @"")];
     [boto_buscar setTitle:NSLocalizedString(@"Cercar gent", @"") forState:UIControlStateNormal];
-    [boto_nearby setTitle:NSLocalizedString(@"Gent a prop", @"") forState:UIControlStateNormal];
+    [boto_nearby setTitle:NSLocalizedString(@"Perfils visitats", @"") forState:UIControlStateNormal];
     [botoIniciarCerca setTitle:NSLocalizedString(@"Buscar", @"") forState:UIControlStateNormal];
     [search_bar setPlaceholder:NSLocalizedString(@"Cercar un sobrenom", @"")];
 

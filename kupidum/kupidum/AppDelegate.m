@@ -27,8 +27,8 @@
 
 
 #warning remove the following lines
-[[KPDUserSingleton sharedInstance] setUsername:@"silvia"];
-[[KPDClientSIP sharedInstance] registerToServerWithUser:@"silvia" password:@"silvia"];
+[[KPDUserSingleton sharedInstance] setUsername:@"albert"];
+[[KPDClientSIP sharedInstance] registerToServerWithUser:@"albert" password:@"albert"];
 
 
 
@@ -104,7 +104,7 @@
 
     UIViewController *homeViewController = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
     UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-    [homeViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Inici", @"") image:[UIImage imageNamed:@"tab_icon_home"] tag:1]];
+    [homeViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Superwoman", @"") image:[UIImage imageNamed:@"tab_icon_home"] tag:1]];
     [homeViewController.navigationItem setTitle:@"Superwoman"];
 
     UINavigationController *finderNavigationController = [[UINavigationController alloc] initWithRootViewController:finderViewController];
