@@ -48,6 +48,33 @@ static const int kUserProfileFormHeaderCellHeight = 48;
     return self;
 }
 
+- (void)processSelectedValueForKeyPath:(NSString *)formKey withKeyValuesInArray:(NSArray *)listOptions
+{
+    NSMutableArray *processedValues = [[NSMutableArray alloc] init];
+    NSArray *selectedEyeColorListOption = [self.model objectForKey:formKey];
+    for(int i=0;i<[selectedEyeColorListOption count]; i++)
+    {
+        IBAPickListFormOption *option = [selectedEyeColorListOption objectAtIndex:i];
+        if([[option name] isKindOfClass:[NSNumber class]])
+        {
+            NSString *substringOptionKey = [NSString stringWithFormat:@"[%@]", [option name]];
+            for(int e=0; e<[listOptions count]; e++)
+            {
+                NSString *optionValue = [[listOptions objectAtIndex:e] name];
+                if([optionValue rangeOfString:substringOptionKey].location != NSNotFound)
+                    [processedValues addObject:optionValue];
+            }
+        }
+        else
+        {
+            [processedValues addObject:[option name]];
+        }
+    }
+
+    NSArray *resultProcessedOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithArray:processedValues]];
+    [self.model setObject:resultProcessedOptions forKey:formKey];
+}
+
 - (int)getFormHeightToIndex:(NSIndexPath *)indexPath withCellHeight:(float)fieldCellHeight
 {
     int numberOfFieldsInSection[7] = {  numberOfFieldsInAppearanceSection + 1,
@@ -103,9 +130,11 @@ static const int kUserProfileFormHeaderCellHeight = 48;
     [minAgeArray addObject:NSLocalizedString(@"[0]Sense especificar", @"")];
     for(int e=18; e<99; e++)
         [minAgeArray addObject:[NSString stringWithFormat:@"[%d]%d anys", e, e]];
-    
+
     NSArray *minAgeListOptions = [IBAPickListFormOption pickListOptionsForStrings:minAgeArray];
-    
+
+    [self processSelectedValueForKeyPath:kMinAgeCandidateProfileField withKeyValuesInArray:minAgeListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMinAgeCandidateProfileField]) || (showEmptyFields))
         [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMinAgeCandidateProfileField
                                                                                 title:NSLocalizedString(@"Edat mínima", @"")
@@ -119,9 +148,11 @@ static const int kUserProfileFormHeaderCellHeight = 48;
     [maxAgeArray addObject:NSLocalizedString(@"[0]Sense especificar", @"")];
     for(int e=18; e<99; e++)
         [maxAgeArray addObject:[NSString stringWithFormat:@"[%d]%d anys", e, e]];
-    
+
     NSArray *maxAgeListOptions = [IBAPickListFormOption pickListOptionsForStrings:maxAgeArray];
-    
+
+    [self processSelectedValueForKeyPath:kMaxAgeCandidateProfileField withKeyValuesInArray:maxAgeListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMaxAgeCandidateProfileField]) || (showEmptyFields))
         [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMaxAgeCandidateProfileField
                                                                                 title:NSLocalizedString(@"Edat màxima", @"")
@@ -137,9 +168,11 @@ static const int kUserProfileFormHeaderCellHeight = 48;
     [minHeightArray addObject:NSLocalizedString(@"[0]Sense especificar", @"")];
     for(int e=140; e<200; e++)
         [minHeightArray addObject:[NSString stringWithFormat:@"[%d]%d cm", e, e]];
-    
+
     NSArray *minHeightListOptions = [IBAPickListFormOption pickListOptionsForStrings:minHeightArray];
-    
+
+    [self processSelectedValueForKeyPath:kMinHeightCandidateProfileField withKeyValuesInArray:minHeightListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMinHeightCandidateProfileField]) || (showEmptyFields))
         [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMinHeightCandidateProfileField
                                                                                 title:NSLocalizedString(@"Alçada mínima", @"")
@@ -153,9 +186,11 @@ static const int kUserProfileFormHeaderCellHeight = 48;
     [maxHeightArray addObject:NSLocalizedString(@"[0]Sense especificar", @"")];
     for(int e=140; e<200; e++)
         [maxHeightArray addObject:[NSString stringWithFormat:@"[%d]%d cm", e, e]];
-    
+
     NSArray *maxHeightListOptions = [IBAPickListFormOption pickListOptionsForStrings:maxHeightArray];
-    
+
+    [self processSelectedValueForKeyPath:kMaxHeightCandidateProfileField withKeyValuesInArray:maxHeightListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMaxHeightCandidateProfileField]) || (showEmptyFields))
         [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMaxHeightCandidateProfileField
                                                                                 title:NSLocalizedString(@"Alçada màxima", @"")
@@ -172,7 +207,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
         [minWeightArray addObject:[NSString stringWithFormat:@"[%d]%d kg", e, e]];
     
     NSArray *minWeightListOptions = [IBAPickListFormOption pickListOptionsForStrings:minWeightArray];
-    
+
+    [self processSelectedValueForKeyPath:kMinWeightCandidateProfileField withKeyValuesInArray:minWeightListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMinWeightCandidateProfileField]) || (showEmptyFields))
         [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMinWeightCandidateProfileField
                                                                                 title:NSLocalizedString(@"Pes mínim", @"")
@@ -188,7 +225,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
         [maxWeightArray addObject:[NSString stringWithFormat:@"[%d]%d kg", e, e]];
     
     NSArray *maxWeightListOptions = [IBAPickListFormOption pickListOptionsForStrings:maxWeightArray];
-    
+
+    [self processSelectedValueForKeyPath:kMaxWeightCandidateProfileField withKeyValuesInArray:maxWeightListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMaxWeightCandidateProfileField]) || (showEmptyFields))
         [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMaxWeightCandidateProfileField
                                                                                 title:NSLocalizedString(@"Pes màxim", @"")
@@ -207,7 +246,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                       NSLocalizedString(@"[7]Pèl-roig", @""),
                                                                                       NSLocalizedString(@"[2]Ros", @""),
                                                                                       nil]];
-    
+
+    [self processSelectedValueForKeyPath:kHairColorCandidateProfileField withKeyValuesInArray:hairColorListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kHairColorCandidateProfileField]) || (showEmptyFields))
         [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHairColorCandidateProfileField
                                                                                 title:NSLocalizedString(@"Color del seu cabell", @"")
@@ -226,7 +267,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                      NSLocalizedString(@"[6]Molt llarg", @""),
                                                                                      NSLocalizedString(@"[7]Sense pèl", @""),
                                                                                      nil]];
-    
+
+    [self processSelectedValueForKeyPath:kHairSizeCandidateProfileField withKeyValuesInArray:hairSizeListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kHairSizeCandidateProfileField]) || (showEmptyFields))
         [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHairSizeCandidateProfileField
                                                                                 title:NSLocalizedString(@"Llargada del seu cabell", @"")
@@ -245,7 +288,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
 																					 NSLocalizedString(@"[6]Negres", @""),
 																					 NSLocalizedString(@"[5]Verds", @""),
 																					 nil]];
-    
+
+    [self processSelectedValueForKeyPath:kEyeColorCandidateProfileField withKeyValuesInArray:eyeColorListOptions];
+
     IBAPickListFormField *eyeColorPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kEyeColorCandidateProfileField
                                                                                           title:NSLocalizedString(@"Color d'ulls", @"")
                                                                                valueTransformer:nil
@@ -283,7 +328,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                                NSLocalizedString(@"[5]Viva", @""),
                                                                                                NSLocalizedString(@"[26]Altre", @""),
                                                                                                nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMainCharacteristicCandidateProfileField withKeyValuesInArray:mainCharacteristicListOptions];
+
     IBAPickListFormField *mainCharacteristicPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kMainCharacteristicCandidateProfileField
                                                                                                     title:NSLocalizedString(@"El seu caràcter", @"")
                                                                                          valueTransformer:nil
@@ -306,7 +353,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                      NSLocalizedString(@"[6]No ho he de dir jo", @""),
                                                                                      NSLocalizedString(@"[7]El físic no té importància", @""),
                                                                                      nil]];
-    
+
+    [self processSelectedValueForKeyPath:kBodyLookCandidateProfileField withKeyValuesInArray:bodyLookListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kBodyLookCandidateProfileField]) || (showEmptyFields))
         [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kBodyLookCandidateProfileField
                                                                                 title:NSLocalizedString(@"El seu aspecte", @"")
@@ -325,7 +374,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                        NSLocalizedString(@"[4]Alguns quilos de més", @""),
                                                                                        NSLocalizedString(@"[5]Rodona", @""),
                                                                                        nil]];
-    
+
+    [self processSelectedValueForKeyPath:kSilhouetteCandidateProfileField withKeyValuesInArray:silhouetteListOptions];
+
     IBAPickListFormField *silhouettePickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kSilhouetteCandidateProfileField
                                                                                             title:NSLocalizedString(@"La seva silueta", @"")
                                                                                  valueTransformer:nil
@@ -355,7 +406,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                       NSLocalizedString(@"[9]Els seus peus", @""),
                                                                                       NSLocalizedString(@"[10]El més bonic no està a la llista", @""),
                                                                                       nil]];
-    
+
+    [self processSelectedValueForKeyPath:kHighlightCandidateProfileField withKeyValuesInArray:highlightListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kHighlightCandidateProfileField]) || (showEmptyFields))
         [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHighlightCandidateProfileField
                                                                                 title:NSLocalizedString(@"El més atractiu d'ell/ella", @"")
@@ -383,7 +436,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
         }
     }
 
-/****************/
+
+
 
     IBAFormSection *situationFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"La seva situació personal", @"") footerTitle:nil];
     [situationFieldSection setFormFieldStyle:selectedStyle];
@@ -398,7 +452,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                           NSLocalizedString(@"[4]Divorciat/Divorciada", @""),
                                                                                           NSLocalizedString(@"[5]Vidu/Vidua", @""),
                                                                                           nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMaritalStatusCandidateProfileField withKeyValuesInArray:maritalStatusListOptions];
+
     IBAPickListFormField *maritalStatusPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kMaritalStatusCandidateProfileField
                                                                                                title:NSLocalizedString(@"El seu estat civil", @"")
                                                                                     valueTransformer:nil
@@ -422,7 +478,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                          NSLocalizedString(@"[6]Sí, 5", @""),
                                                                                          NSLocalizedString(@"[7]Sí, més de 5", @""),
                                                                                          nil]];
-    
+
+    [self processSelectedValueForKeyPath:kHasChildrensCandidateProfileField withKeyValuesInArray:hasChildrensListOptions];
+
     IBAPickListFormField *hasChildrensPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kHasChildrensCandidateProfileField
                                                                                               title:NSLocalizedString(@"Ell/ella te fills", @"")
                                                                                    valueTransformer:nil
@@ -443,7 +501,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                           NSLocalizedString(@"[5]En un pis compartit", @""),
                                                                                           NSLocalizedString(@"[6]Amb els seus fills part del temps", @""),
                                                                                           nil]];
-    
+
+    [self processSelectedValueForKeyPath:kWhereIsLivingCandidateProfileField withKeyValuesInArray:whereIsLivingListOptions];
+
     IBAPickListFormField *whereIsLivingPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kWhereIsLivingCandidateProfileField
                                                                                                title:NSLocalizedString(@"Ell/ella viu", @"")
                                                                                     valueTransformer:nil
@@ -477,9 +537,6 @@ static const int kUserProfileFormHeaderCellHeight = 48;
         }
     }
 
-
-
-/****************/
 
     
     IBAFormSection *valuesFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els seus valors", @"") footerTitle:nil];
@@ -689,7 +746,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                         NSLocalizedString(@"[195]Zambiana", @""),
                                                                                         NSLocalizedString(@"[196]Zimbabuense", @""),
                                                                                         nil]];
-    
+
+    [self processSelectedValueForKeyPath:kNationCandidateProfileField withKeyValuesInArray:citizenshipListOptions];
+
     IBAPickListFormField *nationPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kNationCandidateProfileField
                                                                                         title:NSLocalizedString(@"La seva nacionalitat", @"")
                                                                              valueTransformer:nil
@@ -713,7 +772,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                            NSLocalizedString(@"[7]Indi", @""),
                                                                                            NSLocalizedString(@"[6]Un altre", @""),
                                                                                            nil]];
-    
+
+    [self processSelectedValueForKeyPath:kEthnicalOriginCandidateProfileField withKeyValuesInArray:ethnicalOriginListOptions];
+
     IBAPickListFormField *ethnicalOrigiPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kEthnicalOriginCandidateProfileField
                                                                                                title:NSLocalizedString(@"El seu origen ètnic", @"")
                                                                                     valueTransformer:nil
@@ -740,7 +801,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                      NSLocalizedString(@"[19]Protestant", @""),
                                                                                      NSLocalizedString(@"[13]Un altre", @""),
                                                                                      nil]];
-    
+
+    [self processSelectedValueForKeyPath:kReligionCandidateProfileField withKeyValuesInArray:religionListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kReligionCandidateProfileField]) || (showEmptyFields))
         [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kReligionCandidateProfileField
                                                                                 title:NSLocalizedString(@"La seva religió", @"")
@@ -756,7 +819,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                           NSLocalizedString(@"[2]Practicant ocasional", @""),
                                                                                           NSLocalizedString(@"[3]No practicant", @""),
                                                                                           nil]];
-    
+
+    [self processSelectedValueForKeyPath:kReligionLevelCandidateProfileField withKeyValuesInArray:religionLevelListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kReligionLevelCandidateProfileField]) || (showEmptyFields))
         [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kReligionLevelCandidateProfileField
                                                                                 title:NSLocalizedString(@"Pràctica religiosa", @"")
@@ -774,7 +839,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                        NSLocalizedString(@"[5]Impensable", @""),
                                                                                        NSLocalizedString(@"[6]No em tornaran a enganyar", @""),
                                                                                        nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMarriageIsCandidateProfileField withKeyValuesInArray:marriageIsListOptions];
+
     IBAPickListFormField *marriageIsPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kMarriageIsCandidateProfileField
                                                                                             title:NSLocalizedString(@"Per ell/ella el matrimoni és", @"")
                                                                                  valueTransformer:nil
@@ -793,7 +860,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                        NSLocalizedString(@"[3]Poc romàntic", @""),
                                                                                        NSLocalizedString(@"[4]Gens romàntic", @""),
                                                                                        nil]];
-    
+
+    [self processSelectedValueForKeyPath:kIsRomanticCandidateProfileField withKeyValuesInArray:isRomanticListOptions];
+
     IBAPickListFormField *isRomanticPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kIsRomanticCandidateProfileField
                                                                                             title:NSLocalizedString(@"Ell/ella és romàntic", @"")
                                                                                  valueTransformer:nil
@@ -815,7 +884,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                           NSLocalizedString(@"[5]Sí, més de 3", @""),
                                                                                           NSLocalizedString(@"[6]Sí, nombre encara no decidit", @""),
                                                                                           nil]];
-    
+
+    [self processSelectedValueForKeyPath:kWantChildrensCandidateProfileField withKeyValuesInArray:wantChildrensListOptions];
+
     IBAPickListFormField *wantChildrensPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kWantChildrensCandidateProfileField
                                                                                                title:NSLocalizedString(@"Ell/ella vol tenir fills", @"")
                                                                                     valueTransformer:nil
@@ -845,8 +916,6 @@ static const int kUserProfileFormHeaderCellHeight = 48;
         }
     }
     
-    /****************/
-    
     
 
     IBAFormSection *professionalSituationFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"La seva situació professional", @"") footerTitle:nil];
@@ -862,7 +931,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                             NSLocalizedString(@"[5]Llicenciat o superior", @""),
                                                                                             NSLocalizedString(@"[6]Altres", @""),
                                                                                             nil]];
-    
+
+    [self processSelectedValueForKeyPath:kStudiesMinLevelCandidateProfileField withKeyValuesInArray:studiesMinLevelListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kStudiesMinLevelCandidateProfileField]) || (showEmptyFields))
         [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kStudiesMinLevelCandidateProfileField
                                                                                 title:NSLocalizedString(@"Mínim nivell d'estudis", @"")
@@ -881,7 +952,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                             NSLocalizedString(@"[5]Llicenciat o superior", @""),
                                                                                             NSLocalizedString(@"[6]Altres", @""),
                                                                                             nil]];
-    
+
+    [self processSelectedValueForKeyPath:kStudiesMaxLevelCandidateProfileField withKeyValuesInArray:studiesMaxLevelListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kStudiesMaxLevelCandidateProfileField]) || (showEmptyFields))
         [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kStudiesMaxLevelCandidateProfileField
                                                                                 title:NSLocalizedString(@"Màxim nivell d'estudis", @"")
@@ -960,7 +1033,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                       NSLocalizedString(@"[43]uzbeko", @""),
                                                                                       NSLocalizedString(@"[62]vietnamita", @""),
                                                                                       nil]];
-    
+
+    [self processSelectedValueForKeyPath:kLanguagesCandidateProfileField withKeyValuesInArray:languagesListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kLanguagesCandidateProfileField]) || (showEmptyFields))
         [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kLanguagesCandidateProfileField
                                                                                 title:NSLocalizedString(@"Idiomes que ell/ella parla", @"")
@@ -1037,7 +1112,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                      NSLocalizedString(@"[56]técnico", @""),
                                                                                      NSLocalizedString(@"[57]otros", @""),
                                                                                      nil]];
-    
+
+    [self processSelectedValueForKeyPath:kBusinessCandidateProfileField withKeyValuesInArray:businessListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kBusinessCandidateProfileField]) || (showEmptyFields))
         [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kBusinessCandidateProfileField
                                                                                 title:NSLocalizedString(@"La seva professió", @"")
@@ -1059,7 +1136,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                       NSLocalizedString(@"[6]De 75 a 100.000€/any", @""),
                                                                                       NSLocalizedString(@"[7]Més de 100.000€/any", @""),
                                                                                       nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMinSalaryCandidateProfileField withKeyValuesInArray:minSalaryListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMinSalaryCandidateProfileField]) || (showEmptyFields))
         [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMinSalaryCandidateProfileField
                                                                                 title:NSLocalizedString(@"Ingressos mínims", @"")
@@ -1078,7 +1157,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                       NSLocalizedString(@"[6]De 75 a 100.000€/any", @""),
                                                                                       NSLocalizedString(@"[7]Més de 100.000€/any", @""),
                                                                                       nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMaxSalaryCandidateProfileField withKeyValuesInArray:maxSalaryListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMaxSalaryCandidateProfileField]) || (showEmptyFields))
         [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMaxSalaryCandidateProfileField
                                                                                 title:NSLocalizedString(@"Ingressos màxims", @"")
@@ -1107,9 +1188,6 @@ static const int kUserProfileFormHeaderCellHeight = 48;
             numberOfFieldsInProfessionalSection = [[section formFields] count];
         }
     }
-    
-
-    /****************/
 
 
 
@@ -1130,7 +1208,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                     NSLocalizedString(@"[9]Rock", @""),
                                                                                     NSLocalizedString(@"[11]Altres", @""),
                                                                                     nil]];
-    
+
+    [self processSelectedValueForKeyPath:kStyleCandidateProfileField withKeyValuesInArray:myStyleListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kStyleCandidateProfileField]) || (showEmptyFields))
         [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kStyleCandidateProfileField
                                                                                 title:NSLocalizedString(@"El seu estil", @"")
@@ -1150,7 +1230,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                  NSLocalizedString(@"[3]Vegà", @""),
                                                                                  NSLocalizedString(@"[2]Vegetarià", @""),
                                                                                  nil]];
-    
+
+    [self processSelectedValueForKeyPath:kDietCandidateProfileField withKeyValuesInArray:dietListOptions];
+
     IBAPickListFormField *dietPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kDietCandidateProfileField
                                                                                       title:NSLocalizedString(@"La seva dieta", @"")
                                                                            valueTransformer:nil
@@ -1170,7 +1252,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                    NSLocalizedString(@"[1]Sí, ocasionalment", @""),
                                                                                    NSLocalizedString(@"[2]Sí, regularment", @""),
                                                                                    nil]];
-    
+
+    [self processSelectedValueForKeyPath:kSmokesCandidateProfileField withKeyValuesInArray:smokesListOptions];
+
     IBAPickListFormField *smokesPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kSmokesCandidateProfileField
                                                                                         title:NSLocalizedString(@"Ell/ella fuma", @"")
                                                                              valueTransformer:nil
@@ -1197,7 +1281,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                     NSLocalizedString(@"[11]Altre animal", @""),
                                                                                     NSLocalizedString(@"[12]No te animals", @""),
                                                                                     nil]];
-    
+
+    [self processSelectedValueForKeyPath:kAnimalsCandidateProfileField withKeyValuesInArray:animalsListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kAnimalsCandidateProfileField]) || (showEmptyFields))
         [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kAnimalsCandidateProfileField
                                                                                 title:NSLocalizedString(@"Els seus animals", @"")
@@ -1224,9 +1310,6 @@ static const int kUserProfileFormHeaderCellHeight = 48;
             numberOfFieldsInLifestyleSection = [[section formFields] count];
         }
     }
-    
-    
-    /****************/
 
     
     
@@ -1270,7 +1353,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                       NSLocalizedString(@"[18]videojuegos", @""),
                                                                                       NSLocalizedString(@"[23]Altres", @""),
                                                                                       nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMyHobbiesCandidateProfileField withKeyValuesInArray:myHobbiesListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMyHobbiesCandidateProfileField]) || (showEmptyFields))
         [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyHobbiesCandidateProfileField
                                                                                 title:NSLocalizedString(@"Les seves aficions", @"")
@@ -1325,7 +1410,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                      NSLocalizedString(@"[27]volley-ball", @""),
                                                                                      NSLocalizedString(@"[28]Altres", @""),
                                                                                      nil]];
-    
+
+    [self processSelectedValueForKeyPath:kSportsCandidateProfileField withKeyValuesInArray:mySportsListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kSportsCandidateProfileField]) || (showEmptyFields))
         [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kSportsCandidateProfileField
                                                                                 title:NSLocalizedString(@"Els seus esports", @"")
@@ -1355,7 +1442,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                         NSLocalizedString(@"[15]leer", @""),
                                                                                         NSLocalizedString(@"[12]Altres", @""),
                                                                                         nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMySparetimeCandidateProfileField withKeyValuesInArray:mySparetimeListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMySparetimeCandidateProfileField]) || (showEmptyFields))
         [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMySparetimeCandidateProfileField
                                                                                 title:NSLocalizedString(@"Les seves sortides", @"")
@@ -1382,10 +1471,6 @@ static const int kUserProfileFormHeaderCellHeight = 48;
             numberOfFieldsInInterestsSection = [[section formFields] count];
         }
     }
-    
-    
-    /****************/
-    
     
     
     IBAFormSection *preferencesFieldSection = [self addSectionWithHeaderTitle:NSLocalizedString(@"Els seus gustos culturals", @"") footerTitle:nil];
@@ -1421,7 +1506,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                   NSLocalizedString(@"[10]world music", @""),
                                                                                   NSLocalizedString(@"[17]Altres", @""),
                                                                                   nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMusicCandidateProfileField withKeyValuesInArray:musicListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMusicCandidateProfileField]) || (showEmptyFields))
         [preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMusicCandidateProfileField
                                                                                 title:NSLocalizedString(@"Els gustos musicals", @"")
@@ -1457,7 +1544,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                    NSLocalizedString(@"[20]manga", @""),
                                                                                    NSLocalizedString(@"[19]Altres", @""),
                                                                                    nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMoviesCandidateProfileField withKeyValuesInArray:moviesListOptions];
+
     if(([self userSelectedIdentifierForKeyPath:kMoviesCandidateProfileField]) || (showEmptyFields))
         [preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMoviesCandidateProfileField
                                                                                 title:NSLocalizedString(@"Pel·lícules preferides", @"")
@@ -1514,6 +1603,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
 
 		NSArray *heightListOptions = [IBAPickListFormOption pickListOptionsForStrings:heightArray];
 
+        [self processSelectedValueForKeyPath:kHeightUserProfileField withKeyValuesInArray:heightListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kHeightUserProfileField]) || (showEmptyFields))
             [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHeightUserProfileField
                                                                                     title:NSLocalizedString(@"Alçada", @"")
@@ -1528,6 +1619,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
             [weightArray addObject:[NSString stringWithFormat:@"[%d]%d kg", h, h]];
 
 		NSArray *weightListOptions = [IBAPickListFormOption pickListOptionsForStrings:weightArray];
+
+        [self processSelectedValueForKeyPath:kWeightUserProfileField withKeyValuesInArray:weightListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kWeightUserProfileField]) || (showEmptyFields))
             [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kWeightUserProfileField
@@ -1545,6 +1638,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                          NSLocalizedString(@"[7]Pèl-roig", @""),
                                                                                          NSLocalizedString(@"[2]Ros", @""),
                                                                                          nil]];
+
+        [self processSelectedValueForKeyPath:kHairColorUserProfileField withKeyValuesInArray:hairColorListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kHairColorUserProfileField]) || (showEmptyFields))
             [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHairColorUserProfileField
@@ -1564,6 +1659,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                           NSLocalizedString(@"[7]Sense pèl", @""),
                                                                                           nil]];
 
+        [self processSelectedValueForKeyPath:kHairSizeUserProfileField withKeyValuesInArray:hairSizeListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kHairSizeUserProfileField]) || (showEmptyFields))
             [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHairSizeUserProfileField
                                                                                     title:NSLocalizedString(@"Llargada del cabell", @"")
@@ -1581,7 +1678,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
 																					 NSLocalizedString(@"[6]Negres", @""),
 																					 NSLocalizedString(@"[5]Verds", @""),
 																					 nil]];
-    
+
+    [self processSelectedValueForKeyPath:kEyeColorUserProfileField withKeyValuesInArray:eyeColorListOptions];
+
     IBAPickListFormField *eyeColorPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kEyeColorUserProfileField
                                                                                           title:NSLocalizedString(@"Color d'ulls", @"")
                                                                                valueTransformer:nil
@@ -1619,7 +1718,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                                NSLocalizedString(@"[5]Viva", @""),
                                                                                                NSLocalizedString(@"[26]Altre", @""),
                                                                                                nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMainCharacteristicUserProfileField withKeyValuesInArray:mainCharacteristicListOptions];
+
     IBAPickListFormField *mainCharacteristicPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kMainCharacteristicUserProfileField
                                                                                                     title:NSLocalizedString(@"El meu caràcter", @"")
                                                                                          valueTransformer:nil
@@ -1642,6 +1743,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                          NSLocalizedString(@"[7]El físic no té importància", @""),
                                                                                          nil]];
 
+    [self processSelectedValueForKeyPath:kBodyLookUserProfileField withKeyValuesInArray:bodyLookListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kBodyLookUserProfileField]) || (showEmptyFields))
             [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kBodyLookUserProfileField
                                                                                     title:NSLocalizedString(@"El meu aspecte", @"")
@@ -1658,7 +1761,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                        NSLocalizedString(@"[4]Alguns quilos de més", @""),
                                                                                        NSLocalizedString(@"[5]Rodona", @""),
                                                                                        nil]];
-    
+
+    [self processSelectedValueForKeyPath:kSilhouetteUserProfileField withKeyValuesInArray:silhouetteListOptions];
+
     IBAPickListFormField *silhouettePickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kSilhouetteUserProfileField
                                                                                             title:NSLocalizedString(@"La meva silueta", @"")
                                                                                  valueTransformer:nil
@@ -1688,6 +1793,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                          NSLocalizedString(@"[9]Els meus peus", @""),
                                                                                          NSLocalizedString(@"[10]El més bonic no està a la llista", @""),
                                                                                          nil]];
+
+        [self processSelectedValueForKeyPath:kMyHighlightUserProfileField withKeyValuesInArray:myHighlightListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kMyHighlightUserProfileField]) || (showEmptyFields))
             [basicFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyHighlightUserProfileField
@@ -1729,7 +1836,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                           NSLocalizedString(@"[4]Divorciat/Divorciada", @""),
                                                                                           NSLocalizedString(@"[5]Vidu/Vidua", @""),
                                                                                           nil]];
-    
+
+    [self processSelectedValueForKeyPath:kMaritalStatusUserProfileField withKeyValuesInArray:maritalStatusListOptions];
+
     IBAPickListFormField *maritalStatusPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kMaritalStatusUserProfileField
                                                                                                title:NSLocalizedString(@"El meu estat civil", @"")
                                                                                     valueTransformer:nil
@@ -1753,7 +1862,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                          NSLocalizedString(@"[6]Sí, 5", @""),
                                                                                          NSLocalizedString(@"[7]Sí, més de 5", @""),
                                                                                          nil]];
-    
+
+    [self processSelectedValueForKeyPath:kHasChildrensUserProfileField withKeyValuesInArray:hasChildrensListOptions];
+
     IBAPickListFormField *hasChildrensPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kHasChildrensUserProfileField
                                                                                               title:NSLocalizedString(@"Tinc fills", @"")
                                                                                    valueTransformer:nil
@@ -1774,7 +1885,9 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                           NSLocalizedString(@"[5]En un pis compartit", @""),
                                                                                           NSLocalizedString(@"[6]Amb els seus fills part del temps", @""),
                                                                                           nil]];
-    
+
+    [self processSelectedValueForKeyPath:kWhereIsLivingUserProfileField withKeyValuesInArray:whereIsLivingListOptions];
+
     IBAPickListFormField *whereIsLivingPickFormField = [[IBAPickListFormField alloc] initWithKeyPath:kWhereIsLivingUserProfileField
                                                                                                title:NSLocalizedString(@"Visc", @"")
                                                                                     valueTransformer:nil
@@ -2014,6 +2127,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                                  NSLocalizedString(@"[196]Zimbabuense", @""),
                                                                                                  nil]];
 
+        [self processSelectedValueForKeyPath:kNationUserProfileField withKeyValuesInArray:citizenshipListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kNationUserProfileField]) || (showEmptyFields))
             [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kNationUserProfileField
                                                                                      title:NSLocalizedString(@"La meva nacionalitat", @"")
@@ -2032,6 +2147,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                             NSLocalizedString(@"[7]Indi", @""),
                                                                                             NSLocalizedString(@"[6]Un altre", @""),
                                                                                             nil]];
+
+        [self processSelectedValueForKeyPath:kEthnicalOriginUserProfileField withKeyValuesInArray:ethnicalOriginListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kEthnicalOriginUserProfileField]) || (showEmptyFields))
             [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kEthnicalOriginUserProfileField
@@ -2056,6 +2173,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                                NSLocalizedString(@"[13]Un altre", @""),
                                                                                                nil]];
 
+        [self processSelectedValueForKeyPath:kReligionUserProfileField withKeyValuesInArray:religionListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kReligionUserProfileField]) || (showEmptyFields))
             [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kReligionUserProfileField
                                                                                      title:NSLocalizedString(@"La meva religió", @"")
@@ -2071,6 +2190,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                          NSLocalizedString(@"[2]Practicant ocasional", @""),
                                                                                          NSLocalizedString(@"[3]No practicant", @""),
                                                                                          nil]];
+
+        [self processSelectedValueForKeyPath:kReligionLevelUserProfileField withKeyValuesInArray:religionLevelListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kReligionLevelUserProfileField]) || (showEmptyFields))
             [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kReligionLevelUserProfileField
@@ -2090,6 +2211,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                               NSLocalizedString(@"[6]No em tornaré a casar", @""),
                                                                                               nil]];
 
+        [self processSelectedValueForKeyPath:kMarriageOpinionUserProfileField withKeyValuesInArray:marriageOpinionListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kMarriageOpinionUserProfileField]) || (showEmptyFields))
             [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMarriageOpinionUserProfileField
                                                                                      title:NSLocalizedString(@"Per mi, el matrimoni és", @"")
@@ -2105,6 +2228,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                                 NSLocalizedString(@"[3]Poc romàntic", @""),
                                                                                                 NSLocalizedString(@"[4]Gens romàntic", @""),
                                                                                                 nil]];
+
+        [self processSelectedValueForKeyPath:kRomanticismLevelUserProfileField withKeyValuesInArray:romanticismLevelListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kRomanticismLevelUserProfileField]) || (showEmptyFields))
             [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kRomanticismLevelUserProfileField
@@ -2124,6 +2249,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                                  NSLocalizedString(@"[5]Sí, més de 3", @""),
                                                                                                  NSLocalizedString(@"[6]Sí, número no decidit", @""),
                                                                                                  nil]];
+
+        [self processSelectedValueForKeyPath:kIWantChildrensUserProfileField withKeyValuesInArray:iWantChildrensListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kIWantChildrensUserProfileField]) || (showEmptyFields))
             [valuesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kIWantChildrensUserProfileField
@@ -2162,6 +2289,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                                NSLocalizedString(@"[5]Llicenciat o superior", @""),
                                                                                                NSLocalizedString(@"[6]Altres", @""),
                                                                                                nil]];
+
+        [self processSelectedValueForKeyPath:kStudiesLevelUserProfileField withKeyValuesInArray:studiesLevelListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kStudiesLevelUserProfileField]) || (showEmptyFields))
             [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kStudiesLevelUserProfileField
@@ -2237,6 +2366,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                           NSLocalizedString(@"[43]uzbeko", @""),
                                                                                           NSLocalizedString(@"[62]vietnamita", @""),
                                                                                           nil]];
+
+        [self processSelectedValueForKeyPath:kLanguagesUserProfileField withKeyValuesInArray:languagesListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kLanguagesUserProfileField]) || (showEmptyFields))
             [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kLanguagesUserProfileField
@@ -2315,6 +2446,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                            NSLocalizedString(@"[57]otros", @""),
                                                                                              nil]];
 
+        [self processSelectedValueForKeyPath:kMyBusinessUserProfileField withKeyValuesInArray:myBusinessListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kMyBusinessUserProfileField]) || (showEmptyFields))
             [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyBusinessUserProfileField
                                                                                                     title:NSLocalizedString(@"La meva professió", @"")
@@ -2333,6 +2466,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                              NSLocalizedString(@"[6]De 75 a 100.000€/any", @""),
                                                                                              NSLocalizedString(@"[7]Més de 100.000€/any", @""),
                                                                                              nil]];
+
+        [self processSelectedValueForKeyPath:kSalaryUserProfileField withKeyValuesInArray:salaryListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kSalaryUserProfileField]) || (showEmptyFields))
             [professionalSituationFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kSalaryUserProfileField
@@ -2376,6 +2511,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                              NSLocalizedString(@"[11]Altres", @""),
                                                                                              nil]];
 
+        [self processSelectedValueForKeyPath:kMyStyleUserProfileField withKeyValuesInArray:myStyleListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kMyStyleUserProfileField]) || (showEmptyFields))
             [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyStyleUserProfileField
                                                                                                     title:NSLocalizedString(@"El meu estil", @"")
@@ -2394,6 +2531,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                         NSLocalizedString(@"[2]Vegetarià", @""),
                                                                                         nil]];
 
+        [self processSelectedValueForKeyPath:kAlimentUserProfileField withKeyValuesInArray:alimentListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kAlimentUserProfileField]) || (showEmptyFields))
             [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kAlimentUserProfileField
                                                                                         title:NSLocalizedString(@"La meva alimentació", @"")
@@ -2410,6 +2549,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                         NSLocalizedString(@"[1]Sí, ocasionalment", @""),
                                                                                         NSLocalizedString(@"[2]Sí, regularment", @""),
                                                                                         nil]];
+
+        [self processSelectedValueForKeyPath:kSmokeUserProfileField withKeyValuesInArray:smokeListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kSmokeUserProfileField]) || (showEmptyFields))
             [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kSmokeUserProfileField
@@ -2434,6 +2575,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                       NSLocalizedString(@"[11]Altre animal", @""),
                                                                                       NSLocalizedString(@"[12]No tinc animals", @""),
                                                                                       nil]];
+
+        [self processSelectedValueForKeyPath:kAnimalsUserProfileField withKeyValuesInArray:animalsListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kAnimalsUserProfileField]) || (showEmptyFields))
             [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kAnimalsUserProfileField
@@ -2498,6 +2641,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                           NSLocalizedString(@"[23]Altres", @""),
                                                                                           nil]];
 
+        [self processSelectedValueForKeyPath:kMyHobbiesUserProfileField withKeyValuesInArray:myHobbiesListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kMyHobbiesUserProfileField]) || (showEmptyFields))
             [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyHobbiesUserProfileField
                                                                                         title:NSLocalizedString(@"Les meves aficions", @"")
@@ -2552,6 +2697,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                          NSLocalizedString(@"[28]Altres", @""),
                                                                                          nil]];
 
+        [self processSelectedValueForKeyPath:kMySportsUserProfileField withKeyValuesInArray:mySportsListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kMySportsUserProfileField]) || (showEmptyFields))
             [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMySportsUserProfileField
                                                                                         title:NSLocalizedString(@"Els meus esports", @"")
@@ -2579,6 +2726,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                             NSLocalizedString(@"[15]leer", @""),
                                                                                             NSLocalizedString(@"[12]Altres", @""),
                                                                                             nil]];
+
+        [self processSelectedValueForKeyPath:kMySparetimeUserProfileField withKeyValuesInArray:mySparetimeListOptions];
 
         if(([self userSelectedIdentifierForKeyPath:kMySparetimeUserProfileField]) || (showEmptyFields))
             [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMySparetimeUserProfileField
@@ -2638,6 +2787,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                       NSLocalizedString(@"[17]Altres", @""),
                                                                                             nil]];
 
+        [self processSelectedValueForKeyPath:kMusicUserProfileField withKeyValuesInArray:musicListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kMusicUserProfileField]) || (showEmptyFields))
             [preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMusicUserProfileField
                                                                                           title:NSLocalizedString(@"Gustos musicals", @"")
@@ -2672,13 +2823,14 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                        NSLocalizedString(@"[19]Altres", @""),
                                                                                        nil]];
 
+        [self processSelectedValueForKeyPath:kMoviesUserProfileField withKeyValuesInArray:moviesListOptions];
+
         if(([self userSelectedIdentifierForKeyPath:kMoviesUserProfileField]) || (showEmptyFields))
             [preferencesFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMoviesUserProfileField
                                                                                           title:NSLocalizedString(@"Pel·lícules preferides", @"")
                                                                                valueTransformer:nil
                                                                                   selectionMode:IBAPickListSelectionModeMultiple
                                                                                         options:moviesListOptions
-
                                                                                      isReadOnly:isReadOnly]];
     
         //Remove section if is empty

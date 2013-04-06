@@ -124,5 +124,6 @@ typedef enum UserProfileFormType
 - (void)setReadOnly:(bool)readOnly;
 - (int)userSelectedIdentifierForKeyPath:(NSString *)keyPath;
 - (int)getFormHeightToIndex:(NSIndexPath *)indexPath withCellHeight:(float)fieldCellHeight;
+- (void)processSelectedValueForKeyPath:(NSString *)formKey withKeyValuesInArray:(NSArray *)listOptions;
 
 @end

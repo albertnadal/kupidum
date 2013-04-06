@@ -21,6 +21,7 @@
 
         db = [FMDatabase databaseWithPath:dbPath];
 
+#warning Disable the following log traces
         db.logsErrors = YES;
         db.traceExecution = YES;
 
