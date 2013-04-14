@@ -72,8 +72,10 @@
     [db executeUpdate:@"create table message (from_username text, to_username text, subject text, message text, read bool, date_message date)"];
 
     // User profile
-    [db executeUpdate:@"create table user_profile (username text primary key, eye_color_id int, body_height int, body_weight int, hair_color_id int, hair_size_id int, body_look_id int, body_highlight_id int, citizenship_id int, ethnic_id int, religion_id int, religious_practice_id int, marriage_opinion_id int, romanticism_level_id int, want_children_id int, study_level_id int, profession_id int, salary_id int, style_id int, alimentation_id int, smoke_level_id int, animal_id int)"];
+    [db executeUpdate:@"create table user_profile (username text primary key, face_front_image_url text, face_front_image blob, face_profile_image_url text, face_profile_image blob, body_image_url text, body_image blob, height int, weight int, hair_color_id int, hair_size_id int, eye_color_id int, personality_id int, appearance_id int, silhouette_id int, body_highlight_id int, marital_status_id int, has_childrens_id int, live_with_id int, citizenship_id int, ethnical_origin_id int, religion_id int, religion_level_id int, marriage_opinion_id int, romanticism_id int, want_childrens_id int, studies_id int, languages_id text, profession_id int, salary_id int, style_id int, diet_id int, smoke_id int, animals_id text, hobbies_id text, sports_id text, sparetime_id text, music_id text, movies_id text)"];
 
+
+/*
 //    [db executeUpdate:@"create table movie (movie_id int primary key, name text)"];
     [db executeUpdate:@"create table user_movie (user_movie_id int primary key, username text, movie_id int)"];
 
@@ -91,7 +93,7 @@
 
 //    [db executeUpdate:@"create table language (language_id int primary key, name text)"];
     [db executeUpdate:@"create table user_language (user_language_id int primary key, username text, language_id int)"];
-
+*/
     [db commit];
 }
 

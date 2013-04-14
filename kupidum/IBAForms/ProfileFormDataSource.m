@@ -1699,7 +1699,7 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                                NSLocalizedString(@"[7]Aventurera", @""),
                                                                                                NSLocalizedString(@"[21]Benhumorada", @""),
                                                                                                NSLocalizedString(@"[15]Despreocupada", @""),
-                                                                                               NSLocalizedString(@"[15]Espontania", @""),
+                                                                                               NSLocalizedString(@"[11]Espontania", @""),
                                                                                                NSLocalizedString(@"[10]Generosa", @""),
                                                                                                NSLocalizedString(@"[3]Inquieta", @""),
                                                                                                NSLocalizedString(@"[2]Reservada", @""),
@@ -2582,7 +2582,7 @@ static const int kUserProfileFormHeaderCellHeight = 48;
             [lifestyleFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kAnimalsUserProfileField
                                                                                         title:NSLocalizedString(@"Els meus animals", @"")
                                                                              valueTransformer:nil
-                                                                                selectionMode:IBAPickListSelectionModeSingle
+                                                                                selectionMode:IBAPickListSelectionModeMultiple
                                                                                       options:animalsListOptions
                                                                                    isReadOnly:isReadOnly]];
 

@@ -37,13 +37,15 @@
 - (void)updateTakePhotoButtonsVisibility;
 - (void)loadTableView;
 - (UIImage *)cropSilouettePicture:(UIImage *)image;
-- (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_;
+- (NSMutableDictionary *)retrieveUserProfileModelFromUserProfile:(KPDUserProfile *)user_profile;
+- (void)assignDefaultObject:(id)object toModel:(NSMutableDictionary *)model forKey:(NSString *)key;
+- (NSArray *)pickListFormOptionWithObject:(id)object;
 
 @end
 
 @implementation UserProfileViewController
 
-@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments, formTypeSelector, selectedForm;
+@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments, formTypeSelector, selectedForm, userProfile;
 
 const float basicInformationPanelHeight = 435.0;
 const float buttonsPanelHeight = 120.0f;
@@ -66,15 +68,40 @@ const float bottomMarginHeight = 20.0;
     return self;
 }
 
+- (id)initWithUsername:(NSString *)username_
+{
+    if(self = [super initWithNibName:@"UserProfileViewController" bundle:nil])
+    {
+        username = username_;
+        userProfile = [[KPDUserProfile alloc] initWithUsername:username_];
+        imgDesiredPictureProfile = nil;
+        formTableView = nil;
+
+        NSMutableDictionary *model = [self retrieveUserProfileModelFromUserProfile:userProfile];
+        profileIsEditable = true; //This must be set after load user profile from DB or web service //!isReadOnly;
+        editMode = false;
+        selectedForm = kUserProfileFormMyDescription;
+
+        bool showEmptyFields = NO;
+        ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
+        self.formDataSource = profileFormDataSource;
+
+        containerButtonsHeight = profileIsEditable ? 0.0f : buttonsPanelHeight;
+    }
+
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withUsername:(NSString *)username_
 {
     if(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
         username = username_;
+        userProfile = [[KPDUserProfile alloc] initWithUsername:username_];
         imgDesiredPictureProfile = nil;
         formTableView = nil;
 
-        NSMutableDictionary *model = [self retrieveUserProfileModelForUser:username];
+        NSMutableDictionary *model = [self retrieveUserProfileModelFromUserProfile:userProfile];
         profileIsEditable = true; //This must be set after load user profile from DB or web service //!isReadOnly;
         editMode = false;
         selectedForm = kUserProfileFormMyDescription;
@@ -103,76 +130,61 @@ const float bottomMarginHeight = 20.0;
     [self reloadFormTableView];
 }
 
-- (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_
+- (void)assignDefaultObject:(id)object toModel:(NSMutableDictionary *)model forKey:(NSString *)key
+{
+    if(object)
+        [model setObject:[self pickListFormOptionWithObject:object] forKey:key];
+}
+
+- (NSArray *)pickListFormOptionWithObject:(id)object
+{
+    if([object isKindOfClass:[NSSet class]])
+    {
+        return [IBAPickListFormOption pickListOptionsForStrings:object];
+    }
+    else
+    {
+        return [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:object]];
+    }
+}
+
+- (NSMutableDictionary *)retrieveUserProfileModelFromUserProfile:(KPDUserProfile *)user_profile
 {
 	NSMutableDictionary *model = [[NSMutableDictionary alloc] init];
 
     // User description
-    NSArray *selectedEyeColorListOption = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:6]]];
-    NSArray *heightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:180]]];
-    NSArray *weightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:85]]];
-    NSArray *hairColorListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:3]]];
-    NSArray *hairSizeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:3]]];
-    NSArray *mainCharacteristicSizeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:16]]];
-    NSArray *bodyLookListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:3]]];
-    NSArray *silhouetteListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:5]]];
-    NSArray *maritalStatusListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:1]]];
-    NSArray *hasChildrensListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:1]]];
-    NSArray *whereIsLivingListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:1]]];
-    NSArray *myHighlightListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:1]]];
-    NSArray *citizenshipListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:56]]];
-    NSArray *ethnicalOriginListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:1]]];
-    NSArray *religionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:25]]];
-    NSArray *religionLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:2]]];
-    NSArray *marriageOpinionListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:5]]];
-    NSArray *romanticismLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:2]]];
-    NSArray *iWantChildrensListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:3]]];
-    NSArray *studiesLevelListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:5]]];
-    NSArray *languagesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObjects:[NSNumber numberWithInt:13], [NSNumber numberWithInt:19], nil]];
-    NSArray *myBusinessListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:37]]];
-    NSArray *salaryListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:4]]];
-    NSArray *myStyleListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:9]]];
-    NSArray *alimentListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:1]]];
-    NSArray *smokeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:1]]];
-    NSArray *animalsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:2]]];
-    NSArray *myHobbiesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:20]]];
-    NSArray *mySportsListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:9]]];
-    NSArray *mySparetimeListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:1]]];
-    NSArray *musicListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:11]]];
-    NSArray *moviesListOptions = [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:[NSNumber numberWithInt:11]]];
-
-	[model setObject:selectedEyeColorListOption forKey:kEyeColorUserProfileField];
-    [model setObject:heightListOptions forKey:kHeightUserProfileField];
-	[model setObject:weightListOptions forKey:kWeightUserProfileField];
-	[model setObject:hairColorListOptions forKey:kHairColorUserProfileField];
-	[model setObject:hairSizeListOptions forKey:kHairSizeUserProfileField];
-	[model setObject:mainCharacteristicSizeListOptions forKey:kMainCharacteristicUserProfileField];
-	[model setObject:bodyLookListOptions forKey:kBodyLookUserProfileField];
-	[model setObject:silhouetteListOptions forKey:kSilhouetteUserProfileField];
-	[model setObject:maritalStatusListOptions forKey:kMaritalStatusUserProfileField];
-	[model setObject:hasChildrensListOptions forKey:kHasChildrensUserProfileField];
-	[model setObject:whereIsLivingListOptions forKey:kWhereIsLivingUserProfileField];
-	[model setObject:myHighlightListOptions forKey:kMyHighlightUserProfileField];
-	[model setObject:citizenshipListOptions forKey:kNationUserProfileField];
-	[model setObject:ethnicalOriginListOptions forKey:kEthnicalOriginUserProfileField];
-	[model setObject:religionListOptions forKey:kReligionUserProfileField];
-	[model setObject:religionLevelListOptions forKey:kReligionLevelUserProfileField];
-	[model setObject:marriageOpinionListOptions forKey:kMarriageOpinionUserProfileField];
-	[model setObject:romanticismLevelListOptions forKey:kRomanticismLevelUserProfileField];
-	[model setObject:iWantChildrensListOptions forKey:kIWantChildrensUserProfileField];
-	[model setObject:studiesLevelListOptions forKey:kStudiesLevelUserProfileField];
-	[model setObject:languagesListOptions forKey:kLanguagesUserProfileField];
-	[model setObject:myBusinessListOptions forKey:kMyBusinessUserProfileField];
-	[model setObject:salaryListOptions forKey:kSalaryUserProfileField];
-	[model setObject:myStyleListOptions forKey:kMyStyleUserProfileField];
-	[model setObject:alimentListOptions forKey:kAlimentUserProfileField];
-	[model setObject:smokeListOptions forKey:kSmokeUserProfileField];
-	[model setObject:animalsListOptions forKey:kAnimalsUserProfileField];
-	[model setObject:myHobbiesListOptions forKey:kMyHobbiesUserProfileField];
-	[model setObject:mySportsListOptions forKey:kMySportsUserProfileField];
-	[model setObject:mySparetimeListOptions forKey:kMySparetimeUserProfileField];
-	[model setObject:musicListOptions forKey:kMusicUserProfileField];
-	[model setObject:moviesListOptions forKey:kMoviesUserProfileField];
+    [self assignDefaultObject:user_profile.eyeColorId toModel:model forKey:kEyeColorUserProfileField];
+    [self assignDefaultObject:user_profile.height toModel:model forKey:kHeightUserProfileField];
+    [self assignDefaultObject:user_profile.weight toModel:model forKey:kWeightUserProfileField];
+    [self assignDefaultObject:user_profile.hairColorId toModel:model forKey:kHairColorUserProfileField];
+    [self assignDefaultObject:user_profile.hairSizeId toModel:model forKey:kHairSizeUserProfileField];
+    [self assignDefaultObject:user_profile.personalityId toModel:model forKey:kMainCharacteristicUserProfileField];
+    [self assignDefaultObject:user_profile.appearanceId toModel:model forKey:kBodyLookUserProfileField];
+    [self assignDefaultObject:user_profile.silhouetteId toModel:model forKey:kSilhouetteUserProfileField];
+    [self assignDefaultObject:user_profile.maritalStatusId toModel:model forKey:kMaritalStatusUserProfileField];
+    [self assignDefaultObject:user_profile.hasChildrensId toModel:model forKey:kHasChildrensUserProfileField];
+    [self assignDefaultObject:user_profile.liveWithId toModel:model forKey:kWhereIsLivingUserProfileField];
+    [self assignDefaultObject:user_profile.bodyHighlightId toModel:model forKey:kMyHighlightUserProfileField];
+    [self assignDefaultObject:user_profile.citizenshipId toModel:model forKey:kNationUserProfileField];
+    [self assignDefaultObject:user_profile.ethnicalOriginId toModel:model forKey:kEthnicalOriginUserProfileField];
+    [self assignDefaultObject:user_profile.religionId toModel:model forKey:kReligionUserProfileField];
+    [self assignDefaultObject:user_profile.religionLevelId toModel:model forKey:kReligionLevelUserProfileField];
+    [self assignDefaultObject:user_profile.marriageOpinionId toModel:model forKey:kMarriageOpinionUserProfileField];
+    [self assignDefaultObject:user_profile.romanticismId toModel:model forKey:kRomanticismLevelUserProfileField];
+    [self assignDefaultObject:user_profile.wantChildrensId toModel:model forKey:kIWantChildrensUserProfileField];
+    [self assignDefaultObject:user_profile.studiesId toModel:model forKey:kStudiesLevelUserProfileField];
+    [self assignDefaultObject:user_profile.languagesId toModel:model forKey:kLanguagesUserProfileField];
+    [self assignDefaultObject:user_profile.professionId toModel:model forKey:kMyBusinessUserProfileField];
+    [self assignDefaultObject:user_profile.salaryId toModel:model forKey:kSalaryUserProfileField];
+    [self assignDefaultObject:user_profile.styleId toModel:model forKey:kMyStyleUserProfileField];
+    [self assignDefaultObject:user_profile.dietId toModel:model forKey:kAlimentUserProfileField];
+    [self assignDefaultObject:user_profile.smokeId toModel:model forKey:kSmokeUserProfileField];
+    [self assignDefaultObject:user_profile.animalsId toModel:model forKey:kAnimalsUserProfileField];
+    [self assignDefaultObject:user_profile.hobbiesId toModel:model forKey:kMyHobbiesUserProfileField];
+    [self assignDefaultObject:user_profile.sportsId toModel:model forKey:kMySportsUserProfileField];
+    [self assignDefaultObject:user_profile.sparetimeId toModel:model forKey:kMySparetimeUserProfileField];
+    [self assignDefaultObject:user_profile.musicId toModel:model forKey:kMusicUserProfileField];
+    [self assignDefaultObject:user_profile.moviesId toModel:model forKey:kMoviesUserProfileField];
 
 
     // User candidate preferences

@@ -170,7 +170,7 @@
 - (IBAction)showUserProfile:(id)sender
 {
     NSString *username = @"albert";
-    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil withUsername:username];
+    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithUsername:username];
     [self.navigationController pushViewController:upvc animated:YES];
 }
 

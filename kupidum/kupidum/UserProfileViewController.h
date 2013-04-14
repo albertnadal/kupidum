@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ProfileFormDataSource.h"
+#import "KPDUserProfile.h"
 #import <IBAForms/IBAFormViewController.h>
 #import <IBAforms/IBAFormConstants.h>
 
@@ -33,6 +34,7 @@ typedef enum {
     IBOutlet UISegmentedControl *formTypeSelector;
     KPDUserProfilePhoto photoTypeSelected;
     UserProfileFormType selectedForm;
+    KPDUserProfile *userProfile;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
@@ -48,7 +50,9 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UIView *containerSegments;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *formTypeSelector;
 @property (atomic) UserProfileFormType selectedForm;
+@property (strong, nonatomic) KPDUserProfile *userProfile;
 
+- (id)initWithUsername:(NSString *)username_;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withUsername:(NSString *)username_;
 - (IBAction)showMenuSelectPhotoOrTakePhoto:(id)sender;
 - (IBAction)changeUserProfileForm:(id)sender;
