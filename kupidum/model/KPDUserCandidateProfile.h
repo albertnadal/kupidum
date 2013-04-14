@@ -1,31 +1,19 @@
 //
-//  KPDUserProfile.h
+//  KPDUserCandidateProfile.h
 //  kupidum
 //
-//  Created by Albert Nadal Garriga on 21/02/13.
+//  Created by Albert Nadal Garriga on 15/04/13.
 //  Copyright (c) 2013 laFruitera.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "KPDUserCandidateProfile.h"
 
-@interface KPDUserProfile : NSObject
+@interface KPDUserCandidateProfile : NSObject
 {
     // Username
     NSString *username;
 
-    // Candidate profile
-    KPDUserCandidateProfile *candidateProfile;
-
-    // Pictures
-    NSString *faceFrontImageURL;
-    UIImage *faceFrontImage;
-    NSString *faceProfileImageURL;
-    UIImage *faceProfileImage;
-    NSString *bodyImageURL;
-    UIImage *bodyImage;
-
-    // *** Profile ***
+    // *** Candidate profile ***
     // My physical appearance
     NSNumber *height;
     NSNumber *weight;
@@ -74,13 +62,6 @@
 }
 
 @property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) KPDUserCandidateProfile *candidateProfile;
-@property (nonatomic, retain) NSString *faceFrontImageURL;
-@property (nonatomic, retain) UIImage *faceFrontImage;
-@property (nonatomic, retain) NSString *faceProfileImageURL;
-@property (nonatomic, retain) UIImage *faceProfileImage;
-@property (nonatomic, retain) NSString *bodyImageURL;
-@property (nonatomic, retain) UIImage *bodyImage;
 @property (nonatomic, retain) NSNumber *height;
 @property (nonatomic, retain) NSNumber *weight;
 @property (nonatomic, retain) NSNumber *hairColorId;

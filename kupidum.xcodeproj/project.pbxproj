@@ -271,6 +271,7 @@
 		FFC5B12A16DE696300CFD587 /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFC5B12816DE696300CFD587 /* MessageDetailViewController.m */; };
 		FFC5B12B16DE696300CFD587 /* MessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFC5B12916DE696300CFD587 /* MessageDetailViewController.xib */; };
 		FFC5B12D16DE992900CFD587 /* me.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FFC5B12C16DE992900CFD587 /* me.jpg */; };
+		FFE21681171B5EB5001C4EDA /* KPDUserCandidateProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE21680171B5EB5001C4EDA /* KPDUserCandidateProfile.m */; };
 		FFEDFEDC168E457B00C493AB /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED2168E457B00C493AB /* NSBubbleData.m */; };
 		FFEDFEDD168E457B00C493AB /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED4168E457B00C493AB /* UIBubbleHeaderTableViewCell.m */; };
 		FFEDFEDE168E457B00C493AB /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED6168E457B00C493AB /* UIBubbleTableView.m */; };
@@ -646,6 +647,8 @@
 		FFC5B12816DE696300CFD587 /* MessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageDetailViewController.m; path = kupidum/MessageDetailViewController.m; sourceTree = "<group>"; };
 		FFC5B12916DE696300CFD587 /* MessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageDetailViewController.xib; path = kupidum/MessageDetailViewController.xib; sourceTree = "<group>"; };
 		FFC5B12C16DE992900CFD587 /* me.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = me.jpg; path = kupidum/images/me.jpg; sourceTree = "<group>"; };
+		FFE2167F171B5EB5001C4EDA /* KPDUserCandidateProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDUserCandidateProfile.h; path = kupidum/model/KPDUserCandidateProfile.h; sourceTree = "<group>"; };
+		FFE21680171B5EB5001C4EDA /* KPDUserCandidateProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDUserCandidateProfile.m; path = kupidum/model/KPDUserCandidateProfile.m; sourceTree = "<group>"; };
 		FFEDFED1168E457B00C493AB /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBubbleData.h; path = kupidum/UIBubbleTableView/src/NSBubbleData.h; sourceTree = "<group>"; };
 		FFEDFED2168E457B00C493AB /* NSBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBubbleData.m; path = kupidum/UIBubbleTableView/src/NSBubbleData.m; sourceTree = "<group>"; };
 		FFEDFED3168E457B00C493AB /* UIBubbleHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBubbleHeaderTableViewCell.h; path = kupidum/UIBubbleTableView/src/UIBubbleHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -1253,6 +1256,8 @@
 				FF775DE416D66B6800096474 /* KPDUser.m */,
 				FF61D30E16F7C9E100529429 /* KPDUserProfile.h */,
 				FF61D30F16F7C9E100529429 /* KPDUserProfile.m */,
+				FFE2167F171B5EB5001C4EDA /* KPDUserCandidateProfile.h */,
+				FFE21680171B5EB5001C4EDA /* KPDUserCandidateProfile.m */,
 				FF10044516D79F8D003FA3F9 /* KPDChat.h */,
 				FF10044616D79F8D003FA3F9 /* KPDChat.m */,
 				FF85F0C016D818AD00F839B5 /* KPDChatConversation.h */,
@@ -1778,6 +1783,7 @@
 				FFFCD1C81707728900BC29D6 /* UsersNavigatorContainerView.m in Sources */,
 				FF0F7D451707EDAA007BF55D /* UserNavigatorProfileViewController.m in Sources */,
 				FF0F7D4F1709AEA3007BF55D /* MyAccountViewController.m in Sources */,
+				FFE21681171B5EB5001C4EDA /* KPDUserCandidateProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

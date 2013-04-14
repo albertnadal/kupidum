@@ -1,18 +1,17 @@
 //
-//  KPDUserProfile.m
+//  KPDUserCandidateProfile.m
 //  kupidum
 //
-//  Created by Albert Nadal Garriga on 21/02/13.
+//  Created by Albert Nadal Garriga on 15/04/13.
 //  Copyright (c) 2013 laFruitera.com. All rights reserved.
 //
 
-#import "KPDUserProfile.h"
+#import "KPDUserCandidateProfile.h"
 #import "KupidumDBSingleton.h"
 
-@implementation KPDUserProfile
+@implementation KPDUserCandidateProfile
 
-@synthesize username, candidateProfile;
-@synthesize faceFrontImageURL, faceFrontImage, faceProfileImageURL, faceProfileImage, bodyImageURL, bodyImage;
+@synthesize username;
 @synthesize height, weight, hairColorId, hairSizeId, eyeColorId, personalityId, appearanceId, silhouetteId, bodyHighlightId;
 @synthesize maritalStatusId, hasChildrensId, liveWithId, citizenshipId, ethnicalOriginId, religionId, religionLevelId;
 @synthesize marriageOpinionId, romanticismId, wantChildrensId;
@@ -26,7 +25,6 @@
     if(self = [super init])
     {
         username = nil;
-        candidateProfile = nil;
     }
 
     return self;
@@ -38,7 +36,6 @@
     {
         username = _username;
 
-        self.candidateProfile = nil;
         self.faceFrontImageURL = nil;
         self.faceFrontImage = nil;
         self.faceProfileImageURL = nil;
