@@ -36,10 +36,13 @@
 - (void)reloadFormTableView;
 - (void)updateTakePhotoButtonsVisibility;
 - (void)loadTableView;
+- (void)loadUserPictures;
 - (UIImage *)cropSilouettePicture:(UIImage *)image;
 - (NSMutableDictionary *)retrieveUserProfileModelFromUserProfile:(KPDUserProfile *)user_profile;
 - (void)assignDefaultObject:(id)object toModel:(NSMutableDictionary *)model forKey:(NSString *)key;
 - (NSArray *)pickListFormOptionWithObject:(id)object;
+- (id)retrieveSelectedValuesInModel:(NSDictionary *)model_ forKey:(NSString *)key_ isMultiple:(bool)is_multiple;
+- (void)updateUserProfile;
 
 @end
 
@@ -74,6 +77,7 @@ const float bottomMarginHeight = 20.0;
     {
         username = username_;
         userProfile = [[KPDUserProfile alloc] initWithUsername:username_];
+
         imgDesiredPictureProfile = nil;
         formTableView = nil;
 
@@ -144,7 +148,7 @@ const float bottomMarginHeight = 20.0;
     }
     else
     {
-        return [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:object]];
+        return [IBAPickListFormOption pickListOptionsForStrings:[NSSet setWithObject:(NSNumber *)object]];
     }
 }
 
@@ -418,6 +422,14 @@ const float bottomMarginHeight = 20.0;
     [self loadTableView];
 }
 
+- (void)loadUserPictures
+{
+    // Load user photos from user profile
+    [self.faceFrontPhoto setImage:self.userProfile.faceFrontImage];
+    [self.faceProfilePhoto setImage:self.userProfile.faceProfileImage];
+    [self.bodySilouetePhoto setImage:self.userProfile.bodyImage];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -428,6 +440,7 @@ const float bottomMarginHeight = 20.0;
     [self registerSelector:@selector(showFormField:) withNotification:IBAInputRequestorShowFormField];
     [self registerSelector:@selector(restoreOriginalProfileScrollSize:) withNotification:IBAInputRequestorRestoreOriginalProfileSize];
 
+    [self loadUserPictures];
     [self showNavigationBarButtons];
     [self updateTakePhotoButtonsVisibility];
 
@@ -516,10 +529,88 @@ const float bottomMarginHeight = 20.0;
     [self reloadFormTableView];
 }
 
-- (void)saveUserProfile
+- (id)retrieveSelectedValuesInModel:(NSDictionary *)model_ forKey:(NSString *)key_ isMultiple:(bool)is_multiple
+{
+    NSMutableArray *selectedValues = [[NSMutableArray alloc] init];
+    
+    NSDictionary *dictionaryOfValues;
+    if((dictionaryOfValues = [model_ valueForKey:key_]))
+    {
+        for(id keyValue in dictionaryOfValues)
+        {
+            for(id value in keyValue)
+            {
+                NSLog(@"Value:(%@), Class: (%@)", value, NSStringFromClass([value class]));
+                [selectedValues addObject:[NSNumber numberWithInt:[value integerValue]]];
+            }
+        }
+    }
+
+    if(([selectedValues count]>=1) && (is_multiple))    return [NSSet setWithArray:selectedValues];
+    else if([selectedValues count] == 1)                return [selectedValues objectAtIndex:0];
+    else                                                return nil;
+}
+
+- (void)updateUserProfile
 {
     if([self.formDataSource respondsToSelector:@selector(getModelWithValues)])
-        NSLog(@"Model: %@", [(ProfileFormDataSource *)self.formDataSource getModelWithValues]);
+    {
+        NSDictionary *model = [(ProfileFormDataSource *)self.formDataSource getModelWithValues];
+        NSLog(@"Model: %@", model);
+
+        // User images
+        self.userProfile.faceFrontImage = self.faceFrontPhoto.image;
+        self.userProfile.faceProfileImage = self.faceProfilePhoto.image;
+        self.userProfile.bodyImage = self.bodySilouetePhoto.image;
+
+        // User description
+        self.userProfile.eyeColorId = [self retrieveSelectedValuesInModel:model forKey:kEyeColorUserProfileField isMultiple:NO];
+        self.userProfile.height = [self retrieveSelectedValuesInModel:model forKey:kHeightUserProfileField isMultiple:NO];
+        self.userProfile.weight = [self retrieveSelectedValuesInModel:model forKey:kWeightUserProfileField isMultiple:NO];
+        self.userProfile.hairColorId = [self retrieveSelectedValuesInModel:model forKey:kHairColorUserProfileField isMultiple:NO];
+        self.userProfile.hairSizeId = [self retrieveSelectedValuesInModel:model forKey:kHairSizeUserProfileField isMultiple:NO];
+        self.userProfile.personalityId = [self retrieveSelectedValuesInModel:model forKey:kMainCharacteristicUserProfileField isMultiple:NO];
+        self.userProfile.appearanceId = [self retrieveSelectedValuesInModel:model forKey:kBodyLookUserProfileField isMultiple:NO];
+        self.userProfile.silhouetteId = [self retrieveSelectedValuesInModel:model forKey:kSilhouetteUserProfileField isMultiple:NO];
+        self.userProfile.maritalStatusId = [self retrieveSelectedValuesInModel:model forKey:kMaritalStatusUserProfileField isMultiple:NO];
+        self.userProfile.hasChildrensId = [self retrieveSelectedValuesInModel:model forKey:kHasChildrensUserProfileField isMultiple:NO];
+        self.userProfile.liveWithId = [self retrieveSelectedValuesInModel:model forKey:kWhereIsLivingUserProfileField isMultiple:NO];
+        self.userProfile.bodyHighlightId = [self retrieveSelectedValuesInModel:model forKey:kMyHighlightUserProfileField isMultiple:NO];
+        self.userProfile.citizenshipId = [self retrieveSelectedValuesInModel:model forKey:kNationUserProfileField isMultiple:NO];
+        self.userProfile.ethnicalOriginId = [self retrieveSelectedValuesInModel:model forKey:kEthnicalOriginUserProfileField isMultiple:NO];
+        self.userProfile.religionId = [self retrieveSelectedValuesInModel:model forKey:kReligionUserProfileField isMultiple:NO];
+        self.userProfile.religionLevelId = [self retrieveSelectedValuesInModel:model forKey:kReligionLevelUserProfileField isMultiple:NO];
+        self.userProfile.marriageOpinionId = [self retrieveSelectedValuesInModel:model forKey:kMarriageOpinionUserProfileField isMultiple:NO];
+        self.userProfile.romanticismId = [self retrieveSelectedValuesInModel:model forKey:kRomanticismLevelUserProfileField isMultiple:NO];
+        self.userProfile.wantChildrensId = [self retrieveSelectedValuesInModel:model forKey:kIWantChildrensUserProfileField isMultiple:NO];
+        self.userProfile.studiesId = [self retrieveSelectedValuesInModel:model forKey:kStudiesLevelUserProfileField isMultiple:NO];
+        self.userProfile.languagesId = [self retrieveSelectedValuesInModel:model forKey:kLanguagesUserProfileField isMultiple:YES];
+        self.userProfile.professionId = [self retrieveSelectedValuesInModel:model forKey:kMyBusinessUserProfileField isMultiple:NO];
+        self.userProfile.salaryId = [self retrieveSelectedValuesInModel:model forKey:kSalaryUserProfileField isMultiple:NO];
+        self.userProfile.styleId = [self retrieveSelectedValuesInModel:model forKey:kMyStyleUserProfileField isMultiple:NO];
+        self.userProfile.dietId = [self retrieveSelectedValuesInModel:model forKey:kAlimentUserProfileField isMultiple:NO];
+        self.userProfile.smokeId = [self retrieveSelectedValuesInModel:model forKey:kSmokeUserProfileField isMultiple:NO];
+        self.userProfile.animalsId = [self retrieveSelectedValuesInModel:model forKey:kAnimalsUserProfileField isMultiple:YES];
+        self.userProfile.hobbiesId = [self retrieveSelectedValuesInModel:model forKey:kMyHobbiesUserProfileField isMultiple:YES];
+        self.userProfile.sportsId = [self retrieveSelectedValuesInModel:model forKey:kMySportsUserProfileField isMultiple:YES];
+        self.userProfile.sparetimeId = [self retrieveSelectedValuesInModel:model forKey:kMySparetimeUserProfileField isMultiple:YES];
+        self.userProfile.musicId = [self retrieveSelectedValuesInModel:model forKey:kMusicUserProfileField isMultiple:YES];
+        self.userProfile.moviesId = [self retrieveSelectedValuesInModel:model forKey:kMoviesUserProfileField isMultiple:YES];
+
+        // Updates the information stored in local database
+        [self.userProfile saveToDatabase];
+    }
+}
+
+- (void)saveUserProfile
+{
+    [self updateUserProfile];
+
+    NSMutableDictionary *model = [self retrieveUserProfileModelFromUserProfile:userProfile];
+
+    bool showEmptyFields = NO;
+    ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
+    self.formDataSource = profileFormDataSource;
 
     editMode = false;
     [self.navigationItem setRightBarButtonItem:editButton];

@@ -115,6 +115,7 @@
         self.faceProfileImage = [[UIImage alloc] initWithData:[rs dataForColumn:@"face_profile_image"]];
         self.bodyImageURL = [rs stringForColumn:@"body_image_url"];
         self.bodyImage = [[UIImage alloc] initWithData:[rs dataForColumn:@"body_image"]];
+
         self.height = [NSNumber numberWithInt:[rs intForColumn:@"height"]];
         self.weight = [NSNumber numberWithInt:[rs intForColumn:@"weight"]];
         self.hairColorId = [NSNumber numberWithInt:[rs intForColumn:@"hair_color_id"]];

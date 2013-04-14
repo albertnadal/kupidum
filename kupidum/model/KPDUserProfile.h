@@ -96,18 +96,18 @@
 @property (nonatomic, retain) NSNumber *romanticismId;
 @property (nonatomic, retain) NSNumber *wantChildrensId;
 @property (nonatomic, retain) NSNumber *studiesId;
-@property (atomic, retain) NSSet *languagesId;
+@property (nonatomic, retain) NSSet *languagesId;
 @property (nonatomic, retain) NSNumber *professionId;
 @property (nonatomic, retain) NSNumber *salaryId;
 @property (nonatomic, retain) NSNumber *styleId;
 @property (nonatomic, retain) NSNumber *dietId;
 @property (nonatomic, retain) NSNumber *smokeId;
-@property (atomic, retain) NSSet *animalsId;
-@property (atomic, retain) NSSet *hobbiesId;
-@property (atomic, retain) NSSet *sportsId;
-@property (atomic, retain) NSSet *sparetimeId;
-@property (atomic, retain) NSSet *musicId;
-@property (atomic, retain) NSSet *moviesId;
+@property (nonatomic, retain) NSSet *animalsId;
+@property (nonatomic, retain) NSSet *hobbiesId;
+@property (nonatomic, retain) NSSet *sportsId;
+@property (nonatomic, retain) NSSet *sparetimeId;
+@property (nonatomic, retain) NSSet *musicId;
+@property (nonatomic, retain) NSSet *moviesId;
 
 - (id)initWithUsername:(NSString *)_username;
 - (bool)usernameIsInDatabase:(NSString *)_username;
