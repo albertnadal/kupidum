@@ -38,7 +38,7 @@
     {
         username = _username;
 
-        self.candidateProfile = nil;
+        self.candidateProfile = [[KPDUserCandidateProfile alloc] initWithUsername:username];
         self.faceFrontImageURL = nil;
         self.faceFrontImage = nil;
         self.faceProfileImageURL = nil;
@@ -160,13 +160,13 @@
 {
 #warning Implement this function
 
+    // User profile
     self.faceFrontImageURL = @"";
     self.faceFrontImage = [[UIImage alloc] init];
     self.faceProfileImageURL = @"";
     self.faceProfileImage = [[UIImage alloc] init];
     self.bodyImageURL = @"";
     self.bodyImage = [[UIImage alloc] init];
-
     self.height = @180; // 180cm
     self.weight = @85; // 85kg
     self.hairColorId = @3; // Moreno
@@ -199,6 +199,48 @@
     self.sparetimeId = [NSSet setWithObjects:@9, @7, nil]; // Cinema, Concert
     self.musicId = [NSSet setWithObjects:@11, nil]; // Pop-Rock
     self.moviesId = [NSSet setWithObjects:@2, nil]; // Acció
+
+    // User candidate profile
+    self.candidateProfile.minAge = @25;
+    self.candidateProfile.maxAge = @35;
+    self.candidateProfile.minHeight = @160;
+    self.candidateProfile.maxHeight = @180;
+    self.candidateProfile.minWeight = @55;
+    self.candidateProfile.maxWeight = @65;
+    self.candidateProfile.maritalStatusId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.whereIsLivingId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.wantChildrensId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.hasChildrensId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.silhouetteID = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.mainCharacteristicId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.isRomanticId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.marriageIsId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.smokesId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.dietId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.nationId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.ethnicalOriginId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.bodyLookId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.hairSizeId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.hairColorId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.eyeColorId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.styleId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.highlightId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.studiesMinLevelId = @1;
+    self.candidateProfile.studiesMaxLevelId = @2;
+    self.candidateProfile.languagesId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.religionId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.religionLevelId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.hobbiesId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.sparetimeId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.musicId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.moviesId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.animalsId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.sportsId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.businessId = [NSSet setWithObjects:@1, @2, nil];
+    self.candidateProfile.minSalaryId = @1;
+    self.candidateProfile.maxSalaryId = @2;
+
+    [self.candidateProfile saveToDatabase];
 }
 
 - (void)saveToDatabase

@@ -14,90 +14,88 @@
     NSString *username;
 
     // *** Candidate profile ***
-    // My physical appearance
-    NSNumber *height;
-    NSNumber *weight;
-    NSNumber *hairColorId;
-    NSNumber *hairSizeId;
-    NSNumber *eyeColorId;
-    NSNumber *personalityId;
-    NSNumber *appearanceId;
-    NSNumber *silhouetteId;
-    NSNumber *bodyHighlightId;
-
-    // My personal situation
-    NSNumber *maritalStatusId;
-    NSNumber *hasChildrensId;
-    NSNumber *liveWithId;
-
-    // My values
-    NSNumber *citizenshipId;
-    NSNumber *ethnicalOriginId;
-    NSNumber *religionId;
-    NSNumber *religionLevelId;
-    NSNumber *marriageOpinionId;
-    NSNumber *romanticismId;
-    NSNumber *wantChildrensId;
-
-    // My professional status
-    NSNumber *studiesId;
+    NSNumber *minAge;
+    NSNumber *maxAge;
+    NSNumber *minHeight;
+    NSNumber *maxHeight;
+    NSNumber *minWeight;
+    NSNumber *maxWeight;
+    NSSet *maritalStatusId;
+    NSSet *whereIsLivingId;
+    NSSet *wantChildrensId;
+    NSSet *hasChildrensId;
+    NSSet *silhouetteID;
+    NSSet *mainCharacteristicId;
+    NSSet *isRomanticId;
+    NSSet *marriageIsId;
+    NSSet *smokesId;
+    NSSet *dietId;
+    NSSet *nationId;
+    NSSet *ethnicalOriginId;
+    NSSet *bodyLookId;
+    NSSet *hairSizeId;
+    NSSet *hairColorId;
+    NSSet *eyeColorId;
+    NSSet *styleId;
+    NSSet *highlightId;
+    NSNumber *studiesMinLevelId;
+    NSNumber *studiesMaxLevelId;
     NSSet *languagesId;
-    NSNumber *professionId;
-    NSNumber *salaryId;
-
-    // My lifestyle
-    NSNumber *styleId;
-    NSNumber *dietId;
-    NSNumber *smokeId;
-    NSSet *animalsId;
-
-    // My interests
+    NSSet *religionId;
+    NSSet *religionLevelId;
     NSSet *hobbiesId;
-    NSSet *sportsId;
     NSSet *sparetimeId;
-
-    // My cultural interests
     NSSet *musicId;
     NSSet *moviesId;
+    NSSet *animalsId;
+    NSSet *sportsId;
+    NSSet *businessId;
+    NSNumber *minSalaryId;
+    NSNumber *maxSalaryId;
 }
 
 @property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) NSNumber *height;
-@property (nonatomic, retain) NSNumber *weight;
-@property (nonatomic, retain) NSNumber *hairColorId;
-@property (nonatomic, retain) NSNumber *hairSizeId;
-@property (nonatomic, retain) NSNumber *eyeColorId;
-@property (nonatomic, retain) NSNumber *personalityId;
-@property (nonatomic, retain) NSNumber *appearanceId;
-@property (nonatomic, retain) NSNumber *silhouetteId;
-@property (nonatomic, retain) NSNumber *bodyHighlightId;
-@property (nonatomic, retain) NSNumber *maritalStatusId;
-@property (nonatomic, retain) NSNumber *hasChildrensId;
-@property (nonatomic, retain) NSNumber *liveWithId;
-@property (nonatomic, retain) NSNumber *citizenshipId;
-@property (nonatomic, retain) NSNumber *ethnicalOriginId;
-@property (nonatomic, retain) NSNumber *religionId;
-@property (nonatomic, retain) NSNumber *religionLevelId;
-@property (nonatomic, retain) NSNumber *marriageOpinionId;
-@property (nonatomic, retain) NSNumber *romanticismId;
-@property (nonatomic, retain) NSNumber *wantChildrensId;
-@property (nonatomic, retain) NSNumber *studiesId;
+@property (nonatomic, retain) NSNumber *minAge;
+@property (nonatomic, retain) NSNumber *maxAge;
+@property (nonatomic, retain) NSNumber *minHeight;
+@property (nonatomic, retain) NSNumber *maxHeight;
+@property (nonatomic, retain) NSNumber *minWeight;
+@property (nonatomic, retain) NSNumber *maxWeight;
+@property (nonatomic, retain) NSSet *maritalStatusId;
+@property (nonatomic, retain) NSSet *whereIsLivingId;
+@property (nonatomic, retain) NSSet *wantChildrensId;
+@property (nonatomic, retain) NSSet *hasChildrensId;
+@property (nonatomic, retain) NSSet *silhouetteID;
+@property (nonatomic, retain) NSSet *mainCharacteristicId;
+@property (nonatomic, retain) NSSet *isRomanticId;
+@property (nonatomic, retain) NSSet *marriageIsId;
+@property (nonatomic, retain) NSSet *smokesId;
+@property (nonatomic, retain) NSSet *dietId;
+@property (nonatomic, retain) NSSet *nationId;
+@property (nonatomic, retain) NSSet *ethnicalOriginId;
+@property (nonatomic, retain) NSSet *bodyLookId;
+@property (nonatomic, retain) NSSet *hairSizeId;
+@property (nonatomic, retain) NSSet *hairColorId;
+@property (nonatomic, retain) NSSet *eyeColorId;
+@property (nonatomic, retain) NSSet *styleId;
+@property (nonatomic, retain) NSSet *highlightId;
+@property (nonatomic, retain) NSNumber *studiesMinLevelId;
+@property (nonatomic, retain) NSNumber *studiesMaxLevelId;
 @property (nonatomic, retain) NSSet *languagesId;
-@property (nonatomic, retain) NSNumber *professionId;
-@property (nonatomic, retain) NSNumber *salaryId;
-@property (nonatomic, retain) NSNumber *styleId;
-@property (nonatomic, retain) NSNumber *dietId;
-@property (nonatomic, retain) NSNumber *smokeId;
-@property (nonatomic, retain) NSSet *animalsId;
+@property (nonatomic, retain) NSSet *religionId;
+@property (nonatomic, retain) NSSet *religionLevelId;
 @property (nonatomic, retain) NSSet *hobbiesId;
-@property (nonatomic, retain) NSSet *sportsId;
 @property (nonatomic, retain) NSSet *sparetimeId;
 @property (nonatomic, retain) NSSet *musicId;
 @property (nonatomic, retain) NSSet *moviesId;
+@property (nonatomic, retain) NSSet *animalsId;
+@property (nonatomic, retain) NSSet *sportsId;
+@property (nonatomic, retain) NSSet *businessId;
+@property (nonatomic, retain) NSNumber *minSalaryId;
+@property (nonatomic, retain) NSNumber *maxSalaryId;
 
 - (id)initWithUsername:(NSString *)_username;
 - (bool)usernameIsInDatabase:(NSString *)_username;
-- (void)retrieveDataFromWebService;
 - (void)retrieveDataFromDatabase;
 - (void)saveToDatabase;
 - (NSSet *)retrieveNSSetFromString:(NSString *)string_;

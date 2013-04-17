@@ -1354,10 +1354,10 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                       NSLocalizedString(@"[23]Altres", @""),
                                                                                       nil]];
 
-    [self processSelectedValueForKeyPath:kMyHobbiesCandidateProfileField withKeyValuesInArray:myHobbiesListOptions];
+    [self processSelectedValueForKeyPath:kHobbiesCandidateProfileField withKeyValuesInArray:myHobbiesListOptions];
 
-    if(([self userSelectedIdentifierForKeyPath:kMyHobbiesCandidateProfileField]) || (showEmptyFields))
-        [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMyHobbiesCandidateProfileField
+    if(([self userSelectedIdentifierForKeyPath:kHobbiesCandidateProfileField]) || (showEmptyFields))
+        [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kHobbiesCandidateProfileField
                                                                                 title:NSLocalizedString(@"Les seves aficions", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeMultiple
@@ -1443,10 +1443,10 @@ static const int kUserProfileFormHeaderCellHeight = 48;
                                                                                         NSLocalizedString(@"[12]Altres", @""),
                                                                                         nil]];
 
-    [self processSelectedValueForKeyPath:kMySparetimeCandidateProfileField withKeyValuesInArray:mySparetimeListOptions];
+    [self processSelectedValueForKeyPath:kSparetimeCandidateProfileField withKeyValuesInArray:mySparetimeListOptions];
 
-    if(([self userSelectedIdentifierForKeyPath:kMySparetimeCandidateProfileField]) || (showEmptyFields))
-        [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kMySparetimeCandidateProfileField
+    if(([self userSelectedIdentifierForKeyPath:kSparetimeCandidateProfileField]) || (showEmptyFields))
+        [interestsFieldSection addFormField:[[IBAPickListFormField alloc] initWithKeyPath:kSparetimeCandidateProfileField
                                                                                 title:NSLocalizedString(@"Les seves sortides", @"")
                                                                      valueTransformer:nil
                                                                         selectionMode:IBAPickListSelectionModeMultiple
