@@ -272,6 +272,9 @@
 		FFC5B12B16DE696300CFD587 /* MessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFC5B12916DE696300CFD587 /* MessageDetailViewController.xib */; };
 		FFC5B12D16DE992900CFD587 /* me.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FFC5B12C16DE992900CFD587 /* me.jpg */; };
 		FFE21681171B5EB5001C4EDA /* KPDUserCandidateProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE21680171B5EB5001C4EDA /* KPDUserCandidateProfile.m */; };
+		FFE216851722D6C3001C4EDA /* img_user_default_body_woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE216821722D6C3001C4EDA /* img_user_default_body_woman@2x.png */; };
+		FFE216861722D6C3001C4EDA /* img_user_default_front_woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE216831722D6C3001C4EDA /* img_user_default_front_woman@2x.png */; };
+		FFE216871722D6C3001C4EDA /* img_user_default_profile_woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE216841722D6C3001C4EDA /* img_user_default_profile_woman@2x.png */; };
 		FFEDFEDC168E457B00C493AB /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED2168E457B00C493AB /* NSBubbleData.m */; };
 		FFEDFEDD168E457B00C493AB /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED4168E457B00C493AB /* UIBubbleHeaderTableViewCell.m */; };
 		FFEDFEDE168E457B00C493AB /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED6168E457B00C493AB /* UIBubbleTableView.m */; };
@@ -649,6 +652,9 @@
 		FFC5B12C16DE992900CFD587 /* me.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = me.jpg; path = kupidum/images/me.jpg; sourceTree = "<group>"; };
 		FFE2167F171B5EB5001C4EDA /* KPDUserCandidateProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDUserCandidateProfile.h; path = kupidum/model/KPDUserCandidateProfile.h; sourceTree = "<group>"; };
 		FFE21680171B5EB5001C4EDA /* KPDUserCandidateProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDUserCandidateProfile.m; path = kupidum/model/KPDUserCandidateProfile.m; sourceTree = "<group>"; };
+		FFE216821722D6C3001C4EDA /* img_user_default_body_woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_user_default_body_woman@2x.png"; path = "kupidum/images/img_user_default_body_woman@2x.png"; sourceTree = "<group>"; };
+		FFE216831722D6C3001C4EDA /* img_user_default_front_woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_user_default_front_woman@2x.png"; path = "kupidum/images/img_user_default_front_woman@2x.png"; sourceTree = "<group>"; };
+		FFE216841722D6C3001C4EDA /* img_user_default_profile_woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_user_default_profile_woman@2x.png"; path = "kupidum/images/img_user_default_profile_woman@2x.png"; sourceTree = "<group>"; };
 		FFEDFED1168E457B00C493AB /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBubbleData.h; path = kupidum/UIBubbleTableView/src/NSBubbleData.h; sourceTree = "<group>"; };
 		FFEDFED2168E457B00C493AB /* NSBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBubbleData.m; path = kupidum/UIBubbleTableView/src/NSBubbleData.m; sourceTree = "<group>"; };
 		FFEDFED3168E457B00C493AB /* UIBubbleHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBubbleHeaderTableViewCell.h; path = kupidum/UIBubbleTableView/src/UIBubbleHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -910,6 +916,9 @@
 				FF10044216D79A05003FA3F9 /* db */,
 				FF4902921690F45800500ABB /* audio */,
 				B707444B166BDE7A007E8B23 /* NavigationButtons */,
+				FFE216821722D6C3001C4EDA /* img_user_default_body_woman@2x.png */,
+				FFE216831722D6C3001C4EDA /* img_user_default_front_woman@2x.png */,
+				FFE216841722D6C3001C4EDA /* img_user_default_profile_woman@2x.png */,
 				FFC5B12C16DE992900CFD587 /* me.jpg */,
 				FF7B53A3169A34200042FA62 /* online_green_led_normal.png */,
 				FF7B53A4169A34200042FA62 /* online_green_led_normal@2x.png */,
@@ -1712,6 +1721,9 @@
 				FF0F7D581709DD38007BF55D /* bg_tableview_4rows@2x.png in Resources */,
 				FF0F7D5B1709E95E007BF55D /* bg_logout_button.png in Resources */,
 				FF0F7D5C1709E95E007BF55D /* bg_logout_button@2x.png in Resources */,
+				FFE216851722D6C3001C4EDA /* img_user_default_body_woman@2x.png in Resources */,
+				FFE216861722D6C3001C4EDA /* img_user_default_front_woman@2x.png in Resources */,
+				FFE216871722D6C3001C4EDA /* img_user_default_profile_woman@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

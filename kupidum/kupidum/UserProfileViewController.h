@@ -21,6 +21,10 @@ typedef enum {
 @interface UserProfileViewController : IBAFormViewController<UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate>
 {
     IBOutlet UIScrollView *scroll;
+    IBOutlet UILabel *ageLabel;
+    IBOutlet UILabel *yearsOldLabel;
+    IBOutlet UILabel *fromLabel;
+    IBOutlet UILabel *cityLabel;
     IBOutlet UIButton *faceFrontPhotoButton;
     IBOutlet UIButton *faceProfilePhotoButton;
     IBOutlet UIButton *bodySilouetePhotoButton;
@@ -32,12 +36,17 @@ typedef enum {
     IBOutlet UIView *containerButtons;
     IBOutlet UIView *containerSegments;
     IBOutlet UISegmentedControl *formTypeSelector;
+
     KPDUserProfilePhoto photoTypeSelected;
     UserProfileFormType selectedForm;
     KPDUserProfile *userProfile;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
+@property (strong, nonatomic) IBOutlet UILabel *ageLabel;
+@property (strong, nonatomic) IBOutlet UILabel *yearsOldLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fromLabel;
+@property (strong, nonatomic) IBOutlet UILabel *cityLabel;
 @property (strong, nonatomic) IBOutlet UIButton *faceFrontPhotoButton;
 @property (strong, nonatomic) IBOutlet UIButton *faceProfilePhotoButton;
 @property (strong, nonatomic) IBOutlet UIButton *bodySilouetePhotoButton;
@@ -52,7 +61,7 @@ typedef enum {
 @property (atomic) UserProfileFormType selectedForm;
 @property (strong, nonatomic) KPDUserProfile *userProfile;
 
-- (id)initWithUsername:(NSString *)username_;
+- (id)initWithUsername:(NSString *)username_ isEditable:(bool)editable;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withUsername:(NSString *)username_;
 - (IBAction)showMenuSelectPhotoOrTakePhoto:(id)sender;
 - (IBAction)changeUserProfileForm:(id)sender;

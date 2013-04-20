@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum UserGender
+{
+    kMale = 0,
+    kFemale = 1
+}UserGender;
+
 @interface KPDUser : NSObject
 {
     NSString *username;

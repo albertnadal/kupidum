@@ -21,7 +21,6 @@
     UITableView *formTableView;
     UIImagePickerController *photoPicker;
     UIImageView *imgDesiredPictureProfile;
-    float containerButtonsHeight;
 }
 
 @property (nonatomic, retain) UIImagePickerController *photoPicker;
@@ -36,6 +35,7 @@
 - (void)reloadFormTableView;
 - (void)updateTakePhotoButtonsVisibility;
 - (void)loadTableView;
+- (void)loadUserPresentation;
 - (void)loadUserPictures;
 - (UIImage *)cropSilouettePicture:(UIImage *)image;
 - (NSMutableDictionary *)retrieveUserProfileModelFromUserProfile:(KPDUserProfile *)user_profile;
@@ -43,14 +43,16 @@
 - (NSArray *)pickListFormOptionWithObject:(id)object;
 - (id)retrieveSelectedValuesInModel:(NSDictionary *)model_ forKey:(NSString *)key_ isMultiple:(bool)is_multiple;
 - (void)updateUserProfile;
+- (bool)imageIsEmpty:(UIImage *)image;
+- (void)loadAgeAndCity;
 
 @end
 
 @implementation UserProfileViewController
 
-@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments, formTypeSelector, selectedForm, userProfile;
+@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments, formTypeSelector, selectedForm, userProfile, ageLabel, yearsOldLabel, fromLabel, cityLabel;
 
-const float basicInformationPanelHeight = 435.0;
+const float basicInformationPanelHeight = 495.0f;
 const float buttonsPanelHeight = 120.0f;
 const float segmentsPanelHeight = 70.0f;
 const float detailedInformationPanelHeight = 1500.0;
@@ -63,6 +65,10 @@ const float bottomMarginHeight = 20.0;
     {
         username = @"";
         imgDesiredPictureProfile = nil;
+        ageLabel = nil;
+        yearsOldLabel = nil;
+        fromLabel = nil;
+        cityLabel = nil;
         profileIsEditable = false;
         editMode = false;
         selectedForm = kUserProfileFormMyDescription;
@@ -71,7 +77,7 @@ const float bottomMarginHeight = 20.0;
     return self;
 }
 
-- (id)initWithUsername:(NSString *)username_
+- (id)initWithUsername:(NSString *)username_ isEditable:(bool)editable
 {
     if(self = [super initWithNibName:@"UserProfileViewController" bundle:nil])
     {
@@ -82,15 +88,13 @@ const float bottomMarginHeight = 20.0;
         formTableView = nil;
 
         NSMutableDictionary *model = [self retrieveUserProfileModelFromUserProfile:userProfile];
-        profileIsEditable = true; //This must be set after load user profile from DB or web service //!isReadOnly;
+        profileIsEditable = editable;
         editMode = false;
         selectedForm = kUserProfileFormMyDescription;
 
         bool showEmptyFields = NO;
         ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
         self.formDataSource = profileFormDataSource;
-
-        containerButtonsHeight = profileIsEditable ? 0.0f : buttonsPanelHeight;
     }
 
     return self;
@@ -114,7 +118,6 @@ const float bottomMarginHeight = 20.0;
         ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
         self.formDataSource = profileFormDataSource;
 
-        containerButtonsHeight = profileIsEditable ? 0.0f : buttonsPanelHeight;
     }
 
     return self;
@@ -243,7 +246,15 @@ const float bottomMarginHeight = 20.0;
 {
     [UIView beginAnimations:@"restoreProfileContentSize" context:nil];
     [UIView setAnimationDuration:0.3];
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
+
+    if(profileIsEditable)
+    {
+        CGRect scrollFrame = self.scroll.frame;
+        scrollFrame.size.height = self.view.frame.size.height;
+        [scroll setFrame:scrollFrame];    
+    }
+
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
     [UIView commitAnimations];
 }
 
@@ -336,7 +347,7 @@ const float bottomMarginHeight = 20.0;
 
 - (void)showFormField:(NSNotification *)notification
 {
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + detailedInformationPanelHeight + scroll.frame.size.height)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + segmentsPanelHeight + detailedInformationPanelHeight + scroll.frame.size.height)];
 
 	NSIndexPath *indexPath = [[notification userInfo] objectForKey:@"indexPath"];
 
@@ -352,7 +363,7 @@ const float bottomMarginHeight = 20.0;
     if(formTableView)
         [formTableView removeFromSuperview];
 
-	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
+	formTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, basicInformationPanelHeight + segmentsPanelHeight, 320, detailedInformationPanelHeight) style:UITableViewStyleGrouped];
 	[formTableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[self setTableView:formTableView];
     [formTableView setScrollEnabled:NO];
@@ -362,16 +373,8 @@ const float bottomMarginHeight = 20.0;
     formTableViewFrame.size.height = [(ProfileFormDataSource *)self.formDataSource height];
     [formTableView setFrame:formTableViewFrame];
 
-    // set container segments position
-    if(profileIsEditable)
-    {
-        CGRect containerSegmentsFrame = containerSegments.frame;
-        containerSegmentsFrame.origin.y = containerButtons.frame.origin.y;
-        [containerSegments setFrame:containerSegmentsFrame];
-    }
-
     // update scroll content size
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
 
     [self.scroll addSubview:formTableView];    
 }
@@ -382,12 +385,92 @@ const float bottomMarginHeight = 20.0;
     [self loadTableView];
 }
 
+- (void)loadUserPresentation
+{
+    [self.presentationTextView setText:self.userProfile.presentation];
+}
+
+- (bool)imageIsEmpty:(UIImage *)image
+{
+    return ((!image.size.width) && (!image.size.height));
+}
+
 - (void)loadUserPictures
 {
-    // Load user photos from user profile
-    [self.faceFrontPhoto setImage:self.userProfile.faceFrontImage];
-    [self.faceProfilePhoto setImage:self.userProfile.faceProfileImage];
-    [self.bodySilouetePhoto setImage:self.userProfile.bodyImage];
+    // Head front picture
+    if((self.userProfile.faceFrontImage) && (![self imageIsEmpty:self.userProfile.faceFrontImage]))
+    {
+        [self.faceFrontPhoto setImage:self.userProfile.faceFrontImage];
+    }
+    else
+    {
+        switch (self.userProfile.gender.intValue)
+        {
+            case kMale:     [self.faceFrontPhoto setImage:[UIImage imageNamed:@"img_user_default_front_woman.png"]];
+                            break;
+
+            case kFemale:   [self.faceFrontPhoto setImage:[UIImage imageNamed:@"img_user_default_front_woman.png"]];
+                            break;
+        }
+    }
+
+    // Head profile picture
+    if((self.userProfile.faceProfileImage) && (![self imageIsEmpty:self.userProfile.faceProfileImage]))
+    {
+        [self.faceProfilePhoto setImage:self.userProfile.faceProfileImage];
+    }
+    else
+    {
+        switch (self.userProfile.gender.intValue)
+        {
+            case kMale:     [self.faceProfilePhoto setImage:[UIImage imageNamed:@"img_user_default_profile_woman.png"]];
+                break;
+                
+            case kFemale:   [self.faceProfilePhoto setImage:[UIImage imageNamed:@"img_user_default_profile_woman.png"]];
+                break;
+        }
+    }
+
+    // Body silhouette picture
+    if((self.userProfile.bodyImage) && (![self imageIsEmpty:self.userProfile.bodyImage]))
+    {
+        [self.bodySilouetePhoto setImage:self.userProfile.bodyImage];
+    }
+    else
+    {
+        switch (self.userProfile.gender.intValue)
+        {
+            case kMale:     [self.bodySilouetePhoto setImage:[UIImage imageNamed:@"img_user_default_body_woman.png"]];
+                break;
+                
+            case kFemale:   [self.bodySilouetePhoto setImage:[UIImage imageNamed:@"img_user_default_body_woman.png"]];
+                break;
+        }
+    }
+}
+
+- (void)loadAgeAndCity
+{
+    NSTimeInterval timeInterval = [[NSDate date] timeIntervalSinceDate:self.userProfile.dateOfBirth];
+    int secondsPerYear = 60*60*24*365;
+    int totalYears = floor(timeInterval/secondsPerYear);
+
+    [self.ageLabel setText:[NSString stringWithFormat:@"%d", totalYears]];
+    [self.yearsOldLabel setText:NSLocalizedString(@"years old", @"")];
+    [self.fromLabel setText:NSLocalizedString(@"from", @"")];
+    [self.fromLabel sizeToFit];
+
+    CGFloat cityLabelRightMargin = [[UIScreen mainScreen] bounds].size.width - CGRectGetMaxX(self.cityLabel.frame);
+    [self.cityLabel setText:self.userProfile.city];
+    [self.cityLabel sizeToFit];
+
+    CGRect cityLabelFrame = self.cityLabel.frame;
+    cityLabelFrame.origin.x = [[UIScreen mainScreen] bounds].size.width - cityLabelRightMargin - cityLabelFrame.size.width;
+    [self.cityLabel setFrame:cityLabelFrame];
+
+    CGRect fromLabelFrame = self.fromLabel.frame;
+    fromLabelFrame.origin.x = cityLabelFrame.origin.x - fromLabelFrame.size.width - 5.0f;
+    [self.fromLabel setFrame:fromLabelFrame];
 }
 
 - (void)viewDidLoad
@@ -400,13 +483,18 @@ const float bottomMarginHeight = 20.0;
     [self registerSelector:@selector(showFormField:) withNotification:IBAInputRequestorShowFormField];
     [self registerSelector:@selector(restoreOriginalProfileScrollSize:) withNotification:IBAInputRequestorRestoreOriginalProfileSize];
 
+    [self loadAgeAndCity];
+    [self loadUserPresentation];
     [self loadUserPictures];
     [self showNavigationBarButtons];
     [self updateTakePhotoButtonsVisibility];
 
     [containerButtons setHidden:profileIsEditable];
 
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
+    [self setSelectedForm:kUserProfileFormMyDescription];
+    [self reloadFormTableView];
+
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -461,7 +549,7 @@ const float bottomMarginHeight = 20.0;
     [formTableView setFrame:formTableViewFrame];
 
     // update scroll content size
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + containerButtonsHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
     
     [self.scroll addSubview:formTableView];
     [super viewDidLoad];
@@ -555,6 +643,47 @@ const float bottomMarginHeight = 20.0;
         self.userProfile.sparetimeId = [self retrieveSelectedValuesInModel:model forKey:kMySparetimeUserProfileField isMultiple:YES];
         self.userProfile.musicId = [self retrieveSelectedValuesInModel:model forKey:kMusicUserProfileField isMultiple:YES];
         self.userProfile.moviesId = [self retrieveSelectedValuesInModel:model forKey:kMoviesUserProfileField isMultiple:YES];
+
+        self.userProfile.candidateProfile.minAge = [self retrieveSelectedValuesInModel:model forKey:kMinAgeCandidateProfileField isMultiple:NO];
+        self.userProfile.candidateProfile.maxAge = [self retrieveSelectedValuesInModel:model forKey:kMaxAgeCandidateProfileField isMultiple:NO];
+        self.userProfile.candidateProfile.minHeight = [self retrieveSelectedValuesInModel:model forKey:kMinHeightCandidateProfileField isMultiple:NO];
+        self.userProfile.candidateProfile.maxHeight = [self retrieveSelectedValuesInModel:model forKey:kMaxHeightCandidateProfileField isMultiple:NO];
+        self.userProfile.candidateProfile.minWeight = [self retrieveSelectedValuesInModel:model forKey:kMinWeightCandidateProfileField isMultiple:NO];
+        self.userProfile.candidateProfile.maxWeight = [self retrieveSelectedValuesInModel:model forKey:kMaxWeightCandidateProfileField isMultiple:NO];
+
+        self.userProfile.candidateProfile.maritalStatusId = [self retrieveSelectedValuesInModel:model forKey:kMaritalStatusCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.whereIsLivingId = [self retrieveSelectedValuesInModel:model forKey:kWhereIsLivingCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.wantChildrensId = [self retrieveSelectedValuesInModel:model forKey:kWantChildrensCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.hasChildrensId = [self retrieveSelectedValuesInModel:model forKey:kHasChildrensCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.silhouetteID = [self retrieveSelectedValuesInModel:model forKey:kSilhouetteCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.mainCharacteristicId = [self retrieveSelectedValuesInModel:model forKey:kMainCharacteristicCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.isRomanticId = [self retrieveSelectedValuesInModel:model forKey:kIsRomanticCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.marriageIsId = [self retrieveSelectedValuesInModel:model forKey:kMarriageIsCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.smokesId = [self retrieveSelectedValuesInModel:model forKey:kSmokesCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.dietId = [self retrieveSelectedValuesInModel:model forKey:kDietCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.nationId = [self retrieveSelectedValuesInModel:model forKey:kNationCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.ethnicalOriginId = [self retrieveSelectedValuesInModel:model forKey:kEthnicalOriginCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.bodyLookId = [self retrieveSelectedValuesInModel:model forKey:kBodyLookCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.hairSizeId = [self retrieveSelectedValuesInModel:model forKey:kHairSizeCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.hairColorId = [self retrieveSelectedValuesInModel:model forKey:kHairColorCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.eyeColorId = [self retrieveSelectedValuesInModel:model forKey:kEyeColorCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.styleId = [self retrieveSelectedValuesInModel:model forKey:kStyleCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.highlightId = [self retrieveSelectedValuesInModel:model forKey:kHighlightCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.studiesMinLevelId = [self retrieveSelectedValuesInModel:model forKey:kStudiesMinLevelCandidateProfileField isMultiple:NO];
+        self.userProfile.candidateProfile.studiesMaxLevelId = [self retrieveSelectedValuesInModel:model forKey:kStudiesMaxLevelCandidateProfileField isMultiple:NO];
+        self.userProfile.candidateProfile.languagesId = [self retrieveSelectedValuesInModel:model forKey:kLanguagesCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.religionId = [self retrieveSelectedValuesInModel:model forKey:kReligionCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.religionLevelId = [self retrieveSelectedValuesInModel:model forKey:kReligionLevelCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.hobbiesId = [self retrieveSelectedValuesInModel:model forKey:kHobbiesCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.sparetimeId = [self retrieveSelectedValuesInModel:model forKey:kSparetimeCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.musicId = [self retrieveSelectedValuesInModel:model forKey:kMusicCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.moviesId = [self retrieveSelectedValuesInModel:model forKey:kMoviesCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.animalsId = [self retrieveSelectedValuesInModel:model forKey:kAnimalsCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.sportsId = [self retrieveSelectedValuesInModel:model forKey:kSportsCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.businessId = [self retrieveSelectedValuesInModel:model forKey:kBusinessCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.businessId = [self retrieveSelectedValuesInModel:model forKey:kBusinessCandidateProfileField isMultiple:YES];
+        self.userProfile.candidateProfile.minSalaryId = [self retrieveSelectedValuesInModel:model forKey:kMinSalaryCandidateProfileField isMultiple:NO];
+        self.userProfile.candidateProfile.maxSalaryId = [self retrieveSelectedValuesInModel:model forKey:kMaxSalaryCandidateProfileField isMultiple:NO];
 
         // Updates the information stored in local database
         [self.userProfile saveToDatabase];

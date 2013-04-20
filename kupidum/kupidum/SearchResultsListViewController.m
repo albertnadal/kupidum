@@ -96,7 +96,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil];
+    NSString *username = @"albert";
+    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithUsername:username isEditable:NO];
     [self.navigationController pushViewController:upvc animated:YES];
 }
 

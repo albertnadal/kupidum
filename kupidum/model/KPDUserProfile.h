@@ -8,11 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "KPDUserCandidateProfile.h"
+#import "KPDUser.h"
 
 @interface KPDUserProfile : NSObject
 {
     // Username
     NSString *username;
+
+    // Basic information
+    NSNumber *gender;
+    NSDate *dateOfBirth;
+    NSString *city;
+
+    // User presentation
+    NSString *presentation;
 
     // Candidate profile
     KPDUserCandidateProfile *candidateProfile;
@@ -74,6 +83,10 @@
 }
 
 @property (nonatomic, retain) NSString *username;
+@property (nonatomic, retain) NSNumber *gender;
+@property (nonatomic, retain) NSDate *dateOfBirth;
+@property (nonatomic, retain) NSString *city;
+@property (nonatomic, retain) NSString *presentation;
 @property (nonatomic, retain) KPDUserCandidateProfile *candidateProfile;
 @property (nonatomic, retain) NSString *faceFrontImageURL;
 @property (nonatomic, retain) UIImage *faceFrontImage;

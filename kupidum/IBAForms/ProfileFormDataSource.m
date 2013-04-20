@@ -2932,7 +2932,7 @@ static const int kUserProfileFormHeaderCellHeight = 48;
 - (void)setModelValue:(id)value forKeyPath:(NSString *)keyPath {
 	[super setModelValue:value forKeyPath:keyPath];
 	
-	NSLog(@"%@", [self.model description]);
+//	NSLog(@"%@", [self.model description]);
 }
 
 @end

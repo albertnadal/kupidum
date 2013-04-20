@@ -12,6 +12,7 @@
 @implementation KPDUserProfile
 
 @synthesize username, candidateProfile;
+@synthesize city, gender, dateOfBirth, presentation;
 @synthesize faceFrontImageURL, faceFrontImage, faceProfileImageURL, faceProfileImage, bodyImageURL, bodyImage;
 @synthesize height, weight, hairColorId, hairSizeId, eyeColorId, personalityId, appearanceId, silhouetteId, bodyHighlightId;
 @synthesize maritalStatusId, hasChildrensId, liveWithId, citizenshipId, ethnicalOriginId, religionId, religionLevelId;
@@ -36,8 +37,12 @@
 {
     if(self = [super init])
     {
-        username = _username;
+        self.username = _username;
 
+        self.gender = nil;
+        self.city = nil;
+        self.dateOfBirth = nil;
+        self.presentation = nil;
         self.candidateProfile = [[KPDUserCandidateProfile alloc] initWithUsername:username];
         self.faceFrontImageURL = nil;
         self.faceFrontImage = nil;
@@ -112,12 +117,25 @@
 
     while ([rs next])
     {
+        self.gender = [NSNumber numberWithInt:[rs intForColumn:@"gender"]];
+        self.dateOfBirth = [rs dateForColumn:@"date_of_birth"];
+        self.presentation = [rs stringForColumn:@"presentation"];
+        self.city = [rs stringForColumn:@"city"];
+
         self.faceFrontImageURL = [rs stringForColumn:@"face_front_image_url"];
-        self.faceFrontImage = [[UIImage alloc] initWithData:[rs dataForColumn:@"face_front_image"]];
+        NSData *faceFrontImageData = [rs dataForColumn:@"face_front_image"];
+        if([faceFrontImageData length])
+            self.faceFrontImage = [[UIImage alloc] initWithData:faceFrontImageData];
+
         self.faceProfileImageURL = [rs stringForColumn:@"face_profile_image_url"];
-        self.faceProfileImage = [[UIImage alloc] initWithData:[rs dataForColumn:@"face_profile_image"]];
+        NSData *faceProfileImageData = [rs dataForColumn:@"face_profile_image"];
+        if([faceProfileImageData length])
+            self.faceProfileImage = [[UIImage alloc] initWithData:faceProfileImageData];
+
         self.bodyImageURL = [rs stringForColumn:@"body_image_url"];
-        self.bodyImage = [[UIImage alloc] initWithData:[rs dataForColumn:@"body_image"]];
+        NSData *faceBodyImageData = [rs dataForColumn:@"body_image"];
+        if([faceBodyImageData length])
+            self.bodyImage = [[UIImage alloc] initWithData:faceBodyImageData];
 
         self.height = [NSNumber numberWithInt:[rs intForColumn:@"height"]];
         self.weight = [NSNumber numberWithInt:[rs intForColumn:@"weight"]];
@@ -161,6 +179,16 @@
 #warning Implement this function
 
     // User profile
+    self.gender = [NSNumber numberWithInt:kMale];
+
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setDay:26];
+    [components setMonth:9];
+    [components setYear:1981];
+
+    self.dateOfBirth = [[NSCalendar currentCalendar] dateFromComponents:components];
+    self.presentation = @"I was working from year 2005 to the begining of 2008 at ArenaMobile (Reus, Spain), a global multimedia mobile content provider that worked with partners like Vodafone, Movistar, Orange, Claro and many other telcos worldwide. At 2008 I joined the Internet Web Serveis company (Lleida, Spain), just coinciding with the arrival of the first iPhone SDK from Apple to the mobile market. IWS is a local ISP that provides all kind of custom made Internet web services with customers like Terra, Grupo Prisa or Fon.";
+    self.city = @"Girona";
     self.faceFrontImageURL = @"";
     self.faceFrontImage = [[UIImage alloc] init];
     self.faceProfileImageURL = @"";
@@ -239,8 +267,6 @@
     self.candidateProfile.businessId = [NSSet setWithObjects:@1, @2, nil];
     self.candidateProfile.minSalaryId = @1;
     self.candidateProfile.maxSalaryId = @2;
-
-    [self.candidateProfile saveToDatabase];
 }
 
 - (void)saveToDatabase
@@ -259,16 +285,19 @@
     {
         // Update user data
         [db beginTransaction];
-        [db executeUpdate:@"update user_profile set face_front_image_url = ?, face_front_image = ?, face_profile_image_url = ?, face_profile_image = ?, body_image_url = ?, body_image = ?, height = ?, weight = ?, hair_color_id = ?, hair_size_id = ?, eye_color_id = ?, personality_id = ?, appearance_id = ?, silhouette_id = ?, body_highlight_id = ?, marital_status_id = ?, has_childrens_id = ?, live_with_id = ?, citizenship_id = ?, ethnical_origin_id = ?, religion_id = ?, religion_level_id = ?, marriage_opinion_id = ?, romanticism_id = ?, want_childrens_id = ?, studies_id = ?, languages_id = ?, profession_id = ?, salary_id = ?, style_id = ?, diet_id = ?, smoke_id = ?, animals_id = ?, hobbies_id = ?, sports_id = ?, sparetime_id = ?, music_id = ?, movies_id = ? where username = ?", self.faceFrontImageURL, UIImagePNGRepresentation(self.faceFrontImage), self.faceProfileImageURL, UIImagePNGRepresentation(self.faceProfileImage), self.bodyImageURL, UIImagePNGRepresentation(self.bodyImage), self.height, self.weight, self.hairColorId, self.hairSizeId, self.eyeColorId, self.personalityId, self.appearanceId, self.silhouetteId, self.bodyHighlightId, self.maritalStatusId, self.hasChildrensId, self.liveWithId, self.citizenshipId, self.ethnicalOriginId, self.religionId, self.religionLevelId, self.marriageOpinionId, self.romanticismId, self.wantChildrensId, self.studiesId, languagesIdString, self.professionId, self.salaryId, self.styleId, self.dietId, self.smokeId, animalsIdString, hobbiesIdString, sportsIdString, sparetimeIdString, musicIdString, moviesIdString, self.username];
+        [db executeUpdate:@"update user_profile set gender = ?, date_of_birth = ?, city = ?, presentation = ?, face_front_image_url = ?, face_front_image = ?, face_profile_image_url = ?, face_profile_image = ?, body_image_url = ?, body_image = ?, height = ?, weight = ?, hair_color_id = ?, hair_size_id = ?, eye_color_id = ?, personality_id = ?, appearance_id = ?, silhouette_id = ?, body_highlight_id = ?, marital_status_id = ?, has_childrens_id = ?, live_with_id = ?, citizenship_id = ?, ethnical_origin_id = ?, religion_id = ?, religion_level_id = ?, marriage_opinion_id = ?, romanticism_id = ?, want_childrens_id = ?, studies_id = ?, languages_id = ?, profession_id = ?, salary_id = ?, style_id = ?, diet_id = ?, smoke_id = ?, animals_id = ?, hobbies_id = ?, sports_id = ?, sparetime_id = ?, music_id = ?, movies_id = ? where username = ?", self.gender, self.dateOfBirth, self.city, self.presentation, self.faceFrontImageURL, UIImagePNGRepresentation(self.faceFrontImage), self.faceProfileImageURL, UIImagePNGRepresentation(self.faceProfileImage), self.bodyImageURL, UIImagePNGRepresentation(self.bodyImage), self.height, self.weight, self.hairColorId, self.hairSizeId, self.eyeColorId, self.personalityId, self.appearanceId, self.silhouetteId, self.bodyHighlightId, self.maritalStatusId, self.hasChildrensId, self.liveWithId, self.citizenshipId, self.ethnicalOriginId, self.religionId, self.religionLevelId, self.marriageOpinionId, self.romanticismId, self.wantChildrensId, self.studiesId, languagesIdString, self.professionId, self.salaryId, self.styleId, self.dietId, self.smokeId, animalsIdString, hobbiesIdString, sportsIdString, sparetimeIdString, musicIdString, moviesIdString, self.username];
         [db commit];
     }
     else
     {
         // Insert user to db
         [db beginTransaction];
-        [db executeUpdate:@"insert into user_profile (username, face_front_image_url, face_front_image, face_profile_image_url, face_profile_image, body_image_url, body_image, height, weight, hair_color_id, hair_size_id, eye_color_id, personality_id, appearance_id, silhouette_id, body_highlight_id, marital_status_id, has_childrens_id, live_with_id, citizenship_id, ethnical_origin_id, religion_id, religion_level_id, marriage_opinion_id, romanticism_id, want_childrens_id, studies_id, languages_id, profession_id, salary_id, style_id, diet_id, smoke_id, animals_id, hobbies_id, sports_id, sparetime_id, music_id, movies_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", username, self.faceFrontImageURL, UIImagePNGRepresentation(self.faceFrontImage), self.faceProfileImageURL, UIImagePNGRepresentation(self.faceProfileImage), self.bodyImageURL, UIImagePNGRepresentation(self.bodyImage), self.height, self.weight, self.hairColorId, self.hairSizeId, self.eyeColorId, self.personalityId, self.appearanceId, self.silhouetteId, self.bodyHighlightId, self.maritalStatusId, self.hasChildrensId, self.liveWithId, self.citizenshipId, self.ethnicalOriginId, self.religionId, self.religionLevelId, self.marriageOpinionId, self.romanticismId, self.wantChildrensId, self.studiesId, languagesIdString, self.professionId, self.salaryId, self.styleId, self.dietId, self.smokeId, animalsIdString, hobbiesIdString, sportsIdString, sparetimeIdString, musicIdString, moviesIdString];
+        [db executeUpdate:@"insert into user_profile (username, gender, date_of_birth, city, presentation, face_front_image_url, face_front_image, face_profile_image_url, face_profile_image, body_image_url, body_image, height, weight, hair_color_id, hair_size_id, eye_color_id, personality_id, appearance_id, silhouette_id, body_highlight_id, marital_status_id, has_childrens_id, live_with_id, citizenship_id, ethnical_origin_id, religion_id, religion_level_id, marriage_opinion_id, romanticism_id, want_childrens_id, studies_id, languages_id, profession_id, salary_id, style_id, diet_id, smoke_id, animals_id, hobbies_id, sports_id, sparetime_id, music_id, movies_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", username, self.gender, self.dateOfBirth, self.city, self.presentation, self.faceFrontImageURL, UIImagePNGRepresentation(self.faceFrontImage), self.faceProfileImageURL, UIImagePNGRepresentation(self.faceProfileImage), self.bodyImageURL, UIImagePNGRepresentation(self.bodyImage), self.height, self.weight, self.hairColorId, self.hairSizeId, self.eyeColorId, self.personalityId, self.appearanceId, self.silhouetteId, self.bodyHighlightId, self.maritalStatusId, self.hasChildrensId, self.liveWithId, self.citizenshipId, self.ethnicalOriginId, self.religionId, self.religionLevelId, self.marriageOpinionId, self.romanticismId, self.wantChildrensId, self.studiesId, languagesIdString, self.professionId, self.salaryId, self.styleId, self.dietId, self.smokeId, animalsIdString, hobbiesIdString, sportsIdString, sparetimeIdString, musicIdString, moviesIdString];
         [db commit];
     }
+
+    // Also save the user candidate profile to db
+    [self.candidateProfile saveToDatabase];
 }
 
 - (bool)usernameIsInDatabase:(NSString *)_username

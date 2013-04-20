@@ -194,7 +194,7 @@ static const int kNavigationScrollMargin = 3;
 
 - (void)showUserProfile:(NSString *)username
 {
-    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithNibName:@"UserProfileViewController" bundle:nil withUsername:username];
+    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithUsername:username isEditable:NO];
     [self.navigationController pushViewController:upvc animated:YES];
 }
 

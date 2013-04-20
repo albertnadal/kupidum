@@ -23,7 +23,7 @@
 
 #warning Disable the following log traces
         db.logsErrors = YES;
-        db.traceExecution = NO;
+        db.traceExecution = YES;
 
         if (![db open])
         {
