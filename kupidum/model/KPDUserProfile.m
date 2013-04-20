@@ -185,8 +185,8 @@
     [components setDay:26];
     [components setMonth:9];
     [components setYear:1981];
-
     self.dateOfBirth = [[NSCalendar currentCalendar] dateFromComponents:components];
+
     self.presentation = @"I was working from year 2005 to the begining of 2008 at ArenaMobile (Reus, Spain), a global multimedia mobile content provider that worked with partners like Vodafone, Movistar, Orange, Claro and many other telcos worldwide. At 2008 I joined the Internet Web Serveis company (Lleida, Spain), just coinciding with the arrival of the first iPhone SDK from Apple to the mobile market. IWS is a local ISP that provides all kind of custom made Internet web services with customers like Terra, Grupo Prisa or Fon.";
     self.city = @"Girona";
     self.faceFrontImageURL = @"";
