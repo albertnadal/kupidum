@@ -277,6 +277,9 @@
 		FFE216871722D6C3001C4EDA /* img_user_default_profile_woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE216841722D6C3001C4EDA /* img_user_default_profile_woman@2x.png */; };
 		FFE2168E1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE2168B1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.m */; };
 		FFE2168F1724530A001C4EDA /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE2168D1724530A001C4EDA /* UIScrollView+SVPullToRefresh.m */; };
+		FFE216911724990F001C4EDA /* img_user_default_body_man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE216901724990C001C4EDA /* img_user_default_body_man@2x.png */; };
+		FFE2169317249B5C001C4EDA /* img_user_default_front_man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE2169217249B5B001C4EDA /* img_user_default_front_man@2x.png */; };
+		FFE216951724A38A001C4EDA /* img_user_default_profile_man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE216941724A389001C4EDA /* img_user_default_profile_man@2x.png */; };
 		FFEDFEDC168E457B00C493AB /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED2168E457B00C493AB /* NSBubbleData.m */; };
 		FFEDFEDD168E457B00C493AB /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED4168E457B00C493AB /* UIBubbleHeaderTableViewCell.m */; };
 		FFEDFEDE168E457B00C493AB /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED6168E457B00C493AB /* UIBubbleTableView.m */; };
@@ -662,6 +665,9 @@
 		FFE2168B1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+SVInfiniteScrolling.m"; path = "kupidum/SVPullToRefresh/UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		FFE2168C1724530A001C4EDA /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+SVPullToRefresh.h"; path = "kupidum/SVPullToRefresh/UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		FFE2168D1724530A001C4EDA /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+SVPullToRefresh.m"; path = "kupidum/SVPullToRefresh/UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
+		FFE216901724990C001C4EDA /* img_user_default_body_man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_user_default_body_man@2x.png"; path = "kupidum/images/img_user_default_body_man@2x.png"; sourceTree = "<group>"; };
+		FFE2169217249B5B001C4EDA /* img_user_default_front_man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_user_default_front_man@2x.png"; path = "kupidum/images/img_user_default_front_man@2x.png"; sourceTree = "<group>"; };
+		FFE216941724A389001C4EDA /* img_user_default_profile_man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_user_default_profile_man@2x.png"; path = "kupidum/images/img_user_default_profile_man@2x.png"; sourceTree = "<group>"; };
 		FFEDFED1168E457B00C493AB /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBubbleData.h; path = kupidum/UIBubbleTableView/src/NSBubbleData.h; sourceTree = "<group>"; };
 		FFEDFED2168E457B00C493AB /* NSBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBubbleData.m; path = kupidum/UIBubbleTableView/src/NSBubbleData.m; sourceTree = "<group>"; };
 		FFEDFED3168E457B00C493AB /* UIBubbleHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBubbleHeaderTableViewCell.h; path = kupidum/UIBubbleTableView/src/UIBubbleHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -924,6 +930,9 @@
 				FF10044216D79A05003FA3F9 /* db */,
 				FF4902921690F45800500ABB /* audio */,
 				B707444B166BDE7A007E8B23 /* NavigationButtons */,
+				FFE216901724990C001C4EDA /* img_user_default_body_man@2x.png */,
+				FFE2169217249B5B001C4EDA /* img_user_default_front_man@2x.png */,
+				FFE216941724A389001C4EDA /* img_user_default_profile_man@2x.png */,
 				FFE216821722D6C3001C4EDA /* img_user_default_body_woman@2x.png */,
 				FFE216831722D6C3001C4EDA /* img_user_default_front_woman@2x.png */,
 				FFE216841722D6C3001C4EDA /* img_user_default_profile_woman@2x.png */,
@@ -1744,6 +1753,9 @@
 				FFE216851722D6C3001C4EDA /* img_user_default_body_woman@2x.png in Resources */,
 				FFE216861722D6C3001C4EDA /* img_user_default_front_woman@2x.png in Resources */,
 				FFE216871722D6C3001C4EDA /* img_user_default_profile_woman@2x.png in Resources */,
+				FFE216911724990F001C4EDA /* img_user_default_body_man@2x.png in Resources */,
+				FFE2169317249B5C001C4EDA /* img_user_default_front_man@2x.png in Resources */,
+				FFE216951724A38A001C4EDA /* img_user_default_profile_man@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -109,7 +109,7 @@
     {
         switch (self.userProfile.gender.intValue)
         {
-            case kMale:     [self.faceFrontPhoto setImage:[UIImage imageNamed:@"img_user_default_front_woman.png"]];
+            case kMale:     [self.faceFrontPhoto setImage:[UIImage imageNamed:@"img_user_default_front_man.png"]];
                 break;
                 
             case kFemale:   [self.faceFrontPhoto setImage:[UIImage imageNamed:@"img_user_default_front_woman.png"]];
@@ -126,7 +126,7 @@
     {
         switch (self.userProfile.gender.intValue)
         {
-            case kMale:     [self.faceProfilePhoto setImage:[UIImage imageNamed:@"img_user_default_profile_woman.png"]];
+            case kMale:     [self.faceProfilePhoto setImage:[UIImage imageNamed:@"img_user_default_profile_man.png"]];
                 break;
                 
             case kFemale:   [self.faceProfilePhoto setImage:[UIImage imageNamed:@"img_user_default_profile_woman.png"]];
@@ -143,7 +143,7 @@
     {
         switch (self.userProfile.gender.intValue)
         {
-            case kMale:     [self.bodySilouetePhoto setImage:[UIImage imageNamed:@"img_user_default_body_woman.png"]];
+            case kMale:     [self.bodySilouetePhoto setImage:[UIImage imageNamed:@"img_user_default_body_man.png"]];
                 break;
                 
             case kFemale:   [self.bodySilouetePhoto setImage:[UIImage imageNamed:@"img_user_default_body_woman.png"]];
