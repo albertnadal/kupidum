@@ -77,7 +77,6 @@
     candidatesYouMayLikeView.layer.cornerRadius = 1.0;
     candidatesYouMayLikeView.layer.masksToBounds = YES;
     [candidatesYouMayLikeTableViewController scrollContentToLeft];
-
 }
 
 /*- (void)scrollViewDidScroll:(UIScrollView *)scrollView

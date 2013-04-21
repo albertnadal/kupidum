@@ -22,28 +22,34 @@ typedef enum UserGender
 
     // Basic information
     NSNumber *gender;
+    NSString *genderString;
     NSNumber *genderCandidate;
+    NSString *genderCandidateString;
     NSDate *dateOfBirth;
     NSString *city;
     NSNumber *professionId;
-    NSString *profession;
+    NSString *professionString;
 }
 
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *avatarURL;
 @property (nonatomic, retain) UIImage *avatar;
 @property (nonatomic, retain) NSNumber *gender;
+@property (nonatomic, retain) NSString *genderString;
 @property (nonatomic, retain) NSNumber *genderCandidate;
+@property (nonatomic, retain) NSString *genderCandidateString;
 @property (nonatomic, retain) NSDate *dateOfBirth;
 @property (nonatomic, retain) NSString *city;
 @property (nonatomic, retain) NSNumber *professionId;
-@property (nonatomic, retain) NSString *profession;
+@property (nonatomic, retain) NSString *professionString;
 
 - (id)initWithUsername:(NSString *)_username;
-- (id)initWithUsername:(NSString *)_username avatarUrl:(NSString *)avatar_url gender:(int)the_gender genderCandidate:(int)gender_candidate_ dateOfBirth:(NSDate *)date_of_birth city:(NSString *)city_ professionId:(int)profession_id;
+- (id)initWithUsername:(NSString *)_username avatarUrl:(NSString *)avatar_url avatar:(UIImage *)avatar_image gender:(int)the_gender genderCandidate:(int)gender_candidate_ dateOfBirth:(NSDate *)date_of_birth city:(NSString *)city_ professionId:(int)profession_id;
 - (bool)usernameIsInDatabase:(NSString *)_username;
 - (void)retrieveDataFromWebService;
+- (void)retrieveDataFromDatabase;
 - (void)saveToDatabase;
 - (NSString *)professionStringFromIdentifier:(int)profession_id;
+- (NSString *)genderStringFromIdentifier:(int)gender_id;
 
 @end

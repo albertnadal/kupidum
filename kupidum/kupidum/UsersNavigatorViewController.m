@@ -22,7 +22,6 @@ static const int kNavigationScrollMargin = 3;
 @interface UsersNavigatorViewController ()
 {
     NSArray *usersList;
-    NSArray *usersProfiles;
 
     int contentScrollNavigatorWidth;
     int contentScrollProfilesWidth;
@@ -91,7 +90,7 @@ static const int kNavigationScrollMargin = 3;
         [scrollProfiles setContentOffset:CGPointMake(offsetXScrollUsersProfiles, 0) animated:NO];
 
         int indexSelectedUser = (scrollView.contentOffset.x * [usersList count]) / (([usersList count]*(kSpaceBetweenAvatars + kAvatarWidth)));
-        [self setTitle:[NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), indexSelectedUser+1, [usersList count]]];
+        [self setTitle:[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), indexSelectedUser+1, [usersList count]], [[usersList objectAtIndex:indexSelectedUser] username]]];
     }
     else if(scrollView == scrollProfiles)
     {
@@ -99,7 +98,8 @@ static const int kNavigationScrollMargin = 3;
         [scrollNavigator setContentOffset:CGPointMake(offsetXScrollUsersNavigator, 0) animated:NO];
 
         int indexSelectedUser = (scrollView.contentOffset.x * [usersList count]) / ([usersList count]*[UIScreen mainScreen].bounds.size.width);
-        [self setTitle:[NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), indexSelectedUser+1, [usersList count]]];
+        [self setTitle:[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), indexSelectedUser+1, [usersList count]], [[usersList objectAtIndex:indexSelectedUser] username]]];
+        //[self setTitle:[NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), indexSelectedUser+1, [usersList count]]];
     }
 }
 
@@ -124,16 +124,6 @@ static const int kNavigationScrollMargin = 3;
     KPDUser *user7 = [[KPDUser alloc] initWithUsername:@"user7"];
     KPDUser *user8 = [[KPDUser alloc] initWithUsername:@"user8"];
     usersList = @[ user1, user2, user3, user4, user5, user6, user7, user8 ];
-
-    KPDUserProfile *profile1 = [[KPDUserProfile alloc] initWithUsername:@"user1"];
-    KPDUserProfile *profile2 = [[KPDUserProfile alloc] initWithUsername:@"user2"];
-    KPDUserProfile *profile3 = [[KPDUserProfile alloc] initWithUsername:@"user3"];
-    KPDUserProfile *profile4 = [[KPDUserProfile alloc] initWithUsername:@"user4"];
-    KPDUserProfile *profile5 = [[KPDUserProfile alloc] initWithUsername:@"user5"];
-    KPDUserProfile *profile6 = [[KPDUserProfile alloc] initWithUsername:@"user6"];
-    KPDUserProfile *profile7 = [[KPDUserProfile alloc] initWithUsername:@"user7"];
-    KPDUserProfile *profile8 = [[KPDUserProfile alloc] initWithUsername:@"user8"];
-    usersProfiles = @[ profile1, profile2, profile3, profile4, profile5, profile6, profile7, profile8 ];
 }
 
 - (void)showUsersNavigator
@@ -152,7 +142,7 @@ static const int kNavigationScrollMargin = 3;
         UIView *avatarContainer = [[UIView alloc] initWithFrame:CGRectMake(x, 0, kAvatarWidth, kAvatarHeight)];
         [avatarContainer setBackgroundColor:[UIColor whiteColor]];
         UIImageView *avatarImage = [[UIImageView alloc] initWithFrame:CGRectMake(1, 1, kAvatarWidth-2, kAvatarHeight-2)];
-        [avatarImage setImage:[UIImage imageNamed:@"fake_photo1.png"]];
+        [avatarImage setImage:[user avatar]];
         [avatarContainer addSubview:avatarImage];
         [scrollNavigator addSubview:avatarContainer];
 
@@ -174,11 +164,11 @@ static const int kNavigationScrollMargin = 3;
     userNavigatorProfileViewControllers = [[NSMutableArray alloc] init];
 
     int x = 0;
-    for(int i=0; i<[usersProfiles count]; i++)
+    for(int i=0; i<[usersList count]; i++)
     {        
-        KPDUserProfile *userProfile = [usersProfiles objectAtIndex:i];
+        KPDUser *user = [usersList objectAtIndex:i];
 
-        UserNavigatorProfileViewController *unpvc = [[UserNavigatorProfileViewController alloc] initWithNibName:@"UserNavigatorProfileViewController" bundle:nil];
+        UserNavigatorProfileViewController *unpvc = [[UserNavigatorProfileViewController alloc] initWithUser:user];
         [unpvc setDelegate:self];
         [unpvc.view setFrame:CGRectMake(x, 0, [UIScreen mainScreen].bounds.size.width, scrollProfiles.frame.size.height)];
         [scrollProfiles addSubview:unpvc.view];
@@ -203,7 +193,7 @@ static const int kNavigationScrollMargin = 3;
     [super viewDidLoad];
 
     [self showNavigationBarButtons];
-    [self setTitle:[NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), 1, [usersList count]]];
+    [self setTitle:[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), 1, [usersList count]], [[usersList objectAtIndex:0] username]]];
     [self showUsersNavigator];
     [self showUsersProfiles];
 }

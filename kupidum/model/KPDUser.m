@@ -11,7 +11,7 @@
 
 @implementation KPDUser
 
-@synthesize username, avatarURL, avatar, gender, genderCandidate, dateOfBirth, city, professionId, profession;
+@synthesize username, avatarURL, avatar, gender, genderCandidate, dateOfBirth, city, professionId, professionString, genderCandidateString, genderString;
 
 - (id)init
 {
@@ -22,27 +22,32 @@
         self.avatar = nil;
         self.gender = nil;
         self.genderCandidate = nil;
+        self.genderCandidateString = nil;
         self.dateOfBirth = nil;
         self.city = nil;
         self.professionId = nil;
-        self.profession = nil;
+        self.professionString = nil;
+        self.genderString = nil;
     }
 
     return self;
 }
 
-- (id)initWithUsername:(NSString *)_username avatarUrl:(NSString *)avatar_url gender:(int)the_gender genderCandidate:(int)gender_candidate_ dateOfBirth:(NSDate *)date_of_birth city:(NSString *)city_ professionId:(int)profession_id
+- (id)initWithUsername:(NSString *)_username avatarUrl:(NSString *)avatar_url avatar:(UIImage *)avatar_image gender:(int)the_gender genderCandidate:(int)gender_candidate_ dateOfBirth:(NSDate *)date_of_birth city:(NSString *)city_ professionId:(int)profession_id
 {
     if(self = [super init])
     {
         self.username = _username;
         self.avatarURL = avatar_url;
+        self.avatar = avatar_image;
         self.gender = [NSNumber numberWithInt:the_gender];
         self.genderCandidate = [NSNumber numberWithInt:gender_candidate_];
         self.dateOfBirth = date_of_birth;
         self.city = city_;
         self.professionId = [NSNumber numberWithInt:profession_id];
-        self.profession = [self professionStringFromIdentifier:[self.professionId intValue]];
+        self.professionString = [self professionStringFromIdentifier:[self.professionId intValue]];
+        self.genderCandidateString = [self genderStringFromIdentifier:[self.genderCandidate intValue]];
+        self.genderString = [self genderStringFromIdentifier:[self.gender intValue]];
 
         // If the user is not in the database then we have to retrieve the full data from web service and save to database
         if(![self usernameIsInDatabase:_username])
@@ -66,6 +71,10 @@
             [self retrieveDataFromWebService];
             [self saveToDatabase];
         }
+        else
+        {
+            [self retrieveDataFromDatabase];
+        }
     }
 
     return self;
@@ -74,11 +83,13 @@
 - (void)retrieveDataFromWebService
 {
     //warning Implement this function!
-    self.avatar = [[UIImage alloc] init];
+    self.avatar = [UIImage imageNamed:@"me.jpg"];
     self.avatarURL = @"https://twimg0-a.akamaihd.net/profile_images/3070674028/9f2af264ad0fa725337701afe41dbcab.jpeg";
 
     self.gender = [NSNumber numberWithInt:kMale];
+    self.genderString = [self genderStringFromIdentifier:[self.gender intValue]];
     self.genderCandidate = [NSNumber numberWithInt:kFemale];
+    self.genderCandidateString = [self genderStringFromIdentifier:[self.genderCandidate intValue]];
 
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setDay:26];
@@ -88,14 +99,49 @@
 
     self.city = @"Girona";
     self.professionId = @42; // Metge
-    self.profession = [self professionStringFromIdentifier:[self.professionId intValue]];
+    self.professionString = [self professionStringFromIdentifier:[self.professionId intValue]];
+}
+
+- (void)retrieveDataFromDatabase
+{
+    FMDatabase *db = [[KupidumDBSingleton sharedInstance] db];
+    
+    FMResultSet *rs = [db executeQuery:@"select * from user where username = ?", self.username];
+
+    while ([rs next])
+    {
+        self.gender = [NSNumber numberWithInt:[rs intForColumn:@"gender"]];
+        self.genderCandidate = [NSNumber numberWithInt:[rs intForColumn:@"gender_candidate"]];
+        self.genderCandidateString = [self genderStringFromIdentifier:[self.genderCandidate intValue]];
+        self.dateOfBirth = [rs dateForColumn:@"date_of_birth"];
+        self.city = [rs stringForColumn:@"city"];
+        self.professionId = [NSNumber numberWithInt:[rs intForColumn:@"profession_id"]];
+        self.professionString = [self professionStringFromIdentifier:[self.professionId intValue]];
+
+        self.avatarURL = [rs stringForColumn:@"avatar_url"];
+        NSData *avatarImageData = [rs dataForColumn:@"avatar"];
+        if([avatarImageData length])
+            self.avatar = [[UIImage alloc] initWithData:avatarImageData];
+    }
+    
+    [rs close];
+}
+
+- (NSString *)genderStringFromIdentifier:(int)gender_id
+{
+    switch(gender_id)
+    {
+        case kMale:     return NSLocalizedString(@"man", @"");      break;
+        case kFemale:   return NSLocalizedString(@"woman", @"");    break;
+    }
+
+    return @"";
 }
 
 - (NSString *)professionStringFromIdentifier:(int)profession_id
 {
     switch(profession_id)
     {
-        case 0: return @""; break;
         case 1: return NSLocalizedString(@"[1]actor", @""); break;
         case 2: return NSLocalizedString(@"[2]agente de seguros", @""); break;
         case 3: return NSLocalizedString(@"[3]agente de viajes", @""); break;
@@ -163,7 +209,7 @@
         case 93: return NSLocalizedString(@"[93]panadero", @""); break;
     }
 
-    return @"";
+    return nil;
 }
 
 - (void)saveToDatabase
