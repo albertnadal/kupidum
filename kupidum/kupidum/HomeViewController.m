@@ -14,23 +14,16 @@
 #import "ProfileFormDataSource.h"
 #import <IBAForms/IBAForms.h>
 
-/*typedef enum ScrollDirection {
-    ScrollDirectionNone,
-    ScrollDirectionRight,
-    ScrollDirectionLeft,
-    ScrollDirectionUp,
-    ScrollDirectionDown,
-    ScrollDirectionCrazy,
-} ScrollDirection;*/
-
 @interface HomeViewController ()
 {
-/*    float lastContentOffset;
-    bool topBarIsMoving;
-    CGRect originalViewFrame;
-    ScrollDirection lastScrollDirection;*/
+
 }
 
+- (void)retrieveDataFromWebService;
+- (void)setupUserInterface;
+- (void)updateLastVisitorButton;
+- (void)updateLastMessageUserButton;
+- (void)updateLastInterestedUserButton;
 - (NSMutableDictionary *)retrieveUserProfileModelForUser:(NSString *)username_;
 - (void)hideTopBarAnimated;
 - (void)showTopBarAnimated;
@@ -39,13 +32,18 @@
 
 @implementation HomeViewController
 
-@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView, background;
+@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView, background, lastVisitor, lastMessageUser, lastInterestedUser, lastVisitorButton, lastMessageUserButton, lastInterestedUserButton, interestingPeopleLivingNear, interestingPeopleYouMayLike, nearToYouCandidatesTableViewController, candidatesYouMayLikeTableViewController, myAccountButton, myProfileButton, nearToYouCandidatesLabel, candidatesYouMayLikeLabel, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self)
+    {
+        self.lastVisitor = nil;
+        self.lastMessageUser = nil;
+        self.lastInterestedUser = nil;
+        self.interestingPeopleLivingNear = nil;
+        self.interestingPeopleYouMayLike = nil;
     }
     return self;
 }
@@ -54,7 +52,9 @@
 {
     [super viewDidLoad];
 
-    [scroll setContentSize:CGSizeMake(320, 535)];
+    [self setupUserInterface];
+
+    [scroll setContentSize:CGSizeMake(320, 532)];
 
     [scroll addPullToRefreshWithActionHandler:^{
         // prepend data to dataSource, insert cells at top of table view
@@ -62,6 +62,13 @@
         NSLog(@"Refresh!");
         [scroll.pullToRefreshView stopAnimating];
     }];
+
+#warning remove the loading of fake data and implement the data loading from the web service
+    [self retrieveDataFromWebService];
+
+    [self updateLastVisitorButton];
+    [self updateLastMessageUserButton];
+    [self updateLastInterestedUserButton];
 
     profileResumeView.layer.cornerRadius = 5.0;
     profileResumeView.layer.masksToBounds = YES;
@@ -81,76 +88,196 @@
     [candidatesYouMayLikeTableViewController scrollContentToLeft];
 }
 
-/*- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)setupUserInterface
 {
-    ScrollDirection scrollDirection;
-    if (lastContentOffset > scrollView.contentOffset.y)
-        scrollDirection = ScrollDirectionDown;
-    else if (lastContentOffset <= scrollView.contentOffset.y)
-        scrollDirection = ScrollDirectionUp;
-    
-    lastContentOffset = scrollView.contentOffset.y;
+    // people neart to you label
+    [self.nearToYouCandidatesLabel setText:NSLocalizedString(@"Interesting people living near to you", @"")];
+    [self.nearToYouCandidatesLabel.layer setMasksToBounds:NO];
+    self.nearToYouCandidatesLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.nearToYouCandidatesLabel.layer.shadowOpacity = 0.4;
+    self.nearToYouCandidatesLabel.layer.shadowRadius = 1;
+    self.nearToYouCandidatesLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
 
-    if(scrollDirection == lastScrollDirection)
-        return;
+    // people you may like label
+    [self.candidatesYouMayLikeLabel setText:NSLocalizedString(@"Interesting people you may like", @"")];
+    [self.candidatesYouMayLikeLabel.layer setMasksToBounds:NO];
+    self.candidatesYouMayLikeLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.candidatesYouMayLikeLabel.layer.shadowOpacity = 0.4;
+    self.candidatesYouMayLikeLabel.layer.shadowRadius = 1;
+    self.candidatesYouMayLikeLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
 
-    lastScrollDirection = scrollDirection;
+    // last visitor button
+    [self.lastVisitorButton.titleLabel.layer setMasksToBounds:NO];
+    self.lastVisitorButton.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.lastVisitorButton.titleLabel.layer.shadowOpacity = 1.0;
+    self.lastVisitorButton.titleLabel.layer.shadowRadius = 3;
+    self.lastVisitorButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
 
-    if((!topBarIsMoving) && (scrollDirection == ScrollDirectionUp) && (!self.navigationController.navigationBar.isHidden) && (scrollView.dragging))
+    [self.lastVisitorButton.imageView.layer setMasksToBounds:NO];
+    self.lastVisitorButton.imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.lastVisitorButton.imageView.layer.shadowOpacity = 1.0;
+    self.lastVisitorButton.imageView.layer.shadowRadius = 3;
+    self.lastVisitorButton.imageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+
+    // last message user button
+    [self.lastMessageUserButton.titleLabel.layer setMasksToBounds:NO];
+    self.lastMessageUserButton.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.lastMessageUserButton.titleLabel.layer.shadowOpacity = 1.0;
+    self.lastMessageUserButton.titleLabel.layer.shadowRadius = 3;
+    self.lastMessageUserButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+
+    [self.lastMessageUserButton.imageView.layer setMasksToBounds:NO];
+    self.lastMessageUserButton.imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.lastMessageUserButton.imageView.layer.shadowOpacity = 1.0;
+    self.lastMessageUserButton.imageView.layer.shadowRadius = 3;
+    self.lastMessageUserButton.imageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+
+    // last interested user button
+    [self.lastInterestedUserButton.titleLabel.layer setMasksToBounds:NO];
+    self.lastInterestedUserButton.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.lastInterestedUserButton.titleLabel.layer.shadowOpacity = 1.0;
+    self.lastInterestedUserButton.titleLabel.layer.shadowRadius = 3;
+    self.lastInterestedUserButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+
+    [self.lastInterestedUserButton.imageView.layer setMasksToBounds:NO];
+    self.lastInterestedUserButton.imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.lastInterestedUserButton.imageView.layer.shadowOpacity = 1.0;
+    self.lastInterestedUserButton.imageView.layer.shadowRadius = 3;
+    self.lastInterestedUserButton.imageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+
+    // my profile button
+    [self.myProfileButton.titleLabel.layer setMasksToBounds:NO];
+    self.myProfileButton.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.myProfileButton.titleLabel.layer.shadowOpacity = 0.4;
+    self.myProfileButton.titleLabel.layer.shadowRadius = 1;
+    self.myProfileButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+
+    [self.myProfileButton.imageView.layer setMasksToBounds:NO];
+    self.myProfileButton.imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.myProfileButton.imageView.layer.shadowOpacity = 0.4;
+    self.myProfileButton.imageView.layer.shadowRadius = 1;
+    self.myProfileButton.imageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+
+    // my account button
+    [self.myAccountButton.titleLabel.layer setMasksToBounds:NO];
+    self.myAccountButton.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.myAccountButton.titleLabel.layer.shadowOpacity = 0.4;
+    self.myAccountButton.titleLabel.layer.shadowRadius = 1;
+    self.myAccountButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+
+    [self.myAccountButton.imageView.layer setMasksToBounds:NO];
+    self.myAccountButton.imageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.myAccountButton.imageView.layer.shadowOpacity = 0.4;
+    self.myAccountButton.imageView.layer.shadowRadius = 1;
+    self.myAccountButton.imageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+}
+
+- (void)retrieveDataFromWebService
+{
+    self.lastVisitor = [[KPDUser alloc] initWithUsername:@"pepito"];
+    self.lastMessageUser = [[KPDUser alloc] initWithUsername:@"fulanito"];
+    self.lastInterestedUser = [[KPDUser alloc] initWithUsername:@"menganito"];
+
+    KPDUser *user1 = [[KPDUser alloc] initWithUsername:@"superman"];
+    KPDUser *user2 = [[KPDUser alloc] initWithUsername:@"doraemon"];
+    KPDUser *user3 = [[KPDUser alloc] initWithUsername:@"gojira"];
+    KPDUser *user4 = [[KPDUser alloc] initWithUsername:@"muzaman"];
+    KPDUser *user5 = [[KPDUser alloc] initWithUsername:@"perchita"];
+
+    self.interestingPeopleLivingNear = @[user1, user2, user3, user4, user5];
+    self.interestingPeopleYouMayLike = @[user1, user2, user3, user4, user5];
+}
+
+- (void)updateLastVisitorButton
+{
+    if(self.lastVisitor)
     {
-        NSLog(@"Up!");
-        [self performSelectorOnMainThread:@selector(hideTopBarAnimated) withObject:nil waitUntilDone:YES];
+        [self.lastVisitorButton setBackgroundImage:self.lastVisitor.avatar forState:UIControlStateNormal];
+        [self.lastVisitorButton setTitle:@"2" forState:UIControlStateNormal];
     }
-    else if((!topBarIsMoving) && (scrollDirection == ScrollDirectionDown) && (self.navigationController.navigationBar.isHidden) && (scrollView.dragging))
+    else
     {
-        NSLog(@"Down!");
-        [self performSelectorOnMainThread:@selector(showTopBarAnimated) withObject:nil waitUntilDone:YES];
+        [self.lastVisitorButton setBackgroundImage:nil forState:UIControlStateNormal];
+        [self.lastVisitorButton setTitle:@"0" forState:UIControlStateNormal];
     }
 }
 
-- (void)hideTopBarAnimated
+- (void)updateLastMessageUserButton
 {
-    if(topBarIsMoving)
-        return;
-
-    topBarIsMoving = true;
-
-#ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-#if __IPHONE_OS_VERSION_MIN_REQUIRED > 30100
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
-#else
-    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
-#endif
-#endif
-
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-
-    topBarIsMoving = false;
+    if(self.lastMessageUser)
+    {
+        [self.lastMessageUserButton setBackgroundImage:self.lastMessageUser.avatar forState:UIControlStateNormal];
+        [self.lastMessageUserButton setTitle:@"3" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.lastMessageUserButton setBackgroundImage:nil forState:UIControlStateNormal];
+        [self.lastMessageUserButton setTitle:@"0" forState:UIControlStateNormal];
+    }
 }
 
-- (void)showTopBarAnimated
+- (void)updateLastInterestedUserButton
 {
-    if(topBarIsMoving)
-        return;
+    if(self.lastInterestedUser)
+    {
+        [self.lastInterestedUserButton setBackgroundImage:self.lastInterestedUser.avatar forState:UIControlStateNormal];
+        [self.lastInterestedUserButton setTitle:@"1" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.lastInterestedUserButton setBackgroundImage:nil forState:UIControlStateNormal];
+        [self.lastInterestedUserButton setTitle:@"0" forState:UIControlStateNormal];
+    }
+}
 
-    topBarIsMoving = true;
-    
-#ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-#if __IPHONE_OS_VERSION_MIN_REQUIRED > 30100
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
-#else
-    [[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
-#endif
-#endif
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
-    topBarIsMoving = false;
-}*/
+- (void)usersHorizontalTableViewController:(KPDUsersHorizontalTableViewController *)tableViewController didSelectUserAtIndex:(int)index
+{
+    KPDUser *user = nil;
+
+    if((tableViewController == self.nearToYouCandidatesTableViewController) && (self.interestingPeopleLivingNear))
+    {
+        user = [self.interestingPeopleLivingNear objectAtIndex:index];
+    }
+    else if((tableViewController == self.candidatesYouMayLikeTableViewController) && (self.interestingPeopleYouMayLike))
+    {
+        user = [self.interestingPeopleYouMayLike objectAtIndex:index];
+    }
+
+    UserProfileViewController *upvc = [[UserProfileViewController alloc] initWithUsername:user.username isEditable:NO];
+    [self.navigationController pushViewController:upvc animated:YES];
+}
 
 - (void)usersHorizontalTableViewControllerDidRefresh:(KPDUsersHorizontalTableViewController *)tableViewController
 {
     [self showPeopleLivingNearToUser:@"Superwoman"];
+}
+
+- (KPDUser *)usersHorizontalTableViewControllerDidRefresh:(KPDUsersHorizontalTableViewController *)tableViewController userForRowAtIndex:(int)index
+{
+    if((tableViewController == self.nearToYouCandidatesTableViewController) && (self.interestingPeopleLivingNear))
+    {
+        return [self.interestingPeopleLivingNear objectAtIndex:index];
+    }
+    else if((tableViewController == self.candidatesYouMayLikeTableViewController) && (self.interestingPeopleYouMayLike))
+    {
+        return [self.interestingPeopleYouMayLike objectAtIndex:index];
+    }
+    
+    return nil;
+}
+
+- (NSInteger)numberOfUsersForHorizontalTableViewController:(KPDUsersHorizontalTableViewController *)tableViewController
+{
+    if((tableViewController == self.nearToYouCandidatesTableViewController) && (self.interestingPeopleLivingNear))
+    {
+        return [self.interestingPeopleLivingNear count];
+    }
+    else if((tableViewController == self.candidatesYouMayLikeTableViewController) && (self.interestingPeopleYouMayLike))
+    {
+        return [self.interestingPeopleYouMayLike count];
+    }
+
+    return 0;
 }
 
 - (void)showPeopleLivingNearToUser:(NSString *)theUser

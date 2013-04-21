@@ -253,10 +253,7 @@
 											<bytes key="NSWhite">MQA</bytes>
 										</object>
 										<reference key="IBUINormalTitleColor" ref="942740747"/>
-										<object class="NSColor" key="IBUINormalTitleShadowColor" id="544898246">
-											<int key="NSColorSpace">3</int>
-											<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
-										</object>
+										<reference key="IBUINormalTitleShadowColor" ref="447696025"/>
 										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">img_profile_icon.png</string>
@@ -325,7 +322,7 @@
 										<string key="IBUINormalTitle">My account</string>
 										<reference key="IBUIHighlightedTitleColor" ref="942740747"/>
 										<reference key="IBUINormalTitleColor" ref="942740747"/>
-										<reference key="IBUINormalTitleShadowColor" ref="544898246"/>
+										<reference key="IBUINormalTitleShadowColor" ref="447696025"/>
 										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">img_account_icon.png</string>
@@ -377,11 +374,11 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
-										<double key="IBUITitleEdgeInsets.top">40</double>
+										<double key="IBUITitleEdgeInsets.top">55</double>
 										<double key="IBUITitleEdgeInsets.bottom">0.0</double>
 										<double key="IBUITitleEdgeInsets.left">11</double>
 										<double key="IBUITitleEdgeInsets.right">0.0</double>
-										<double key="IBUIImageEdgeInsets.top">41</double>
+										<double key="IBUIImageEdgeInsets.top">56</double>
 										<double key="IBUIImageEdgeInsets.bottom">0.0</double>
 										<double key="IBUIImageEdgeInsets.left">0.0</double>
 										<double key="IBUIImageEdgeInsets.right">10</double>
@@ -389,10 +386,7 @@
 										<string key="IBUINormalTitle">5</string>
 										<reference key="IBUIHighlightedTitleColor" ref="942740747"/>
 										<reference key="IBUINormalTitleColor" ref="942740747"/>
-										<object class="NSColor" key="IBUINormalTitleShadowColor" id="691574799">
-											<int key="NSColorSpace">3</int>
-											<bytes key="NSWhite">MC41AA</bytes>
-										</object>
+										<reference key="IBUINormalTitleShadowColor" ref="447696025"/>
 										<object class="NSCustomResource" key="IBUINormalImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">img_visits_icon.png</string>
@@ -453,11 +447,11 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
-										<double key="IBUITitleEdgeInsets.top">40</double>
+										<double key="IBUITitleEdgeInsets.top">55</double>
 										<double key="IBUITitleEdgeInsets.bottom">0.0</double>
 										<double key="IBUITitleEdgeInsets.left">11</double>
 										<double key="IBUITitleEdgeInsets.right">0.0</double>
-										<double key="IBUIImageEdgeInsets.top">41</double>
+										<double key="IBUIImageEdgeInsets.top">56</double>
 										<double key="IBUIImageEdgeInsets.bottom">0.0</double>
 										<double key="IBUIImageEdgeInsets.left">0.0</double>
 										<double key="IBUIImageEdgeInsets.right">10</double>
@@ -465,7 +459,7 @@
 										<string key="IBUINormalTitle">3</string>
 										<reference key="IBUIHighlightedTitleColor" ref="942740747"/>
 										<reference key="IBUINormalTitleColor" ref="942740747"/>
-										<reference key="IBUINormalTitleShadowColor" ref="691574799"/>
+										<reference key="IBUINormalTitleShadowColor" ref="447696025"/>
 										<object class="NSCustomResource" key="IBUINormalImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">img_letter_icon.png</string>
@@ -517,11 +511,11 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
-										<double key="IBUITitleEdgeInsets.top">40</double>
+										<double key="IBUITitleEdgeInsets.top">55</double>
 										<double key="IBUITitleEdgeInsets.bottom">0.0</double>
 										<double key="IBUITitleEdgeInsets.left">11</double>
 										<double key="IBUITitleEdgeInsets.right">0.0</double>
-										<double key="IBUIImageEdgeInsets.top">41</double>
+										<double key="IBUIImageEdgeInsets.top">56</double>
 										<double key="IBUIImageEdgeInsets.bottom">0.0</double>
 										<double key="IBUIImageEdgeInsets.left">0.0</double>
 										<double key="IBUIImageEdgeInsets.right">10</double>
@@ -529,7 +523,7 @@
 										<string key="IBUINormalTitle">15</string>
 										<reference key="IBUIHighlightedTitleColor" ref="942740747"/>
 										<reference key="IBUINormalTitleColor" ref="942740747"/>
-										<reference key="IBUINormalTitleShadowColor" ref="691574799"/>
+										<reference key="IBUINormalTitleShadowColor" ref="447696025"/>
 										<object class="NSCustomResource" key="IBUINormalImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">img_star_icon.png</string>
@@ -598,7 +592,7 @@
 										<string key="IBUIText">Interesting people living near to you</string>
 										<reference key="IBUITextColor" ref="942740747"/>
 										<nil key="IBUIHighlightedColor"/>
-										<reference key="IBUIShadowColor" ref="544898246"/>
+										<reference key="IBUIShadowColor" ref="447696025"/>
 										<int key="IBUIBaselineAdjustment">0</int>
 										<bool key="IBUIAdjustsLetterSpacingToFitWidth">YES</bool>
 										<int key="IBUINumberOfLines">5</int>
@@ -673,7 +667,7 @@
 										<string key="IBUIText">Interesting people you may like</string>
 										<reference key="IBUITextColor" ref="942740747"/>
 										<nil key="IBUIHighlightedColor"/>
-										<reference key="IBUIShadowColor" ref="544898246"/>
+										<reference key="IBUIShadowColor" ref="447696025"/>
 										<int key="IBUIBaselineAdjustment">0</int>
 										<bool key="IBUIAdjustsLetterSpacingToFitWidth">YES</bool>
 										<int key="IBUINumberOfLines">5</int>
@@ -794,6 +788,86 @@
 						<reference key="destination" ref="1004278184"/>
 					</object>
 					<int key="connectionID">101</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">lastVisitorButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="51097651"/>
+					</object>
+					<int key="connectionID">106</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">lastMessageUserButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="721752372"/>
+					</object>
+					<int key="connectionID">107</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">lastInterestedUserButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="978598812"/>
+					</object>
+					<int key="connectionID">108</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">myProfileButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="773522288"/>
+					</object>
+					<int key="connectionID">109</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">myAccountButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="471456502"/>
+					</object>
+					<int key="connectionID">110</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">nearToYouCandidatesLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="623973803"/>
+					</object>
+					<int key="connectionID">111</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">candidatesYouMayLikeLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="168053019"/>
+					</object>
+					<int key="connectionID">112</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">faceFrontPhoto</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="4021208"/>
+					</object>
+					<int key="connectionID">113</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">bodySilouetePhoto</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="488685043"/>
+					</object>
+					<int key="connectionID">114</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">faceProfilePhoto</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="895755739"/>
+					</object>
+					<int key="connectionID">115</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -1147,15 +1221,15 @@
 				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="84.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="85.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="85.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
+				<real value="2" key="85.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
 				<string key="86.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="87.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="88.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="89.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="89.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
+				<real value="2" key="89.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
 				<string key="90.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="91.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="91.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
+				<real value="2" key="91.IBUIButtonInspectorSelectedEdgeInsetMetadataKey"/>
 				<string key="92.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="93.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="94.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1167,7 +1241,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">105</int>
+			<int key="maxID">115</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1205,7 +1279,17 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="background">UIImageView</string>
+						<string key="bodySilouetePhoto">UIImageView</string>
+						<string key="candidatesYouMayLikeLabel">UILabel</string>
 						<string key="candidatesYouMayLikeView">UIView</string>
+						<string key="faceFrontPhoto">UIImageView</string>
+						<string key="faceProfilePhoto">UIImageView</string>
+						<string key="lastInterestedUserButton">UIButton</string>
+						<string key="lastMessageUserButton">UIButton</string>
+						<string key="lastVisitorButton">UIButton</string>
+						<string key="myAccountButton">UIButton</string>
+						<string key="myProfileButton">UIButton</string>
+						<string key="nearToYouCandidatesLabel">UILabel</string>
 						<string key="nearToYouCandidatesView">UIView</string>
 						<string key="profileResumeView">UIView</string>
 						<string key="scroll">UIScrollView</string>
@@ -1215,9 +1299,49 @@
 							<string key="name">background</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="bodySilouetePhoto">
+							<string key="name">bodySilouetePhoto</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="candidatesYouMayLikeLabel">
+							<string key="name">candidatesYouMayLikeLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="candidatesYouMayLikeView">
 							<string key="name">candidatesYouMayLikeView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="faceFrontPhoto">
+							<string key="name">faceFrontPhoto</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="faceProfilePhoto">
+							<string key="name">faceProfilePhoto</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lastInterestedUserButton">
+							<string key="name">lastInterestedUserButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lastMessageUserButton">
+							<string key="name">lastMessageUserButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lastVisitorButton">
+							<string key="name">lastVisitorButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="myAccountButton">
+							<string key="name">myAccountButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="myProfileButton">
+							<string key="name">myProfileButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="nearToYouCandidatesLabel">
+							<string key="name">nearToYouCandidatesLabel</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="nearToYouCandidatesView">
 							<string key="name">nearToYouCandidatesView</string>
