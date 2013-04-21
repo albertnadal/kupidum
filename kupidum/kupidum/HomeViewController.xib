@@ -451,7 +451,7 @@
 										<double key="IBUITitleEdgeInsets.bottom">0.0</double>
 										<double key="IBUITitleEdgeInsets.left">11</double>
 										<double key="IBUITitleEdgeInsets.right">0.0</double>
-										<double key="IBUIImageEdgeInsets.top">56</double>
+										<double key="IBUIImageEdgeInsets.top">55</double>
 										<double key="IBUIImageEdgeInsets.bottom">0.0</double>
 										<double key="IBUIImageEdgeInsets.left">0.0</double>
 										<double key="IBUIImageEdgeInsets.right">10</double>
@@ -515,7 +515,7 @@
 										<double key="IBUITitleEdgeInsets.bottom">0.0</double>
 										<double key="IBUITitleEdgeInsets.left">11</double>
 										<double key="IBUITitleEdgeInsets.right">0.0</double>
-										<double key="IBUIImageEdgeInsets.top">56</double>
+										<double key="IBUIImageEdgeInsets.top">54</double>
 										<double key="IBUIImageEdgeInsets.bottom">0.0</double>
 										<double key="IBUIImageEdgeInsets.left">0.0</double>
 										<double key="IBUIImageEdgeInsets.right">10</double>
@@ -631,6 +631,7 @@
 										<string key="NSFrame">{{97, 1}, {209, 96}}</string>
 										<reference key="NSSuperview" ref="777734139"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<reference key="IBUIBackgroundColor" ref="942740747"/>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>

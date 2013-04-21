@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "KPDUser.h"
+#import "KPDUserProfile.h"
 #import "KPDUsersHorizontalTableViewController.h"
 #import "UIScrollView+SVPullToRefresh.h"
 
@@ -37,6 +38,8 @@
     KPDUsersHorizontalTableViewController *nearToYouCandidatesTableViewController;
     KPDUsersHorizontalTableViewController *candidatesYouMayLikeTableViewController;
 
+    KPDUserProfile *userProfile;
+
     KPDUser *lastVisitor;
     KPDUser *lastMessageUser;
     KPDUser *lastInterestedUser;
@@ -57,6 +60,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *candidatesYouMayLikeLabel;
 @property (strong, nonatomic) KPDUsersHorizontalTableViewController *nearToYouCandidatesTableViewController;
 @property (strong, nonatomic) KPDUsersHorizontalTableViewController *candidatesYouMayLikeTableViewController;
+@property (strong, nonatomic) KPDUserProfile *userProfile;
 @property (strong, nonatomic) KPDUser *lastVisitor;
 @property (strong, nonatomic) KPDUser *lastMessageUser;
 @property (strong, nonatomic) KPDUser *lastInterestedUser;

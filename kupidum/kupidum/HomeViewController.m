@@ -20,7 +20,9 @@
 }
 
 - (void)retrieveDataFromWebService;
+- (bool)imageIsEmpty:(UIImage *)image;
 - (void)setupUserInterface;
+- (void)loadUserPictures;
 - (void)updateLastVisitorButton;
 - (void)updateLastMessageUserButton;
 - (void)updateLastInterestedUserButton;
@@ -32,7 +34,7 @@
 
 @implementation HomeViewController
 
-@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView, background, lastVisitor, lastMessageUser, lastInterestedUser, lastVisitorButton, lastMessageUserButton, lastInterestedUserButton, interestingPeopleLivingNear, interestingPeopleYouMayLike, nearToYouCandidatesTableViewController, candidatesYouMayLikeTableViewController, myAccountButton, myProfileButton, nearToYouCandidatesLabel, candidatesYouMayLikeLabel, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto;
+@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView, background, lastVisitor, lastMessageUser, lastInterestedUser, lastVisitorButton, lastMessageUserButton, lastInterestedUserButton, interestingPeopleLivingNear, interestingPeopleYouMayLike, nearToYouCandidatesTableViewController, candidatesYouMayLikeTableViewController, myAccountButton, myProfileButton, nearToYouCandidatesLabel, candidatesYouMayLikeLabel, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, userProfile;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,6 +46,7 @@
         self.lastInterestedUser = nil;
         self.interestingPeopleLivingNear = nil;
         self.interestingPeopleYouMayLike = nil;
+        self.userProfile = [[KPDUserProfile alloc] initWithUsername:@"albert"];
     }
     return self;
 }
@@ -51,6 +54,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [self loadUserPictures];
 
     [self setupUserInterface];
 
@@ -86,6 +91,65 @@
     candidatesYouMayLikeView.layer.cornerRadius = 1.0;
     candidatesYouMayLikeView.layer.masksToBounds = YES;
     [candidatesYouMayLikeTableViewController scrollContentToLeft];
+}
+
+- (bool)imageIsEmpty:(UIImage *)image
+{
+    return ((!image.size.width) && (!image.size.height));
+}
+
+- (void)loadUserPictures
+{
+    // Head front picture
+    if((self.userProfile.faceFrontImage) && (![self imageIsEmpty:self.userProfile.faceFrontImage]))
+    {
+        [self.faceFrontPhoto setImage:self.userProfile.faceFrontImage];
+    }
+    else
+    {
+        switch (self.userProfile.gender.intValue)
+        {
+            case kMale:     [self.faceFrontPhoto setImage:[UIImage imageNamed:@"img_user_default_front_woman.png"]];
+                break;
+                
+            case kFemale:   [self.faceFrontPhoto setImage:[UIImage imageNamed:@"img_user_default_front_woman.png"]];
+                break;
+        }
+    }
+    
+    // Head profile picture
+    if((self.userProfile.faceProfileImage) && (![self imageIsEmpty:self.userProfile.faceProfileImage]))
+    {
+        [self.faceProfilePhoto setImage:self.userProfile.faceProfileImage];
+    }
+    else
+    {
+        switch (self.userProfile.gender.intValue)
+        {
+            case kMale:     [self.faceProfilePhoto setImage:[UIImage imageNamed:@"img_user_default_profile_woman.png"]];
+                break;
+                
+            case kFemale:   [self.faceProfilePhoto setImage:[UIImage imageNamed:@"img_user_default_profile_woman.png"]];
+                break;
+        }
+    }
+    
+    // Body silhouette picture
+    if((self.userProfile.bodyImage) && (![self imageIsEmpty:self.userProfile.bodyImage]))
+    {
+        [self.bodySilouetePhoto setImage:self.userProfile.bodyImage];
+    }
+    else
+    {
+        switch (self.userProfile.gender.intValue)
+        {
+            case kMale:     [self.bodySilouetePhoto setImage:[UIImage imageNamed:@"img_user_default_body_woman.png"]];
+                break;
+                
+            case kFemale:   [self.bodySilouetePhoto setImage:[UIImage imageNamed:@"img_user_default_body_woman.png"]];
+                break;
+        }
+    }
 }
 
 - (void)setupUserInterface
