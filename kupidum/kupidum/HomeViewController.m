@@ -53,13 +53,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 
-/*    lastContentOffset = 0;
-    lastScrollDirection = ScrollDirectionNone;
-    topBarIsMoving = false;
-    originalViewFrame = self.view.frame;*/
     [scroll setContentSize:CGSizeMake(320, 535)];
+
+    [scroll addPullToRefreshWithActionHandler:^{
+        // prepend data to dataSource, insert cells at top of table view
+        // call [tableView.pullToRefreshView stopAnimating] when done
+        NSLog(@"Refresh!");
+        [scroll.pullToRefreshView stopAnimating];
+    }];
 
     profileResumeView.layer.cornerRadius = 5.0;
     profileResumeView.layer.masksToBounds = YES;

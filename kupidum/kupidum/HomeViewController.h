@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "KPDUsersHorizontalTableViewController.h"
+#import "UIScrollView+SVPullToRefresh.h"
 
 @interface HomeViewController : UIViewController <UIScrollViewDelegate, KPDUsersHorizontalTableViewControllerDelegate>
 {

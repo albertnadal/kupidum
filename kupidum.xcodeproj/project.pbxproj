@@ -275,6 +275,8 @@
 		FFE216851722D6C3001C4EDA /* img_user_default_body_woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE216821722D6C3001C4EDA /* img_user_default_body_woman@2x.png */; };
 		FFE216861722D6C3001C4EDA /* img_user_default_front_woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE216831722D6C3001C4EDA /* img_user_default_front_woman@2x.png */; };
 		FFE216871722D6C3001C4EDA /* img_user_default_profile_woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFE216841722D6C3001C4EDA /* img_user_default_profile_woman@2x.png */; };
+		FFE2168E1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE2168B1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.m */; };
+		FFE2168F1724530A001C4EDA /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE2168D1724530A001C4EDA /* UIScrollView+SVPullToRefresh.m */; };
 		FFEDFEDC168E457B00C493AB /* NSBubbleData.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED2168E457B00C493AB /* NSBubbleData.m */; };
 		FFEDFEDD168E457B00C493AB /* UIBubbleHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED4168E457B00C493AB /* UIBubbleHeaderTableViewCell.m */; };
 		FFEDFEDE168E457B00C493AB /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEDFED6168E457B00C493AB /* UIBubbleTableView.m */; };
@@ -655,6 +657,11 @@
 		FFE216821722D6C3001C4EDA /* img_user_default_body_woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_user_default_body_woman@2x.png"; path = "kupidum/images/img_user_default_body_woman@2x.png"; sourceTree = "<group>"; };
 		FFE216831722D6C3001C4EDA /* img_user_default_front_woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_user_default_front_woman@2x.png"; path = "kupidum/images/img_user_default_front_woman@2x.png"; sourceTree = "<group>"; };
 		FFE216841722D6C3001C4EDA /* img_user_default_profile_woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_user_default_profile_woman@2x.png"; path = "kupidum/images/img_user_default_profile_woman@2x.png"; sourceTree = "<group>"; };
+		FFE216891724530A001C4EDA /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVPullToRefresh.h; path = kupidum/SVPullToRefresh/SVPullToRefresh.h; sourceTree = "<group>"; };
+		FFE2168A1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+SVInfiniteScrolling.h"; path = "kupidum/SVPullToRefresh/UIScrollView+SVInfiniteScrolling.h"; sourceTree = "<group>"; };
+		FFE2168B1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+SVInfiniteScrolling.m"; path = "kupidum/SVPullToRefresh/UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
+		FFE2168C1724530A001C4EDA /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+SVPullToRefresh.h"; path = "kupidum/SVPullToRefresh/UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
+		FFE2168D1724530A001C4EDA /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+SVPullToRefresh.m"; path = "kupidum/SVPullToRefresh/UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
 		FFEDFED1168E457B00C493AB /* NSBubbleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSBubbleData.h; path = kupidum/UIBubbleTableView/src/NSBubbleData.h; sourceTree = "<group>"; };
 		FFEDFED2168E457B00C493AB /* NSBubbleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSBubbleData.m; path = kupidum/UIBubbleTableView/src/NSBubbleData.m; sourceTree = "<group>"; };
 		FFEDFED3168E457B00C493AB /* UIBubbleHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIBubbleHeaderTableViewCell.h; path = kupidum/UIBubbleTableView/src/UIBubbleHeaderTableViewCell.h; sourceTree = "<group>"; };
@@ -823,6 +830,7 @@
 		B7EF67EB1659001800F20DF3 = {
 			isa = PBXGroup;
 			children = (
+				FFE21688172452AD001C4EDA /* SVPullToRefresh */,
 				FF85117D16DCC52A00B464F9 /* AKSegmentedControl */,
 				FF85F0CB16DA686A00F839B5 /* db */,
 				FF10043016D7955E003FA3F9 /* fmdb */,
@@ -1378,6 +1386,18 @@
 			name = Message;
 			sourceTree = "<group>";
 		};
+		FFE21688172452AD001C4EDA /* SVPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				FFE216891724530A001C4EDA /* SVPullToRefresh.h */,
+				FFE2168A1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.h */,
+				FFE2168B1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.m */,
+				FFE2168C1724530A001C4EDA /* UIScrollView+SVPullToRefresh.h */,
+				FFE2168D1724530A001C4EDA /* UIScrollView+SVPullToRefresh.m */,
+			);
+			name = SVPullToRefresh;
+			sourceTree = "<group>";
+		};
 		FFEDFECD168E44B900C493AB /* UIBubbleTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1796,6 +1816,8 @@
 				FF0F7D451707EDAA007BF55D /* UserNavigatorProfileViewController.m in Sources */,
 				FF0F7D4F1709AEA3007BF55D /* MyAccountViewController.m in Sources */,
 				FFE21681171B5EB5001C4EDA /* KPDUserCandidateProfile.m in Sources */,
+				FFE2168E1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				FFE2168F1724530A001C4EDA /* UIScrollView+SVPullToRefresh.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
