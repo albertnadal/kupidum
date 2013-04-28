@@ -50,10 +50,10 @@
         self.genderString = [self genderStringFromIdentifier:[self.gender intValue]];
 
         // If the user is not in the database then we have to retrieve the full data from web service and save to database
-        if(![self usernameIsInDatabase:_username])
-        {
+        //if(![self usernameIsInDatabase:_username])
+        //{
             [self saveToDatabase];
-        }
+        //}
     }
     
     return self;

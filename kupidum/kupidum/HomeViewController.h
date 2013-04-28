@@ -11,6 +11,8 @@
 #import "KPDUserProfile.h"
 #import "KPDUsersHorizontalTableViewController.h"
 #import "UIScrollView+SVPullToRefresh.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface HomeViewController : UIViewController <UIScrollViewDelegate, KPDUsersHorizontalTableViewControllerDelegate>
 {
@@ -44,8 +46,8 @@
     KPDUser *lastMessageUser;
     KPDUser *lastInterestedUser;
 
-    NSArray *interestingPeopleLivingNear;
-    NSArray *interestingPeopleYouMayLike;
+    NSMutableArray *interestingPeopleLivingNear;
+    NSMutableArray *interestingPeopleYouMayLike;
 }
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scroll;
@@ -69,8 +71,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *lastInterestedUserButton;
 @property (strong, nonatomic) IBOutlet UIButton *myProfileButton;
 @property (strong, nonatomic) IBOutlet UIButton *myAccountButton;
-@property (strong, nonatomic) NSArray *interestingPeopleLivingNear;
-@property (strong, nonatomic) NSArray *interestingPeopleYouMayLike;
+@property (strong, nonatomic) NSMutableArray *interestingPeopleLivingNear;
+@property (strong, nonatomic) NSMutableArray *interestingPeopleYouMayLike;
 
 - (void)showPeopleLivingNearToUser:(NSString *)theUser;
 - (void)showAlert;

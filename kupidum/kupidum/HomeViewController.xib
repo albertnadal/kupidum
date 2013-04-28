@@ -66,7 +66,7 @@
 										<string key="NSFrameSize">{202, 202}</string>
 										<reference key="NSSuperview" ref="232169032"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="300979592"/>
+										<reference key="NSNextKeyView" ref="4021208"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<int key="IBUIContentMode">5</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -76,86 +76,13 @@
 											<string key="NSResourceName">bg_home_profile_resume.png</string>
 										</object>
 									</object>
-									<object class="IBUIView" id="849595553">
-										<reference key="NSNextResponder" ref="232169032"/>
-										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{93, 1}, {1, 185}}</string>
-										<reference key="NSSuperview" ref="232169032"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="83891300"/>
-										<string key="NSReuseIdentifierKey">_NS:9</string>
-										<object class="NSColor" key="IBUIBackgroundColor">
-											<int key="NSColorSpace">1</int>
-											<bytes key="NSRGB">MC44OTgwMzkyMTU3IDAuODk4MDM5MjE1NyAwLjg5ODAzOTIxNTcAA</bytes>
-										</object>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-									</object>
-									<object class="IBUIView" id="505682516">
-										<reference key="NSNextResponder" ref="232169032"/>
-										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{1, 93}, {92, 1}}</string>
-										<reference key="NSSuperview" ref="232169032"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="290464508"/>
-										<string key="NSReuseIdentifierKey">_NS:9</string>
-										<object class="NSColor" key="IBUIBackgroundColor">
-											<int key="NSColorSpace">1</int>
-											<bytes key="NSRGB">MC44OTgwMzkyMTU3IDAuODk4MDM5MjE1NyAwLjg5ODAzOTIxNTcAA</bytes>
-										</object>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-									</object>
-									<object class="IBUIImageView" id="300979592">
-										<reference key="NSNextResponder" ref="232169032"/>
-										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{1, 1}, {92, 92}}</string>
-										<reference key="NSSuperview" ref="232169032"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="4021208"/>
-										<string key="NSReuseIdentifierKey">_NS:9</string>
-										<bool key="IBUIUserInteractionEnabled">NO</bool>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<object class="NSCustomResource" key="IBUIImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">img_front_face_anonymous_woman.png</string>
-										</object>
-									</object>
-									<object class="IBUIImageView" id="290464508">
-										<reference key="NSNextResponder" ref="232169032"/>
-										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{1, 94}, {92, 92}}</string>
-										<reference key="NSSuperview" ref="232169032"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="895755739"/>
-										<string key="NSReuseIdentifierKey">_NS:9</string>
-										<bool key="IBUIUserInteractionEnabled">NO</bool>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<object class="NSCustomResource" key="IBUIImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">img_profile_face_anonymous_woman.png</string>
-										</object>
-									</object>
-									<object class="IBUIImageView" id="83891300">
-										<reference key="NSNextResponder" ref="232169032"/>
-										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{94, 1}, {92, 185}}</string>
-										<reference key="NSSuperview" ref="232169032"/>
-										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="488685043"/>
-										<string key="NSReuseIdentifierKey">_NS:9</string>
-										<bool key="IBUIUserInteractionEnabled">NO</bool>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<object class="NSCustomResource" key="IBUIImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">img_silhouette_woman.png</string>
-										</object>
-									</object>
 									<object class="IBUIImageView" id="4021208">
 										<reference key="NSNextResponder" ref="232169032"/>
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{1, 1}, {100, 100}}</string>
 										<reference key="NSSuperview" ref="232169032"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="505682516"/>
+										<reference key="NSNextKeyView" ref="895755739"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -170,7 +97,7 @@
 										<string key="NSFrame">{{1, 102}, {100, 99}}</string>
 										<reference key="NSSuperview" ref="232169032"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView" ref="849595553"/>
+										<reference key="NSNextKeyView" ref="488685043"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -383,7 +310,7 @@
 										<double key="IBUIImageEdgeInsets.left">0.0</double>
 										<double key="IBUIImageEdgeInsets.right">10</double>
 										<string key="IBUITitleShadowOffset">{0, 1}</string>
-										<string key="IBUINormalTitle">5</string>
+										<string key="IBUINormalTitle">0</string>
 										<reference key="IBUIHighlightedTitleColor" ref="942740747"/>
 										<reference key="IBUINormalTitleColor" ref="942740747"/>
 										<reference key="IBUINormalTitleShadowColor" ref="447696025"/>
@@ -456,7 +383,7 @@
 										<double key="IBUIImageEdgeInsets.left">0.0</double>
 										<double key="IBUIImageEdgeInsets.right">10</double>
 										<string key="IBUITitleShadowOffset">{0, 1}</string>
-										<string key="IBUINormalTitle">3</string>
+										<string key="IBUINormalTitle">0</string>
 										<reference key="IBUIHighlightedTitleColor" ref="942740747"/>
 										<reference key="IBUINormalTitleColor" ref="942740747"/>
 										<reference key="IBUINormalTitleShadowColor" ref="447696025"/>
@@ -520,7 +447,7 @@
 										<double key="IBUIImageEdgeInsets.left">0.0</double>
 										<double key="IBUIImageEdgeInsets.right">10</double>
 										<string key="IBUITitleShadowOffset">{0, 1}</string>
-										<string key="IBUINormalTitle">15</string>
+										<string key="IBUINormalTitle">0</string>
 										<reference key="IBUIHighlightedTitleColor" ref="942740747"/>
 										<reference key="IBUINormalTitleColor" ref="942740747"/>
 										<reference key="IBUINormalTitleShadowColor" ref="447696025"/>
@@ -980,11 +907,6 @@
 							<reference ref="488685043"/>
 							<reference ref="895755739"/>
 							<reference ref="4021208"/>
-							<reference ref="83891300"/>
-							<reference ref="290464508"/>
-							<reference ref="300979592"/>
-							<reference ref="505682516"/>
-							<reference ref="849595553"/>
 							<reference ref="385115611"/>
 						</array>
 						<reference key="parent" ref="881234172"/>
@@ -1003,31 +925,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
 						<reference key="object" ref="4021208"/>
-						<reference key="parent" ref="232169032"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">20</int>
-						<reference key="object" ref="83891300"/>
-						<reference key="parent" ref="232169032"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">19</int>
-						<reference key="object" ref="290464508"/>
-						<reference key="parent" ref="232169032"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">18</int>
-						<reference key="object" ref="300979592"/>
-						<reference key="parent" ref="232169032"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">15</int>
-						<reference key="object" ref="505682516"/>
-						<reference key="parent" ref="232169032"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">14</int>
-						<reference key="object" ref="849595553"/>
 						<reference key="parent" ref="232169032"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -1198,11 +1095,6 @@
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="100.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="18.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="20.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1376,12 +1268,9 @@
 			<string key="fake_photo2.png">{184, 184}</string>
 			<string key="fake_photo3.png">{184, 369}</string>
 			<string key="img_account_icon.png">{98, 98}</string>
-			<string key="img_front_face_anonymous_woman.png">{92, 92}</string>
 			<string key="img_label_arrow.png">{110, 98}</string>
 			<string key="img_letter_icon.png">{34, 34}</string>
-			<string key="img_profile_face_anonymous_woman.png">{92, 92}</string>
 			<string key="img_profile_icon.png">{96, 96}</string>
-			<string key="img_silhouette_woman.png">{92, 185}</string>
 			<string key="img_star_icon.png">{33, 33}</string>
 			<string key="img_visits_icon.png">{33, 33}</string>
 		</dictionary>

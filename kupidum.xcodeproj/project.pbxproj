@@ -28,6 +28,16 @@
 		FF10043F16D7957F003FA3F9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10043A16D7957F003FA3F9 /* FMResultSet.m */; };
 		FF10044416D79A2E003FA3F9 /* kupidum.db in Resources */ = {isa = PBXBuildFile; fileRef = FF10044316D79A2E003FA3F9 /* kupidum.db */; };
 		FF10044716D79F8D003FA3F9 /* KPDChat.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10044616D79F8D003FA3F9 /* KPDChat.m */; };
+		FF1095B7172C6C4900EEE302 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1095A5172C6C4900EEE302 /* AFHTTPClient.m */; };
+		FF1095B8172C6C4900EEE302 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1095A7172C6C4900EEE302 /* AFHTTPRequestOperation.m */; };
+		FF1095B9172C6C4900EEE302 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1095A9172C6C4900EEE302 /* AFImageRequestOperation.m */; };
+		FF1095BA172C6C4900EEE302 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1095AB172C6C4900EEE302 /* AFJSONRequestOperation.m */; };
+		FF1095BB172C6C4900EEE302 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1095AD172C6C4900EEE302 /* AFNetworkActivityIndicatorManager.m */; };
+		FF1095BC172C6C4900EEE302 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1095B0172C6C4900EEE302 /* AFPropertyListRequestOperation.m */; };
+		FF1095BD172C6C4900EEE302 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1095B2172C6C4900EEE302 /* AFURLConnectionOperation.m */; };
+		FF1095BE172C6C4900EEE302 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1095B4172C6C4900EEE302 /* AFXMLRequestOperation.m */; };
+		FF1095BF172C6C4900EEE302 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1095B6172C6C4900EEE302 /* UIImageView+AFNetworking.m */; };
+		FF1095C3172C73B300EEE302 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1095C2172C73B300EEE302 /* MBProgressHUD.m */; };
 		FF25A5A6168674C900F5DB58 /* KPDClientSIP.m in Sources */ = {isa = PBXBuildFile; fileRef = FF25A5A1168674C900F5DB58 /* KPDClientSIP.m */; };
 		FF25A5A7168674C900F5DB58 /* KPDVideoDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = FF25A5A3168674C900F5DB58 /* KPDVideoDevice.m */; };
 		FF25A5A8168674C900F5DB58 /* KPDVideoDeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF25A5A5168674C900F5DB58 /* KPDVideoDeviceView.m */; };
@@ -254,6 +264,7 @@
 		FFAE275E1699C6FA00B82CF6 /* WCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAE275D1699C6FA00B82CF6 /* WCAlertView.m */; };
 		FFAE7CD816DBFB7300F3E684 /* img_camera_white_striped.png in Resources */ = {isa = PBXBuildFile; fileRef = FFAE7CD616DBFB5E00F3E684 /* img_camera_white_striped.png */; };
 		FFAE7CD916DBFB7300F3E684 /* img_camera_white_striped@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFAE7CD716DBFB6900F3E684 /* img_camera_white_striped@2x.png */; };
+		FFB5E19B1729DD710012D8FC /* img_user_default_profile_man.png in Resources */ = {isa = PBXBuildFile; fileRef = FFB5E19A1729DD710012D8FC /* img_user_default_profile_man.png */; };
 		FFBC47A916DF7ED50035BA73 /* MessageComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBC47A716DF7ED50035BA73 /* MessageComposeViewController.m */; };
 		FFBC47AA16DF7ED50035BA73 /* MessageComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFBC47A816DF7ED50035BA73 /* MessageComposeViewController.xib */; };
 		FFBC47AD16DF8B220035BA73 /* img_letter_white_small.png in Resources */ = {isa = PBXBuildFile; fileRef = FFBC47AB16DF8B220035BA73 /* img_letter_white_small.png */; };
@@ -366,6 +377,27 @@
 		FF10044316D79A2E003FA3F9 /* kupidum.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = kupidum.db; path = kupidum/db/kupidum.db; sourceTree = "<group>"; };
 		FF10044516D79F8D003FA3F9 /* KPDChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDChat.h; path = kupidum/model/KPDChat.h; sourceTree = "<group>"; };
 		FF10044616D79F8D003FA3F9 /* KPDChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDChat.m; path = kupidum/model/KPDChat.m; sourceTree = "<group>"; };
+		FF1095A4172C6C4900EEE302 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPClient.h; path = kupidum/AFNetworking/AFHTTPClient.h; sourceTree = "<group>"; };
+		FF1095A5172C6C4900EEE302 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPClient.m; path = kupidum/AFNetworking/AFHTTPClient.m; sourceTree = "<group>"; };
+		FF1095A6172C6C4900EEE302 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = kupidum/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		FF1095A7172C6C4900EEE302 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = kupidum/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		FF1095A8172C6C4900EEE302 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFImageRequestOperation.h; path = kupidum/AFNetworking/AFImageRequestOperation.h; sourceTree = "<group>"; };
+		FF1095A9172C6C4900EEE302 /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFImageRequestOperation.m; path = kupidum/AFNetworking/AFImageRequestOperation.m; sourceTree = "<group>"; };
+		FF1095AA172C6C4900EEE302 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFJSONRequestOperation.h; path = kupidum/AFNetworking/AFJSONRequestOperation.h; sourceTree = "<group>"; };
+		FF1095AB172C6C4900EEE302 /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFJSONRequestOperation.m; path = kupidum/AFNetworking/AFJSONRequestOperation.m; sourceTree = "<group>"; };
+		FF1095AC172C6C4900EEE302 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = kupidum/AFNetworking/AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		FF1095AD172C6C4900EEE302 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = kupidum/AFNetworking/AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		FF1095AE172C6C4900EEE302 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = kupidum/AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
+		FF1095AF172C6C4900EEE302 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPropertyListRequestOperation.h; path = kupidum/AFNetworking/AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
+		FF1095B0172C6C4900EEE302 /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFPropertyListRequestOperation.m; path = kupidum/AFNetworking/AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
+		FF1095B1172C6C4900EEE302 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = kupidum/AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		FF1095B2172C6C4900EEE302 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = kupidum/AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		FF1095B3172C6C4900EEE302 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFXMLRequestOperation.h; path = kupidum/AFNetworking/AFXMLRequestOperation.h; sourceTree = "<group>"; };
+		FF1095B4172C6C4900EEE302 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFXMLRequestOperation.m; path = kupidum/AFNetworking/AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		FF1095B5172C6C4900EEE302 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "kupidum/AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		FF1095B6172C6C4900EEE302 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "kupidum/AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		FF1095C1172C73B300EEE302 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = kupidum/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
+		FF1095C2172C73B300EEE302 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = kupidum/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		FF25A5A0168674C900F5DB58 /* KPDClientSIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDClientSIP.h; path = kupidum/rtc/KPDClientSIP.h; sourceTree = "<group>"; };
 		FF25A5A1168674C900F5DB58 /* KPDClientSIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDClientSIP.m; path = kupidum/rtc/KPDClientSIP.m; sourceTree = "<group>"; };
 		FF25A5A2168674C900F5DB58 /* KPDVideoDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDVideoDevice.h; path = kupidum/rtc/KPDVideoDevice.h; sourceTree = "<group>"; };
@@ -632,6 +664,7 @@
 		FFAE275D1699C6FA00B82CF6 /* WCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WCAlertView.m; path = kupidum/WCAlertView/WCAlertView/WCAlertView.m; sourceTree = "<group>"; };
 		FFAE7CD616DBFB5E00F3E684 /* img_camera_white_striped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_camera_white_striped.png; path = kupidum/images/img_camera_white_striped.png; sourceTree = "<group>"; };
 		FFAE7CD716DBFB6900F3E684 /* img_camera_white_striped@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "img_camera_white_striped@2x.png"; path = "kupidum/images/img_camera_white_striped@2x.png"; sourceTree = "<group>"; };
+		FFB5E19A1729DD710012D8FC /* img_user_default_profile_man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_user_default_profile_man.png; path = kupidum/images/img_user_default_profile_man.png; sourceTree = "<group>"; };
 		FFBC47A616DF7ED50035BA73 /* MessageComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageComposeViewController.h; path = kupidum/MessageComposeViewController.h; sourceTree = "<group>"; };
 		FFBC47A716DF7ED50035BA73 /* MessageComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageComposeViewController.m; path = kupidum/MessageComposeViewController.m; sourceTree = "<group>"; };
 		FFBC47A816DF7ED50035BA73 /* MessageComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageComposeViewController.xib; path = kupidum/MessageComposeViewController.xib; sourceTree = "<group>"; };
@@ -836,6 +869,8 @@
 		B7EF67EB1659001800F20DF3 = {
 			isa = PBXGroup;
 			children = (
+				FF1095C0172C72AF00EEE302 /* MBProgressHUD */,
+				FF1095A3172C6C2B00EEE302 /* AFNetworking */,
 				FFE21688172452AD001C4EDA /* SVPullToRefresh */,
 				FF85117D16DCC52A00B464F9 /* AKSegmentedControl */,
 				FF85F0CB16DA686A00F839B5 /* db */,
@@ -932,6 +967,7 @@
 				B707444B166BDE7A007E8B23 /* NavigationButtons */,
 				FFE216901724990C001C4EDA /* img_user_default_body_man@2x.png */,
 				FFE2169217249B5B001C4EDA /* img_user_default_front_man@2x.png */,
+				FFB5E19A1729DD710012D8FC /* img_user_default_profile_man.png */,
 				FFE216941724A389001C4EDA /* img_user_default_profile_man@2x.png */,
 				FFE216821722D6C3001C4EDA /* img_user_default_body_woman@2x.png */,
 				FFE216831722D6C3001C4EDA /* img_user_default_front_woman@2x.png */,
@@ -1118,6 +1154,41 @@
 				FF10044316D79A2E003FA3F9 /* kupidum.db */,
 			);
 			name = db;
+			sourceTree = "<group>";
+		};
+		FF1095A3172C6C2B00EEE302 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				FF1095A4172C6C4900EEE302 /* AFHTTPClient.h */,
+				FF1095A5172C6C4900EEE302 /* AFHTTPClient.m */,
+				FF1095A6172C6C4900EEE302 /* AFHTTPRequestOperation.h */,
+				FF1095A7172C6C4900EEE302 /* AFHTTPRequestOperation.m */,
+				FF1095A8172C6C4900EEE302 /* AFImageRequestOperation.h */,
+				FF1095A9172C6C4900EEE302 /* AFImageRequestOperation.m */,
+				FF1095AA172C6C4900EEE302 /* AFJSONRequestOperation.h */,
+				FF1095AB172C6C4900EEE302 /* AFJSONRequestOperation.m */,
+				FF1095AC172C6C4900EEE302 /* AFNetworkActivityIndicatorManager.h */,
+				FF1095AD172C6C4900EEE302 /* AFNetworkActivityIndicatorManager.m */,
+				FF1095AE172C6C4900EEE302 /* AFNetworking.h */,
+				FF1095AF172C6C4900EEE302 /* AFPropertyListRequestOperation.h */,
+				FF1095B0172C6C4900EEE302 /* AFPropertyListRequestOperation.m */,
+				FF1095B1172C6C4900EEE302 /* AFURLConnectionOperation.h */,
+				FF1095B2172C6C4900EEE302 /* AFURLConnectionOperation.m */,
+				FF1095B3172C6C4900EEE302 /* AFXMLRequestOperation.h */,
+				FF1095B4172C6C4900EEE302 /* AFXMLRequestOperation.m */,
+				FF1095B5172C6C4900EEE302 /* UIImageView+AFNetworking.h */,
+				FF1095B6172C6C4900EEE302 /* UIImageView+AFNetworking.m */,
+			);
+			name = AFNetworking;
+			sourceTree = "<group>";
+		};
+		FF1095C0172C72AF00EEE302 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				FF1095C1172C73B300EEE302 /* MBProgressHUD.h */,
+				FF1095C2172C73B300EEE302 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		FF25A5B216867C1800F5DB58 /* others */ = {
@@ -1756,6 +1827,7 @@
 				FFE216911724990F001C4EDA /* img_user_default_body_man@2x.png in Resources */,
 				FFE2169317249B5C001C4EDA /* img_user_default_front_man@2x.png in Resources */,
 				FFE216951724A38A001C4EDA /* img_user_default_profile_man@2x.png in Resources */,
+				FFB5E19B1729DD710012D8FC /* img_user_default_profile_man.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1830,6 +1902,16 @@
 				FFE21681171B5EB5001C4EDA /* KPDUserCandidateProfile.m in Sources */,
 				FFE2168E1724530A001C4EDA /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				FFE2168F1724530A001C4EDA /* UIScrollView+SVPullToRefresh.m in Sources */,
+				FF1095B7172C6C4900EEE302 /* AFHTTPClient.m in Sources */,
+				FF1095B8172C6C4900EEE302 /* AFHTTPRequestOperation.m in Sources */,
+				FF1095B9172C6C4900EEE302 /* AFImageRequestOperation.m in Sources */,
+				FF1095BA172C6C4900EEE302 /* AFJSONRequestOperation.m in Sources */,
+				FF1095BB172C6C4900EEE302 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				FF1095BC172C6C4900EEE302 /* AFPropertyListRequestOperation.m in Sources */,
+				FF1095BD172C6C4900EEE302 /* AFURLConnectionOperation.m in Sources */,
+				FF1095BE172C6C4900EEE302 /* AFXMLRequestOperation.m in Sources */,
+				FF1095BF172C6C4900EEE302 /* UIImageView+AFNetworking.m in Sources */,
+				FF1095C3172C73B300EEE302 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

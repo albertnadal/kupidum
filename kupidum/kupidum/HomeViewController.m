@@ -13,11 +13,14 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ProfileFormDataSource.h"
 #import <IBAForms/IBAForms.h>
+#import "MBProgressHUD.h"
 
 @interface HomeViewController ()
 {
-
+    MBProgressHUD *hud;
 }
+
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 - (void)retrieveDataFromWebService;
 - (bool)imageIsEmpty:(UIImage *)image;
@@ -34,7 +37,7 @@
 
 @implementation HomeViewController
 
-@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView, background, lastVisitor, lastMessageUser, lastInterestedUser, lastVisitorButton, lastMessageUserButton, lastInterestedUserButton, interestingPeopleLivingNear, interestingPeopleYouMayLike, nearToYouCandidatesTableViewController, candidatesYouMayLikeTableViewController, myAccountButton, myProfileButton, nearToYouCandidatesLabel, candidatesYouMayLikeLabel, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, userProfile;
+@synthesize scroll, profileResumeView, nearToYouCandidatesView, candidatesYouMayLikeView, background, lastVisitor, lastMessageUser, lastInterestedUser, lastVisitorButton, lastMessageUserButton, lastInterestedUserButton, interestingPeopleLivingNear, interestingPeopleYouMayLike, nearToYouCandidatesTableViewController, candidatesYouMayLikeTableViewController, myAccountButton, myProfileButton, nearToYouCandidatesLabel, candidatesYouMayLikeLabel, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, userProfile, hud;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,8 +67,7 @@
     [scroll addPullToRefreshWithActionHandler:^{
         // prepend data to dataSource, insert cells at top of table view
         // call [tableView.pullToRefreshView stopAnimating] when done
-        NSLog(@"Refresh!");
-        [scroll.pullToRefreshView stopAnimating];
+        [self retrieveDataFromWebService];
     }];
 
 #warning remove the loading of fake data and implement the data loading from the web service
@@ -154,6 +156,14 @@
 
 - (void)setupUserInterface
 {
+    // Reset to default values
+    [self.lastVisitorButton setBackgroundImage:nil forState:UIControlStateNormal];
+    [self.lastVisitorButton setTitle:@"0" forState:UIControlStateNormal];
+    [self.lastMessageUserButton setBackgroundImage:nil forState:UIControlStateNormal];
+    [self.lastMessageUserButton setTitle:@"0" forState:UIControlStateNormal];
+    [self.lastInterestedUserButton setBackgroundImage:nil forState:UIControlStateNormal];
+    [self.lastInterestedUserButton setTitle:@"0" forState:UIControlStateNormal];
+
     // people neart to you label
     [self.nearToYouCandidatesLabel setText:NSLocalizedString(@"Interesting people living near to you", @"")];
     [self.nearToYouCandidatesLabel.layer setMasksToBounds:NO];
@@ -238,6 +248,221 @@
 
 - (void)retrieveDataFromWebService
 {
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.mode = MBProgressHUDAnimationFade;
+    self.hud.labelText = NSLocalizedString(@"Loading data...", @"");
+
+    NSURL *url = [NSURL URLWithString:@"http://www.lafruitera.com/ws/v1/home.php"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
+    {
+        NSLog(@"App.net Global Stream: %@", JSON);
+        NSDictionary *homeData = (NSDictionary *)JSON;
+
+        // Set the basic user home information
+        NSDictionary *userHomeInformation = [homeData objectForKey:@"userHomeInformation"];
+        [self setTitle:[userHomeInformation objectForKey:@"username"]];
+        [self.lastVisitorButton setTitle:[(NSNumber *)[userHomeInformation objectForKey:@"totalNewVisitors"] stringValue] forState:UIControlStateNormal];
+        [self.lastMessageUserButton setTitle:[(NSNumber *)[userHomeInformation objectForKey:@"totalNewMessages"] stringValue] forState:UIControlStateNormal];
+        [self.lastInterestedUserButton setTitle:[(NSNumber *)[userHomeInformation objectForKey:@"totalNewInterests"] stringValue] forState:UIControlStateNormal];
+
+        // Set the avatar placeholder based on candidate gender
+        UIImage *candidateAvatarPlaceholder = nil;
+        UserGender genderCandidate = [(NSNumber *)[userHomeInformation objectForKey:@"genderCandidate"] intValue];
+        switch (genderCandidate)
+        {
+            case kMale:     candidateAvatarPlaceholder = [UIImage imageNamed:@"img_user_default_front_man.png"];
+                            break;
+                
+            case kFemale:   candidateAvatarPlaceholder = [UIImage imageNamed:@"img_user_default_front_woman.png"];
+                            break;
+        }
+
+        // Set default user pictures based on gender type
+        UserGender gender = [(NSNumber *)[userHomeInformation objectForKey:@"gender"] intValue];
+        switch (gender)
+        {
+            case kMale:     [self.faceFrontPhoto setImage:[UIImage imageNamed:@"img_user_default_front_man.png"]];
+                            [self.faceProfilePhoto setImage:[UIImage imageNamed:@"img_user_default_profile_man.png"]];
+                            [self.bodySilouetePhoto setImage:[UIImage imageNamed:@"img_user_default_body_man.png"]];
+                            break;
+                
+            case kFemale:   [self.faceFrontPhoto setImage:[UIImage imageNamed:@"img_user_default_front_woman.png"]];
+                            [self.faceProfilePhoto setImage:[UIImage imageNamed:@"img_user_default_profile_woman.png"]];
+                            [self.bodySilouetePhoto setImage:[UIImage imageNamed:@"img_user_default_body_woman.png"]];
+                            break;
+        }
+
+        // Download user pictures
+        if([[userHomeInformation objectForKey:@"frontFaceImageUrl"] length])
+            [self.faceFrontPhoto setImageWithURL:[NSURL URLWithString:[userHomeInformation objectForKey:@"frontFaceImageUrl"]] placeholderImage:self.faceFrontPhoto.image];
+
+        if([[userHomeInformation objectForKey:@"profileFaceImageUrl"] length])
+            [self.faceProfilePhoto setImageWithURL:[NSURL URLWithString:[userHomeInformation objectForKey:@"profileFaceImageUrl"]] placeholderImage:self.faceProfilePhoto.image];
+
+        if([[userHomeInformation objectForKey:@"bodyImageUrl"] length])
+            [self.bodySilouetePhoto setImageWithURL:[NSURL URLWithString:[userHomeInformation objectForKey:@"bodyImageUrl"]] placeholderImage:self.bodySilouetePhoto.image];
+
+        // Save and show the information of the last visitor
+        NSDictionary *lastVisitorData = [homeData objectForKey:@"lastVisitor"];
+        if(lastVisitorData)
+        {
+            NSString *lastVisitorUsername = [lastVisitorData objectForKey:@"username"];
+            NSString *lastVisitorAvatarURL = [lastVisitorData objectForKey:@"avatarURL"];
+            UserGender lastVisitorGender = [(NSNumber *)[lastVisitorData objectForKey:@"gender"] intValue];
+            UserGender lastVisitorGenderCandidate = [(NSNumber *)[lastVisitorData objectForKey:@"genderCandidate"] intValue];
+            NSDate *lastVisitorDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[lastVisitorData objectForKey:@"dateOfBirth"] intValue]];
+            NSString *lastVisitorCity = [lastVisitorData objectForKey:@"city"];
+            int lastVisitorProfessionId = [(NSNumber *)[lastVisitorData objectForKey:@"professionId"] intValue];
+
+            self.lastVisitor = [[KPDUser alloc] initWithUsername:lastVisitorUsername avatarUrl:lastVisitorAvatarURL avatar:nil gender:lastVisitorGender genderCandidate:lastVisitorGenderCandidate dateOfBirth:lastVisitorDateOfBirth city:lastVisitorCity professionId:lastVisitorProfessionId];
+
+            // Download and save to disk the last visitor avatar
+            if([lastVisitorAvatarURL length])
+            {
+                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:lastVisitorAvatarURL]];
+                [[[UIImageView alloc] init] setImageWithURLRequest:request placeholderImage:candidateAvatarPlaceholder success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                {
+                    self.lastVisitor.avatar = image;
+                    [self.lastVisitor saveToDatabase]; // Save the user avatar to disk
+                    [self.lastVisitorButton setBackgroundImage:self.lastVisitor.avatar forState:UIControlStateNormal];
+                } failure:nil];
+            }
+        }
+
+        // Save and show the information of the last user message
+        NSDictionary *lastMessageUserData = [homeData objectForKey:@"lastMessageUser"];
+        if(lastMessageUserData)
+        {
+            NSString *lastMessageUserUsername = [lastMessageUserData objectForKey:@"username"];
+            NSString *lastMessageUserAvatarURL = [lastMessageUserData objectForKey:@"avatarURL"];
+            UserGender lastMessageUserGender = [(NSNumber *)[lastMessageUserData objectForKey:@"gender"] intValue];
+            UserGender lastMessageUserGenderCandidate = [(NSNumber *)[lastMessageUserData objectForKey:@"genderCandidate"] intValue];
+            NSDate *lastMessageUserDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[lastMessageUserData objectForKey:@"dateOfBirth"] intValue]];
+            NSString *lastMessageUserCity = [lastMessageUserData objectForKey:@"city"];
+            int lastMessageUserProfessionId = [(NSNumber *)[lastMessageUserData objectForKey:@"professionId"] intValue];
+
+            self.lastMessageUser = [[KPDUser alloc] initWithUsername:lastMessageUserUsername avatarUrl:lastMessageUserAvatarURL avatar:nil gender:lastMessageUserGender genderCandidate:lastMessageUserGenderCandidate dateOfBirth:lastMessageUserDateOfBirth city:lastMessageUserCity professionId:lastMessageUserProfessionId];
+
+            // Download and save to disk the last visitor avatar
+            if([lastMessageUserAvatarURL length])
+            {
+                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:lastMessageUserAvatarURL]];
+                [[[UIImageView alloc] init] setImageWithURLRequest:request placeholderImage:candidateAvatarPlaceholder success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                 {
+                     self.lastMessageUser.avatar = image;
+                     [self.lastMessageUser saveToDatabase]; // Save the user avatar to disk
+                     [self.lastMessageUserButton setBackgroundImage:self.lastMessageUser.avatar forState:UIControlStateNormal];
+                 } failure:nil];
+            }
+        }
+
+        // Save and show the information of the last interested user
+        NSDictionary *lastInterestedUserData = [homeData objectForKey:@"lastInterestedUser"];
+        if(lastInterestedUserData)
+        {
+            NSString *lastInterestedUserUsername = [lastInterestedUserData objectForKey:@"username"];
+            NSString *lastInterestedUserAvatarURL = [lastInterestedUserData objectForKey:@"avatarURL"];
+            UserGender lastInterestedUserGender = [(NSNumber *)[lastInterestedUserData objectForKey:@"gender"] intValue];
+            UserGender lastInterestedUserGenderCandidate = [(NSNumber *)[lastInterestedUserData objectForKey:@"genderCandidate"] intValue];
+            NSDate *lastInterestedUserDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[lastInterestedUserData objectForKey:@"dateOfBirth"] intValue]];
+            NSString *lastInterestedUserCity = [lastInterestedUserData objectForKey:@"city"];
+            int lastInterestedUserProfessionId = [(NSNumber *)[lastInterestedUserData objectForKey:@"professionId"] intValue];
+            
+            self.lastInterestedUser = [[KPDUser alloc] initWithUsername:lastInterestedUserUsername avatarUrl:lastInterestedUserAvatarURL avatar:nil gender:lastInterestedUserGender genderCandidate:lastInterestedUserGenderCandidate dateOfBirth:lastInterestedUserDateOfBirth city:lastInterestedUserCity professionId:lastInterestedUserProfessionId];
+            
+            // Download and save to disk the last visitor avatar
+            if([lastInterestedUserAvatarURL length])
+            {
+                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:lastInterestedUserAvatarURL]];
+                [[[UIImageView alloc] init] setImageWithURLRequest:request placeholderImage:candidateAvatarPlaceholder success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                 {
+                     self.lastInterestedUser.avatar = image;
+                     [self.lastInterestedUser saveToDatabase]; // Save the user avatar to disk
+                     [self.lastInterestedUserButton setBackgroundImage:self.lastInterestedUser.avatar forState:UIControlStateNormal];
+                 } failure:nil];
+            }
+        }
+
+        // Save and show interesting people living near to user
+        NSArray *listOfInterestingPeopleLivingNear = [homeData objectForKey:@"interestingPeopleLivingNear"];
+        if(self.interestingPeopleLivingNear)
+            [self.interestingPeopleLivingNear removeAllObjects];
+        self.interestingPeopleLivingNear = [[NSMutableArray alloc] init];
+
+        for(NSDictionary *interestingUser in listOfInterestingPeopleLivingNear)
+        {
+            NSString *interestingUserUsername = [interestingUser objectForKey:@"username"];
+            NSString *interestingUserAvatarURL = [interestingUser objectForKey:@"avatarURL"];
+            UserGender interestingUserGender = [(NSNumber *)[interestingUser objectForKey:@"gender"] intValue];
+            UserGender interestingUserGenderCandidate = [(NSNumber *)[interestingUser objectForKey:@"genderCandidate"] intValue];
+            NSDate *interestingUserDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[interestingUser objectForKey:@"dateOfBirth"] intValue]];
+            NSString *interestingUserCity = [interestingUser objectForKey:@"city"];
+            int interestingUserProfessionId = [(NSNumber *)[interestingUser objectForKey:@"professionId"] intValue];
+
+            KPDUser *interestingUser = [[KPDUser alloc] initWithUsername:interestingUserUsername avatarUrl:interestingUserAvatarURL avatar:nil gender:interestingUserGender genderCandidate:interestingUserGenderCandidate dateOfBirth:interestingUserDateOfBirth city:interestingUserCity professionId:interestingUserProfessionId];
+            [self.interestingPeopleLivingNear addObject:interestingUser];
+
+            // Download and save to disk the last visitor avatar
+            if([interestingUserAvatarURL length])
+            {
+                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:interestingUserAvatarURL]];
+                [[[UIImageView alloc] init] setImageWithURLRequest:request placeholderImage:candidateAvatarPlaceholder success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                 {
+                     interestingUser.avatar = image;
+                     [interestingUser saveToDatabase]; // Save the user avatar to disk
+                     [(UITableView *)self.nearToYouCandidatesTableViewController.view reloadData];
+                 } failure:nil];
+            }
+        }
+
+
+        // Save and show interesting people living near to user
+        NSArray *listOfInterestingPeopleYouMayLike = [homeData objectForKey:@"interestingPeopleYouMayLike"];
+        if(self.interestingPeopleYouMayLike)
+            [self.interestingPeopleYouMayLike removeAllObjects];
+        self.interestingPeopleYouMayLike = [[NSMutableArray alloc] init];
+        
+        for(NSDictionary *interestingUser in listOfInterestingPeopleYouMayLike)
+        {
+            NSString *interestingUserUsername = [interestingUser objectForKey:@"username"];
+            NSString *interestingUserAvatarURL = [interestingUser objectForKey:@"avatarURL"];
+            UserGender interestingUserGender = [(NSNumber *)[interestingUser objectForKey:@"gender"] intValue];
+            UserGender interestingUserGenderCandidate = [(NSNumber *)[interestingUser objectForKey:@"genderCandidate"] intValue];
+            NSDate *interestingUserDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[interestingUser objectForKey:@"dateOfBirth"] intValue]];
+            NSString *interestingUserCity = [interestingUser objectForKey:@"city"];
+            int interestingUserProfessionId = [(NSNumber *)[interestingUser objectForKey:@"professionId"] intValue];
+            
+            KPDUser *interestingUser = [[KPDUser alloc] initWithUsername:interestingUserUsername avatarUrl:interestingUserAvatarURL avatar:nil gender:interestingUserGender genderCandidate:interestingUserGenderCandidate dateOfBirth:interestingUserDateOfBirth city:interestingUserCity professionId:interestingUserProfessionId];
+            [self.interestingPeopleYouMayLike addObject:interestingUser];
+            
+            // Download and save to disk the last visitor avatar
+            if([interestingUserAvatarURL length])
+            {
+                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:interestingUserAvatarURL]];
+                [[[UIImageView alloc] init] setImageWithURLRequest:request placeholderImage:candidateAvatarPlaceholder success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                 {
+                     interestingUser.avatar = image;
+                     [interestingUser saveToDatabase]; // Save the user avatar to disk
+                     [(UITableView *)self.candidatesYouMayLikeTableViewController.view reloadData];
+                 } failure:nil];
+            }
+        }
+
+        // Stop any possible visual loading indicator
+        [self.hud hide:YES];
+        [scroll.pullToRefreshView stopAnimating];
+
+    } failure:^(NSURLRequest *request , NSHTTPURLResponse *response , NSError *error , id JSON )
+    {
+        NSLog(@"Error: %@", error);
+        NSLog(@"JSON: %@", JSON);
+        [self.hud hide:YES];
+    }];
+
+    [operation start];
+
+/*
     self.lastVisitor = [[KPDUser alloc] initWithUsername:@"pepito"];
     self.lastMessageUser = [[KPDUser alloc] initWithUsername:@"fulanito"];
     self.lastInterestedUser = [[KPDUser alloc] initWithUsername:@"menganito"];
@@ -249,7 +474,7 @@
     KPDUser *user5 = [[KPDUser alloc] initWithUsername:@"perchita"];
 
     self.interestingPeopleLivingNear = @[user1, user2, user3, user4, user5];
-    self.interestingPeopleYouMayLike = @[user1, user2, user3, user4, user5];
+    self.interestingPeopleYouMayLike = @[user1, user2, user3, user4, user5];*/
 }
 
 - (void)updateLastVisitorButton
@@ -257,12 +482,10 @@
     if(self.lastVisitor)
     {
         [self.lastVisitorButton setBackgroundImage:self.lastVisitor.avatar forState:UIControlStateNormal];
-        [self.lastVisitorButton setTitle:@"2" forState:UIControlStateNormal];
     }
     else
     {
         [self.lastVisitorButton setBackgroundImage:nil forState:UIControlStateNormal];
-        [self.lastVisitorButton setTitle:@"0" forState:UIControlStateNormal];
     }
 }
 
