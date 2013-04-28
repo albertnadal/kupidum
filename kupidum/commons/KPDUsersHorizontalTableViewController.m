@@ -32,6 +32,10 @@
         [self.view setBackgroundColor:[UIColor whiteColor]];
 
         [self addPullToRefreshHeader];
+        [(UITableView *)self.view setDelaysContentTouches:YES];
+        [(UITableView *)self.view setMultipleTouchEnabled:NO];
+        [(UITableView *)self.view setCanCancelContentTouches:NO];
+        [(UITableView *)self.view setBouncesZoom:NO];
         [(UITableView *)self.view setDataSource:self];
         [(UITableView *)self.view setDelegate:self];
         [(UITableView *)self.view setShowsHorizontalScrollIndicator:FALSE];

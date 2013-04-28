@@ -11,4 +11,6 @@
 
 @interface UsersNavigatorViewController : UIViewController<UIScrollViewDelegate, KPDUserProfileDelegate>
 
+- (id)initAndShowInterestingPeopleNear;
+
 @end

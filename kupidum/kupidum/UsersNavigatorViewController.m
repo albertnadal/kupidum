@@ -13,6 +13,9 @@
 #import "KPDUserProfile.h"
 #import "UserProfileViewController.h"
 #import "KPDUIUtilities.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+#import "MBProgressHUD.h"
 
 static const int kSpaceBetweenAvatars = 6;
 static const int kAvatarWidth = 65;
@@ -21,7 +24,7 @@ static const int kNavigationScrollMargin = 3;
 
 @interface UsersNavigatorViewController ()
 {
-    NSArray *usersList;
+    NSMutableArray *usersList;
 
     int contentScrollNavigatorWidth;
     int contentScrollProfilesWidth;
@@ -29,26 +32,49 @@ static const int kNavigationScrollMargin = 3;
     IBOutlet UsersNavigatorContainerView *scrollNavigatorContainer;
     IBOutlet UIScrollView *scrollNavigator;
     IBOutlet UIScrollView *scrollProfiles;
+    IBOutlet UIImageView *userSelectorImage;
     UIScrollView *activeScroll;
 
     NSMutableArray *userNavigatorProfileViewControllers;
+    MBProgressHUD *hud;
 }
 
+@property (nonatomic, strong) NSMutableArray *usersList;
 @property (nonatomic, retain) IBOutlet UsersNavigatorContainerView *scrollNavigatorContainer;
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollNavigator;
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollProfiles;
+@property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollNavigator;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollProfiles;
+@property (nonatomic, strong) IBOutlet UIImageView *userSelectorImage;
 
 - (void)showNavigationBarButtons;
 - (void)backPressed;
 - (void)loadFakeUsers;
 - (void)showUsersNavigator;
 - (void)showUsersProfiles;
+- (void)retrieveInterestingPeopleNearDataFromWebService;
 
 @end
 
 @implementation UsersNavigatorViewController
 
-@synthesize scrollNavigator, scrollProfiles, scrollNavigatorContainer;
+@synthesize scrollNavigator, scrollProfiles, scrollNavigatorContainer, hud, userSelectorImage, usersList;
+
+- (id)initAndShowInterestingPeopleNear
+{
+    self = [super initWithNibName:@"UsersNavigatorViewController" bundle:nil];
+    if (self)
+    {
+        usersList = nil;
+        contentScrollNavigatorWidth = 0;
+        contentScrollProfilesWidth = 0;
+        activeScroll = nil;
+        userNavigatorProfileViewControllers = nil;
+
+        // Retrieve data from server and show the interesting people living near to the user
+        [self retrieveInterestingPeopleNearDataFromWebService];
+    }
+    return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,10 +85,96 @@ static const int kNavigationScrollMargin = 3;
         contentScrollProfilesWidth = 0;
         activeScroll = nil;
         userNavigatorProfileViewControllers = nil;
-
+        
         [self loadFakeUsers];
     }
     return self;
+}
+
+- (void)retrieveInterestingPeopleNearDataFromWebService
+{
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.mode = MBProgressHUDAnimationFade;
+    self.hud.labelText = NSLocalizedString(@"Loading data...", @"");
+
+    [self.userSelectorImage setHidden:YES];
+
+    NSURL *url = [NSURL URLWithString:@"http://www.lafruitera.com/ws/v1/interestingPeopleNear.php"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
+                                         {
+                                             NSLog(@"App.net Global Stream: %@", JSON);
+                                             NSDictionary *interestingPeopleData = (NSDictionary *)JSON;
+                                             
+                                             // Set the basic user home information
+                                             NSDictionary *resultsInformation = [interestingPeopleData objectForKey:@"resultsInformation"];
+                                             int totalResults = [(NSNumber *)[resultsInformation objectForKey:@"totalNewVisitors"] intValue];
+                                             NSString *usernameRequester = [resultsInformation objectForKey:@"username"];
+
+
+                                             // Set the avatar placeholder based on candidate gender
+                                             UIImage *candidateAvatarPlaceholder = nil;
+                                             UserGender genderCandidate = [(NSNumber *)[resultsInformation objectForKey:@"genderCandidate"] intValue];
+                                             switch (genderCandidate)
+                                             {
+                                                 case kMale:     candidateAvatarPlaceholder = [UIImage imageNamed:@"img_user_default_front_man.png"];
+                                                     break;
+                                                     
+                                                 case kFemale:   candidateAvatarPlaceholder = [UIImage imageNamed:@"img_user_default_front_woman.png"];
+                                                     break;
+                                             }
+
+
+                                             // Save and show interesting people living near to user
+                                             NSArray *listOfInterestingPeopleLivingNear = [interestingPeopleData objectForKey:@"interestingPeopleLivingNear"];
+                                             if(self.usersList)
+                                                 [self.usersList removeAllObjects];
+                                             self.usersList = [[NSMutableArray alloc] init];
+                                             
+                                             for(NSDictionary *interestingUser in listOfInterestingPeopleLivingNear)
+                                             {
+#warning check if KPDUser is already in the local database.
+                                                 NSString *interestingUserUsername = [interestingUser objectForKey:@"username"];
+                                                 NSString *interestingUserAvatarURL = [interestingUser objectForKey:@"avatarURL"];
+                                                 UserGender interestingUserGender = [(NSNumber *)[interestingUser objectForKey:@"gender"] intValue];
+                                                 UserGender interestingUserGenderCandidate = [(NSNumber *)[interestingUser objectForKey:@"genderCandidate"] intValue];
+                                                 NSDate *interestingUserDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[interestingUser objectForKey:@"dateOfBirth"] intValue]];
+                                                 NSString *interestingUserCity = [interestingUser objectForKey:@"city"];
+                                                 int interestingUserProfessionId = [(NSNumber *)[interestingUser objectForKey:@"professionId"] intValue];
+                                                 
+                                                 KPDUser *interestingUser = [[KPDUser alloc] initWithUsername:interestingUserUsername avatarUrl:interestingUserAvatarURL avatar:nil gender:interestingUserGender genderCandidate:interestingUserGenderCandidate dateOfBirth:interestingUserDateOfBirth city:interestingUserCity professionId:interestingUserProfessionId];
+                                                 [self.usersList addObject:interestingUser];
+                                                 
+                                                 // Download and save to disk the last visitor avatar
+                                                 if([interestingUserAvatarURL length])
+                                                 {
+                                                     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:interestingUserAvatarURL]];
+                                                     [[[UIImageView alloc] init] setImageWithURLRequest:request placeholderImage:candidateAvatarPlaceholder success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                                                      {
+                                                          interestingUser.avatar = image;
+                                                          [interestingUser saveToDatabase]; // Save the user avatar to disk
+                                                      } failure:nil];
+                                                 }
+                                             }
+
+
+                                             // Stop any possible visual loading indicator
+                                             [self.hud hide:YES];
+
+                                             // Show results
+                                             [self.userSelectorImage setHidden:NO];
+                                             [self setTitle:[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), 1, [usersList count]], [[usersList objectAtIndex:0] username]]];
+                                             [self showUsersNavigator];
+                                             [self showUsersProfiles];
+
+                                         } failure:^(NSURLRequest *request , NSHTTPURLResponse *response , NSError *error , id JSON )
+                                         {
+                                             NSLog(@"Error: %@", error);
+                                             NSLog(@"JSON: %@", JSON);
+                                             [self.hud hide:YES];
+                                         }];
+    
+    [operation start];
 }
 
 - (void)showNavigationBarButtons
@@ -193,9 +305,6 @@ static const int kNavigationScrollMargin = 3;
     [super viewDidLoad];
 
     [self showNavigationBarButtons];
-    [self setTitle:[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), 1, [usersList count]], [[usersList objectAtIndex:0] username]]];
-    [self showUsersNavigator];
-    [self showUsersProfiles];
 }
 
 - (void)didReceiveMemoryWarning

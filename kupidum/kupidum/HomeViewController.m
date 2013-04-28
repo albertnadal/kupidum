@@ -171,6 +171,8 @@
     self.nearToYouCandidatesLabel.layer.shadowOpacity = 0.4;
     self.nearToYouCandidatesLabel.layer.shadowRadius = 1;
     self.nearToYouCandidatesLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.nearToYouCandidatesLabel.layer.shouldRasterize = YES;
+    self.nearToYouCandidatesLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     // people you may like label
     [self.candidatesYouMayLikeLabel setText:NSLocalizedString(@"Interesting people you may like", @"")];
@@ -179,6 +181,8 @@
     self.candidatesYouMayLikeLabel.layer.shadowOpacity = 0.4;
     self.candidatesYouMayLikeLabel.layer.shadowRadius = 1;
     self.candidatesYouMayLikeLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.candidatesYouMayLikeLabel.layer.shouldRasterize = YES;
+    self.candidatesYouMayLikeLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     // last visitor button
     [self.lastVisitorButton.titleLabel.layer setMasksToBounds:NO];
@@ -186,12 +190,16 @@
     self.lastVisitorButton.titleLabel.layer.shadowOpacity = 1.0;
     self.lastVisitorButton.titleLabel.layer.shadowRadius = 3;
     self.lastVisitorButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.lastVisitorButton.titleLabel.layer.shouldRasterize = YES;
+    self.lastVisitorButton.titleLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     [self.lastVisitorButton.imageView.layer setMasksToBounds:NO];
     self.lastVisitorButton.imageView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.lastVisitorButton.imageView.layer.shadowOpacity = 1.0;
     self.lastVisitorButton.imageView.layer.shadowRadius = 3;
     self.lastVisitorButton.imageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.lastVisitorButton.imageView.layer.shouldRasterize = YES;
+    self.lastVisitorButton.imageView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     // last message user button
     [self.lastMessageUserButton.titleLabel.layer setMasksToBounds:NO];
@@ -199,12 +207,16 @@
     self.lastMessageUserButton.titleLabel.layer.shadowOpacity = 1.0;
     self.lastMessageUserButton.titleLabel.layer.shadowRadius = 3;
     self.lastMessageUserButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.lastMessageUserButton.titleLabel.layer.shouldRasterize = YES;
+    self.lastMessageUserButton.titleLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     [self.lastMessageUserButton.imageView.layer setMasksToBounds:NO];
     self.lastMessageUserButton.imageView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.lastMessageUserButton.imageView.layer.shadowOpacity = 1.0;
     self.lastMessageUserButton.imageView.layer.shadowRadius = 3;
     self.lastMessageUserButton.imageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.lastMessageUserButton.imageView.layer.shouldRasterize = YES;
+    self.lastMessageUserButton.imageView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     // last interested user button
     [self.lastInterestedUserButton.titleLabel.layer setMasksToBounds:NO];
@@ -212,12 +224,16 @@
     self.lastInterestedUserButton.titleLabel.layer.shadowOpacity = 1.0;
     self.lastInterestedUserButton.titleLabel.layer.shadowRadius = 3;
     self.lastInterestedUserButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.lastInterestedUserButton.titleLabel.layer.shouldRasterize = YES;
+    self.lastInterestedUserButton.titleLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     [self.lastInterestedUserButton.imageView.layer setMasksToBounds:NO];
     self.lastInterestedUserButton.imageView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.lastInterestedUserButton.imageView.layer.shadowOpacity = 1.0;
     self.lastInterestedUserButton.imageView.layer.shadowRadius = 3;
     self.lastInterestedUserButton.imageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.lastInterestedUserButton.imageView.layer.shouldRasterize = YES;
+    self.lastInterestedUserButton.imageView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     // my profile button
     [self.myProfileButton.titleLabel.layer setMasksToBounds:NO];
@@ -225,12 +241,16 @@
     self.myProfileButton.titleLabel.layer.shadowOpacity = 0.4;
     self.myProfileButton.titleLabel.layer.shadowRadius = 1;
     self.myProfileButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.myProfileButton.titleLabel.layer.shouldRasterize = YES;
+    self.myProfileButton.titleLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     [self.myProfileButton.imageView.layer setMasksToBounds:NO];
     self.myProfileButton.imageView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.myProfileButton.imageView.layer.shadowOpacity = 0.4;
     self.myProfileButton.imageView.layer.shadowRadius = 1;
     self.myProfileButton.imageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.myProfileButton.imageView.layer.shouldRasterize = YES;
+    self.myProfileButton.imageView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     // my account button
     [self.myAccountButton.titleLabel.layer setMasksToBounds:NO];
@@ -238,12 +258,16 @@
     self.myAccountButton.titleLabel.layer.shadowOpacity = 0.4;
     self.myAccountButton.titleLabel.layer.shadowRadius = 1;
     self.myAccountButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.myAccountButton.titleLabel.layer.shouldRasterize = YES;
+    self.myAccountButton.titleLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     [self.myAccountButton.imageView.layer setMasksToBounds:NO];
     self.myAccountButton.imageView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.myAccountButton.imageView.layer.shadowOpacity = 0.4;
     self.myAccountButton.imageView.layer.shadowRadius = 1;
     self.myAccountButton.imageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.myAccountButton.imageView.layer.shouldRasterize = YES;
+    self.myAccountButton.imageView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 }
 
 - (void)retrieveDataFromWebService
@@ -461,20 +485,6 @@
     }];
 
     [operation start];
-
-/*
-    self.lastVisitor = [[KPDUser alloc] initWithUsername:@"pepito"];
-    self.lastMessageUser = [[KPDUser alloc] initWithUsername:@"fulanito"];
-    self.lastInterestedUser = [[KPDUser alloc] initWithUsername:@"menganito"];
-
-    KPDUser *user1 = [[KPDUser alloc] initWithUsername:@"superman"];
-    KPDUser *user2 = [[KPDUser alloc] initWithUsername:@"doraemon"];
-    KPDUser *user3 = [[KPDUser alloc] initWithUsername:@"gojira"];
-    KPDUser *user4 = [[KPDUser alloc] initWithUsername:@"muzaman"];
-    KPDUser *user5 = [[KPDUser alloc] initWithUsername:@"perchita"];
-
-    self.interestingPeopleLivingNear = @[user1, user2, user3, user4, user5];
-    self.interestingPeopleYouMayLike = @[user1, user2, user3, user4, user5];*/
 }
 
 - (void)updateLastVisitorButton
@@ -569,7 +579,7 @@
 
 - (void)showPeopleLivingNearToUser:(NSString *)theUser
 {
-    UsersNavigatorViewController *unvc = [[UsersNavigatorViewController alloc] initWithNibName:@"UsersNavigatorViewController" bundle:nil];
+    UsersNavigatorViewController *unvc = [[UsersNavigatorViewController alloc] initAndShowInterestingPeopleNear];
     [self.navigationController pushViewController:unvc animated:YES];
 }
 
