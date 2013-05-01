@@ -59,7 +59,7 @@
 
     [db beginTransaction];
     // User tables
-    [db executeUpdate:@"create table user (username text primary key, avatar_url text, avatar blob, gender int, gender_candidate int, date_of_birth date, city text, profession_id int)"];
+    [db executeUpdate:@"create table user (username text primary key, avatar_url text, avatar blob, gender int, gender_candidate int, min_age_candidate int, max_age_candidate int, min_height_candidate, max_height_candidate, date_of_birth date, city text, presentation text, profession_id int)"];
 
     // Chat tables
     [db executeUpdate:@"create table chat (username_a text, username_b text, last_message text, date_last_message date)"];

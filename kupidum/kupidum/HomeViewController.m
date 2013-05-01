@@ -165,7 +165,7 @@
     [self.lastInterestedUserButton setTitle:@"0" forState:UIControlStateNormal];
 
     // people neart to you label
-    [self.nearToYouCandidatesLabel setText:NSLocalizedString(@"Interesting people living near to you", @"")];
+    [self.nearToYouCandidatesLabel setText:NSLocalizedString(@"Interesting people living near to me", @"")];
     [self.nearToYouCandidatesLabel.layer setMasksToBounds:NO];
     self.nearToYouCandidatesLabel.layer.shadowColor = [UIColor blackColor].CGColor;
     self.nearToYouCandidatesLabel.layer.shadowOpacity = 0.4;
@@ -175,7 +175,7 @@
     self.nearToYouCandidatesLabel.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     // people you may like label
-    [self.candidatesYouMayLikeLabel setText:NSLocalizedString(@"Interesting people you may like", @"")];
+    [self.candidatesYouMayLikeLabel setText:NSLocalizedString(@"Interesting people I may like", @"")];
     [self.candidatesYouMayLikeLabel.layer setMasksToBounds:NO];
     self.candidatesYouMayLikeLabel.layer.shadowColor = [UIColor blackColor].CGColor;
     self.candidatesYouMayLikeLabel.layer.shadowOpacity = 0.4;
@@ -335,11 +335,16 @@
             NSString *lastVisitorAvatarURL = [lastVisitorData objectForKey:@"avatarURL"];
             UserGender lastVisitorGender = [(NSNumber *)[lastVisitorData objectForKey:@"gender"] intValue];
             UserGender lastVisitorGenderCandidate = [(NSNumber *)[lastVisitorData objectForKey:@"genderCandidate"] intValue];
+            int lastVisitorMinAgeCandidate = [(NSNumber *)[lastVisitorData objectForKey:@"minAgeCandidate"] intValue];
+            int lastVisitorMaxAgeCandidate = [(NSNumber *)[lastVisitorData objectForKey:@"maxAgeCandidate"] intValue];
+            int lastVisitorMinLenghtCandidate = [(NSNumber *)[lastVisitorData objectForKey:@"minHeightCandidate"] intValue];
+            int lastVisitorMaxLenghtCandidate = [(NSNumber *)[lastVisitorData objectForKey:@"maxHeightCandidate"] intValue];
             NSDate *lastVisitorDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[lastVisitorData objectForKey:@"dateOfBirth"] intValue]];
             NSString *lastVisitorCity = [lastVisitorData objectForKey:@"city"];
+            NSString *lastVisitorPresentation = [lastVisitorData objectForKey:@"presentation"];
             int lastVisitorProfessionId = [(NSNumber *)[lastVisitorData objectForKey:@"professionId"] intValue];
 
-            self.lastVisitor = [[KPDUser alloc] initWithUsername:lastVisitorUsername avatarUrl:lastVisitorAvatarURL avatar:nil gender:lastVisitorGender genderCandidate:lastVisitorGenderCandidate dateOfBirth:lastVisitorDateOfBirth city:lastVisitorCity professionId:lastVisitorProfessionId];
+            self.lastVisitor = [[KPDUser alloc] initWithUsername:lastVisitorUsername avatarUrl:lastVisitorAvatarURL avatar:nil gender:lastVisitorGender genderCandidate:lastVisitorGenderCandidate dateOfBirth:lastVisitorDateOfBirth city:lastVisitorCity professionId:lastVisitorProfessionId presentation:lastVisitorPresentation minAgeCandidate:lastVisitorMinAgeCandidate maxAgeCandidate:lastVisitorMaxAgeCandidate minLenghtCandidate:lastVisitorMinLenghtCandidate maxLenghtCandidate:lastVisitorMaxLenghtCandidate];
 
             // Download and save to disk the last visitor avatar
             if([lastVisitorAvatarURL length])
@@ -350,6 +355,7 @@
                     self.lastVisitor.avatar = image;
                     [self.lastVisitor saveToDatabase]; // Save the user avatar to disk
                     [self.lastVisitorButton setBackgroundImage:self.lastVisitor.avatar forState:UIControlStateNormal];
+
                 } failure:nil];
             }
         }
@@ -362,11 +368,16 @@
             NSString *lastMessageUserAvatarURL = [lastMessageUserData objectForKey:@"avatarURL"];
             UserGender lastMessageUserGender = [(NSNumber *)[lastMessageUserData objectForKey:@"gender"] intValue];
             UserGender lastMessageUserGenderCandidate = [(NSNumber *)[lastMessageUserData objectForKey:@"genderCandidate"] intValue];
+            int lastMessageUserMinAgeCandidate = [(NSNumber *)[lastMessageUserData objectForKey:@"minAgeCandidate"] intValue];
+            int lastMessageUserMaxAgeCandidate = [(NSNumber *)[lastMessageUserData objectForKey:@"maxAgeCandidate"] intValue];
+            int lastMessageUserMinLenghtCandidate = [(NSNumber *)[lastMessageUserData objectForKey:@"minHeightCandidate"] intValue];
+            int lastMessageUserMaxLenghtCandidate = [(NSNumber *)[lastMessageUserData objectForKey:@"maxHeightCandidate"] intValue];
             NSDate *lastMessageUserDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[lastMessageUserData objectForKey:@"dateOfBirth"] intValue]];
             NSString *lastMessageUserCity = [lastMessageUserData objectForKey:@"city"];
+            NSString *lastMessageUserPresentation = [lastMessageUserData objectForKey:@"presentation"];
             int lastMessageUserProfessionId = [(NSNumber *)[lastMessageUserData objectForKey:@"professionId"] intValue];
 
-            self.lastMessageUser = [[KPDUser alloc] initWithUsername:lastMessageUserUsername avatarUrl:lastMessageUserAvatarURL avatar:nil gender:lastMessageUserGender genderCandidate:lastMessageUserGenderCandidate dateOfBirth:lastMessageUserDateOfBirth city:lastMessageUserCity professionId:lastMessageUserProfessionId];
+            self.lastMessageUser = [[KPDUser alloc] initWithUsername:lastMessageUserUsername avatarUrl:lastMessageUserAvatarURL avatar:nil gender:lastMessageUserGender genderCandidate:lastMessageUserGenderCandidate dateOfBirth:lastMessageUserDateOfBirth city:lastMessageUserCity professionId:lastMessageUserProfessionId presentation:lastMessageUserPresentation minAgeCandidate:lastMessageUserMinAgeCandidate maxAgeCandidate:lastMessageUserMaxAgeCandidate minLenghtCandidate:lastMessageUserMinLenghtCandidate maxLenghtCandidate:lastMessageUserMaxLenghtCandidate];
 
             // Download and save to disk the last visitor avatar
             if([lastMessageUserAvatarURL length])
@@ -389,12 +400,17 @@
             NSString *lastInterestedUserAvatarURL = [lastInterestedUserData objectForKey:@"avatarURL"];
             UserGender lastInterestedUserGender = [(NSNumber *)[lastInterestedUserData objectForKey:@"gender"] intValue];
             UserGender lastInterestedUserGenderCandidate = [(NSNumber *)[lastInterestedUserData objectForKey:@"genderCandidate"] intValue];
+            int lastInterestedUserMinAgeCandidate = [(NSNumber *)[lastInterestedUserData objectForKey:@"minAgeCandidate"] intValue];
+            int lastInterestedUserMaxAgeCandidate = [(NSNumber *)[lastInterestedUserData objectForKey:@"maxAgeCandidate"] intValue];
+            int lastInterestedUserMinLenghtCandidate = [(NSNumber *)[lastInterestedUserData objectForKey:@"minHeightCandidate"] intValue];
+            int lastInterestedUserMaxLenghtCandidate = [(NSNumber *)[lastInterestedUserData objectForKey:@"maxHeightCandidate"] intValue];
             NSDate *lastInterestedUserDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[lastInterestedUserData objectForKey:@"dateOfBirth"] intValue]];
             NSString *lastInterestedUserCity = [lastInterestedUserData objectForKey:@"city"];
+            NSString *lastInterestedUserPresentation = [lastInterestedUserData objectForKey:@"presentation"];
             int lastInterestedUserProfessionId = [(NSNumber *)[lastInterestedUserData objectForKey:@"professionId"] intValue];
-            
-            self.lastInterestedUser = [[KPDUser alloc] initWithUsername:lastInterestedUserUsername avatarUrl:lastInterestedUserAvatarURL avatar:nil gender:lastInterestedUserGender genderCandidate:lastInterestedUserGenderCandidate dateOfBirth:lastInterestedUserDateOfBirth city:lastInterestedUserCity professionId:lastInterestedUserProfessionId];
-            
+
+            self.lastInterestedUser = [[KPDUser alloc] initWithUsername:lastInterestedUserUsername avatarUrl:lastInterestedUserAvatarURL avatar:nil gender:lastInterestedUserGender genderCandidate:lastInterestedUserGenderCandidate dateOfBirth:lastInterestedUserDateOfBirth city:lastInterestedUserCity professionId:lastInterestedUserProfessionId presentation:lastInterestedUserPresentation minAgeCandidate:lastInterestedUserMinAgeCandidate maxAgeCandidate:lastInterestedUserMaxAgeCandidate minLenghtCandidate:lastInterestedUserMinLenghtCandidate maxLenghtCandidate:lastInterestedUserMaxLenghtCandidate];
+
             // Download and save to disk the last visitor avatar
             if([lastInterestedUserAvatarURL length])
             {
@@ -420,11 +436,16 @@
             NSString *interestingUserAvatarURL = [interestingUser objectForKey:@"avatarURL"];
             UserGender interestingUserGender = [(NSNumber *)[interestingUser objectForKey:@"gender"] intValue];
             UserGender interestingUserGenderCandidate = [(NSNumber *)[interestingUser objectForKey:@"genderCandidate"] intValue];
+            int interestingUserMinAgeCandidate = [(NSNumber *)[interestingUser objectForKey:@"minAgeCandidate"] intValue];
+            int interestingUserMaxAgeCandidate = [(NSNumber *)[interestingUser objectForKey:@"maxAgeCandidate"] intValue];
+            int interestingUserMinLenghtCandidate = [(NSNumber *)[interestingUser objectForKey:@"minHeightCandidate"] intValue];
+            int interestingUserMaxLenghtCandidate = [(NSNumber *)[interestingUser objectForKey:@"maxHeightCandidate"] intValue];
             NSDate *interestingUserDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[interestingUser objectForKey:@"dateOfBirth"] intValue]];
             NSString *interestingUserCity = [interestingUser objectForKey:@"city"];
+            NSString *interestingUserPresentation = [interestingUser objectForKey:@"presentation"];
             int interestingUserProfessionId = [(NSNumber *)[interestingUser objectForKey:@"professionId"] intValue];
 
-            KPDUser *interestingUser = [[KPDUser alloc] initWithUsername:interestingUserUsername avatarUrl:interestingUserAvatarURL avatar:nil gender:interestingUserGender genderCandidate:interestingUserGenderCandidate dateOfBirth:interestingUserDateOfBirth city:interestingUserCity professionId:interestingUserProfessionId];
+            KPDUser *interestingUser = [[KPDUser alloc] initWithUsername:interestingUserUsername avatarUrl:interestingUserAvatarURL avatar:nil gender:interestingUserGender genderCandidate:interestingUserGenderCandidate dateOfBirth:interestingUserDateOfBirth city:interestingUserCity professionId:interestingUserProfessionId presentation:interestingUserPresentation minAgeCandidate:interestingUserMinAgeCandidate maxAgeCandidate:interestingUserMaxAgeCandidate minLenghtCandidate:interestingUserMinLenghtCandidate maxLenghtCandidate:interestingUserMaxLenghtCandidate];
             [self.interestingPeopleLivingNear addObject:interestingUser];
 
             // Download and save to disk the last visitor avatar
@@ -436,6 +457,7 @@
                      interestingUser.avatar = image;
                      [interestingUser saveToDatabase]; // Save the user avatar to disk
                      [(UITableView *)self.nearToYouCandidatesTableViewController.view reloadData];
+                     [nearToYouCandidatesTableViewController scrollContentToLeft];
                  } failure:nil];
             }
         }
@@ -453,11 +475,16 @@
             NSString *interestingUserAvatarURL = [interestingUser objectForKey:@"avatarURL"];
             UserGender interestingUserGender = [(NSNumber *)[interestingUser objectForKey:@"gender"] intValue];
             UserGender interestingUserGenderCandidate = [(NSNumber *)[interestingUser objectForKey:@"genderCandidate"] intValue];
+            int interestingUserMinAgeCandidate = [(NSNumber *)[interestingUser objectForKey:@"minAgeCandidate"] intValue];
+            int interestingUserMaxAgeCandidate = [(NSNumber *)[interestingUser objectForKey:@"maxAgeCandidate"] intValue];
+            int interestingUserMinLenghtCandidate = [(NSNumber *)[interestingUser objectForKey:@"minHeightCandidate"] intValue];
+            int interestingUserMaxLenghtCandidate = [(NSNumber *)[interestingUser objectForKey:@"maxHeightCandidate"] intValue];
             NSDate *interestingUserDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[interestingUser objectForKey:@"dateOfBirth"] intValue]];
             NSString *interestingUserCity = [interestingUser objectForKey:@"city"];
+            NSString *interestingUserPresentation = [interestingUser objectForKey:@"presentation"];
             int interestingUserProfessionId = [(NSNumber *)[interestingUser objectForKey:@"professionId"] intValue];
             
-            KPDUser *interestingUser = [[KPDUser alloc] initWithUsername:interestingUserUsername avatarUrl:interestingUserAvatarURL avatar:nil gender:interestingUserGender genderCandidate:interestingUserGenderCandidate dateOfBirth:interestingUserDateOfBirth city:interestingUserCity professionId:interestingUserProfessionId];
+            KPDUser *interestingUser = [[KPDUser alloc] initWithUsername:interestingUserUsername avatarUrl:interestingUserAvatarURL avatar:nil gender:interestingUserGender genderCandidate:interestingUserGenderCandidate dateOfBirth:interestingUserDateOfBirth city:interestingUserCity professionId:interestingUserProfessionId presentation:interestingUserPresentation minAgeCandidate:interestingUserMinAgeCandidate maxAgeCandidate:interestingUserMaxAgeCandidate minLenghtCandidate:interestingUserMinLenghtCandidate maxLenghtCandidate:interestingUserMaxLenghtCandidate];
             [self.interestingPeopleYouMayLike addObject:interestingUser];
             
             // Download and save to disk the last visitor avatar
@@ -469,6 +496,7 @@
                      interestingUser.avatar = image;
                      [interestingUser saveToDatabase]; // Save the user avatar to disk
                      [(UITableView *)self.candidatesYouMayLikeTableViewController.view reloadData];
+                     [candidatesYouMayLikeTableViewController scrollContentToLeft];
                  } failure:nil];
             }
         }

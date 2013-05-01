@@ -11,7 +11,7 @@
 
 @implementation KPDUser
 
-@synthesize username, avatarURL, avatar, gender, genderCandidate, dateOfBirth, city, professionId, professionString, genderCandidateString, genderString;
+@synthesize username, avatarURL, avatar, gender, genderCandidate, dateOfBirth, city, professionId, professionString, genderCandidateString, genderString, presentation, minAgeCandidate, maxAgeCandidate, minHeightCandidate, maxHeightCandidate;
 
 - (id)init
 {
@@ -28,12 +28,13 @@
         self.professionId = nil;
         self.professionString = nil;
         self.genderString = nil;
+        self.presentation = nil;
     }
 
     return self;
 }
 
-- (id)initWithUsername:(NSString *)_username avatarUrl:(NSString *)avatar_url avatar:(UIImage *)avatar_image gender:(int)the_gender genderCandidate:(int)gender_candidate_ dateOfBirth:(NSDate *)date_of_birth city:(NSString *)city_ professionId:(int)profession_id
+- (id)initWithUsername:(NSString *)_username avatarUrl:(NSString *)avatar_url avatar:(UIImage *)avatar_image gender:(int)the_gender genderCandidate:(int)gender_candidate_ dateOfBirth:(NSDate *)date_of_birth city:(NSString *)city_ professionId:(int)profession_id presentation:(NSString *)presentation_ minAgeCandidate:(int)minAgeCand maxAgeCandidate:(int)maxAgeCand minLenghtCandidate:(int)minLenghtCand maxLenghtCandidate:(int)maxLenghtCand
 {
     if(self = [super init])
     {
@@ -48,6 +49,11 @@
         self.professionString = [self professionStringFromIdentifier:[self.professionId intValue]];
         self.genderCandidateString = [self genderStringFromIdentifier:[self.genderCandidate intValue]];
         self.genderString = [self genderStringFromIdentifier:[self.gender intValue]];
+        self.presentation = presentation_;
+        self.minAgeCandidate = [NSNumber numberWithInt:minAgeCand];
+        self.maxAgeCandidate = [NSNumber numberWithInt:maxAgeCand];
+        self.minHeightCandidate = [NSNumber numberWithInt:minLenghtCand];
+        self.maxHeightCandidate = [NSNumber numberWithInt:maxLenghtCand];
 
         // If the user is not in the database then we have to retrieve the full data from web service and save to database
         //if(![self usernameIsInDatabase:_username])
@@ -85,6 +91,7 @@
     //warning Implement this function!
     self.avatar = [UIImage imageNamed:@"me.jpg"];
     self.avatarURL = @"https://twimg0-a.akamaihd.net/profile_images/3070674028/9f2af264ad0fa725337701afe41dbcab.jpeg";
+    self.presentation = @"Hola que tal!";
 
     self.gender = [NSNumber numberWithInt:kMale];
     self.genderString = [self genderStringFromIdentifier:[self.gender intValue]];
@@ -100,6 +107,11 @@
     self.city = @"Girona";
     self.professionId = @42; // Metge
     self.professionString = [self professionStringFromIdentifier:[self.professionId intValue]];
+
+    self.minAgeCandidate = [NSNumber numberWithInt:25];
+    self.maxAgeCandidate = [NSNumber numberWithInt:35];
+    self.minHeightCandidate = [NSNumber numberWithInt:160];
+    self.maxHeightCandidate = [NSNumber numberWithInt:180];
 }
 
 - (void)retrieveDataFromDatabase
@@ -117,6 +129,11 @@
         self.city = [rs stringForColumn:@"city"];
         self.professionId = [NSNumber numberWithInt:[rs intForColumn:@"profession_id"]];
         self.professionString = [self professionStringFromIdentifier:[self.professionId intValue]];
+        self.presentation = [rs stringForColumn:@"presentation"];
+        self.minAgeCandidate = [NSNumber numberWithInt:[rs intForColumn:@"min_age_candidate"]];
+        self.maxAgeCandidate = [NSNumber numberWithInt:[rs intForColumn:@"max_age_candidate"]];
+        self.minHeightCandidate = [NSNumber numberWithInt:[rs intForColumn:@"min_height_candidate"]];
+        self.maxHeightCandidate = [NSNumber numberWithInt:[rs intForColumn:@"max_height_candidate"]];
 
         self.avatarURL = [rs stringForColumn:@"avatar_url"];
         NSData *avatarImageData = [rs dataForColumn:@"avatar"];
@@ -220,14 +237,14 @@
     {
         // Update user data
         [db beginTransaction];
-        [db executeUpdate:@"update user set avatar_url = ?, avatar = ?, gender = ?, gender_candidate = ?, date_of_birth = ?, city = ?, profession_id = ? where username = ?", self.avatarURL, UIImagePNGRepresentation(avatar), self.gender, self.genderCandidate, self.dateOfBirth, self.city, self.professionId, username];
+        [db executeUpdate:@"update user set avatar_url = ?, avatar = ?, gender = ?, gender_candidate = ?, min_age_candidate = ?, max_age_candidate = ?, min_height_candidate = ?, max_height_candidate = ?, date_of_birth = ?, city = ?, presentation = ?, profession_id = ? where username = ?", self.avatarURL, UIImagePNGRepresentation(avatar), self.gender, self.genderCandidate, self.minAgeCandidate, self.maxAgeCandidate, self.minHeightCandidate, self.maxHeightCandidate, self.dateOfBirth, self.city, self.presentation, self.professionId, username];
         [db commit];
     }
     else
     {
         // Insert user to db
         [db beginTransaction];
-        [db executeUpdate:@"insert into user (username, avatar_url, avatar, gender, gender_candidate, date_of_birth, city, profession_id) values (?, ?, ?, ?, ?, ?, ?, ?)", username, avatarURL, UIImagePNGRepresentation(avatar), self.gender, self.genderCandidate, self.dateOfBirth, self.city, self.professionId];
+        [db executeUpdate:@"insert into user (username, avatar_url, avatar, gender, gender_candidate, min_age_candidate, max_age_candidate, min_height_candidate, max_height_candidate, date_of_birth, city, presentation, profession_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", username, avatarURL, UIImagePNGRepresentation(avatar), self.gender, self.genderCandidate, self.minAgeCandidate, self.maxAgeCandidate, self.minHeightCandidate, self.maxHeightCandidate, self.dateOfBirth, self.city, self.presentation, self.professionId];
         [db commit];
     }
 }

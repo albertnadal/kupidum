@@ -16,6 +16,7 @@
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 #import "MBProgressHUD.h"
+#import <QuartzCore/QuartzCore.h>
 
 static const int kSpaceBetweenAvatars = 6;
 static const int kAvatarWidth = 65;
@@ -48,10 +49,11 @@ static const int kNavigationScrollMargin = 3;
 
 - (void)showNavigationBarButtons;
 - (void)backPressed;
-- (void)loadFakeUsers;
 - (void)showUsersNavigator;
 - (void)showUsersProfiles;
 - (void)retrieveInterestingPeopleNearDataFromWebService;
+- (void)reloadUserProfilesData;
+- (void)reloadUserNavigatorData;
 
 @end
 
@@ -85,8 +87,6 @@ static const int kNavigationScrollMargin = 3;
         contentScrollProfilesWidth = 0;
         activeScroll = nil;
         userNavigatorProfileViewControllers = nil;
-        
-        [self loadFakeUsers];
     }
     return self;
 }
@@ -130,7 +130,8 @@ static const int kNavigationScrollMargin = 3;
                                              if(self.usersList)
                                                  [self.usersList removeAllObjects];
                                              self.usersList = [[NSMutableArray alloc] init];
-                                             
+
+                                             int i=0;
                                              for(NSDictionary *interestingUser in listOfInterestingPeopleLivingNear)
                                              {
 #warning check if KPDUser is already in the local database.
@@ -138,13 +139,18 @@ static const int kNavigationScrollMargin = 3;
                                                  NSString *interestingUserAvatarURL = [interestingUser objectForKey:@"avatarURL"];
                                                  UserGender interestingUserGender = [(NSNumber *)[interestingUser objectForKey:@"gender"] intValue];
                                                  UserGender interestingUserGenderCandidate = [(NSNumber *)[interestingUser objectForKey:@"genderCandidate"] intValue];
+                                                 int interestingUserMinAgeCandidate = [(NSNumber *)[interestingUser objectForKey:@"minAgeCandidate"] intValue];
+                                                 int interestingUserMaxAgeCandidate = [(NSNumber *)[interestingUser objectForKey:@"maxAgeCandidate"] intValue];
+                                                 int interestingUserMinLenghtCandidate = [(NSNumber *)[interestingUser objectForKey:@"minHeightCandidate"] intValue];
+                                                 int interestingUserMaxLenghtCandidate = [(NSNumber *)[interestingUser objectForKey:@"maxHeightCandidate"] intValue];
                                                  NSDate *interestingUserDateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[interestingUser objectForKey:@"dateOfBirth"] intValue]];
                                                  NSString *interestingUserCity = [interestingUser objectForKey:@"city"];
+                                                 NSString *interestingUserPresentation = [interestingUser objectForKey:@"presentation"];
                                                  int interestingUserProfessionId = [(NSNumber *)[interestingUser objectForKey:@"professionId"] intValue];
-                                                 
-                                                 KPDUser *interestingUser = [[KPDUser alloc] initWithUsername:interestingUserUsername avatarUrl:interestingUserAvatarURL avatar:nil gender:interestingUserGender genderCandidate:interestingUserGenderCandidate dateOfBirth:interestingUserDateOfBirth city:interestingUserCity professionId:interestingUserProfessionId];
+
+                                                 KPDUser *interestingUser = [[KPDUser alloc] initWithUsername:interestingUserUsername avatarUrl:interestingUserAvatarURL avatar:nil gender:interestingUserGender genderCandidate:interestingUserGenderCandidate dateOfBirth:interestingUserDateOfBirth city:interestingUserCity professionId:interestingUserProfessionId presentation:interestingUserPresentation minAgeCandidate:interestingUserMinAgeCandidate maxAgeCandidate:interestingUserMaxAgeCandidate minLenghtCandidate:interestingUserMinLenghtCandidate maxLenghtCandidate:interestingUserMaxLenghtCandidate];
                                                  [self.usersList addObject:interestingUser];
-                                                 
+
                                                  // Download and save to disk the last visitor avatar
                                                  if([interestingUserAvatarURL length])
                                                  {
@@ -153,8 +159,12 @@ static const int kNavigationScrollMargin = 3;
                                                       {
                                                           interestingUser.avatar = image;
                                                           [interestingUser saveToDatabase]; // Save the user avatar to disk
+                                                          [self reloadUserProfilesData];
+                                                          [self reloadUserNavigatorData];
                                                       } failure:nil];
                                                  }
+
+                                                 i++;
                                              }
 
 
@@ -225,19 +235,6 @@ static const int kNavigationScrollMargin = 3;
     activeScroll = nil;
 }
 
-- (void)loadFakeUsers
-{
-    KPDUser *user1 = [[KPDUser alloc] initWithUsername:@"user1"];
-    KPDUser *user2 = [[KPDUser alloc] initWithUsername:@"user2"];
-    KPDUser *user3 = [[KPDUser alloc] initWithUsername:@"user3"];
-    KPDUser *user4 = [[KPDUser alloc] initWithUsername:@"user4"];
-    KPDUser *user5 = [[KPDUser alloc] initWithUsername:@"user5"];
-    KPDUser *user6 = [[KPDUser alloc] initWithUsername:@"user6"];
-    KPDUser *user7 = [[KPDUser alloc] initWithUsername:@"user7"];
-    KPDUser *user8 = [[KPDUser alloc] initWithUsername:@"user8"];
-    usersList = @[ user1, user2, user3, user4, user5, user6, user7, user8 ];
-}
-
 - (void)showUsersNavigator
 {
     [self.scrollNavigatorContainer setClipsToBounds:YES];
@@ -254,6 +251,7 @@ static const int kNavigationScrollMargin = 3;
         UIView *avatarContainer = [[UIView alloc] initWithFrame:CGRectMake(x, 0, kAvatarWidth, kAvatarHeight)];
         [avatarContainer setBackgroundColor:[UIColor whiteColor]];
         UIImageView *avatarImage = [[UIImageView alloc] initWithFrame:CGRectMake(1, 1, kAvatarWidth-2, kAvatarHeight-2)];
+        [avatarImage setTag:i];
         [avatarImage setImage:[user avatar]];
         [avatarContainer addSubview:avatarImage];
         [scrollNavigator addSubview:avatarContainer];
@@ -266,6 +264,29 @@ static const int kNavigationScrollMargin = 3;
     contentScrollNavigatorWidth = x;
 
     [scrollNavigator setContentSize:CGSizeMake(x, kAvatarHeight)];
+}
+
+- (void)reloadUserNavigatorData
+{
+    for(int i=0; i<[usersList count]; i++)
+    {
+        KPDUser *user = [usersList objectAtIndex:i];
+
+        UIImageView *userNavigatorAvatarImageView = (UIImageView *)[scrollNavigator viewWithTag:i];
+        
+        if([userNavigatorAvatarImageView respondsToSelector:@selector(setImage:)])
+            [userNavigatorAvatarImageView setImage:user.avatar];
+
+    }
+}
+
+- (void)reloadUserProfilesData
+{
+    for(int i=0; i<[userNavigatorProfileViewControllers count]; i++)
+    {
+        UserNavigatorProfileViewController *unpvc = (UserNavigatorProfileViewController *)[userNavigatorProfileViewControllers objectAtIndex:i];
+        [unpvc reloadData];
+    }
 }
 
 - (void)showUsersProfiles
@@ -303,6 +324,15 @@ static const int kNavigationScrollMargin = 3;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // people neart to you label
+    [self.userSelectorImage.layer setMasksToBounds:NO];
+    self.userSelectorImage.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.userSelectorImage.layer.shadowOpacity = 0.4;
+    self.userSelectorImage.layer.shadowRadius = 1.0;
+    self.userSelectorImage.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.userSelectorImage.layer.shouldRasterize = YES;
+    self.userSelectorImage.layer.rasterizationScale = [[UIScreen mainScreen] scale];
 
     [self showNavigationBarButtons];
 }

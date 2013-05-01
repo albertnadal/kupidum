@@ -736,11 +736,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "kupidum/model/KPDUser.m"
-         timestampString = "388251308.585914"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
+         startingLineNumber = "75"
+         endingLineNumber = "75"
          landmarkName = "-initWithUsername:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -749,11 +749,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "kupidum/model/KPDUser.m"
-         timestampString = "388251308.585914"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
          landmarkName = "-initWithUsername:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -762,11 +762,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "kupidum/model/KPDUser.m"
-         timestampString = "388251308.585914"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "113"
-         endingLineNumber = "113"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
          landmarkName = "-retrieveDataFromDatabase"
          landmarkType = "5">
       </FileBreakpoint>
@@ -775,11 +775,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "kupidum/model/KPDUser.m"
-         timestampString = "388251308.585914"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "107"
-         endingLineNumber = "107"
+         startingLineNumber = "119"
+         endingLineNumber = "119"
          landmarkName = "-retrieveDataFromDatabase"
          landmarkType = "5">
       </FileBreakpoint>
@@ -788,11 +788,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "kupidum/model/KPDUser.m"
-         timestampString = "388251308.585914"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "76"
-         endingLineNumber = "76"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
          landmarkName = "-initWithUsername:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -801,11 +801,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "kupidum/model/KPDUser.m"
-         timestampString = "388251308.585914"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
          landmarkName = "-retrieveDataFromWebService"
          landmarkType = "5">
       </FileBreakpoint>
@@ -814,11 +814,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "kupidum/kupidum/HomeViewController.m"
-         timestampString = "388840776.296422"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "483"
-         endingLineNumber = "483"
+         startingLineNumber = "511"
+         endingLineNumber = "511"
          landmarkName = "-retrieveDataFromWebService"
          landmarkType = "5">
       </FileBreakpoint>
@@ -827,7 +827,46 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "kupidum/kupidum/HomeViewController.m"
-         timestampString = "388840776.296422"
+         timestampString = "389117064.355724"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "502"
+         endingLineNumber = "502"
+         landmarkName = "-retrieveDataFromWebService"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "kupidum/kupidum/HomeViewController.m"
+         timestampString = "389117064.355724"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "467"
+         endingLineNumber = "467"
+         landmarkName = "-retrieveDataFromWebService"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "kupidum/kupidum/HomeViewController.m"
+         timestampString = "389117064.355724"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "472"
+         endingLineNumber = "472"
+         landmarkName = "-retrieveDataFromWebService"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "kupidum/kupidum/HomeViewController.m"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "474"
@@ -840,11 +879,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "kupidum/kupidum/HomeViewController.m"
-         timestampString = "388840776.296422"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "445"
-         endingLineNumber = "445"
+         startingLineNumber = "491"
+         endingLineNumber = "491"
          landmarkName = "-retrieveDataFromWebService"
          landmarkType = "5">
       </FileBreakpoint>
@@ -853,11 +892,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "kupidum/kupidum/HomeViewController.m"
-         timestampString = "388840776.296422"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "450"
-         endingLineNumber = "450"
+         startingLineNumber = "493"
+         endingLineNumber = "493"
          landmarkName = "-retrieveDataFromWebService"
          landmarkType = "5">
       </FileBreakpoint>
@@ -865,39 +904,13 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "kupidum/kupidum/HomeViewController.m"
-         timestampString = "388840776.296422"
+         filePath = "kupidum/kupidum/UserNavigatorProfileViewController.m"
+         timestampString = "389117064.355724"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "452"
-         endingLineNumber = "452"
-         landmarkName = "-retrieveDataFromWebService"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "kupidum/kupidum/HomeViewController.m"
-         timestampString = "388840776.296422"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "464"
-         endingLineNumber = "464"
-         landmarkName = "-retrieveDataFromWebService"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "kupidum/kupidum/HomeViewController.m"
-         timestampString = "388840776.296422"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "466"
-         endingLineNumber = "466"
-         landmarkName = "-retrieveDataFromWebService"
+         startingLineNumber = "57"
+         endingLineNumber = "57"
+         landmarkName = "-reloadData"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

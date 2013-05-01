@@ -7,6 +7,9 @@
 //
 
 #import "UserNavigatorProfileViewController.h"
+#import <QuartzCore/QuartzCore.h>
+
+static const int kPresentationHeight = 64.0f;
 
 @interface UserNavigatorProfileViewController ()
 {
@@ -15,6 +18,10 @@
     IBOutlet UILabel *overview;
     IBOutlet UILabel *usernameLabel;
     IBOutlet UILabel *wantsToMeetLabel;
+    IBOutlet UIImageView *beginQuotesImage;
+    IBOutlet UILabel *presentationLabel;
+    IBOutlet UILabel *minMaxAgeCandidateLabel;
+    IBOutlet UILabel *minMaxHeightCandidateLabel;
 }
 
 @property (nonatomic, retain) KPDUser *user;
@@ -22,12 +29,18 @@
 @property (nonatomic, retain) IBOutlet UILabel *overview;
 @property (nonatomic, retain) IBOutlet UILabel *usernameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *wantsToMeetLabel;
+@property (nonatomic, retain) IBOutlet UIImageView *beginQuotesImage;
+@property (nonatomic, retain) IBOutlet UILabel *presentationLabel;
+@property (nonatomic, retain) IBOutlet UILabel *minMaxAgeCandidateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *minMaxHeightCandidateLabel;
+
+- (void)loadData;
 
 @end
 
 @implementation UserNavigatorProfileViewController
 
-@synthesize delegate, user, avatar, overview, usernameLabel, wantsToMeetLabel;
+@synthesize delegate, user, avatar, overview, usernameLabel, wantsToMeetLabel, beginQuotesImage, presentationLabel, minMaxAgeCandidateLabel, minMaxHeightCandidateLabel;
 
 - (id)initWithUser:(KPDUser *)user_
 {
@@ -39,10 +52,14 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)reloadData
 {
-    [super viewDidLoad];
+    [self.user retrieveDataFromDatabase];
+    [self loadData];
+}
 
+- (void)loadData
+{
     [self.avatar setImage:self.user.avatar];
 
     [self.usernameLabel setText:self.user.username];
@@ -60,7 +77,35 @@
     int totalYears = floor(timeInterval/secondsPerYear);
 
     NSString *genderOrProfession = self.user.professionString ? self.user.professionString : self.user.genderString;
-    [self.overview setText:[NSString stringWithFormat:@"%@ is a %d years old %@ who lives in %@", self.user.username, totalYears, genderOrProfession, self.user.city]];
+    [self.overview setText:[NSString stringWithFormat:NSLocalizedString(@"%@ is a %d years old %@ who lives in %@", @""), self.user.username, totalYears, genderOrProfession, self.user.city]];
+
+    // people near to you label
+    [self.overview.layer setMasksToBounds:NO];
+    self.overview.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.overview.layer.shadowOpacity = 0.95;
+    self.overview.layer.shadowRadius = 1.5;
+    self.overview.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.overview.layer.shouldRasterize = YES;
+    self.overview.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+
+    [self.minMaxAgeCandidateLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%d-%d years old", @""), [self.user.minAgeCandidate intValue], [self.user.maxAgeCandidate intValue]]];
+    [self.minMaxHeightCandidateLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%d-%d cm height", @""), [self.user.minHeightCandidate intValue], [self.user.maxHeightCandidate intValue]]];
+
+    // load the presentation data
+    NSString *presentationText = [NSString stringWithFormat:@"        %@", self.user.presentation];
+    [self.presentationLabel setText:presentationText];
+    [self.presentationLabel sizeToFit];
+
+    CGRect presentationLabelFrame = self.presentationLabel.frame;
+    presentationLabelFrame.size.height = MIN(kPresentationHeight, presentationLabelFrame.size.height);
+    [self.presentationLabel setFrame:presentationLabelFrame];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [self loadData];
 
     // Invisible selector button
     UIButton *selectButton = [UIButton buttonWithType:UIButtonTypeCustom];

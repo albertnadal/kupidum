@@ -19,5 +19,6 @@
 
 - (id)initWithUser:(KPDUser *)user_;
 - (IBAction)showFullUserProfile:(id)sender;
+- (void)reloadData;
 
 @end

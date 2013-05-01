@@ -29,6 +29,13 @@ typedef enum UserGender
     NSString *city;
     NSNumber *professionId;
     NSString *professionString;
+    NSNumber *minAgeCandidate;
+    NSNumber *maxAgeCandidate;
+    NSNumber *minHeightCandidate;
+    NSNumber *maxHeightCandidate;
+
+    // User presentation
+    NSString *presentation;
 }
 
 @property (nonatomic, retain) NSString *username;
@@ -42,9 +49,14 @@ typedef enum UserGender
 @property (nonatomic, retain) NSString *city;
 @property (nonatomic, retain) NSNumber *professionId;
 @property (nonatomic, retain) NSString *professionString;
+@property (nonatomic, retain) NSString *presentation;
+@property (nonatomic, retain) NSNumber *minAgeCandidate;
+@property (nonatomic, retain) NSNumber *maxAgeCandidate;
+@property (nonatomic, retain) NSNumber *minHeightCandidate;
+@property (nonatomic, retain) NSNumber *maxHeightCandidate;
 
 - (id)initWithUsername:(NSString *)_username;
-- (id)initWithUsername:(NSString *)_username avatarUrl:(NSString *)avatar_url avatar:(UIImage *)avatar_image gender:(int)the_gender genderCandidate:(int)gender_candidate_ dateOfBirth:(NSDate *)date_of_birth city:(NSString *)city_ professionId:(int)profession_id;
+- (id)initWithUsername:(NSString *)_username avatarUrl:(NSString *)avatar_url avatar:(UIImage *)avatar_image gender:(int)the_gender genderCandidate:(int)gender_candidate_ dateOfBirth:(NSDate *)date_of_birth city:(NSString *)city_ professionId:(int)profession_id presentation:(NSString *)presentation_ minAgeCandidate:(int)minAgeCand maxAgeCandidate:(int)maxAgeCand minLenghtCandidate:(int)minLenghtCand maxLenghtCandidate:(int)maxLenghtCand;
 - (bool)usernameIsInDatabase:(NSString *)_username;
 - (void)retrieveDataFromWebService;
 - (void)retrieveDataFromDatabase;
