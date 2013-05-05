@@ -8,9 +8,14 @@
 
 #import "UserProfileViewController.h"
 #import "KPDUIUtilities.h"
+#import "RNSwipeBar.h"
+#import "MBProgressHUD.h"
 #import <IBAForms/IBAForms.h>
+#import <QuartzCore/QuartzCore.h>
 
-@interface UserProfileViewController ()
+typedef void(^userProfileCompletionBlock)(bool success, NSMutableDictionary *model);
+
+@interface UserProfileViewController () <RNSwipeBarDelegate, UIScrollViewDelegate>
 {
     NSString *username;
     bool isReadOnly;
@@ -21,9 +26,19 @@
     UITableView *formTableView;
     UIImagePickerController *photoPicker;
     UIImageView *imgDesiredPictureProfile;
+    RNSwipeBar *swipeBar;
+    IBOutlet UIView *userPictures;
+    IBOutlet UIView *presentationView;
+    MBProgressHUD *hud;
+    float bottomScrollPadding;
 }
 
-@property (nonatomic, retain) UIImagePickerController *photoPicker;
+@property (nonatomic, strong) UIImagePickerController *photoPicker;
+@property (nonatomic, strong) UIView *userPictures;
+@property (nonatomic, strong) UIView *presentationView;
+@property (strong) RNSwipeBar *swipeBar;
+@property (nonatomic, strong) MBProgressHUD *hud;
+@property (atomic) float bottomScrollPadding;
 
 - (void)beginEditMode;
 - (void)saveUserProfile;
@@ -38,19 +53,20 @@
 - (void)loadUserPresentation;
 - (void)loadUserPictures;
 - (UIImage *)cropSilouettePicture:(UIImage *)image;
-- (NSMutableDictionary *)retrieveUserProfileModelFromUserProfile:(KPDUserProfile *)user_profile;
+- (void)retrieveUserProfileModelFromUsername:(NSString *)theUsername withCompletionBlock:(userProfileCompletionBlock)completionBlock;
 - (void)assignDefaultObject:(id)object toModel:(NSMutableDictionary *)model forKey:(NSString *)key;
 - (NSArray *)pickListFormOptionWithObject:(id)object;
 - (id)retrieveSelectedValuesInModel:(NSDictionary *)model_ forKey:(NSString *)key_ isMultiple:(bool)is_multiple;
 - (void)updateUserProfile;
 - (bool)imageIsEmpty:(UIImage *)image;
 - (void)loadAgeAndCity;
+- (void)reloadProfileView;
 
 @end
 
 @implementation UserProfileViewController
 
-@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments, formTypeSelector, selectedForm, userProfile, ageLabel, yearsOldLabel, fromLabel, cityLabel;
+@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments, formTypeSelector, selectedForm, userProfile, ageLabel, yearsOldLabel, fromLabel, cityLabel, onlineIndicatorHeaderImage, swipeBar, userPictures, presentationView, hud, bottomScrollPadding;
 
 const float basicInformationPanelHeight = 495.0f;
 const float buttonsPanelHeight = 120.0f;
@@ -72,6 +88,7 @@ const float bottomMarginHeight = 20.0;
         profileIsEditable = false;
         editMode = false;
         selectedForm = kUserProfileFormMyDescription;
+        bottomScrollPadding = 0.0f;
     }
 
     return self;
@@ -82,19 +99,13 @@ const float bottomMarginHeight = 20.0;
     if(self = [super initWithNibName:@"UserProfileViewController" bundle:nil])
     {
         username = username_;
-        userProfile = [[KPDUserProfile alloc] initWithUsername:username_];
 
+        profileIsEditable = editable;
         imgDesiredPictureProfile = nil;
         formTableView = nil;
 
-        NSMutableDictionary *model = [self retrieveUserProfileModelFromUserProfile:userProfile];
-        profileIsEditable = editable;
-        editMode = false;
-        selectedForm = kUserProfileFormMyDescription;
-
-        bool showEmptyFields = NO;
-        ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
-        self.formDataSource = profileFormDataSource;
+        if(profileIsEditable)   bottomScrollPadding = 0.0f;
+        else                    bottomScrollPadding = 35.0f;
     }
 
     return self;
@@ -105,19 +116,22 @@ const float bottomMarginHeight = 20.0;
     if(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
         username = username_;
-        userProfile = [[KPDUserProfile alloc] initWithUsername:username_];
         imgDesiredPictureProfile = nil;
         formTableView = nil;
+        bottomScrollPadding = 0.0f;
 
-        NSMutableDictionary *model = [self retrieveUserProfileModelFromUserProfile:userProfile];
-        profileIsEditable = true; //This must be set after load user profile from DB or web service //!isReadOnly;
-        editMode = false;
-        selectedForm = kUserProfileFormMyDescription;
-
-        bool showEmptyFields = NO;
-        ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
-        self.formDataSource = profileFormDataSource;
-
+        [self retrieveUserProfileModelFromUsername:username
+                               withCompletionBlock:^(bool success, NSMutableDictionary *theModel)
+         {
+             NSMutableDictionary *model = theModel;
+             profileIsEditable = true; //This must be set after load user profile from DB or web service //!isReadOnly;
+             editMode = false;
+             selectedForm = kUserProfileFormMyDescription;
+             
+             bool showEmptyFields = NO;
+             ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
+             self.formDataSource = profileFormDataSource;
+         }];
     }
 
     return self;
@@ -155,86 +169,94 @@ const float bottomMarginHeight = 20.0;
     }
 }
 
-- (NSMutableDictionary *)retrieveUserProfileModelFromUserProfile:(KPDUserProfile *)user_profile
+- (void)retrieveUserProfileModelFromUsername:(NSString *)theUsername
+                         withCompletionBlock:(userProfileCompletionBlock)completionBlock
 {
-	NSMutableDictionary *model = [[NSMutableDictionary alloc] init];
+    dispatch_queue_t request_queue = dispatch_queue_create("com.kupidum.profile", NULL);
 
-    // User description
-    [self assignDefaultObject:user_profile.eyeColorId toModel:model forKey:kEyeColorUserProfileField];
-    [self assignDefaultObject:user_profile.height toModel:model forKey:kHeightUserProfileField];
-    [self assignDefaultObject:user_profile.weight toModel:model forKey:kWeightUserProfileField];
-    [self assignDefaultObject:user_profile.hairColorId toModel:model forKey:kHairColorUserProfileField];
-    [self assignDefaultObject:user_profile.hairSizeId toModel:model forKey:kHairSizeUserProfileField];
-    [self assignDefaultObject:user_profile.personalityId toModel:model forKey:kMainCharacteristicUserProfileField];
-    [self assignDefaultObject:user_profile.appearanceId toModel:model forKey:kBodyLookUserProfileField];
-    [self assignDefaultObject:user_profile.silhouetteId toModel:model forKey:kSilhouetteUserProfileField];
-    [self assignDefaultObject:user_profile.maritalStatusId toModel:model forKey:kMaritalStatusUserProfileField];
-    [self assignDefaultObject:user_profile.hasChildrensId toModel:model forKey:kHasChildrensUserProfileField];
-    [self assignDefaultObject:user_profile.liveWithId toModel:model forKey:kWhereIsLivingUserProfileField];
-    [self assignDefaultObject:user_profile.bodyHighlightId toModel:model forKey:kMyHighlightUserProfileField];
-    [self assignDefaultObject:user_profile.citizenshipId toModel:model forKey:kNationUserProfileField];
-    [self assignDefaultObject:user_profile.ethnicalOriginId toModel:model forKey:kEthnicalOriginUserProfileField];
-    [self assignDefaultObject:user_profile.religionId toModel:model forKey:kReligionUserProfileField];
-    [self assignDefaultObject:user_profile.religionLevelId toModel:model forKey:kReligionLevelUserProfileField];
-    [self assignDefaultObject:user_profile.marriageOpinionId toModel:model forKey:kMarriageOpinionUserProfileField];
-    [self assignDefaultObject:user_profile.romanticismId toModel:model forKey:kRomanticismLevelUserProfileField];
-    [self assignDefaultObject:user_profile.wantChildrensId toModel:model forKey:kIWantChildrensUserProfileField];
-    [self assignDefaultObject:user_profile.studiesId toModel:model forKey:kStudiesLevelUserProfileField];
-    [self assignDefaultObject:user_profile.languagesId toModel:model forKey:kLanguagesUserProfileField];
-    [self assignDefaultObject:user_profile.professionId toModel:model forKey:kMyBusinessUserProfileField];
-    [self assignDefaultObject:user_profile.salaryId toModel:model forKey:kSalaryUserProfileField];
-    [self assignDefaultObject:user_profile.styleId toModel:model forKey:kMyStyleUserProfileField];
-    [self assignDefaultObject:user_profile.dietId toModel:model forKey:kAlimentUserProfileField];
-    [self assignDefaultObject:user_profile.smokeId toModel:model forKey:kSmokeUserProfileField];
-    [self assignDefaultObject:user_profile.animalsId toModel:model forKey:kAnimalsUserProfileField];
-    [self assignDefaultObject:user_profile.hobbiesId toModel:model forKey:kMyHobbiesUserProfileField];
-    [self assignDefaultObject:user_profile.sportsId toModel:model forKey:kMySportsUserProfileField];
-    [self assignDefaultObject:user_profile.sparetimeId toModel:model forKey:kMySparetimeUserProfileField];
-    [self assignDefaultObject:user_profile.musicId toModel:model forKey:kMusicUserProfileField];
-    [self assignDefaultObject:user_profile.moviesId toModel:model forKey:kMoviesUserProfileField];
+    dispatch_async(request_queue, ^{
 
+        self.userProfile = [[KPDUserProfile alloc] initWithUsername:theUsername];
+        NSMutableDictionary *model = [[NSMutableDictionary alloc] init];
 
-    // User candidate preferences
-    [self assignDefaultObject:user_profile.candidateProfile.minAge toModel:model forKey:kMinAgeCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.maxAge toModel:model forKey:kMaxAgeCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.minHeight toModel:model forKey:kMinHeightCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.maxHeight toModel:model forKey:kMaxHeightCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.minWeight toModel:model forKey:kMinWeightCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.maxWeight toModel:model forKey:kMaxWeightCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.maritalStatusId toModel:model forKey:kMaritalStatusCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.whereIsLivingId toModel:model forKey:kWhereIsLivingCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.wantChildrensId toModel:model forKey:kWantChildrensCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.hasChildrensId toModel:model forKey:kHasChildrensCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.silhouetteID toModel:model forKey:kSilhouetteCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.mainCharacteristicId toModel:model forKey:kMainCharacteristicCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.isRomanticId toModel:model forKey:kIsRomanticCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.marriageIsId toModel:model forKey:kMarriageIsCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.smokesId toModel:model forKey:kSmokesCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.dietId toModel:model forKey:kDietCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.nationId toModel:model forKey:kNationCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.ethnicalOriginId toModel:model forKey:kEthnicalOriginCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.bodyLookId toModel:model forKey:kBodyLookCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.hairSizeId toModel:model forKey:kHairSizeCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.hairColorId toModel:model forKey:kHairColorCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.eyeColorId toModel:model forKey:kEyeColorCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.styleId toModel:model forKey:kStyleCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.highlightId toModel:model forKey:kHighlightCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.studiesMinLevelId toModel:model forKey:kStudiesMinLevelCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.studiesMaxLevelId toModel:model forKey:kStudiesMaxLevelCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.languagesId toModel:model forKey:kLanguagesCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.religionId toModel:model forKey:kReligionCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.religionLevelId toModel:model forKey:kReligionLevelCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.hobbiesId toModel:model forKey:kHobbiesCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.sparetimeId toModel:model forKey:kSparetimeCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.musicId toModel:model forKey:kMusicCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.moviesId toModel:model forKey:kMoviesCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.animalsId toModel:model forKey:kAnimalsCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.sportsId toModel:model forKey:kSportsCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.businessId toModel:model forKey:kBusinessCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.minSalaryId toModel:model forKey:kMinSalaryCandidateProfileField];
-    [self assignDefaultObject:user_profile.candidateProfile.maxSalaryId toModel:model forKey:kMaxSalaryCandidateProfileField];
+        // User description
+        [self assignDefaultObject:userProfile.eyeColorId toModel:model forKey:kEyeColorUserProfileField];
+        [self assignDefaultObject:userProfile.height toModel:model forKey:kHeightUserProfileField];
+        [self assignDefaultObject:userProfile.weight toModel:model forKey:kWeightUserProfileField];
+        [self assignDefaultObject:userProfile.hairColorId toModel:model forKey:kHairColorUserProfileField];
+        [self assignDefaultObject:userProfile.hairSizeId toModel:model forKey:kHairSizeUserProfileField];
+        [self assignDefaultObject:userProfile.personalityId toModel:model forKey:kMainCharacteristicUserProfileField];
+        [self assignDefaultObject:userProfile.appearanceId toModel:model forKey:kBodyLookUserProfileField];
+        [self assignDefaultObject:userProfile.silhouetteId toModel:model forKey:kSilhouetteUserProfileField];
+        [self assignDefaultObject:userProfile.maritalStatusId toModel:model forKey:kMaritalStatusUserProfileField];
+        [self assignDefaultObject:userProfile.hasChildrensId toModel:model forKey:kHasChildrensUserProfileField];
+        [self assignDefaultObject:userProfile.liveWithId toModel:model forKey:kWhereIsLivingUserProfileField];
+        [self assignDefaultObject:userProfile.bodyHighlightId toModel:model forKey:kMyHighlightUserProfileField];
+        [self assignDefaultObject:userProfile.citizenshipId toModel:model forKey:kNationUserProfileField];
+        [self assignDefaultObject:userProfile.ethnicalOriginId toModel:model forKey:kEthnicalOriginUserProfileField];
+        [self assignDefaultObject:userProfile.religionId toModel:model forKey:kReligionUserProfileField];
+        [self assignDefaultObject:userProfile.religionLevelId toModel:model forKey:kReligionLevelUserProfileField];
+        [self assignDefaultObject:userProfile.marriageOpinionId toModel:model forKey:kMarriageOpinionUserProfileField];
+        [self assignDefaultObject:userProfile.romanticismId toModel:model forKey:kRomanticismLevelUserProfileField];
+        [self assignDefaultObject:userProfile.wantChildrensId toModel:model forKey:kIWantChildrensUserProfileField];
+        [self assignDefaultObject:userProfile.studiesId toModel:model forKey:kStudiesLevelUserProfileField];
+        [self assignDefaultObject:userProfile.languagesId toModel:model forKey:kLanguagesUserProfileField];
+        [self assignDefaultObject:userProfile.professionId toModel:model forKey:kMyBusinessUserProfileField];
+        [self assignDefaultObject:userProfile.salaryId toModel:model forKey:kSalaryUserProfileField];
+        [self assignDefaultObject:userProfile.styleId toModel:model forKey:kMyStyleUserProfileField];
+        [self assignDefaultObject:userProfile.dietId toModel:model forKey:kAlimentUserProfileField];
+        [self assignDefaultObject:userProfile.smokeId toModel:model forKey:kSmokeUserProfileField];
+        [self assignDefaultObject:userProfile.animalsId toModel:model forKey:kAnimalsUserProfileField];
+        [self assignDefaultObject:userProfile.hobbiesId toModel:model forKey:kMyHobbiesUserProfileField];
+        [self assignDefaultObject:userProfile.sportsId toModel:model forKey:kMySportsUserProfileField];
+        [self assignDefaultObject:userProfile.sparetimeId toModel:model forKey:kMySparetimeUserProfileField];
+        [self assignDefaultObject:userProfile.musicId toModel:model forKey:kMusicUserProfileField];
+        [self assignDefaultObject:userProfile.moviesId toModel:model forKey:kMoviesUserProfileField];
 
-    return model;
+        // User candidate preferences
+        [self assignDefaultObject:userProfile.candidateProfile.minAge toModel:model forKey:kMinAgeCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.maxAge toModel:model forKey:kMaxAgeCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.minHeight toModel:model forKey:kMinHeightCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.maxHeight toModel:model forKey:kMaxHeightCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.minWeight toModel:model forKey:kMinWeightCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.maxWeight toModel:model forKey:kMaxWeightCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.maritalStatusId toModel:model forKey:kMaritalStatusCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.whereIsLivingId toModel:model forKey:kWhereIsLivingCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.wantChildrensId toModel:model forKey:kWantChildrensCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.hasChildrensId toModel:model forKey:kHasChildrensCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.silhouetteID toModel:model forKey:kSilhouetteCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.mainCharacteristicId toModel:model forKey:kMainCharacteristicCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.isRomanticId toModel:model forKey:kIsRomanticCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.marriageIsId toModel:model forKey:kMarriageIsCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.smokesId toModel:model forKey:kSmokesCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.dietId toModel:model forKey:kDietCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.nationId toModel:model forKey:kNationCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.ethnicalOriginId toModel:model forKey:kEthnicalOriginCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.bodyLookId toModel:model forKey:kBodyLookCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.hairSizeId toModel:model forKey:kHairSizeCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.hairColorId toModel:model forKey:kHairColorCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.eyeColorId toModel:model forKey:kEyeColorCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.styleId toModel:model forKey:kStyleCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.highlightId toModel:model forKey:kHighlightCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.studiesMinLevelId toModel:model forKey:kStudiesMinLevelCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.studiesMaxLevelId toModel:model forKey:kStudiesMaxLevelCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.languagesId toModel:model forKey:kLanguagesCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.religionId toModel:model forKey:kReligionCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.religionLevelId toModel:model forKey:kReligionLevelCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.hobbiesId toModel:model forKey:kHobbiesCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.sparetimeId toModel:model forKey:kSparetimeCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.musicId toModel:model forKey:kMusicCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.moviesId toModel:model forKey:kMoviesCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.animalsId toModel:model forKey:kAnimalsCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.sportsId toModel:model forKey:kSportsCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.businessId toModel:model forKey:kBusinessCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.minSalaryId toModel:model forKey:kMinSalaryCandidateProfileField];
+        [self assignDefaultObject:userProfile.candidateProfile.maxSalaryId toModel:model forKey:kMaxSalaryCandidateProfileField];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(true, model);
+        });
+    });
 }
 
 - (void)registerSelector:(SEL)selector withNotification:(NSString *)notificationKey
@@ -387,6 +409,11 @@ const float bottomMarginHeight = 20.0;
 
 - (void)loadUserPresentation
 {
+    self.presentationView.layer.borderColor = [UIColor colorWithRed:171.0f/255.0f green:171.0f/255.0f blue:171.0f/255.0f alpha:1.0f].CGColor; //[UIColor redColor].CGColor;
+    self.presentationView.layer.borderWidth = 1.0f;
+    self.presentationView.layer.cornerRadius = 10;
+    self.presentationView.layer.masksToBounds = YES;
+
     [self.presentationTextView setText:self.userProfile.presentation];
 }
 
@@ -397,6 +424,11 @@ const float bottomMarginHeight = 20.0;
 
 - (void)loadUserPictures
 {
+    self.userPictures.layer.borderColor = [UIColor colorWithRed:171.0f/255.0f green:171.0f/255.0f blue:171.0f/255.0f alpha:1.0f].CGColor; //[UIColor redColor].CGColor;
+    self.userPictures.layer.borderWidth = 1.0f;
+    self.userPictures.layer.cornerRadius = 10;
+    self.userPictures.layer.masksToBounds = YES;
+
     // Head front picture
     if((self.userProfile.faceFrontImage) && (![self imageIsEmpty:self.userProfile.faceFrontImage]))
     {
@@ -473,34 +505,112 @@ const float bottomMarginHeight = 20.0;
     [self.fromLabel setFrame:fromLabelFrame];
 }
 
+- (void)reloadProfileView
+{
+    imgDesiredPictureProfile = nil;
+    
+    [self registerSelector:@selector(showFormField:) withNotification:IBAInputRequestorShowFormField];
+    [self registerSelector:@selector(restoreOriginalProfileScrollSize:) withNotification:IBAInputRequestorRestoreOriginalProfileSize];
+    
+    [self.onlineIndicatorHeaderImage.image resizableImageWithCapInsets:UIEdgeInsetsMake(20.0f, 20.0f, 20.0f, 20.0f)],
+    
+    [self loadAgeAndCity];
+    [self loadUserPresentation];
+    [self loadUserPictures];
+    [self updateTakePhotoButtonsVisibility];
+    
+    [self.containerButtons setHidden:profileIsEditable];
+    
+    if(!profileIsEditable)
+    {
+        [self.containerButtons.layer setMasksToBounds:NO];
+        self.containerButtons.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.containerButtons.layer.shadowOpacity = 0.85;
+        self.containerButtons.layer.shadowRadius = 3;
+        self.containerButtons.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        self.containerButtons.layer.shouldRasterize = YES;
+        self.containerButtons.layer.rasterizationScale = [[UIScreen mainScreen] scale];
+        
+        self.swipeBar = [[RNSwipeBar alloc] initWithMainView:self.view];
+        [self.swipeBar setPadding:35.0f];
+        [self.swipeBar setDelegate:self];
+        [self.view addSubview:self.swipeBar];
+        [self.swipeBar setBarView:self.containerButtons];
+        [self.swipeBar show:YES];
+    }
+    
+    [self setSelectedForm:kUserProfileFormMyDescription];
+    [self reloadFormTableView];
+    
+    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
+    [self.scroll setHidden:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    imgDesiredPictureProfile = nil;
+    // Adjust the scroll size in order to avoid overlap the bottom swipeBar
+    CGRect scrollFrame = self.scroll.frame;
+    scrollFrame.size.height = scrollFrame.size.height - self.bottomScrollPadding;
+    [self.scroll setFrame:scrollFrame];
+
+    // While downloading the data the scroll must be hidden
+    [self.scroll setHidden:YES];
+
+    [self showNavigationBarButtons];
+
     self.title = username;
 
-    [self registerSelector:@selector(showFormField:) withNotification:IBAInputRequestorShowFormField];
-    [self registerSelector:@selector(restoreOriginalProfileScrollSize:) withNotification:IBAInputRequestorRestoreOriginalProfileSize];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.mode = MBProgressHUDAnimationFade;
+    self.hud.labelText = NSLocalizedString(@"Loading data...", @"");
 
-    [self loadAgeAndCity];
-    [self loadUserPresentation];
-    [self loadUserPictures];
-    [self showNavigationBarButtons];
-    [self updateTakePhotoButtonsVisibility];
+    [self retrieveUserProfileModelFromUsername:username
+                           withCompletionBlock:^(bool success, NSMutableDictionary *theModel)
+     {
+         NSMutableDictionary *model = theModel;
+//         profileIsEditable = editable;
+         editMode = false;
+         selectedForm = kUserProfileFormMyDescription;
+         
+         bool showEmptyFields = NO;
+         ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
+         self.formDataSource = profileFormDataSource;
+         
+         [self reloadProfileView];
+         [self.hud performSelector:@selector(hide:) withObject:[NSNumber numberWithBool:YES] afterDelay:0.7f];
+     }];
 
-    [containerButtons setHidden:profileIsEditable];
-
-    [self setSelectedForm:kUserProfileFormMyDescription];
-    [self reloadFormTableView];
-
-    [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if(![self.swipeBar isHidden])
+    {
+        [self.swipeBar hide:YES];
+    }
+}
+
+- (void)swipeBarDidAppear:(id)sender
+{
+    
+}
+
+- (void)swipeBarDidDisappear:(id)sender
+{
+    
+}
+
+- (void)swipebarWasSwiped:(id)sender
+{
+    
 }
 
 - (void)showNavigationBarButtons
@@ -550,7 +660,7 @@ const float bottomMarginHeight = 20.0;
 
     // update scroll content size
     [scroll setContentSize:CGSizeMake(320, basicInformationPanelHeight + segmentsPanelHeight + formTableView.frame.size.height + bottomMarginHeight)];
-    
+
     [self.scroll addSubview:formTableView];
     [super viewDidLoad];
 }
@@ -570,8 +680,8 @@ const float bottomMarginHeight = 20.0;
     [self.navigationItem setRightBarButtonItem:doneButton];
 
     [presentationPencil setHidden:NO];
-    [presentationTextView setEditable:YES];
-    [presentationTextView setUserInteractionEnabled:YES];
+    //[presentationTextView setEditable:YES];
+    //[presentationTextView setUserInteractionEnabled:YES];
 
     [self updateTakePhotoButtonsVisibility];
     [self reloadFormTableView];
@@ -694,21 +804,24 @@ const float bottomMarginHeight = 20.0;
 {
     [self updateUserProfile];
 
-    NSMutableDictionary *model = [self retrieveUserProfileModelFromUserProfile:userProfile];
+    [self retrieveUserProfileModelFromUsername:username
+                           withCompletionBlock:^(bool success, NSMutableDictionary *theModel)
+     {
+         NSMutableDictionary *model = theModel;
+         bool showEmptyFields = NO;
+         ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
+         self.formDataSource = profileFormDataSource;
 
-    bool showEmptyFields = NO;
-    ProfileFormDataSource *profileFormDataSource = [[ProfileFormDataSource alloc] initWithModel:model isReadOnly:YES showEmptyFields:showEmptyFields withFormType:selectedForm];
-    self.formDataSource = profileFormDataSource;
+         editMode = false;
+         [self.navigationItem setRightBarButtonItem:editButton];
 
-    editMode = false;
-    [self.navigationItem setRightBarButtonItem:editButton];
+         [presentationPencil setHidden:YES];
+         //[presentationTextView setEditable:NO];
+         //[presentationTextView setUserInteractionEnabled:NO];
 
-    [presentationPencil setHidden:YES];
-    [presentationTextView setEditable:NO];
-    [presentationTextView setUserInteractionEnabled:NO];
-
-    [self updateTakePhotoButtonsVisibility];
-    [self reloadFormTableView];
+         [self updateTakePhotoButtonsVisibility];
+         [self reloadFormTableView];
+     }];
 }
 
 - (void)backPressed

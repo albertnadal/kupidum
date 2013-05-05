@@ -8,6 +8,9 @@
 
 #import "KPDUserProfile.h"
 #import "KupidumDBSingleton.h"
+#import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
+#import "ProfileFormDataSource.h"
 
 @implementation KPDUserProfile
 
@@ -172,14 +175,15 @@
     }
     
     [rs close];
+
+    // retrieve the user candidate profile data
+    [self.candidateProfile retrieveDataFromDatabase];
 }
 
 - (void)retrieveDataFromWebService
 {
-#warning Implement this function
-
     // User profile
-    self.gender = [NSNumber numberWithInt:kMale];
+/*    self.gender = [NSNumber numberWithInt:kMale];
 
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setDay:26];
@@ -194,42 +198,41 @@
     self.faceProfileImageURL = @"";
     self.faceProfileImage = [[UIImage alloc] init];
     self.bodyImageURL = @"";
-    self.bodyImage = [[UIImage alloc] init];
-    self.height = @180; // 180cm
-    self.weight = @85; // 85kg
-    self.hairColorId = @3; // Moreno
-    self.hairSizeId = @4; // Semillarg
-    self.eyeColorId = @6; // Negres
-    self.personalityId = @15; // Despreocupat
-    self.appearanceId = @3; // Agradable de veure
-    self.silhouetteId = @2; // Esportiva
-    self.bodyHighlightId = @1; // Els ulls
-    self.maritalStatusId = @1; // No casat mai
-    self.hasChildrensId = @1; // Cap
-    self.liveWithId = @5; // En un pis compartit
-    self.citizenshipId = @6; // Andorrana
-    self.ethnicalOriginId = @1; // Europeu
-    self.religionId = @25; // Cristià
-    self.religionLevelId = @3; // No practicant
-    self.marriageOpinionId = @5; // Impensable
-    self.romanticismId = @4; // Gens romàntic
-    self.wantChildrensId = @2; // Si, 1
-    self.studiesId = @5; // Llicenciat
-    self.languagesId = [NSSet setWithObjects:@4, @22, @13, nil]; // Anglès, Francès, Català
-    self.professionId = @42; // Metge
-    self.salaryId = @4; // De 30 a 50.000€/any
-    self.styleId = @5; // Despreocupat
-    self.dietId = @1; // Menja de tot
-    self.smokeId = @1; // Si, ocasionalment
-    self.animalsId = [NSSet setWithObjects:@9, @2, nil]; // Conill, Gos
-    self.hobbiesId = [NSSet setWithObjects:@22, @7, nil]; // Fotos, Música
-    self.sportsId = [NSSet setWithObjects:@25, @19, nil]; // Tenis, Surf
-    self.sparetimeId = [NSSet setWithObjects:@9, @7, nil]; // Cinema, Concert
-    self.musicId = [NSSet setWithObjects:@11, nil]; // Pop-Rock
-    self.moviesId = [NSSet setWithObjects:@2, nil]; // Acció
+    self.bodyImage = [[UIImage alloc] init];*/
+//    self.height = @180; // 180cm
+//    self.weight = @85; // 85kg
+//    self.hairColorId = @3; // Moreno
+//    self.hairSizeId = @4; // Semillarg
+//    self.eyeColorId = @6; // Negres
+//    self.personalityId = @15; // Despreocupat
+//    self.silhouetteId = @2; // Esportiva
+//    self.bodyHighlightId = @1; // Els ulls
+//    self.maritalStatusId = @1; // No casat mai
+//    self.hasChildrensId = @1; // Cap
+//    self.liveWithId = @5; // En un pis compartit
+//    self.citizenshipId = @6; // Andorrana
+//    self.ethnicalOriginId = @1; // Europeu
+//    self.religionId = @25; // Cristià
+//    self.religionLevelId = @3; // No practicant
+//    self.marriageOpinionId = @5; // Impensable
+//    self.romanticismId = @4; // Gens romàntic
+//    self.wantChildrensId = @2; // Si, 1
+//    self.studiesId = @5; // Llicenciat
+//    self.languagesId = [NSSet setWithObjects:@4, @22, @13, nil]; // Anglès, Francès, Català
+//    self.professionId = @42; // Metge
+//    self.salaryId = @4; // De 30 a 50.000€/any
+//    self.styleId = @5; // Despreocupat
+//    self.dietId = @1; // Menja de tot
+//    self.smokeId = @1; // Si, ocasionalment
+//    self.animalsId = [NSSet setWithObjects:@9, @2, nil]; // Conill, Gos
+//    self.hobbiesId = [NSSet setWithObjects:@22, @7, nil]; // Fotos, Música
+//    self.sportsId = [NSSet setWithObjects:@25, @19, nil]; // Tenis, Surf
+//    self.sparetimeId = [NSSet setWithObjects:@9, @7, nil]; // Cinema, Concert
+//    self.musicId = [NSSet setWithObjects:@11, nil]; // Pop-Rock
+//    self.moviesId = [NSSet setWithObjects:@2, nil]; // Acció
 
     // User candidate profile
-    self.candidateProfile.minAge = @25;
+/*    self.candidateProfile.minAge = @25;
     self.candidateProfile.maxAge = @35;
     self.candidateProfile.minHeight = @160;
     self.candidateProfile.maxHeight = @180;
@@ -266,7 +269,163 @@
     self.candidateProfile.sportsId = [NSSet setWithObjects:@1, @2, nil];
     self.candidateProfile.businessId = [NSSet setWithObjects:@1, @2, nil];
     self.candidateProfile.minSalaryId = @1;
-    self.candidateProfile.maxSalaryId = @2;
+    self.candidateProfile.maxSalaryId = @2;*/
+
+
+//    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    self.hud.mode = MBProgressHUDAnimationFade;
+//    self.hud.labelText = NSLocalizedString(@"Loading data...", @"");
+
+    NSURL *url = [NSURL URLWithString:@"http://www.lafruitera.com/ws/v1/profile.php"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    //getting the data
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    //json parse
+
+                                             NSDictionary *profileData = (NSDictionary *)[NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+                                             NSLog(@"App.net Global Stream: %@", profileData);
+
+                                             // Set the basic user home information
+                                             NSDictionary *userBasicInformation = [profileData objectForKey:@"userBasicInformation"];
+
+                                             self.gender = [userBasicInformation objectForKey:@"gender"];
+                                             self.dateOfBirth = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[userBasicInformation objectForKey:@"dateOfBirth"] intValue]];
+                                             self.presentation = [userBasicInformation objectForKey:@"presentation"];
+                                             self.city = [userBasicInformation objectForKey:@"city"];
+                                             self.faceFrontImageURL = [userBasicInformation objectForKey:@"frontFaceImageUrl"];
+                                             self.faceFrontImage = [[UIImage alloc] init];
+                                             self.faceProfileImageURL = [userBasicInformation objectForKey:@"profileFaceImageUrl"];
+                                             self.faceProfileImage = [[UIImage alloc] init];
+                                             self.bodyImageURL = [userBasicInformation objectForKey:@"bodyImageUrl"];
+                                             self.bodyImage = [[UIImage alloc] init];
+
+                                             // Set the user description
+                                             NSDictionary *userDescription = [profileData objectForKey:@"userDescription"];
+
+                                             self.height = [userDescription objectForKey:kHeightUserProfileField];
+                                             self.weight = [userDescription objectForKey:kWeightUserProfileField];
+                                             self.hairColorId = [userDescription objectForKey:kHairColorUserProfileField];
+                                             self.hairSizeId = [userDescription objectForKey:kHairSizeUserProfileField];
+                                             self.eyeColorId = [userDescription objectForKey:kEyeColorUserProfileField];
+                                             self.personalityId = [userDescription objectForKey:kMainCharacteristicUserProfileField];
+                                             self.appearanceId = [userDescription objectForKey:kBodyLookUserProfileField];
+                                             self.silhouetteId = [userDescription objectForKey:kSilhouetteUserProfileField];
+                                             self.maritalStatusId = [userDescription objectForKey:kMaritalStatusUserProfileField];
+                                             self.hasChildrensId = [userDescription objectForKey:kHasChildrensUserProfileField];
+                                             self.liveWithId = [userDescription objectForKey:kWhereIsLivingUserProfileField];
+                                             self.bodyHighlightId = [userDescription objectForKey:kMyHighlightUserProfileField];
+                                             self.citizenshipId = [userDescription objectForKey:kNationUserProfileField];
+                                             self.ethnicalOriginId = [userDescription objectForKey:kEthnicalOriginUserProfileField];
+                                             self.religionId = [userDescription objectForKey:kReligionUserProfileField];
+                                             self.religionLevelId = [userDescription objectForKey:kReligionLevelUserProfileField];
+                                             self.marriageOpinionId = [userDescription objectForKey:kMarriageOpinionUserProfileField];
+                                             self.romanticismId = [userDescription objectForKey:kRomanticismLevelUserProfileField];
+                                             self.wantChildrensId = [userDescription objectForKey:kIWantChildrensUserProfileField];
+                                             self.studiesId = [userDescription objectForKey:kStudiesLevelUserProfileField];
+                                             self.languagesId = [userDescription objectForKey:kLanguagesUserProfileField];
+                                             self.professionId = [userDescription objectForKey:kMyBusinessUserProfileField];
+                                             self.salaryId = [userDescription objectForKey:kSalaryUserProfileField];
+                                             self.styleId = [userDescription objectForKey:kMyStyleUserProfileField];
+                                             self.dietId = [userDescription objectForKey:kAlimentUserProfileField];
+                                             self.smokeId = [userDescription objectForKey:kSmokeUserProfileField];
+                                             self.animalsId = [userDescription objectForKey:kAnimalsUserProfileField];
+                                             self.hobbiesId = [userDescription objectForKey:kMyHobbiesUserProfileField];
+                                             self.sportsId = [userDescription objectForKey:kMySportsUserProfileField];
+                                             self.sparetimeId = [userDescription objectForKey:kMySparetimeUserProfileField];
+                                             self.musicId = [userDescription objectForKey:kMusicUserProfileField];
+                                             self.moviesId = [userDescription objectForKey:kMoviesUserProfileField];
+
+
+                                             // Set the user candidate description
+                                             NSDictionary *candidateDescription = [profileData objectForKey:@"candidateDescription"];
+
+                                             self.candidateProfile.minAge = [candidateDescription objectForKey:kMinAgeCandidateProfileField];
+                                             self.candidateProfile.maxAge = [candidateDescription objectForKey:kMaxAgeCandidateProfileField];
+                                             self.candidateProfile.minHeight = [candidateDescription objectForKey:kMinHeightCandidateProfileField];
+                                             self.candidateProfile.maxHeight = [candidateDescription objectForKey:kMaxHeightCandidateProfileField];
+                                             self.candidateProfile.minWeight = [candidateDescription objectForKey:kMinWeightCandidateProfileField];
+                                             self.candidateProfile.maxWeight = [candidateDescription objectForKey:kMaxWeightCandidateProfileField];
+                                             self.candidateProfile.maritalStatusId = [candidateDescription objectForKey:kMaritalStatusCandidateProfileField];
+                                             self.candidateProfile.whereIsLivingId = [candidateDescription objectForKey:kWhereIsLivingCandidateProfileField];
+                                             self.candidateProfile.wantChildrensId = [candidateDescription objectForKey:kWantChildrensCandidateProfileField];
+                                             self.candidateProfile.hasChildrensId = [candidateDescription objectForKey:kHasChildrensCandidateProfileField];
+                                             self.candidateProfile.silhouetteID = [candidateDescription objectForKey:kSilhouetteCandidateProfileField];
+                                             self.candidateProfile.mainCharacteristicId = [candidateDescription objectForKey:kMainCharacteristicCandidateProfileField];
+                                             self.candidateProfile.isRomanticId = [candidateDescription objectForKey:kIsRomanticCandidateProfileField];
+                                             self.candidateProfile.marriageIsId = [candidateDescription objectForKey:kMarriageIsCandidateProfileField];
+                                             self.candidateProfile.smokesId = [candidateDescription objectForKey:kSmokesCandidateProfileField];
+                                             self.candidateProfile.dietId = [candidateDescription objectForKey:kDietCandidateProfileField];
+                                             self.candidateProfile.nationId = [candidateDescription objectForKey:kNationCandidateProfileField];
+                                             self.candidateProfile.ethnicalOriginId = [candidateDescription objectForKey:kEthnicalOriginCandidateProfileField];
+                                             self.candidateProfile.bodyLookId = [candidateDescription objectForKey:kBodyLookCandidateProfileField];
+                                             self.candidateProfile.hairSizeId = [candidateDescription objectForKey:kHairSizeCandidateProfileField];
+                                             self.candidateProfile.hairColorId = [candidateDescription objectForKey:kHairColorCandidateProfileField];
+                                             self.candidateProfile.eyeColorId = [candidateDescription objectForKey:kEyeColorCandidateProfileField];
+                                             self.candidateProfile.styleId = [candidateDescription objectForKey:kStyleCandidateProfileField];
+                                             self.candidateProfile.highlightId = [candidateDescription objectForKey:kHighlightCandidateProfileField];
+                                             self.candidateProfile.studiesMinLevelId = [candidateDescription objectForKey:kStudiesMinLevelCandidateProfileField];
+                                             self.candidateProfile.studiesMaxLevelId = [candidateDescription objectForKey:kStudiesMaxLevelCandidateProfileField];
+                                             self.candidateProfile.languagesId = [candidateDescription objectForKey:kLanguagesCandidateProfileField];
+                                             self.candidateProfile.religionId = [candidateDescription objectForKey:kReligionCandidateProfileField];
+                                             self.candidateProfile.religionLevelId = [candidateDescription objectForKey:kReligionLevelCandidateProfileField];
+                                             self.candidateProfile.hobbiesId = [candidateDescription objectForKey:kHobbiesCandidateProfileField];
+                                             self.candidateProfile.sparetimeId = [candidateDescription objectForKey:kSparetimeCandidateProfileField];
+                                             self.candidateProfile.musicId = [candidateDescription objectForKey:kMusicCandidateProfileField];
+                                             self.candidateProfile.moviesId = [candidateDescription objectForKey:kMoviesCandidateProfileField];
+                                             self.candidateProfile.animalsId = [candidateDescription objectForKey:kAnimalsCandidateProfileField];
+                                             self.candidateProfile.sportsId = [candidateDescription objectForKey:kSportsCandidateProfileField];
+                                             self.candidateProfile.businessId = [candidateDescription objectForKey:kBusinessCandidateProfileField];
+                                             self.candidateProfile.minSalaryId = [candidateDescription objectForKey:kMinSalaryCandidateProfileField];
+                                             self.candidateProfile.maxSalaryId = [candidateDescription objectForKey:kMaxSalaryCandidateProfileField];
+
+                                             [self saveToDatabase];
+
+/*
+
+ // User candidate preferences
+ [self assignDefaultObject:user_profile.candidateProfile.minAge toModel:model forKey:kMinAgeCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.maxAge toModel:model forKey:kMaxAgeCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.minHeight toModel:model forKey:kMinHeightCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.maxHeight toModel:model forKey:kMaxHeightCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.minWeight toModel:model forKey:kMinWeightCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.maxWeight toModel:model forKey:kMaxWeightCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.maritalStatusId toModel:model forKey:kMaritalStatusCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.whereIsLivingId toModel:model forKey:kWhereIsLivingCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.wantChildrensId toModel:model forKey:kWantChildrensCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.hasChildrensId toModel:model forKey:kHasChildrensCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.silhouetteID toModel:model forKey:kSilhouetteCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.mainCharacteristicId toModel:model forKey:kMainCharacteristicCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.isRomanticId toModel:model forKey:kIsRomanticCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.marriageIsId toModel:model forKey:kMarriageIsCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.smokesId toModel:model forKey:kSmokesCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.dietId toModel:model forKey:kDietCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.nationId toModel:model forKey:kNationCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.ethnicalOriginId toModel:model forKey:kEthnicalOriginCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.bodyLookId toModel:model forKey:kBodyLookCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.hairSizeId toModel:model forKey:kHairSizeCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.hairColorId toModel:model forKey:kHairColorCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.eyeColorId toModel:model forKey:kEyeColorCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.styleId toModel:model forKey:kStyleCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.highlightId toModel:model forKey:kHighlightCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.studiesMinLevelId toModel:model forKey:kStudiesMinLevelCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.studiesMaxLevelId toModel:model forKey:kStudiesMaxLevelCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.languagesId toModel:model forKey:kLanguagesCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.religionId toModel:model forKey:kReligionCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.religionLevelId toModel:model forKey:kReligionLevelCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.hobbiesId toModel:model forKey:kHobbiesCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.sparetimeId toModel:model forKey:kSparetimeCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.musicId toModel:model forKey:kMusicCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.moviesId toModel:model forKey:kMoviesCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.animalsId toModel:model forKey:kAnimalsCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.sportsId toModel:model forKey:kSportsCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.businessId toModel:model forKey:kBusinessCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.minSalaryId toModel:model forKey:kMinSalaryCandidateProfileField];
+ [self assignDefaultObject:user_profile.candidateProfile.maxSalaryId toModel:model forKey:kMaxSalaryCandidateProfileField];
+ 
+ return model;*/
 }
 
 - (void)saveToDatabase

@@ -31,11 +31,13 @@ typedef enum {
     IBOutlet UIImageView *faceFrontPhoto;
     IBOutlet UIImageView *faceProfilePhoto;
     IBOutlet UIImageView *bodySilouetePhoto;
-    IBOutlet UITextView *presentationTextView;
+    IBOutlet UILabel *presentationTextView;
     IBOutlet UIImageView *presentationPencil;
     IBOutlet UIView *containerButtons;
     IBOutlet UIView *containerSegments;
     IBOutlet UISegmentedControl *formTypeSelector;
+
+    IBOutlet UIImageView *onlineIndicatorHeaderImage;
 
     KPDUserProfilePhoto photoTypeSelected;
     UserProfileFormType selectedForm;
@@ -53,11 +55,12 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UIImageView *faceFrontPhoto;
 @property (strong, nonatomic) IBOutlet UIImageView *faceProfilePhoto;
 @property (strong, nonatomic) IBOutlet UIImageView *bodySilouetePhoto;
-@property (strong, nonatomic) IBOutlet UITextView *presentationTextView;
+@property (strong, nonatomic) IBOutlet UILabel *presentationTextView;
 @property (strong, nonatomic) IBOutlet UIImageView *presentationPencil;
 @property (strong, nonatomic) IBOutlet UIView *containerButtons;
 @property (strong, nonatomic) IBOutlet UIView *containerSegments;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *formTypeSelector;
+@property (strong, nonatomic) IBOutlet UIImageView *onlineIndicatorHeaderImage;
 @property (atomic) UserProfileFormType selectedForm;
 @property (strong, nonatomic) KPDUserProfile *userProfile;
 

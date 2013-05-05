@@ -50,19 +50,41 @@ static const int kUserProfileFormHeaderCellHeight = 48;
 
 - (void)processSelectedValueForKeyPath:(NSString *)formKey withKeyValuesInArray:(NSArray *)listOptions
 {
+
     NSMutableArray *processedValues = [[NSMutableArray alloc] init];
     NSArray *selectedEyeColorListOption = [self.model objectForKey:formKey];
+
     for(int i=0;i<[selectedEyeColorListOption count]; i++)
     {
         IBAPickListFormOption *option = [selectedEyeColorListOption objectAtIndex:i];
-        if([[option name] isKindOfClass:[NSNumber class]])
+
+        if([[option name] isKindOfClass:[NSArray class]])
+        {
+            for(int e=0;e<[(NSArray *)[option name] count];e++)
+            {
+                NSNumber *numero = [(NSArray *)[option name] objectAtIndex:e];
+                NSString *substringOptionKey = [NSString stringWithFormat:@"[%@]", numero];
+                for(int e=0; e<[listOptions count]; e++)
+                {
+                    NSString *optionValue = [[listOptions objectAtIndex:e] name];
+                    if([optionValue rangeOfString:substringOptionKey].location != NSNotFound)
+                    {
+                        [processedValues addObject:optionValue];
+                    }
+                }
+
+            }
+        }
+        else if([[option name] isKindOfClass:[NSNumber class]])
         {
             NSString *substringOptionKey = [NSString stringWithFormat:@"[%@]", [option name]];
             for(int e=0; e<[listOptions count]; e++)
             {
                 NSString *optionValue = [[listOptions objectAtIndex:e] name];
                 if([optionValue rangeOfString:substringOptionKey].location != NSNotFound)
+                {
                     [processedValues addObject:optionValue];
+                }
             }
         }
         else

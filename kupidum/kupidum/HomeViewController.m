@@ -67,7 +67,7 @@
     [scroll addPullToRefreshWithActionHandler:^{
         // prepend data to dataSource, insert cells at top of table view
         // call [tableView.pullToRefreshView stopAnimating] when done
-        [self retrieveDataFromWebService];
+        [self performSelector:@selector(retrieveDataFromWebService) withObject:nil afterDelay:0.3];
     }];
 
 #warning remove the loading of fake data and implement the data loading from the web service
