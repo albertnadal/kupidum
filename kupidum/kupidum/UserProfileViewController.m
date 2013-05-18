@@ -31,6 +31,8 @@ typedef void(^userProfileCompletionBlock)(bool success, NSMutableDictionary *mod
     IBOutlet UIView *presentationView;
     MBProgressHUD *hud;
     float bottomScrollPadding;
+    bool hiddenTabBar;
+    int lastContentOffset;
 }
 
 @property (nonatomic, strong) UIImagePickerController *photoPicker;
@@ -39,6 +41,8 @@ typedef void(^userProfileCompletionBlock)(bool success, NSMutableDictionary *mod
 @property (strong) RNSwipeBar *swipeBar;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (atomic) float bottomScrollPadding;
+@property (atomic) bool hiddenTabBar;
+@property (atomic) int lastContentOffset;
 
 - (void)beginEditMode;
 - (void)saveUserProfile;
@@ -61,12 +65,14 @@ typedef void(^userProfileCompletionBlock)(bool success, NSMutableDictionary *mod
 - (bool)imageIsEmpty:(UIImage *)image;
 - (void)loadAgeAndCity;
 - (void)reloadProfileView;
+- (void)showTabBar;
+- (void)hideTabBar;
 
 @end
 
 @implementation UserProfileViewController
 
-@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments, formTypeSelector, selectedForm, userProfile, ageLabel, yearsOldLabel, fromLabel, cityLabel, onlineIndicatorHeaderImage, swipeBar, userPictures, presentationView, hud, bottomScrollPadding;
+@synthesize scroll, faceFrontPhotoButton, faceProfilePhotoButton, bodySilouetePhotoButton, faceFrontPhoto, faceProfilePhoto, bodySilouetePhoto, photoPicker, presentationTextView, presentationPencil, containerButtons, containerSegments, formTypeSelector, selectedForm, userProfile, ageLabel, yearsOldLabel, fromLabel, cityLabel, onlineIndicatorHeaderImage, swipeBar, userPictures, presentationView, hud, bottomScrollPadding, hiddenTabBar, lastContentOffset;
 
 const float basicInformationPanelHeight = 495.0f;
 const float buttonsPanelHeight = 120.0f;
@@ -89,6 +95,8 @@ const float bottomMarginHeight = 20.0;
         editMode = false;
         selectedForm = kUserProfileFormMyDescription;
         bottomScrollPadding = 0.0f;
+        hiddenTabBar = false;
+        lastContentOffset = 0;
     }
 
     return self;
@@ -103,6 +111,8 @@ const float bottomMarginHeight = 20.0;
         profileIsEditable = editable;
         imgDesiredPictureProfile = nil;
         formTableView = nil;
+        hiddenTabBar = false;
+        lastContentOffset = 0;
 
         if(profileIsEditable)   bottomScrollPadding = 0.0f;
         else                    bottomScrollPadding = 35.0f;
@@ -119,6 +129,8 @@ const float bottomMarginHeight = 20.0;
         imgDesiredPictureProfile = nil;
         formTableView = nil;
         bottomScrollPadding = 0.0f;
+        hiddenTabBar = false;
+        lastContentOffset = 0;
 
         [self retrieveUserProfileModelFromUsername:username
                                withCompletionBlock:^(bool success, NSMutableDictionary *theModel)
@@ -546,6 +558,52 @@ const float bottomMarginHeight = 20.0;
     [self.scroll setHidden:NO];
 }
 
+- (void)showTabBar
+{
+    if(!self.hiddenTabBar) return;
+
+    self.hiddenTabBar = false;
+
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.15];
+    for(UIView *view in self.tabBarController.view.subviews)
+    {
+        CGRect _rect = view.frame;
+        if([view isKindOfClass:[UITabBar class]])
+        {
+            _rect.origin.y = 519.0f; //CGRectGetMaxY(_rect) - _rect.size.height;
+            [view setFrame:_rect];
+        } else {
+            _rect.size.height = 519.0f;
+            [view setFrame:_rect];
+        }
+    }
+    [UIView commitAnimations];
+}
+
+- (void)hideTabBar
+{
+    if(self.hiddenTabBar) return;
+
+    self.hiddenTabBar = true;
+
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.15];
+    for(UIView *view in self.tabBarController.view.subviews)
+    {
+        CGRect _rect = view.frame;
+        if([view isKindOfClass:[UITabBar class]])
+        {
+            _rect.origin.y = 519.0f + 49.0f; //CGRectGetMaxY(_rect) + _rect.size.height;
+            [view setFrame:_rect];
+        } else {
+            _rect.size.height = 519.0f + 49.0f;
+            [view setFrame:_rect];
+        }
+    }
+    [UIView commitAnimations];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -584,6 +642,13 @@ const float bottomMarginHeight = 20.0;
 
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+
+    [self showTabBar];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -592,9 +657,19 @@ const float bottomMarginHeight = 20.0;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if(![self.swipeBar isHidden])
+    if((scrollView.contentOffset.y >= 0) && (scrollView.contentOffset.y <= ([self.scroll contentSize].height - self.scroll.frame.size.height)))
     {
-        [self.swipeBar hide:YES];
+        if(![self.swipeBar isHidden])
+        {
+            [self.swipeBar hide:YES];
+        }
+
+        bool scrollDown = (self.lastContentOffset < scrollView.contentOffset.y) ? true : false;
+
+        self.lastContentOffset = scrollView.contentOffset.y;
+
+        if((scrollDown) && (!hiddenTabBar))         [self hideTabBar];
+        else if((!scrollDown) && (hiddenTabBar))    [self showTabBar];
     }
 }
 
