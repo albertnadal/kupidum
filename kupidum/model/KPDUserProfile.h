@@ -10,8 +10,13 @@
 #import "KPDUserCandidateProfile.h"
 #import "KPDUser.h"
 
+@protocol KPDUserProfileDelegate;
+
 @interface KPDUserProfile : NSObject
 {
+    // Delegate
+    id<KPDUserProfileDelegate> delegate;
+
     // Username
     NSString *username;
 
@@ -82,6 +87,7 @@
     NSSet *moviesId;
 }
 
+@property (nonatomic, retain) id<KPDUserProfileDelegate> delegate;
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSNumber *gender;
 @property (nonatomic, retain) NSDate *dateOfBirth;
@@ -127,11 +133,21 @@
 @property (nonatomic, retain) NSSet *musicId;
 @property (nonatomic, retain) NSSet *moviesId;
 
-- (id)initWithUsername:(NSString *)_username;
+- (id)initWithUsername:(NSString *)_username andDelegate:(id<KPDUserProfileDelegate>)theDelegate;
 - (bool)usernameIsInDatabase:(NSString *)_username;
 - (void)retrieveDataFromWebService;
 - (void)retrieveDataFromDatabase;
 - (void)saveToDatabase;
 - (NSSet *)retrieveNSSetFromString:(NSString *)string_;
+
+@end
+
+@protocol KPDUserProfileDelegate
+
+@optional
+
+- (void)userProfile:(KPDUserProfile *)profile didRetrievedFrontFaceImage:(UIImage *)image;
+- (void)userProfile:(KPDUserProfile *)profile didRetrievedFaceProfileImage:(UIImage *)image;
+- (void)userProfile:(KPDUserProfile *)profile didRetrievedBodyImage:(UIImage *)image;
 
 @end

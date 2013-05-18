@@ -18,7 +18,7 @@ typedef enum {
 	kBodySilouette = 3
 } KPDUserProfilePhoto;
 
-@interface UserProfileViewController : IBAFormViewController<UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate>
+@interface UserProfileViewController : IBAFormViewController<UIImagePickerControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, KPDUserProfileDelegate>
 {
     IBOutlet UIScrollView *scroll;
     IBOutlet UILabel *ageLabel;
@@ -71,7 +71,7 @@ typedef enum {
 
 @end
 
-@protocol KPDUserProfileDelegate
+@protocol KPDUserProfileViewControllerDelegate
 
 - (void)showUserProfile:(NSString *)username;
 

@@ -49,7 +49,7 @@
         self.lastInterestedUser = nil;
         self.interestingPeopleLivingNear = nil;
         self.interestingPeopleYouMayLike = nil;
-        self.userProfile = [[KPDUserProfile alloc] initWithUsername:@"albert"];
+        self.userProfile = [[KPDUserProfile alloc] initWithUsername:@"albert" andDelegate:self];
     }
     return self;
 }

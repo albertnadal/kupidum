@@ -181,6 +181,21 @@ const float bottomMarginHeight = 20.0;
     }
 }
 
+- (void)userProfile:(KPDUserProfile *)profile didRetrievedFrontFaceImage:(UIImage *)image
+{
+    [self.faceFrontPhoto setImage:image];
+}
+
+- (void)userProfile:(KPDUserProfile *)profile didRetrievedFaceProfileImage:(UIImage *)image
+{
+    [self.faceProfilePhoto setImage:image];
+}
+
+- (void)userProfile:(KPDUserProfile *)profile didRetrievedBodyImage:(UIImage *)image
+{
+    [self.bodySilouetePhoto setImage:image];
+}
+
 - (void)retrieveUserProfileModelFromUsername:(NSString *)theUsername
                          withCompletionBlock:(userProfileCompletionBlock)completionBlock
 {
@@ -188,7 +203,8 @@ const float bottomMarginHeight = 20.0;
 
     dispatch_async(request_queue, ^{
 
-        self.userProfile = [[KPDUserProfile alloc] initWithUsername:theUsername];
+        self.userProfile = [[KPDUserProfile alloc] initWithUsername:theUsername andDelegate:self];
+
         NSMutableDictionary *model = [[NSMutableDictionary alloc] init];
 
         // User description
@@ -544,7 +560,7 @@ const float bottomMarginHeight = 20.0;
         self.containerButtons.layer.rasterizationScale = [[UIScreen mainScreen] scale];
         
         self.swipeBar = [[RNSwipeBar alloc] initWithMainView:self.view];
-        [self.swipeBar setPadding:35.0f];
+        [self.swipeBar setPadding:30.0f];
         [self.swipeBar setDelegate:self];
         [self.view addSubview:self.swipeBar];
         [self.swipeBar setBarView:self.containerButtons];

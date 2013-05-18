@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UserProfileViewController.h"
 
-@interface UsersNavigatorViewController : UIViewController<UIScrollViewDelegate, KPDUserProfileDelegate>
+@interface UsersNavigatorViewController : UIViewController<UIScrollViewDelegate, KPDUserProfileViewControllerDelegate>
 
 - (id)initAndShowInterestingPeopleNear;
 

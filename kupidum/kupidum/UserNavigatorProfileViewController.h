@@ -12,10 +12,10 @@
 
 @interface UserNavigatorProfileViewController : UIViewController
 {
-    id<KPDUserProfileDelegate> delegate;
+    id<KPDUserProfileViewControllerDelegate> delegate;
 }
 
-@property (nonatomic, retain) id<KPDUserProfileDelegate> delegate;
+@property (nonatomic, retain) id<KPDUserProfileViewControllerDelegate> delegate;
 
 - (id)initWithUser:(KPDUser *)user_;
 - (IBAction)showFullUserProfile:(id)sender;

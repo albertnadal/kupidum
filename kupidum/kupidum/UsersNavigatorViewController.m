@@ -212,7 +212,8 @@ static const int kNavigationScrollMargin = 3;
         [scrollProfiles setContentOffset:CGPointMake(offsetXScrollUsersProfiles, 0) animated:NO];
 
         int indexSelectedUser = (scrollView.contentOffset.x * [usersList count]) / (([usersList count]*(kSpaceBetweenAvatars + kAvatarWidth)));
-        [self setTitle:[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), indexSelectedUser+1, [usersList count]], [[usersList objectAtIndex:indexSelectedUser] username]]];
+        //[self setTitle:[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), indexSelectedUser+1, [usersList count]], [[usersList objectAtIndex:indexSelectedUser] username]]];
+        [self setTitle:[[usersList objectAtIndex:indexSelectedUser] username]];
     }
     else if(scrollView == scrollProfiles)
     {
@@ -220,8 +221,8 @@ static const int kNavigationScrollMargin = 3;
         [scrollNavigator setContentOffset:CGPointMake(offsetXScrollUsersNavigator, 0) animated:NO];
 
         int indexSelectedUser = (scrollView.contentOffset.x * [usersList count]) / ([usersList count]*[UIScreen mainScreen].bounds.size.width);
-        [self setTitle:[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), indexSelectedUser+1, [usersList count]], [[usersList objectAtIndex:indexSelectedUser] username]]];
-        //[self setTitle:[NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), indexSelectedUser+1, [usersList count]]];
+        //[self setTitle:[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), indexSelectedUser+1, [usersList count]], [[usersList objectAtIndex:indexSelectedUser] username]]];
+        [self setTitle:[[usersList objectAtIndex:indexSelectedUser] username]];
     }
 }
 

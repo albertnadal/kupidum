@@ -14,7 +14,7 @@
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface HomeViewController : UIViewController <UIScrollViewDelegate, KPDUsersHorizontalTableViewControllerDelegate>
+@interface HomeViewController : UIViewController <UIScrollViewDelegate, KPDUsersHorizontalTableViewControllerDelegate, KPDUserProfileDelegate>
 {
     IBOutlet UIScrollView *scroll;
     IBOutlet UIImageView *background;
