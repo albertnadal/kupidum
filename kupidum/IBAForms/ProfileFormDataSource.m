@@ -2914,13 +2914,22 @@ static const int kUserProfileFormHeaderCellHeight = 48;
             NSString *itemName = itemNameWithValue;
             NSString *itemValue = @"";
 
-            NSRange range_open_clautador = [itemNameWithValue rangeOfString:@"["];
-            NSRange range_close_clautador = [itemNameWithValue rangeOfString:@"]"];
-            if(range_open_clautador.location < range_close_clautador.location)
+            if([itemNameWithValue isKindOfClass:[NSString class]])
             {
-                int range_length = range_close_clautador.location - (range_open_clautador.location + 1);
-                itemValue = [itemNameWithValue substringWithRange:NSMakeRange(range_open_clautador.location + 1, range_length)];
-                itemName = [itemNameWithValue stringByReplacingCharactersInRange:NSMakeRange(range_open_clautador.location, range_length + 2) withString:@""];
+
+                NSRange range_open_clautador = [itemNameWithValue rangeOfString:@"["];
+                NSRange range_close_clautador = [itemNameWithValue rangeOfString:@"]"];
+                if(range_open_clautador.location < range_close_clautador.location)
+                {
+                    int range_length = range_close_clautador.location - (range_open_clautador.location + 1);
+                    itemValue = [itemNameWithValue substringWithRange:NSMakeRange(range_open_clautador.location + 1, range_length)];
+                    itemName = [itemNameWithValue stringByReplacingCharactersInRange:NSMakeRange(range_open_clautador.location, range_length + 2) withString:@""];
+                }
+            }
+            else if([itemNameWithValue isKindOfClass:[NSNumber class]])
+            {
+                itemName = @"";
+                itemValue = [NSString stringWithFormat:@"%d", [(NSNumber *)itemNameWithValue intValue]];
             }
 
             NSDictionary *pairValueName = @{ itemValue : itemName };
@@ -2929,6 +2938,8 @@ static const int kUserProfileFormHeaderCellHeight = 48;
 
         [modelWithValues setObject:itemsWithValues forKey:key];
     }
+
+    NSLog(@"Model to update: %@", modelWithValues);
 
     return [NSDictionary dictionaryWithDictionary:modelWithValues];
 }
