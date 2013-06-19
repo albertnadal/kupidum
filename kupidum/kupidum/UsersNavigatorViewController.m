@@ -99,11 +99,10 @@ static const int kNavigationScrollMargin = 3;
 
     [self.userSelectorImage setHidden:YES];
 
-    NSURL *url = [NSURL URLWithString:@"http://www.lafruitera.com/ws/v1/interestingPeopleNear.php"];
+    NSURL *url = [NSURL URLWithString:@"http://www.albertnadal.cat/ws/v1/interestingPeopleNear.php"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
                                          {
-                                             NSLog(@"App.net Global Stream: %@", JSON);
                                              NSDictionary *interestingPeopleData = (NSDictionary *)JSON;
                                              
                                              // Set the basic user home information
@@ -173,7 +172,7 @@ static const int kNavigationScrollMargin = 3;
 
                                              // Show results
                                              [self.userSelectorImage setHidden:NO];
-                                             [self setTitle:[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), 1, [usersList count]], [[usersList objectAtIndex:0] username]]];
+                                             [self setTitle:[[usersList objectAtIndex:0] username]]; //[NSString stringWithFormat:@"%@: %@", [NSString stringWithFormat:NSLocalizedString(@"%d de %d", @""), 1, [usersList count]], [[usersList objectAtIndex:0] username]]];
                                              [self showUsersNavigator];
                                              [self showUsersProfiles];
 

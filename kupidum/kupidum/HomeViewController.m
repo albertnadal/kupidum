@@ -276,11 +276,10 @@
     self.hud.mode = MBProgressHUDAnimationFade;
     self.hud.labelText = NSLocalizedString(@"Loading data...", @"");
 
-    NSURL *url = [NSURL URLWithString:@"http://www.lafruitera.com/ws/v1/home.php"];
+    NSURL *url = [NSURL URLWithString:@"http://www.albertnadal.cat/ws/v1/home.php"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
     {
-        NSLog(@"App.net Global Stream: %@", JSON);
         NSDictionary *homeData = (NSDictionary *)JSON;
 
         // Set the basic user home information
@@ -468,7 +467,7 @@
         if(self.interestingPeopleYouMayLike)
             [self.interestingPeopleYouMayLike removeAllObjects];
         self.interestingPeopleYouMayLike = [[NSMutableArray alloc] init];
-        
+
         for(NSDictionary *interestingUser in listOfInterestingPeopleYouMayLike)
         {
             NSString *interestingUserUsername = [interestingUser objectForKey:@"username"];

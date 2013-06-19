@@ -64,7 +64,7 @@
                                                           andInsideImage:@"nav_arrow_back_button.png"
                                                              andSelector:@selector(backPressed)
                                                                andTarget:self];
-    
+
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:backButton]];
 }
 
@@ -83,7 +83,7 @@
 	[usuari setText:[[usuari text] stringByReplacingOccurrencesOfString:@" " withString:@""]];
 
 	//Primer caldria validar que els camps entrats son correctes
-	if(([[usuari text] isEqualToString:@""]) || ([[contrassenya text] isEqualToString:@""]))
+	if((![[usuari text] length]) || (![[contrassenya text] length]))
 	{
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed.", @"") message:NSLocalizedString(@"Siusplau, omple tots els camps.", @"") delegate:self
 											  cancelButtonTitle:NSLocalizedString(@"Continuar", @"") otherButtonTitles:nil];

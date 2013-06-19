@@ -277,7 +277,7 @@
 //    self.hud.mode = MBProgressHUDAnimationFade;
 //    self.hud.labelText = NSLocalizedString(@"Loading data...", @"");
 
-    NSURL *url = [NSURL URLWithString:@"http://www.lafruitera.com/ws/v1/profile.php"];
+    NSURL *url = [NSURL URLWithString:@"http://www.albertnadal.cat/ws/v1/profile.php"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
     NSURLResponse *response = nil;

@@ -92,8 +92,8 @@
     [homeViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Superwoman", @"") image:[UIImage imageNamed:@"tab_icon_home"] tag:1]];
     [homeViewController.navigationItem setTitle:@"Superwoman"];
 
-    UINavigationController *finderNavigationController = [[UINavigationController alloc] initWithRootViewController:finderViewController];
-    [finderNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Cercar", @"") image:[UIImage imageNamed:@"tab_icon_search"] tag:2]];
+//    UINavigationController *finderNavigationController = [[UINavigationController alloc] initWithRootViewController:finderViewController];
+//    [finderNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Cercar", @"") image:[UIImage imageNamed:@"tab_icon_search"] tag:2]];
 
     UINavigationController *messageNavigationController = [[UINavigationController alloc] initWithRootViewController:messageViewController];
     [messageNavigationController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Missatges", @"") image:[UIImage imageNamed:@"tab_icon_msg"] tag:3]];
@@ -107,7 +107,7 @@
     [videocallViewController setTabBarItem:[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videotrucada", @"") image:[UIImage imageNamed:@"tab_icon_video"] tag:5]];
 
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[homeNavigationController, finderNavigationController, messageNavigationController, chatNavigationController, videocallNavigationController];
+    self.tabBarController.viewControllers = @[homeNavigationController/*, finderNavigationController*/, messageNavigationController, chatNavigationController, videocallNavigationController];
     [self.tabBarController setSelectedViewController:homeNavigationController];
     self.window.rootViewController = self.tabBarController;
 }
